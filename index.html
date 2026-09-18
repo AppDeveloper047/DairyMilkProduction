@@ -9,62 +9,61 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex">
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-slate-950 border-r border-slate-800 flex flex-col justify-between hidden md:flex">
+    <aside class="w-64 bg-slate-950 border-r border-slate-900 flex flex-col justify-between hidden md:flex">
         <div>
-            <div class="p-6 border-b border-slate-800 flex items-center space-x-3">
+            <div class="p-6 border-b border-slate-900 flex items-center space-x-3">
                 <div class="bg-indigo-600 p-2 rounded-lg text-white">
                     <i class="fa-solid fa-cow text-xl"></i>
                 </div>
                 <span class="text-lg font-bold tracking-wide">DairyManager</span>
             </div>
             <nav class="p-4 space-y-1">
-                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                <a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
                     <i class="fa-solid fa-chart-pie w-5"></i>
                     <span>Dashboard</span>
                 </a>
                 <div class="space-y-1">
-                    <a href="#" class="flex items-center justify-between px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                    <a href="#" onclick="switchTab('billing')" id="nav-billing" class="flex items-center justify-between px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-file-invoice-dollar w-5"></i>
                             <span>Billing Invoice</span>
                         </div>
-                        <i class="fa-solid fa-chevron-down text-xs"></i>
                     </a>
                 </div>
-                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-indigo-600/10 text-indigo-400 border border-indigo-600/20 font-medium transition">
+                <a href="#" onclick="switchTab('expense')" id="nav-expense" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-indigo-600/10 text-indigo-400 border border-indigo-600/20 font-medium transition">
                     <i class="fa-solid fa-wallet w-5"></i>
                     <span>Expense Management</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                <a href="#" onclick="switchTab('profile')" id="nav-profile" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
                     <i class="fa-solid fa-gear w-5"></i>
                     <span>Edit Profile</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                <a href="#" onclick="switchTab('terms')" id="nav-terms" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
                     <i class="fa-solid fa-file-lines w-5"></i>
                     <span>Bill Terms</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                <a href="#" onclick="switchTab('whatsapp')" id="nav-whatsapp" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
                     <i class="fa-brands fa-whatsapp w-5 text-emerald-400"></i>
                     <span>WhatsApp Messages</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-slate-800 text-xs text-slate-500 text-center">
+        <div class="p-4 border-t border-slate-900 text-xs text-slate-500 text-center">
             Farm & Dairy System v2.1
         </div>
     </aside>
 
     <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <header class="h-16 border-b border-slate-800 bg-slate-950/50 backdrop-blur px-8 flex items-center justify-between">
+    <main class="flex-1 flex flex-col min-w-0 bg-slate-950 overflow-y-auto">
+        <header class="h-16 border-b border-slate-900 bg-slate-950 px-8 flex items-center justify-between sticky top-0 z-20">
             <div class="flex items-center space-x-4">
                 <button class="md:hidden text-slate-400 hover:text-white">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
-                <h1 class="text-lg font-semibold text-white">Expense Tracker</h1>
+                <h1 id="headerTitle" class="text-lg font-semibold text-white">Expense Tracker</h1>
             </div>
             <div class="flex items-center space-x-3">
                 <div class="w-9 h-9 rounded-full bg-indigo-600 flex items-center justify-center font-bold text-white text-sm">
@@ -74,99 +73,169 @@
         </header>
 
         <div class="p-8 max-w-5xl w-full mx-auto space-y-6">
-            <!-- Expense Management Card -->
-            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
-                <div class="flex items-start space-x-4 mb-6">
-                    <div class="p-3 bg-indigo-600/20 text-indigo-400 rounded-xl border border-indigo-500/30">
-                        <i class="fa-solid fa-wallet text-2xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-white">Farm & Dairy Expense Management</h2>
-                        <p class="text-sm text-slate-400 mt-0.5">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
+
+            <!-- DASHBOARD TAB -->
+            <div id="tab-dashboard" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-xl font-bold text-white mb-2">Dashboard Overview</h2>
+                    <p class="text-sm text-slate-400 mb-6">Welcome back! Here is a summary of your farm and dairy operations.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                            <p class="text-xs text-slate-400 uppercase tracking-wider">Total Expenses (Month)</p>
+                            <h3 class="text-2xl font-bold text-white mt-2">₹42,500</h3>
+                        </div>
+                        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                            <p class="text-xs text-slate-400 uppercase tracking-wider">Active Cattle</p>
+                            <h3 class="text-2xl font-bold text-white mt-2">24</h3>
+                        </div>
+                        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                            <p class="text-xs text-slate-400 uppercase tracking-wider">Pending Invoices</p>
+                            <h3 class="text-2xl font-bold text-white mt-2">3</h3>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Expense Form -->
-                <form id="expenseForm" class="space-y-5">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                        <!-- Date -->
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Date:</label>
-                            <div class="relative">
-                                <input type="date" id="expenseDate" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
-                            </div>
+            <!-- BILLING INVOICE TAB -->
+            <div id="tab-billing" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-xl font-bold text-white mb-2">Billing Invoice</h2>
+                    <p class="text-sm text-slate-400 mb-4">Manage and generate customer milk billing invoices here.</p>
+                    <div class="p-8 text-center border border-dashed border-slate-800 rounded-xl text-slate-500">
+                        Invoice management module is ready.
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPENSE MANAGEMENT TAB (Active by default) -->
+            <div id="tab-expense" class="tab-content space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="p-3 bg-indigo-600/20 text-indigo-400 rounded-xl border border-indigo-500/30">
+                            <i class="fa-solid fa-wallet text-2xl"></i>
                         </div>
-
-                        <!-- Expense Category Dropdown with built-in Add Option -->
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Expense Category:</label>
-                            <div class="relative">
-                                <select id="expenseCategory" onchange="handleCategoryChange(this)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition appearance-none">
-                                    <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>
-                                    <option value="Veterinary & Medicine">Veterinary & Medicine</option>
-                                    <option value="Electricity & Water">Electricity & Water</option>
-                                    <option value="Labor & Wages">Labor & Wages</option>
-                                    <option value="Equipment & Maintenance">Equipment & Maintenance</option>
-                                    <option value="ADD_NEW" class="text-indigo-400 font-semibold">+ Add New Category...</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
-                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                            <h2 class="text-xl font-bold text-white">Farm & Dairy Expense Management</h2>
+                            <p class="text-sm text-slate-400 mt-0.5">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
+                        </div>
+                    </div>
+
+                    <!-- Expense Form -->
+                    <form id="expenseForm" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <!-- Date -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Date:</label>
+                                <div class="relative">
+                                    <input type="date" id="expenseDate" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
                                 </div>
                             </div>
+
+                            <!-- Expense Category Dropdown with built-in Add Option -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Expense Category:</label>
+                                <div class="relative">
+                                    <select id="expenseCategory" onchange="handleCategoryChange(this)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition appearance-none">
+                                        <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>
+                                        <option value="Veterinary & Medicine">Veterinary & Medicine</option>
+                                        <option value="Electricity & Water">Electricity & Water</option>
+                                        <option value="Labor & Wages">Labor & Wages</option>
+                                        <option value="Equipment & Maintenance">Equipment & Maintenance</option>
+                                        <option value="ADD_NEW" class="text-indigo-400 font-semibold">+ Add New Category...</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Amount -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Amount (₹):</label>
+                                <input type="number" id="expenseAmount" placeholder="e.g. 2500" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+                            </div>
                         </div>
 
-                        <!-- Amount -->
+                        <!-- Description / Notes -->
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Amount (₹):</label>
-                            <input type="number" id="expenseAmount" placeholder="e.g. 2500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Description / Notes:</label>
+                            <input type="text" id="expenseNotes" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
                         </div>
-                    </div>
 
-                    <!-- Description / Notes -->
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Description / Notes:</label>
-                        <input type="text" id="expenseNotes" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
-                    </div>
+                        <!-- Submit Button -->
+                        <div class="pt-2">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-6 py-2.5 rounded-xl shadow-lg shadow-indigo-600/30 flex items-center space-x-2 transition">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                <span>Save Expense</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
-                    <!-- Submit Button -->
-                    <div class="pt-2">
-                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-6 py-2.5 rounded-xl shadow-lg shadow-indigo-600/30 flex items-center space-x-2 transition">
-                            <i class="fa-solid fa-floppy-disk"></i>
-                            <span>Save Expense</span>
-                        </button>
+                <!-- Recent Expenses Table Preview -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-base font-bold text-white mb-4">Recent Recorded Expenses</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                                    <th class="py-3 px-4">Date</th>
+                                    <th class="py-3 px-4">Category</th>
+                                    <th class="py-3 px-4">Notes</th>
+                                    <th class="py-3 px-4 text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expenseTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+                                <tr>
+                                    <td class="py-3 px-4">09/18/2026</td>
+                                    <td class="py-3 px-4"><span class="bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-md text-xs font-medium border border-indigo-500/20">Cattle Feed & Dana</span></td>
+                                    <td class="py-3 px-4 text-slate-400">Purchased 2 bags cattle feed from local mandi</td>
+                                    <td class="py-3 px-4 text-right font-semibold text-white">₹2,500</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </form>
-            </div>
-
-            <!-- Recent Expenses Table Preview -->
-            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
-                <h3 class="text-base font-bold text-white mb-4">Recent Recorded Expenses</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
-                                <th class="py-3 px-4">Date</th>
-                                <th class="py-3 px-4">Category</th>
-                                <th class="py-3 px-4">Notes</th>
-                                <th class="py-3 px-4 text-right">Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody id="expenseTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-                            <tr>
-                                <td class="py-3 px-4">09/18/2026</td>
-                                <td class="py-3 px-4"><span class="bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-md text-xs font-medium border border-indigo-500/20">Cattle Feed & Dana</span></td>
-                                <td class="py-3 px-4 text-slate-400">Purchased 2 bags cattle feed from local mandi</td>
-                                <td class="py-3 px-4 text-right font-semibold text-white">₹2,500</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
+
+            <!-- EDIT PROFILE TAB -->
+            <div id="tab-profile" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-xl font-bold text-white mb-2">Edit Profile</h2>
+                    <p class="text-sm text-slate-400 mb-4">Update your business details and personal information.</p>
+                    <div class="p-8 text-center border border-dashed border-slate-800 rounded-xl text-slate-500">
+                        Profile configuration module.
+                    </div>
+                </div>
+            </div>
+
+            <!-- BILL TERMS TAB -->
+            <div id="tab-terms" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-xl font-bold text-white mb-2">Bill Terms</h2>
+                    <p class="text-sm text-slate-400 mb-4">Configure terms and conditions printed on invoices.</p>
+                    <div class="p-8 text-center border border-dashed border-slate-800 rounded-xl text-slate-500">
+                        Bill terms configuration module.
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHATSAPP MESSAGES TAB -->
+            <div id="tab-whatsapp" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-xl font-bold text-white mb-2">WhatsApp Messages</h2>
+                    <p class="text-sm text-slate-400 mb-4">Set up automated billing notifications via WhatsApp.</p>
+                    <div class="p-8 text-center border border-dashed border-slate-800 rounded-xl text-slate-500">
+                        WhatsApp integration module.
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
     <!-- Modal for Adding New Category -->
-    <div id="categoryModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+    <div id="categoryModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-bold text-white flex items-center space-x-2">
@@ -180,7 +249,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Category Name:</label>
-                    <input type="text" id="newCategoryInput" placeholder="e.g. Transport & Fuel" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+                    <input type="text" id="newCategoryInput" placeholder="e.g. Transport & Fuel" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
                 </div>
                 <div class="flex justify-end space-x-3 pt-2">
                     <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium text-sm transition">Cancel</button>
@@ -196,6 +265,35 @@
         document.getElementById('expenseDate').valueAsDate = new Date();
         let lastSelectedCategory = "Cattle Feed & Dana";
 
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            // Remove active classes from all nav links
+            document.querySelectorAll('aside nav a').forEach(el => {
+                el.classList.remove('bg-indigo-600/10', 'text-indigo-400', 'border', 'border-indigo-600/20', 'font-medium');
+                el.classList.add('text-slate-400');
+            });
+
+            // Show selected tab
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            // Highlight active nav
+            const activeNav = document.getElementById('nav-' + tabId);
+            activeNav.classList.remove('text-slate-400');
+            activeNav.classList.add('bg-indigo-600/10', 'text-indigo-400', 'border', 'border-indigo-600/20', 'font-medium');
+
+            // Update header title
+            const titles = {
+                'dashboard': 'Dashboard Overview',
+                'billing': 'Billing Invoice',
+                'expense': 'Expense Tracker',
+                'profile': 'Edit Profile',
+                'terms': 'Bill Terms',
+                'whatsapp': 'WhatsApp Messages'
+            };
+            document.getElementById('headerTitle').textContent = titles[tabId];
+        }
+
         function handleCategoryChange(selectElement) {
             if (selectElement.value === "ADD_NEW") {
                 document.getElementById('categoryModal').classList.remove('hidden');
@@ -208,7 +306,6 @@
         function closeCategoryModal() {
             document.getElementById('categoryModal').classList.add('hidden');
             document.getElementById('newCategoryInput').value = '';
-            // Reset dropdown back to the last valid selection
             document.getElementById('expenseCategory').value = lastSelectedCategory;
         }
 
@@ -223,7 +320,6 @@
 
             const selectDropdown = document.getElementById('expenseCategory');
             
-            // Check if already exists
             let exists = false;
             for (let option of selectDropdown.options) {
                 if (option.value.toLowerCase() === categoryName.toLowerCase()) {
@@ -237,7 +333,6 @@
                 return;
             }
 
-            // Create new option just above the "Add New" option
             const newOption = document.createElement('option');
             newOption.value = categoryName;
             newOption.textContent = categoryName;
@@ -245,7 +340,6 @@
             const addNewOptionNode = selectDropdown.querySelector('option[value="ADD_NEW"]');
             selectDropdown.insertBefore(newOption, addNewOptionNode);
             
-            // Select the newly added category
             selectDropdown.value = categoryName;
             lastSelectedCategory = categoryName;
 
@@ -282,7 +376,6 @@
             
             tableBody.insertBefore(newRow, tableBody.firstChild);
 
-            // Reset amount and notes
             document.getElementById('expenseAmount').value = '';
             document.getElementById('expenseNotes').value = '';
             alert('Expense saved successfully!');
