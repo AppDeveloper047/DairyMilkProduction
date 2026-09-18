@@ -127,14 +127,23 @@
     <div class="flex-1 flex flex-col h-full overflow-y-auto">
         <header class="bg-white/70 backdrop-blur-md border-b border-slate-200/80 p-4 flex justify-between items-center shadow-sm">
             <button onclick="toggleSidebar()" class="md:hidden text-slate-700 text-xl"><i class="fa-solid fa-bars"></i></button>
-            <h1 class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Shri Khatu Shyam Dairy - Dashboard</h1>
+            
+            <div class="flex-1 flex flex-col items-center justify-center text-center px-4">
+                <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Shri Khatu Shyam Dairy</h1>
+                <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600 mt-0.5 font-medium">
+                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Shajapur, Madhya Pradesh</span>
+                    <span>|</span>
+                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Indore, Madhya Pradesh</span>
+                    <span>|</span>
+                    <span id="headerContactNum"><i class="fa-solid fa-phone text-emerald-500 mr-1"></i>+91 9876543210</span>
+                </div>
+            </div>
             
             <div class="flex items-center gap-3">
                 <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-white/80 backdrop-blur text-slate-700 border border-slate-300 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-pink-500 shadow-sm font-medium">
                     <option value="en">English</option>
                     <option value="hi">हिंदी (Hindi)</option>
                 </select>
-                <span class="text-xs bg-purple-100/80 backdrop-blur text-purple-700 px-3.5 py-2 rounded-xl border border-purple-200 font-semibold shadow-sm">Head Office: Shajapur</span>
             </div>
         </header>
 
@@ -1012,7 +1021,19 @@
         }
 
         function saveProfileChanges() {
-            alert('Dairy profile details updated successfully!');
+            let brand = document.getElementById('profileBrandName').value.trim();
+            let office = document.getElementById('profileOffice').value.trim();
+            let hub = document.getElementById('profileHub').value.trim();
+            let contact = document.getElementById('profileContact').value.trim();
+
+            if(!brand) { alert('Please enter Dairy / Brand Name!'); return; }
+
+            document.getElementById('headerBrandName').innerText = brand;
+            document.getElementById('headerOfficeLoc').innerHTML = `<i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: ${office}`;
+            document.getElementById('headerHubLoc').innerHTML = `<i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: ${hub}`;
+            document.getElementById('headerContactNum').innerHTML = `<i class="fa-solid fa-phone text-emerald-500 mr-1"></i>${contact}`;
+
+            alert('Dairy profile details updated successfully on screen!');
         }
 
         function saveBillTerms() {
