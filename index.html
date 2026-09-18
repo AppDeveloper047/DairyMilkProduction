@@ -3,1045 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dairy Management CRM</title>
-    <!-- Tailwind CSS -->
+    <title>Farm & Dairy Expense Management</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Chart.js DataLabels Plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #94a3b8 100%);
-            color: #1e293b;
-        }
-        .sidebar-3d-bg {
-            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.2), inset -2px -2px 10px rgba(255, 255, 255, 0.05);
-        }
-        .menu-3d-btn {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #f8fafc;
-        }
-        .menu-3d-btn:hover {
-            background: rgba(30, 41, 59, 0.9);
-            border-color: rgba(236, 72, 153, 0.5);
-            transform: translateY(-2px);
-        }
-        .menu-3d-btn:active, .menu-3d-btn.active-tab {
-            background: rgba(15, 23, 42, 0.95);
-            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: translateY(1px) scale(0.99);
-            border-color: #ec4899;
-        }
-        .sub-menu-btn {
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(5px);
-            transition: all 0.2s ease;
-            color: #cbd5e1;
-        }
-        .sub-menu-btn:hover, .sub-menu-btn.active-sub {
-            background: rgba(236, 72, 153, 0.2);
-            color: #ffffff;
-            border-left: 4px solid #ec4899;
-        }
-        #sidebar {
-            border-top-right-radius: 30px;
-            border-bottom-right-radius: 30px;
-            transition: transform 0.4s ease-in-out;
-        }
-        .card-light-box {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.08), 0 8px 12px -6px rgba(0, 0, 0, 0.05);
-        }
-        .card-gradient-1 { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #fff; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
-        .card-gradient-2 { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
-        .card-gradient-3 { background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); color: #fff; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3); }
-        .card-gradient-4 { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
-    </style>
 </head>
-<body class="font-sans flex h-screen overflow-hidden">
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex">
 
-    <!-- 3D Sidebar Panel -->
-    <div id="sidebar" class="w-72 sidebar-3d-bg text-white flex flex-col z-50 transform -translate-x-full md:translate-x-0 fixed md:relative h-full">
-        <div class="p-6 text-2xl font-extrabold tracking-wider flex items-center justify-between border-b border-white/15">
-            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span data-translate="app_title">Dairy CRM</span></span>
-            <button onclick="toggleSidebar()" class="md:hidden text-white text-xl hover:text-pink-400 transition"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-
-        <nav class="flex-1 px-4 py-6 space-y-3.5 overflow-y-auto">
-            <a href="#home" onclick="switchTab('home', this)" class="menu-3d-btn active-tab flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-translate="menu_home">Dashboard</span>
-            </a>
-            
-            <!-- Master Billing Invoice Menu -->
-            <div>
-                <button onclick="toggleBillingSubMenu()" class="menu-3d-btn w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                    <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-translate="menu_billing">Billing Invoice</span></span>
-                    <i class="fa-solid fa-chevron-down text-xs text-gray-300 transition-transform duration-300" id="billingArrow"></i>
-                </button>
-                <div id="billingSubMenu" class="hidden pl-4 pr-2 py-2 space-y-2 mt-2 bg-black/30 rounded-xl border border-white/10 backdrop-blur-md">
-                    <button onclick="switchSubTab('bulk-dairy', this)" class="sub-menu-btn active-sub w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-industry mr-2 text-pink-400 text-xs"></i> Bulk Dairy Billing
-                    </button>
-                    <button onclick="switchSubTab('retail-milk', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-store mr-2 text-purple-400 text-xs"></i> Retail Milk Selling
-                    </button>
-                    <button onclick="switchSubTab('cattle-deal', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-horse mr-2 text-amber-400 text-xs"></i> Cattle Purchase & Sell
-                    </button>
-                    <button onclick="switchSubTab('other-products', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-boxes-stacked mr-2 text-emerald-400 text-xs"></i> Other Products Buy/Sell
-                    </button>
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-950 border-r border-slate-800 flex flex-col justify-between hidden md:flex">
+        <div>
+            <div class="p-6 border-b border-slate-800 flex items-center space-x-3">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-cow text-xl"></i>
                 </div>
+                <span class="text-lg font-bold tracking-wide">DairyManager</span>
             </div>
-
-            <a href="#expense" onclick="switchTab('expense', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>
-            </a>
-            <a href="#profile" onclick="switchTab('profile', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-translate="menu_profile">Edit Profile</span>
-            </a>
-            <a href="#terms" onclick="switchTab('terms', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-translate="menu_terms">Bill Terms</span>
-            </a>
-            <a href="#whatsapp" onclick="switchTab('whatsapp', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-translate="menu_whatsapp">WhatsApp Messages</span>
-            </a>
-        </nav>
-
-        <div class="p-4 border-t border-white/15 text-xs text-center text-slate-400">
-            © 2026 Shri Khatu Shyam Dairy Farming
+            <nav class="p-4 space-y-1">
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-chart-pie w-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center justify-between px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-file-invoice-dollar w-5"></i>
+                            <span>Billing Invoice</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </a>
+                </div>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-indigo-600/10 text-indigo-400 border border-indigo-600/20 font-medium transition">
+                    <i class="fa-solid fa-wallet w-5"></i>
+                    <span>Expense Management</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-gear w-5"></i>
+                    <span>Edit Profile</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-file-lines w-5"></i>
+                    <span>Bill Terms</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition">
+                    <i class="fa-brands fa-whatsapp w-5 text-emerald-400"></i>
+                    <span>WhatsApp Messages</span>
+                </a>
+            </nav>
         </div>
-    </div>
+        <div class="p-4 border-t border-slate-800 text-xs text-slate-500 text-center">
+            Farm & Dairy System v2.1
+        </div>
+    </aside>
 
     <!-- Main Content Area -->
-    <div class="flex-1 flex flex-col h-full overflow-y-auto">
-        <header class="bg-white/70 backdrop-blur-md border-b border-slate-200/80 p-4 flex justify-between items-center shadow-sm">
-            <button onclick="toggleSidebar()" class="md:hidden text-slate-700 text-xl"><i class="fa-solid fa-bars"></i></button>
-            <h1 class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Shri Khatu Shyam Dairy - Dashboard</h1>
-            
-            <div class="flex items-center gap-3">
-                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-white/80 backdrop-blur text-slate-700 border border-slate-300 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-pink-500 shadow-sm font-medium">
-                    <option value="en">English</option>
-                    <option value="hi">हिंदी (Hindi)</option>
-                </select>
-                <span class="text-xs bg-purple-100/80 backdrop-blur text-purple-700 px-3.5 py-2 rounded-xl border border-purple-200 font-semibold shadow-sm">Head Office: Shajapur</span>
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        <header class="h-16 border-b border-slate-800 bg-slate-950/50 backdrop-blur px-8 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-lg font-semibold text-white">Expense Tracker</h1>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-full bg-indigo-600 flex items-center justify-center font-bold text-white text-sm">
+                    PT
+                </div>
             </div>
         </header>
 
-        <main class="p-6 space-y-6 flex-1">
-            
-            <!-- Dashboard Home Tab -->
-            <div id="tab-home" class="tab-content space-y-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="card-gradient-1 p-5 rounded-2xl">
-                        <p class="text-white/80 text-sm font-medium">Total Cattle Count</p>
-                        <h3 class="text-3xl font-extrabold mt-1">24 <span class="text-xs font-normal">(Cows: 14, Buffaloes: 10)</span></h3>
+        <div class="p-8 max-w-5xl w-full mx-auto space-y-6">
+            <!-- Expense Management Card -->
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <div class="flex items-start space-x-4 mb-6">
+                    <div class="p-3 bg-indigo-600/20 text-indigo-400 rounded-xl border border-indigo-500/30">
+                        <i class="fa-solid fa-wallet text-2xl"></i>
                     </div>
-                    <div class="card-gradient-2 p-5 rounded-2xl">
-                        <p class="text-white/80 text-sm font-medium">Total Investment</p>
-                        <h3 class="text-3xl font-extrabold mt-1">₹ 8,50,000</h3>
-                    </div>
-                    <div class="card-gradient-3 p-5 rounded-2xl">
-                        <p class="text-white/80 text-sm font-medium">Total Milk Production</p>
-                        <h3 class="text-3xl font-extrabold mt-1">4,250 Liters</h3>
-                    </div>
-                    <div class="card-gradient-4 p-5 rounded-2xl">
-                        <p class="text-white/80 text-sm font-medium">Monthly Revenue</p>
-                        <h3 class="text-3xl font-extrabold mt-1">+ ₹ 2,47,500</h3>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Farm & Dairy Expense Management</h2>
+                        <p class="text-sm text-slate-400 mt-0.5">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
-                            </h3>
-                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
-                        </div>
-                        <div class="relative w-full flex justify-center items-center py-2">
-                            <div class="w-[300px] h-[300px]">
-                                <canvas id="cattleChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                                <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend
-                            </h3>
-                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Weekly Output</span>
-                        </div>
-                        <div class="relative w-full py-2">
-                            <canvas id="milkChart" height="155"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Billing Invoice Main Container -->
-            <div id="tab-billing-invoice" class="tab-content hidden space-y-6">
-                <!-- Bulk Dairy Subtab -->
-                <div id="subtab-bulk-dairy" class="sub-content space-y-6">
-                    <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-pink-600"><i class="fa-solid fa-industry mr-2"></i> Bulk Dairy Milk Sales Entry</h2>
-                            <p class="text-slate-600 text-sm mt-1">Enter FAT and Fat Rate; Rate per Liter and Total Amount will calculate automatically.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="billDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Shift:</label>
-                                <select id="billShift" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Morning">Morning</option>
-                                    <option value="Evening">Evening</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Milk Type:</label>
-                                <select id="milkType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Cow Milk">Cow Milk</option>
-                                    <option value="Buffalo Milk">Buffalo Milk</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Quantity (Liters):</label>
-                                <input type="number" id="milkQty" placeholder="e.g. 85" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">FAT %:</label>
-                                <input type="number" step="0.1" id="milkFat" placeholder="e.g. 5.0" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Fat Rate (₹):</label>
-                                <input type="number" step="0.5" id="fatRate" placeholder="e.g. 10" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">SNF / CLR:</label>
-                                <input type="number" step="0.1" id="milkSnf" placeholder="e.g. 8.5" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Liter (Auto):</label>
-                                <input type="text" id="perLiterRate" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-purple-700 font-bold shadow-sm" readonly>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
-                                <input type="text" id="totalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy Name:</label>
-                                <input type="text" id="dairyName" placeholder="Enter Dairy / Collection Center Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
-                                <select id="paymentStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Pending">Pending</option>
-                                    <option value="Paid">Paid</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <button onclick="saveMilkEntry()" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bulk Entry
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Milk Selling Record Sheet Preview</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse text-sm">
-                                <thead>
-                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Shift</th><th class="p-3">Milk Type</th><th class="p-3">Quantity</th><th class="p-3">FAT %</th><th class="p-3">Fat Rate</th><th class="p-3">SNF / CLR</th><th class="p-3">Rate/L</th><th class="p-3">Total Amt</th><th class="p-3">Dairy</th><th class="p-3">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="salesTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added yet.</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Retail Milk Subtab (With Date) -->
-                <div id="subtab-retail-milk" class="sub-content hidden space-y-6">
-                    <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-purple-600"><i class="fa-solid fa-store mr-2"></i> Retail Milk Selling Entry</h2>
-                            <p class="text-slate-600 text-sm mt-1">Direct customer retail billing without FAT/CLR calculations.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="retailDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Name:</label>
-                                <select id="retailCustSelect" onchange="checkNewRetailParty(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Customer</option>
-                                    <option value="Rahul Sharma">Rahul Sharma</option>
-                                    <option value="Amit Verma">Amit Verma</option>
-                                    <option value="NEW">+ Add New Customer</option>
-                                </select>
-                                <input type="text" id="retailCustCustom" placeholder="Enter New Customer Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-purple-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number:</label>
-                                <input type="text" id="retailMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Liters:</label>
-                                <input type="number" step="0.5" id="retailLitermt" placeholder="e.g. 5" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Per Liter Rate (₹):</label>
-                                <input type="number" id="retailRate" placeholder="e.g. 60" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
-                                <input type="text" id="retailTotalAmt" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
-                                <select id="retailStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <button onclick="saveRetailEntry()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Retail Bill
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> Retail Milk Records</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse text-sm">
-                                <thead>
-                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Customer Name</th><th class="p-3">Mobile</th><th class="p-3">Liters</th><th class="p-3">Rate/L</th><th class="p-3">Total Amount</th><th class="p-3">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="retailTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No retail records added yet.</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cattle Deal Subtab (With Date) -->
-                <div id="subtab-cattle-deal" class="sub-content hidden space-y-6">
-                    <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-horse mr-2"></i> Cattle Purchase & Sell Management</h2>
-                            <p class="text-slate-600 text-sm mt-1">Record cattle buying and selling details with tag number and pricing.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="cattleDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
-                                <select id="cattleTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Purchase">Purchase</option>
-                                    <option value="Sell">Sell</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Cattle Breed / Category:</label>
-                                <select id="cattleBreedSelect" onchange="checkNewCattleCategory(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Milking Cow">Milking Cow</option>
-                                    <option value="Milking Buffalo">Milking Buffalo</option>
-                                    <option value="Heifer / Calf">Heifer / Calf</option>
-                                    <option value="Pregnant Animal">Pregnant Animal</option>
-                                    <option value="NEW">+ Add New Category</option>
-                                </select>
-                                <input type="text" id="cattleBreedCustom" placeholder="Enter New Category" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Tag Number / Identification:</label>
-                                <input type="text" id="cattleTag" placeholder="e.g. TAG-405" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Name (Dealer/Farmer):</label>
-                                <select id="cattlePartySelect" onchange="checkNewCattleParty(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Party</option>
-                                    <option value="Shyamlal Traders">Shyamlal Traders</option>
-                                    <option value="Kishan Singh">Kishan Singh</option>
-                                    <option value="NEW">+ Add New Party</option>
-                                </select>
-                                <input type="text" id="cattlePartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
-                                <input type="number" id="cattleAmount" placeholder="e.g. 65000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-amber-700 font-bold focus:border-amber-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
-                                <select id="cattleStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <button onclick="saveCattleEntry()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Cattle Record
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> Cattle Deal History</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse text-sm">
-                                <thead>
-                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Breed</th><th class="p-3">Tag No.</th><th class="p-3">Party Name</th><th class="p-3">Amount</th><th class="p-3">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cattleTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No cattle records added yet.</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Other Products Subtab (With Date) -->
-                <div id="subtab-other-products" class="sub-content hidden space-y-6">
-                    <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-boxes-stacked mr-2"></i> Other Products Purchase & Sell</h2>
-                            <p class="text-slate-600 text-sm mt-1">Manage inventory with per Bag, Kg, Litre, Pcs calculation options.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="prodDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
-                                <select id="prodTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Purchase">Purchase</option>
-                                    <option value="Sell">Sell</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Product Name:</label>
-                                <select id="prodNameSelect" onchange="checkNewProduct(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Cattle Feed (Pashu Aahar)">Cattle Feed (Pashu Aahar)</option>
-                                    <option value="Vermicompost Fertilizer">Vermicompost Fertilizer</option>
-                                    <option value="Chaff / Straw">Chaff / Straw</option>
-                                    <option value="Veterinary Medicine">Veterinary Medicine</option>
-                                    <option value="NEW">+ Add New Product</option>
-                                </select>
-                                <input type="text" id="prodNameCustom" placeholder="Enter New Product Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Unit Option:</label>
-                                <select id="prodUnitType" onchange="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Bag">Per Bag (बैग)</option>
-                                    <option value="Kg">Per Kg (किलोग्राम)</option>
-                                    <option value="Litre">Per Litre (लीटर)</option>
-                                    <option value="Pcs">Per Piece (नंग)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Quantity:</label>
-                                <input type="number" step="0.1" id="prodQtyNum" placeholder="e.g. 10" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Unit (₹):</label>
-                                <input type="number" step="0.5" id="prodRatePerUnit" placeholder="e.g. 1250" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto Calc):</label>
-                                <input type="text" id="prodTotalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-emerald-700 font-bold shadow-sm" readonly>
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party / Vendor Name:</label>
-                                <select id="prodPartySelect" onchange="checkNewProductParty(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Party</option>
-                                    <option value="Agri Feed Suppliers">Agri Feed Suppliers</option>
-                                    <option value="Shajapur Organic Hub">Shajapur Organic Hub</option>
-                                    <option value="NEW">+ Add New Party</option>
-                                </select>
-                                <input type="text" id="prodPartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
-                                <select id="prodStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <button onclick="saveProductEntry()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Product Record
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Products History</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse text-sm">
-                                <thead>
-                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Product Name</th><th class="p-3">Quantity & Unit</th><th class="p-3">Rate/Unit</th><th class="p-3">Total Amount</th><th class="p-3">Party</th><th class="p-3">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="prodTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="8" class="p-4 text-center">No product records added yet.</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Working Expense Management Section -->
-            <div id="tab-expense" class="tab-content hidden space-y-6">
-                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                    <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-blue-600"><i class="fa-solid fa-wallet mr-2"></i> Farm & Dairy Expense Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
-                    </div>
+                <!-- Expense Form -->
+                <form id="expenseForm" class="space-y-5">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <!-- Date -->
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                            <input type="date" id="expDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Date:</label>
+                            <div class="relative">
+                                <input type="date" id="expenseDate" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+                            </div>
                         </div>
+
+                        <!-- Expense Category Dropdown with built-in Add Option -->
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Expense Category:</label>
-                            <select id="expCategory" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
-                                <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>
-                                <option value="Veterinary & Medicine">Veterinary & Medicine</option>
-                                <option value="Electricity & Water">Electricity & Water</option>
-                                <option value="Labour Wages">Labour Wages</option>
-                                <option value="Transport & Logistics">Transport & Logistics</option>
-                                <option value="Maintenance & Miscellaneous">Maintenance & Miscellaneous</option>
-                            </select>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Expense Category:</label>
+                            <div class="relative">
+                                <select id="expenseCategory" onchange="handleCategoryChange(this)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition appearance-none">
+                                    <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>
+                                    <option value="Veterinary & Medicine">Veterinary & Medicine</option>
+                                    <option value="Electricity & Water">Electricity & Water</option>
+                                    <option value="Labor & Wages">Labor & Wages</option>
+                                    <option value="Equipment & Maintenance">Equipment & Maintenance</option>
+                                    <option value="ADD_NEW" class="text-indigo-400 font-semibold">+ Add New Category...</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- Amount -->
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
-                            <input type="number" id="expAmount" placeholder="e.g. 2500" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-blue-700 font-bold focus:border-blue-500 focus:outline-none shadow-sm">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
-                            <input type="text" id="expDesc" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Amount (₹):</label>
+                            <input type="number" id="expenseAmount" placeholder="e.g. 2500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
                         </div>
                     </div>
+
+                    <!-- Description / Notes -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Description / Notes:</label>
+                        <input type="text" id="expenseNotes" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+                    </div>
+
+                    <!-- Submit Button -->
                     <div class="pt-2">
-                        <button onclick="saveExpenseEntry()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Expense
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-6 py-2.5 rounded-xl shadow-lg shadow-indigo-600/30 flex items-center space-x-2 transition">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Save Expense</span>
                         </button>
                     </div>
-                </div>
-
-                <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                    <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> Expense Records Sheet</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead>
-                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th><th class="p-3">Category</th><th class="p-3">Description</th><th class="p-3">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody id="expenseTableBody" class="text-slate-700">
-                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="4" class="p-4 text-center">No expense records added yet.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                </form>
             </div>
 
-            <!-- Working Edit Profile Section -->
-            <div id="tab-profile" class="tab-content hidden space-y-6">
-                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                    <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-gear mr-2"></i> Edit Farm & Business Profile</h2>
-                        <p class="text-slate-600 text-sm mt-1">Update your dairy brand name, head office address, and contact details for invoices.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Brand Name:</label>
-                            <input type="text" id="profileBrandName" value="Shri Khatu Shyam Dairy" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Head Office Location:</label>
-                            <input type="text" id="profileOffice" value="Shajapur, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Packaging Hub Location:</label>
-                            <input type="text" id="profileHub" value="Indore, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Contact Number / Helpline:</label>
-                            <input type="text" id="profileContact" value="+91 9876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                        </div>
-                    </div>
-                    <div class="pt-2">
-                        <button onclick="saveProfileChanges()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Update Profile
-                        </button>
-                    </div>
+            <!-- Recent Expenses Table Preview -->
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h3 class="text-base font-bold text-white mb-4">Recent Recorded Expenses</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                                <th class="py-3 px-4">Date</th>
+                                <th class="py-3 px-4">Category</th>
+                                <th class="py-3 px-4">Notes</th>
+                                <th class="py-3 px-4 text-right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+                            <tr>
+                                <td class="py-3 px-4">09/18/2026</td>
+                                <td class="py-3 px-4"><span class="bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-md text-xs font-medium border border-indigo-500/20">Cattle Feed & Dana</span></td>
+                                <td class="py-3 px-4 text-slate-400">Purchased 2 bags cattle feed from local mandi</td>
+                                <td class="py-3 px-4 text-right font-semibold text-white">₹2,500</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+    </main>
 
-            <!-- Working Bill Terms Section -->
-            <div id="tab-terms" class="tab-content hidden space-y-6">
-                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                    <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-file-contract mr-2"></i> Bill Terms & Conditions Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Define standard terms that will appear at the bottom of customer invoices and bills.</p>
-                    </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Invoice Terms & Policy (HTML / Text):</label>
-                            <textarea id="billTermsText" rows="6" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">1. Goods once sold will not be taken back without prior inspection.
-2. Payment must be cleared within 7 days from the date of billing.
-3. All disputes are subject to Shajapur (M.P.) jurisdiction only.
-4. Thank you for your trusted business with Shri Khatu Shyam Dairy.</textarea>
-                        </div>
-                    </div>
-                    <div class="pt-2">
-                        <button onclick="saveBillTerms()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bill Terms
-                        </button>
-                    </div>
+    <!-- Modal for Adding New Category -->
+    <div id="categoryModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-folder-plus text-indigo-400"></i>
+                    <span>Add New Expense Category</span>
+                </h3>
+                <button onclick="closeCategoryModal()" class="text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Category Name:</label>
+                    <input type="text" id="newCategoryInput" placeholder="e.g. Transport & Fuel" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500 transition">
+                </div>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium text-sm transition">Cancel</button>
+                    <button type="button" onclick="addNewCategory()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm shadow-lg shadow-indigo-600/30 transition">Add Category</button>
                 </div>
             </div>
-
-            <!-- Working WhatsApp Messages Section -->
-            <div id="tab-whatsapp" class="tab-content hidden space-y-6">
-                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                    <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp Quick Message Generator</h2>
-                        <p class="text-slate-600 text-sm mt-1">Send bills, payment reminders, or daily milk delivery updates directly to customers via WhatsApp.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Mobile Number:</label>
-                            <input type="text" id="waMobile" placeholder="e.g. 919876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Message Template Type:</label>
-                            <select id="waTemplateType" onchange="updateWaTemplate(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
-                                <option value="bill">Daily Milk Bill & Payment Reminder</option>
-                                <option value="welcome">Welcome New Retail Customer</option>
-                                <option value="payment">Payment Receipt Acknowledgement</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customizable Message:</label>
-                            <textarea id="waMessageText" rows="4" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!</textarea>
-                        </div>
-                    </div>
-                    <div class="pt-2">
-                        <button onclick="sendWhatsAppMessage()" class="bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Send via WhatsApp
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </main>
+        </div>
     </div>
 
-    <!-- JavaScript Functions -->
+    <!-- JavaScript functionality -->
     <script>
-        let calculatedPerLiter = 0;
-        let calculatedTotalAmt = 0;
-        let calculatedRetailAmt = 0;
-        let calculatedProductTotalAmt = 0;
+        // Set default date to today
+        document.getElementById('expenseDate').valueAsDate = new Date();
+        let lastSelectedCategory = "Cattle Feed & Dana";
 
-        const translations = {
-            en: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" },
-            hi: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" }
-        };
-
-        function changeLanguage(lang) {
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) el.innerText = translations[lang][key];
-            });
+        function handleCategoryChange(selectElement) {
+            if (selectElement.value === "ADD_NEW") {
+                document.getElementById('categoryModal').classList.remove('hidden');
+                document.getElementById('newCategoryInput').focus();
+            } else {
+                lastSelectedCategory = selectElement.value;
+            }
         }
 
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
-
-        function toggleBillingSubMenu() {
-            const sub = document.getElementById('billingSubMenu');
-            const arrow = document.getElementById('billingArrow');
-            sub.classList.toggle('hidden');
-            arrow.classList.toggle('rotate-180');
+        function closeCategoryModal() {
+            document.getElementById('categoryModal').classList.add('hidden');
+            document.getElementById('newCategoryInput').value = '';
+            // Reset dropdown back to the last valid selection
+            document.getElementById('expenseCategory').value = lastSelectedCategory;
         }
 
-        function switchTab(tabId, element) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            if(tabId === 'home') document.getElementById('tab-home').classList.remove('hidden');
-            else document.getElementById('tab-' + tabId).classList.remove('hidden');
+        function addNewCategory() {
+            const inputField = document.getElementById('newCategoryInput');
+            const categoryName = inputField.value.trim();
+
+            if (!categoryName) {
+                alert('Please enter a category name.');
+                return;
+            }
+
+            const selectDropdown = document.getElementById('expenseCategory');
             
-            document.querySelectorAll('.menu-3d-btn').forEach(el => el.classList.remove('active-tab'));
-            element.classList.add('active-tab');
-            toggleSidebar();
-        }
-
-        function switchSubTab(subId, element) {
-            document.querySelectorAll('.sub-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('subtab-' + subId).classList.remove('hidden');
-            document.querySelectorAll('.sub-menu-btn').forEach(el => el.classList.remove('active-sub'));
-            element.classList.add('active-sub');
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('tab-billing-invoice').classList.remove('hidden');
-            toggleSidebar();
-        }
-
-        function checkNewRetailParty(val) {
-            let customInput = document.getElementById('retailCustCustom');
-            if(val === 'NEW') { customInput.classList.remove('hidden'); customInput.focus(); }
-            else { customInput.classList.add('hidden'); customInput.value = ''; }
-        }
-
-        function checkNewCattleCategory(val) {
-            let customInput = document.getElementById('cattleBreedCustom');
-            if(val === 'NEW') { customInput.classList.remove('hidden'); customInput.focus(); }
-            else { customInput.classList.add('hidden'); customInput.value = ''; }
-        }
-
-        function checkNewCattleParty(val) {
-            let customInput = document.getElementById('cattlePartyCustom');
-            if(val === 'NEW') { customInput.classList.remove('hidden'); customInput.focus(); }
-            else { customInput.classList.add('hidden'); customInput.value = ''; }
-        }
-
-        function checkNewProduct(val) {
-            let customInput = document.getElementById('prodNameCustom');
-            if(val === 'NEW') { customInput.classList.remove('hidden'); customInput.focus(); }
-            else { customInput.classList.add('hidden'); customInput.value = ''; }
-        }
-
-        function checkNewProductParty(val) {
-            let customInput = document.getElementById('prodPartyCustom');
-            if(val === 'NEW') { customInput.classList.remove('hidden'); customInput.focus(); }
-            else { customInput.classList.add('hidden'); customInput.value = ''; }
-        }
-
-        function calculateFatBilling() {
-            let qty = parseFloat(document.getElementById('milkQty').value) || 0;
-            let fat = parseFloat(document.getElementById('milkFat').value) || 0;
-            let fatRate = parseFloat(document.getElementById('fatRate').value) || 0;
-            calculatedPerLiter = fat * fatRate;
-            calculatedTotalAmt = qty * calculatedPerLiter;
-            document.getElementById('perLiterRate').value = calculatedPerLiter > 0 ? '₹ ' + calculatedPerLiter.toFixed(2) : '';
-            document.getElementById('totalAmount').value = calculatedTotalAmt > 0 ? '₹ ' + calculatedTotalAmt.toFixed(2) : '';
-        }
-
-        function calculateRetailBilling() {
-            let liters = parseFloat(document.getElementById('retailLitermt').value) || 0;
-            let rate = parseFloat(document.getElementById('retailRate').value) || 0;
-            calculatedRetailAmt = liters * rate;
-            document.getElementById('retailTotalAmt').value = calculatedRetailAmt > 0 ? '₹ ' + calculatedRetailAmt.toFixed(2) : '';
-        }
-
-        function calculateProductTotal() {
-            let qtyNum = parseFloat(document.getElementById('prodQtyNum').value) || 0;
-            let rateUnit = parseFloat(document.getElementById('prodRatePerUnit').value) || 0;
-            calculatedProductTotalAmt = qtyNum * rateUnit;
-            document.getElementById('prodTotalAmount').value = calculatedProductTotalAmt > 0 ? '₹ ' + calculatedProductTotalAmt.toFixed(2) : '';
-        }
-
-        function saveMilkEntry() {
-            let date = document.getElementById('billDate').value || new Date().toISOString().split('T')[0];
-            let shift = document.getElementById('billShift').value;
-            let milkType = document.getElementById('milkType').value;
-            let qty = document.getElementById('milkQty').value;
-            let fat = document.getElementById('milkFat').value;
-            let fatRate = document.getElementById('fatRate').value;
-            let snf = document.getElementById('milkSnf').value || '-';
-            let dairyName = document.getElementById('dairyName').value || 'Dairy Center';
-            let status = document.getElementById('paymentStatus').value;
-
-            if(!qty || !fat || !fatRate) { alert('Please fill Quantity, FAT and Fat Rate properly!'); return; }
-
-            let tbody = document.getElementById('salesTableBody');
-            if(tbody.innerHTML.includes('No records added yet')) tbody.innerHTML = '';
-
-            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3">${shift}</td><td class="p-3 text-pink-600 font-medium">${milkType}</td>
-                <td class="p-3">${qty} L</td><td class="p-3">${fat}</td><td class="p-3">₹ ${fatRate}</td><td class="p-3">${snf}</td>
-                <td class="p-3 text-purple-700 font-semibold">₹ ${calculatedPerLiter.toFixed(2)}</td><td class="p-3 text-emerald-600 font-bold">₹ ${calculatedTotalAmt.toFixed(2)}</td>
-                <td class="p-3">${dairyName}</td><td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs bg-amber-100 text-amber-700 font-semibold border border-amber-300">${status}</span></td>
-            </tr>`;
-            tbody.insertAdjacentHTML('afterbegin', newRow);
-            alert('Bulk milk entry successfully recorded!');
-        }
-
-        function saveRetailEntry() {
-            let date = document.getElementById('retailDate').value || new Date().toISOString().split('T')[0];
-            let selectElem = document.getElementById('retailCustSelect');
-            let customElem = document.getElementById('retailCustCustom');
-            let name = selectElem.value === 'NEW' ? customElem.value.trim() : selectElem.value;
-            let mobile = document.getElementById('retailMobile').value;
-            let liters = document.getElementById('retailLitermt').value;
-            let rate = document.getElementById('retailRate').value;
-            let status = document.getElementById('retailStatus').value;
-
-            if(!name || !liters || !rate) { alert('Please fill Customer Name, Liters and Rate properly!'); return; }
-
-            if(selectElem.value === 'NEW' && name !== '') {
-                let newOpt = document.createElement('option'); newOpt.value = name; newOpt.text = name;
-                selectElem.insertBefore(newOpt, selectElem.lastElementChild); selectElem.value = name;
-                customElem.classList.add('hidden'); customElem.value = '';
+            // Check if already exists
+            let exists = false;
+            for (let option of selectDropdown.options) {
+                if (option.value.toLowerCase() === categoryName.toLowerCase()) {
+                    exists = true;
+                    break;
+                }
             }
 
-            let tbody = document.getElementById('retailTableBody');
-            if(tbody.innerHTML.includes('No retail records added yet')) tbody.innerHTML = '';
+            if (exists) {
+                alert('This category already exists!');
+                return;
+            }
 
-            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 text-purple-700 font-medium">${name}</td><td class="p-3">${mobile || '-'}</td>
-                <td class="p-3">${liters} L</td><td class="p-3">₹ ${rate}</td>
-                <td class="p-3 text-emerald-600 font-bold">₹ ${calculatedRetailAmt.toFixed(2)}</td>
-                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs bg-purple-100 text-purple-700 font-semibold border border-purple-300">${status}</span></td>
-            </tr>`;
-            tbody.insertAdjacentHTML('afterbegin', newRow);
-            alert('Retail milk bill successfully saved!');
+            // Create new option just above the "Add New" option
+            const newOption = document.createElement('option');
+            newOption.value = categoryName;
+            newOption.textContent = categoryName;
+            
+            const addNewOptionNode = selectDropdown.querySelector('option[value="ADD_NEW"]');
+            selectDropdown.insertBefore(newOption, addNewOptionNode);
+            
+            // Select the newly added category
+            selectDropdown.value = categoryName;
+            lastSelectedCategory = categoryName;
+
+            closeCategoryModal();
         }
 
-        function saveCattleEntry() {
-            let date = document.getElementById('cattleDate').value || new Date().toISOString().split('T')[0];
-            let type = document.getElementById('cattleTxType').value;
-            let breedSelect = document.getElementById('cattleBreedSelect');
-            let breedCustom = document.getElementById('cattleBreedCustom');
-            let breed = breedSelect.value === 'NEW' ? breedCustom.value.trim() : breedSelect.value;
-            let tag = document.getElementById('cattleTag').value || '-';
-            let partySelect = document.getElementById('cattlePartySelect');
-            let partyCustom = document.getElementById('cattlePartyCustom');
-            let party = partySelect.value === 'NEW' ? partyCustom.value.trim() : partySelect.value;
-            let amount = document.getElementById('cattleAmount').value;
-            let status = document.getElementById('cattleStatus').value;
+        // Handle Form Submission
+        document.getElementById('expenseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const date = document.getElementById('expenseDate').value;
+            const category = document.getElementById('expenseCategory').value;
+            const amount = document.getElementById('expenseAmount').value;
+            const notes = document.getElementById('expenseNotes').value;
 
-            if(!amount || !breed) { alert('Please fill Breed and Amount properly!'); return; }
+            if (category === "ADD_NEW") {
+                alert('Please select or add a valid category.');
+                return;
+            }
 
-            let tbody = document.getElementById('cattleTableBody');
-            if(tbody.innerHTML.includes('No cattle records added yet')) tbody.innerHTML = '';
+            if (!amount) {
+                alert('Please enter an amount.');
+                return;
+            }
 
-            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 text-amber-600 font-semibold">${type}</td><td class="p-3">${breed}</td><td class="p-3">${tag}</td>
-                <td class="p-3">${party || '-'}</td><td class="p-3 text-emerald-600 font-bold">₹ ${amount}</td>
-                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs bg-amber-100 text-amber-700 font-semibold border border-amber-300">${status}</span></td>
-            </tr>`;
-            tbody.insertAdjacentHTML('afterbegin', newRow);
-            alert('Cattle record saved successfully!');
-        }
+            const tableBody = document.getElementById('expenseTableBody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="py-3 px-4">${date}</td>
+                <td class="py-3 px-4"><span class="bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-md text-xs font-medium border border-indigo-500/20">${category}</span></td>
+                <td class="py-3 px-4 text-slate-400">${notes || '-'}</td>
+                <td class="py-3 px-4 text-right font-semibold text-white">₹${Number(amount).toLocaleString('en-IN')}</td>
+            `;
+            
+            tableBody.insertBefore(newRow, tableBody.firstChild);
 
-        function saveProductEntry() {
-            let date = document.getElementById('prodDate').value || new Date().toISOString().split('T')[0];
-            let type = document.getElementById('prodTxType').value;
-            let prodSelect = document.getElementById('prodNameSelect');
-            let prodCustom = document.getElementById('prodNameCustom');
-            let prodName = prodSelect.value === 'NEW' ? prodCustom.value.trim() : prodSelect.value;
-            let unitType = document.getElementById('prodUnitType').value;
-            let qtyNum = document.getElementById('prodQtyNum').value;
-            let rateUnit = document.getElementById('prodRatePerUnit').value;
-            let partySelect = document.getElementById('prodPartySelect');
-            let partyCustom = document.getElementById('prodPartyCustom');
-            let party = partySelect.value === 'NEW' ? partyCustom.value.trim() : partySelect.value;
-            let status = document.getElementById('prodStatus').value;
-
-            if(!prodName || !qtyNum || !rateUnit) { alert('Please fill Product Name, Quantity and Rate properly!'); return; }
-
-            let tbody = document.getElementById('prodTableBody');
-            if(tbody.innerHTML.includes('No product records added yet')) tbody.innerHTML = '';
-
-            let formattedQty = `${qtyNum} ${unitType}${qtyNum > 1 && unitType !== 'Kg' && unitType !== 'Litre' ? 's' : ''}`;
-
-            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 text-emerald-600 font-semibold">${type}</td><td class="p-3 text-slate-800 font-medium">${prodName}</td>
-                <td class="p-3">${formattedQty}</td><td class="p-3">₹ ${rateUnit}</td>
-                <td class="p-3 text-emerald-600 font-bold">₹ ${calculatedProductTotalAmt.toFixed(2)}</td>
-                <td class="p-3">${party || '-'}</td>
-                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs bg-emerald-100 text-emerald-700 font-semibold border border-emerald-300">${status}</span></td>
-            </tr>`;
-            tbody.insertAdjacentHTML('afterbegin', newRow);
-            alert('Product record saved successfully!');
-        }
-
-        function saveExpenseEntry() {
-            let date = document.getElementById('expDate').value || new Date().toISOString().split('T')[0];
-            let category = document.getElementById('expCategory').value;
-            let amount = document.getElementById('expAmount').value;
-            let desc = document.getElementById('expDesc').value || '-';
-
-            if(!amount) { alert('Please enter expense amount!'); return; }
-
-            let tbody = document.getElementById('expenseTableBody');
-            if(tbody.innerHTML.includes('No expense records added yet')) tbody.innerHTML = '';
-
-            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 font-semibold text-blue-600">${category}</td>
-                <td class="p-3">${desc}</td><td class="p-3 text-red-600 font-bold">₹ ${amount}</td>
-            </tr>`;
-            tbody.insertAdjacentHTML('afterbegin', newRow);
+            // Reset amount and notes
+            document.getElementById('expenseAmount').value = '';
+            document.getElementById('expenseNotes').value = '';
             alert('Expense saved successfully!');
-        }
-
-        function saveProfileChanges() {
-            alert('Dairy profile details updated successfully!');
-        }
-
-        function saveBillTerms() {
-            alert('Bill terms and conditions saved successfully!');
-        }
-
-        function updateWaTemplate(val) {
-            let msgBox = document.getElementById('waMessageText');
-            if(val === 'bill') {
-                msgBox.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
-            } else if(val === 'welcome') {
-                msgBox.value = "Welcome to Shri Khatu Shyam Dairy family! We are delighted to serve you pure and fresh farm milk daily.";
-            } else if(val === 'payment') {
-                msgBox.value = "Thank you! We have successfully received your payment for the milk supply. Keep supporting Shri Khatu Shyam Dairy.";
-            }
-        }
-
-        function sendWhatsAppMessage() {
-            let mobile = document.getElementById('waMobile').value.trim();
-            let msg = encodeURIComponent(document.getElementById('waMessageText').value);
-            if(!mobile) { alert('Please enter customer WhatsApp mobile number!'); return; }
-            window.open(`https://wa.me/${mobile}?text=${msg}`, '_blank');
-        }
-
-        window.onload = function() {
-            let today = new Date().toISOString().split('T')[0];
-            document.getElementById('billDate').valueAsDate = new Date();
-            document.getElementById('retailDate').valueAsDate = new Date();
-            document.getElementById('cattleDate').valueAsDate = new Date();
-            document.getElementById('prodDate').valueAsDate = new Date();
-            document.getElementById('expDate').valueAsDate = new Date();
-
-            // Register Chart DataLabels plugin
-            Chart.register(ChartDataLabels);
-
-            // Cattle Ratio Doughnut Chart
-            new Chart(document.getElementById('cattleChart').getContext('2d'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Milking Cows (10)', 'Pregnant Cows (4)', 'Milking Buffaloes (8)', 'Calves (2)'],
-                    datasets: [{
-                        data: [10, 4, 8, 2],
-                        backgroundColor: ['#ec4899', '#8b5cf6', '#3b82f6', '#10b981'],
-                        borderWidth: 3,
-                        borderColor: '#ffffff',
-                        hoverOffset: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: '#334155', font: { weight: 'bold', size: 11 }, padding: 15 }
-                        },
-                        datalabels: {
-                            color: '#ffffff',
-                            font: { weight: 'bold', size: 13 },
-                            formatter: (value) => value
-                        }
-                    }
-                }
-            });
-
-            // Milk Sales Line Chart with Data Labels and Gradient Area Fill
-            const ctx = document.getElementById('milkChart').getContext('2d');
-            let gradientCow = ctx.createLinearGradient(0, 0, 0, 200);
-            gradientCow.addColorStop(0, 'rgba(236, 72, 153, 0.35)');
-            gradientCow.addColorStop(1, 'rgba(236, 72, 153, 0.0)');
-
-            let gradientBuffalo = ctx.createLinearGradient(0, 0, 0, 200);
-            gradientBuffalo.addColorStop(0, 'rgba(59, 130, 246, 0.35)');
-            gradientBuffalo.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['1 Sept', '2 Sept', '3 Sept', '4 Sept', '5 Sept', '6 Sept', '7 Sept'],
-                    datasets: [
-                        {
-                            label: 'Cow Milk (L)',
-                            data: [85, 90, 88, 92, 95, 90, 93],
-                            borderColor: '#ec4899',
-                            backgroundColor: gradientCow,
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.35,
-                            pointBackgroundColor: '#ec4899',
-                            pointRadius: 4
-                        },
-                        {
-                            label: 'Buffalo Milk (L)',
-                            data: [55, 52, 58, 60, 57, 59, 62],
-                            borderColor: '#3b82f6',
-                            backgroundColor: gradientBuffalo,
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.35,
-                            pointBackgroundColor: '#3b82f6',
-                            pointRadius: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                            ticks: { color: '#334155', font: { weight: '500' } }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#334155', font: { weight: '500' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: { color: '#334155', font: { weight: 'bold', size: 11 } }
-                        },
-                        datalabels: {
-                            align: 'top',
-                            color: '#1e293b',
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (value) => value + 'L'
-                        }
-                    }
-                }
-            });
-        };
+        });
     </script>
 </body>
 </html>
