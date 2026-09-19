@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shri Khatu Shyam Dairy</title>
+    <!-- Include Chart.js for the dashboard chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,7 +92,7 @@
             padding-top: 60px;
         }
         .sidebar a {
-            padding: 10px 15px;
+            padding: 12px 20px;
             text-decoration: none;
             font-size: 16px;
             color: #818181;
@@ -99,6 +101,7 @@
         }
         .sidebar a:hover {
             color: #f1f1f1;
+            background-color: #222;
         }
         .sidebar .close-btn {
             position: absolute;
@@ -171,11 +174,15 @@
 </head>
 <body>
 
-    <!-- Sidebar Menu -->
+    <!-- Sidebar Menu with All Options Restored -->
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
         <a href="#" onclick="switchView('dashboardView')">Dashboard</a>
         <a href="#" onclick="switchView('pendingView')">Pending Payment</a>
+        <a href="#" onclick="switchView('cattleView')">Cattle Management</a>
+        <a href="#" onclick="switchView('milkView')">Milk Production</a>
+        <a href="#" onclick="switchView('reportsView')">Reports & Analytics</a>
+        <a href="#" onclick="switchView('settingsView')">Settings</a>
     </div>
 
     <!-- Header -->
@@ -211,10 +218,21 @@
                 <div class="card-value">+ ₹ 2,47,500</div>
             </div>
 
-            <!-- Updated Dashboard Card showing Total Pending Amount -->
+            <!-- Total Pending Amount Card -->
             <div class="card pending-amount">
                 <div class="card-title">Total Pending Amount</div>
                 <div class="card-value">₹ 12,50,000</div>
+            </div>
+
+            <!-- Restored Dashboard Chart Card -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div class="card-title" style="margin: 0; font-weight: bold;">Cattle Ratio Breakdown</div>
+                    <span style="font-size: 10px; background: #e2f0d9; color: #385723; padding: 2px 8px; border-radius: 10px;">Live Share</span>
+                </div>
+                <div style="width: 220px; margin: auto;">
+                    <canvas id="cattleChart"></canvas>
+                </div>
             </div>
         </div>
 
@@ -242,7 +260,7 @@
                             <td>
                                 <button class="btn-deposit" onclick="toggleDepositForm('form1')">Deposit</button>
                                 
-                                <!-- Hidden History / Deposit Form container revealed on click -->
+                                <!-- Deposit Form container revealed on click -->
                                 <div id="form1" class="deposit-form-container">
                                     <label style="font-size: 11px; font-weight: bold;">Deposit Date:</label>
                                     <input type="date" id="depositDate1">
@@ -262,6 +280,35 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- PLACEHOLDER VIEWS FOR OTHER SIDEBAR OPTIONS -->
+        <div id="cattleView" class="view-section">
+            <div class="card">
+                <h3>Cattle Management</h3>
+                <p>Manage all cattle records, health logs, and feeding schedules here.</p>
+            </div>
+        </div>
+
+        <div id="milkView" class="view-section">
+            <div class="card">
+                <h3>Milk Production</h3>
+                <p>Track daily morning and evening milk collection figures.</p>
+            </div>
+        </div>
+
+        <div id="reportsView" class="view-section">
+            <div class="card">
+                <h3>Reports & Analytics</h3>
+                <p>View detailed business analytics, performance metrics, and financial summaries.</p>
+            </div>
+        </div>
+
+        <div id="settingsView" class="view-section">
+            <div class="card">
+                <h3>Settings</h3>
+                <p>Configure app preferences, profile details, and user permissions.</p>
             </div>
         </div>
 
@@ -294,9 +341,34 @@
         }
 
         function confirmPayment() {
-            alert("Payment recorded successfully in pure English format!");
+            alert("Payment recorded successfully!");
             location.reload();
         }
+
+        // Initialize Dashboard Chart
+        const ctx = document.getElementById('cattleChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Milking Cows', 'Dry Cows', 'Buffaloes'],
+                datasets: [{
+                    data: [10, 4, 10],
+                    backgroundColor: ['#007bff', '#28a745', '#d63384'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
