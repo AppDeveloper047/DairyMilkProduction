@@ -155,7 +155,7 @@
 
         <main class="p-6 space-y-6 flex-1">
             
-            <!-- Dashboard Home Tab (Row-aligned Grid Boxes) -->
+            <!-- Dashboard Home Tab -->
             <div id="tab-home" class="tab-content space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                     <div class="card-gradient-1 p-5 rounded-2xl flex flex-col justify-between">
@@ -174,7 +174,6 @@
                         <p class="text-white/80 text-sm font-medium">Monthly Revenue</p>
                         <h3 class="text-2xl font-extrabold mt-1">+ ₹ 2,47,500</h3>
                     </div>
-                    <!-- Pending Customer Box Only (No Details Table Here) -->
                     <div onclick="switchTab('pending-customers', document.querySelector('a[href=\'#pending-customers\']'))" class="card-gradient-5 p-5 rounded-2xl flex flex-col justify-between cursor-pointer hover:scale-105 transition shadow-lg">
                         <div class="flex justify-between items-center">
                             <p class="text-white/80 text-sm font-medium">Pending Customers</p>
@@ -213,13 +212,13 @@
                 </div>
             </div>
 
-            <!-- Pending Customers Tab (All Details Here) -->
+            <!-- Pending Customers Tab -->
             <div id="tab-pending-customers" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3 flex justify-between items-center">
                         <div>
                             <h2 class="text-xl font-bold text-red-600"><i class="fa-solid fa-users-clock mr-2"></i> All Pending Customers & Payment Dues</h2>
-                            <p class="text-slate-600 text-sm mt-1">Complete details of all pending customers across entries.</p>
+                            <p class="text-slate-600 text-sm mt-1">Complete details of pending payments, जमा तारीख (Date), Cash/Online Mode, and Amount.</p>
                         </div>
                         <button onclick="renderPendingCustomers()" class="bg-red-100 text-red-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-200 transition">
                             <i class="fa-solid fa-rotate mr-1"></i> Refresh List
@@ -229,13 +228,13 @@
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th>
+                                    <th class="p-3">Entry Date</th>
                                     <th class="p-3">Module / Type</th>
                                     <th class="p-3">Customer / Party Name</th>
                                     <th class="p-3">Mobile Number</th>
                                     <th class="p-3">Details / Quantity</th>
                                     <th class="p-3">Pending Amount</th>
-                                    <th class="p-3">Action</th>
+                                    <th class="p-3">Payment Deposit (Jama) Action</th>
                                 </tr>
                             </thead>
                             <tbody id="pendingTableBody" class="text-slate-700">
@@ -805,7 +804,6 @@
             if(window.innerWidth < 768) toggleSidebar();
         }
 
-        // Retail Customer Handlers
         function onRetailCustomerChange(val) {
             let customInput = document.getElementById('retailCustCustom');
             let mobInput = document.getElementById('retailMobile');
@@ -1103,6 +1101,7 @@
             document.getElementById('dashPendingCount').innerHTML = `${pendingRecords.length} <span class="text-xs font-normal">Pending</span>`;
         }
 
+        // Updated function to handle payment deposit details: Jama Date, Cash/Online Mode, and Amount
         function renderPendingCustomers() {
             let tbody = document.getElementById('pendingTableBody');
             if(pendingRecords.length === 0) {
@@ -1110,6 +1109,7 @@
                 return;
             }
             let html = '';
+            let todayDateStr = new Date().toISOString().split('T')[0];
             pendingRecords.forEach((item, index) => {
                 html += `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                     <td class="p-3">${item.date}</td>
@@ -1117,20 +1117,58 @@
                     <td class="p-3 font-bold text-slate-800">${item.name}</td>
                     <td class="p-3">${item.mobile}</td>
                     <td class="p-3">${item.details}</td>
-                    <td class="p-3 text-red-600 font-extrabold">₹ ${item.amount}</td>
-                    <td class="p-3">
-                        <button onclick="markAsPaid(${index})" class="bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-700 transition">Mark Paid</button>
+                    <td class="p-3 text-red-600 font-extrabold" id="pendingAmt-${index}">₹ ${item.amount}</td>
+                    <td class="p-3 space-y-2">
+                        <div class="flex flex-wrap gap-2 items-center">
+                            <div>
+                                <label class="block text-[10px] text-slate-500 font-medium">Jama Date:</label>
+                                <input type="date" id="jamaDate-${index}" value="${todayDateStr}" class="bg-white border border-slate-300 rounded-lg p-1 text-xs text-slate-700">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-slate-500 font-medium">Mode:</label>
+                                <select id="jamaMode-${index}" class="bg-white border border-slate-300 rounded-lg p-1 text-xs text-slate-700 font-semibold">
+                                    <option value="Cash">Cash (कैश)</option>
+                                    <option value="Online">Online (ऑनलाइन)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-slate-500 font-medium">Jama Amount (₹):</label>
+                                <input type="number" id="jamaAmt-${index}" value="${item.amount}" class="bg-white border border-slate-300 rounded-lg p-1 text-xs text-emerald-700 font-bold w-24">
+                            </div>
+                        </div>
+                        <button onclick="processPaymentDeposit(${index})" class="mt-1 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-700 transition w-full shadow">
+                            <i class="fa-solid fa-check mr-1"></i> Confirm & Clear Payment
+                        </button>
                     </td>
                 </tr>`;
             });
             tbody.innerHTML = html;
         }
 
-        function markAsPaid(index) {
-            pendingRecords.splice(index, 1);
+        function processPaymentDeposit(index) {
+            let jDate = document.getElementById(`jamaDate-${index}`).value;
+            let jMode = document.getElementById(`jamaMode-${index}`).value;
+            let jAmt = parseFloat(document.getElementById(`jamaAmt-${index}`).value) || 0;
+            let currentDue = parseFloat(pendingRecords[index].amount);
+
+            if(jAmt <= 0) {
+                alert('Kripya valid jama amount darj karein!');
+                return;
+            }
+
+            if(jAmt >= currentDue) {
+                // Fully paid, remove from pending list
+                alert(`Payment Successfully Cleared!\nDate: ${jDate}\nMode: ${jMode}\nAmount: ₹ ${jAmt}`);
+                pendingRecords.splice(index, 1);
+            } else {
+                // Partially paid, reduce the pending amount
+                let remaining = currentDue - jAmt;
+                pendingRecords[index].amount = remaining.toFixed(2);
+                alert(`Partial Payment Received!\nDate: ${jDate}\nMode: ${jMode}\nDeposited: ₹ ${jAmt}\nRemaining Due: ₹ ${remaining.toFixed(2)}`);
+            }
+
             updatePendingCount();
             renderPendingCustomers();
-            alert('Payment marked as cleared successfully!');
         }
 
         function saveExpenseEntry() {
@@ -1205,10 +1243,8 @@
             document.getElementById('prodDate').valueAsDate = new Date();
             document.getElementById('expDate').valueAsDate = new Date();
 
-            // Register Chart DataLabels plugin
             Chart.register(ChartDataLabels);
 
-            // Cattle Ratio Doughnut Chart
             new Chart(document.getElementById('cattleChart').getContext('2d'), {
                 type: 'doughnut',
                 data: {
@@ -1238,7 +1274,6 @@
                 }
             });
 
-            // Milk Sales Line Chart with Data Labels and Gradient Area Fill
             const ctx = document.getElementById('milkChart').getContext('2d');
             let gradientCow = ctx.createLinearGradient(0, 0, 0, 200);
             gradientCow.addColorStop(0, 'rgba(236, 72, 153, 0.35)');
