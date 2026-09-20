@@ -1029,9 +1029,9 @@
             document.getElementById('prodTotalAmount').value = calculatedProductTotalAmt > 0 ? '₹ ' + calculatedProductTotalAmt.toFixed(2) : '';
         }
 
-        // GOOGLE SHEET SYNC FUNCTION
+        // GOOGLE SHEET SYNC FUNCTION (Updated with your correct Web App URL)
         function sendDataToGoogleSheet(recordData) {
-            var scriptURL = "https://script.google.com/macros/s/AKfycbwP0l1_0l5b0hE9K_c6vj5rFwVvK_gLwN_2Yl1_r7Kq3b_yVz1c8X5p9N3L/exec"; // Aapka Web App URL yahan daal diya hai
+            var scriptURL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
