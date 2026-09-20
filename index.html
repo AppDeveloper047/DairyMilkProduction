@@ -905,6 +905,13 @@
             arrow.classList.toggle('rotate-180');
         }
 
+        function switchTab(tabId) {
+    // Saare tabs ko hide karein
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    // Sirf target wale tab ko dikhayein
+    document.getElementById('tab-' + tabId).classList.remove('hidden');
+}
+
         function switchTab(tabId, element) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             if(tabId === 'home') document.getElementById('tab-home').classList.remove('hidden');
