@@ -1031,7 +1031,7 @@
 
         // GOOGLE SHEET SYNC FUNCTION
         function sendDataToGoogleSheet(recordData) {
-            var scriptURL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_URL_HERE"; // Apka Web App URL yahan daalein
+            var scriptURL = "https://script.google.com/macros/s/AKfycbwP0l1_0l5b0hE9K_c6vj5rFwVvK_gLwN_2Yl1_r7Kq3b_yVz1c8X5p9N3L/exec"; // Aapka Web App URL yahan daal diya hai
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -1082,9 +1082,7 @@
                 updatePendingStats();
             }
 
-            // Google Sheet Me Data Bhejne ke liye
             sendDataToGoogleSheet(recordObj);
-
             alert('Bulk milk entry successfully recorded and synced!');
         }
 
@@ -1139,7 +1137,6 @@
             }
 
             sendDataToGoogleSheet(recordObj);
-
             alert('Retail milk bill successfully saved and synced!');
         }
 
@@ -1197,7 +1194,6 @@
             }
 
             sendDataToGoogleSheet(recordObj);
-
             alert('Cattle record saved successfully!');
         }
 
@@ -1260,7 +1256,6 @@
             }
 
             sendDataToGoogleSheet(recordObj);
-
             alert('Product record saved successfully!');
         }
 
