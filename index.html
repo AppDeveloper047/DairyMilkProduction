@@ -74,7 +74,7 @@
     <!-- 3D Sidebar Panel -->
     <div id="sidebar" class="w-72 sidebar-3d-bg text-white flex flex-col z-50 transform -translate-x-full md:translate-x-0 fixed md:relative h-full">
         <div class="p-6 text-2xl font-extrabold tracking-wider flex items-center justify-between border-b border-white/15">
-            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span data-translate="app_title">Dairy CRM</span></span>
+            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-translate="app_title">Shri Khatu Shyam Dairy</span></span>
             <button onclick="toggleSidebar()" class="md:hidden text-white text-xl hover:text-pink-400 transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
@@ -129,7 +129,7 @@
             </a>
         </nav>
 
-        <div class="p-4 border-t border-white/15 text-xs text-center text-slate-400">
+        <div id="sidebarFooter" class="p-4 border-t border-white/15 text-xs text-center text-slate-400">
             © 2026 Shri Khatu Shyam Dairy Farming
         </div>
     </div>
@@ -165,19 +165,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                     <div class="card-gradient-1 p-5 rounded-2xl flex flex-col justify-between">
                         <p class="text-white/80 text-sm font-medium">Total Cattle Count</p>
-                        <h3 class="text-2xl font-extrabold mt-1">24 <span class="text-xs font-normal">(Cows: 14, Buff: 10)</span></h3>
+                        <h3 id="dashCattleCount" class="text-2xl font-extrabold mt-1">24 <span class="text-xs font-normal">(Cows: 14, Buff: 10)</span></h3>
                     </div>
                     <div class="card-gradient-2 p-5 rounded-2xl flex flex-col justify-between">
                         <p class="text-white/80 text-sm font-medium">Total Investment</p>
-                        <h3 class="text-2xl font-extrabold mt-1">₹ 8,50,000</h3>
+                        <h3 id="dashInvestment" class="text-2xl font-extrabold mt-1">₹ 8,50,000</h3>
                     </div>
                     <div class="card-gradient-3 p-5 rounded-2xl flex flex-col justify-between">
                         <p class="text-white/80 text-sm font-medium">Total Milk Production</p>
-                        <h3 class="text-2xl font-extrabold mt-1">4,250 Liters</h3>
+                        <h3 id="dashMilkProd" class="text-2xl font-extrabold mt-1">4,250 Liters</h3>
                     </div>
                     <div class="card-gradient-4 p-5 rounded-2xl flex flex-col justify-between">
                         <p class="text-white/80 text-sm font-medium">Monthly Revenue</p>
-                        <h3 class="text-2xl font-extrabold mt-1">+ ₹ 2,47,500</h3>
+                        <h3 id="dashRevenue" class="text-2xl font-extrabold mt-1">+ ₹ 2,47,500</h3>
                     </div>
                     <!-- Total Pending Amount Box -->
                     <div onclick="switchTab('pending-customers', document.querySelector('a[href=\'#pending-customers\']'))" class="card-gradient-5 p-5 rounded-2xl flex flex-col justify-between cursor-pointer hover:scale-105 transition shadow-lg">
@@ -209,7 +209,7 @@
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
                                 <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend
                             </h3>
-                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Weekly Output</span>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Live Weekly Output</span>
                         </div>
                         <div class="relative w-full py-2">
                             <canvas id="milkChart" height="155"></canvas>
@@ -873,6 +873,15 @@
         let pendingRecords = [];
         let masterLedgerHistory = [];
 
+        // Live Dashboard Dynamic Stats
+        let liveStats = {
+            cows: 14,
+            buffaloes: 10,
+            totalInvestment: 850000,
+            totalMilkLitres: 4250,
+            monthlyRevenue: 247500
+        };
+
         // Directory to store customer/party mobile numbers dynamically
         let customerDirectory = {
             "Rahul Sharma": "9876543210",
@@ -887,6 +896,71 @@
             en: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" },
             hi: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" }
         };
+
+        let cattleChartInstance = null;
+        let milkChartInstance = null;
+
+        window.onload = function() {
+            initCharts();
+            updateDashboardBoxes();
+        };
+
+        function initCharts() {
+            const ctxCattle = document.getElementById('cattleChart').getContext('2d');
+            cattleChartInstance = new Chart(ctxCattle, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Milking Cows', 'Milking Buffaloes', 'Heifers / Calves'],
+                    datasets: [{
+                        data: [liveStats.cows, liveStats.buffaloes, 5],
+                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            const ctxMilk = document.getElementById('milkChart').getContext('2d');
+            milkChartInstance = new Chart(ctxMilk, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Milk Output (Liters)',
+                        data: [600, 620, 590, 650, 640, 680, 670],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        function updateChartsAndBoxes() {
+            if(cattleChartInstance) {
+                cattleChartInstance.data.datasets[0].data = [liveStats.cows, liveStats.buffaloes, 5];
+                cattleChartInstance.update();
+            }
+            updateDashboardBoxes();
+        }
+
+        function updateDashboardBoxes() {
+            let totalCows = liveStats.cows + liveStats.buffaloes;
+            document.getElementById('dashCattleCount').innerHTML = `${totalCows} <span class="text-xs font-normal">(Cows: ${liveStats.cows}, Buff: ${liveStats.buffaloes})</span>`;
+            document.getElementById('dashInvestment').innerText = `₹ ${liveStats.totalInvestment.toLocaleString('en-IN')}`;
+            document.getElementById('dashMilkProd').innerText = `${liveStats.totalMilkLitres.toLocaleString('en-IN')} Liters`;
+            document.getElementById('dashRevenue').innerText = `+ ₹ ${liveStats.monthlyRevenue.toLocaleString('en-IN')}`;
+        }
 
         function changeLanguage(lang) {
             const elements = document.querySelectorAll('[data-translate]');
@@ -930,6 +1004,26 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('tab-billing-invoice').classList.remove('hidden');
             if(window.innerWidth < 768) toggleSidebar();
+        }
+
+        // Edit Profile Feature Implementation
+        function saveProfileChanges() {
+            let brandName = document.getElementById('profileBrandName').value.trim();
+            let office = document.getElementById('profileOffice').value.trim();
+            let hub = document.getElementById('profileHub').value.trim();
+            let contact = document.getElementById('profileContact').value.trim();
+
+            if(!brandName) { alert('Please enter Dairy/Brand Name!'); return; }
+
+            // Update Header & Sidebar Titles Dynamically
+            document.getElementById('headerBrandName').innerText = brandName;
+            document.getElementById('sidebarBrandTitle').innerText = brandName;
+            document.getElementById('headerOfficeLoc').innerHTML = `<i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: ${office}`;
+            document.getElementById('headerHubLoc').innerHTML = `<i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: ${hub}`;
+            document.getElementById('headerContactNum').innerHTML = `<i class="fa-solid fa-phone text-emerald-500 mr-1"></i>${contact}`;
+            document.getElementById('sidebarFooter').innerText = `© 2026 ${brandName} Farming`;
+
+            alert('Profile updated successfully across all headers and invoices!');
         }
 
         // Retail Customer Handlers
@@ -1029,7 +1123,7 @@
             document.getElementById('prodTotalAmount').value = calculatedProductTotalAmt > 0 ? '₹ ' + calculatedProductTotalAmt.toFixed(2) : '';
         }
 
-        // GOOGLE SHEET SYNC FUNCTION (Updated with your correct Web App URL)
+        // GOOGLE SHEET SYNC FUNCTION
         function sendDataToGoogleSheet(recordData) {
             var scriptURL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
             fetch(scriptURL, {
@@ -1046,7 +1140,7 @@
             let date = document.getElementById('billDate').value || new Date().toISOString().split('T')[0];
             let shift = document.getElementById('billShift').value;
             let milkType = document.getElementById('milkType').value;
-            let qty = document.getElementById('milkQty').value;
+            let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             let fat = document.getElementById('milkFat').value;
             let fatRate = document.getElementById('fatRate').value;
             let snf = document.getElementById('milkSnf').value || '-';
@@ -1079,8 +1173,13 @@
             masterLedgerHistory.push(recordObj);
             if(status === 'Pending') {
                 pendingRecords.push(recordObj);
-                updatePendingStats();
             }
+
+            // Update Live Stats
+            liveStats.totalMilkLitres += qty;
+            liveStats.monthlyRevenue += calculatedTotalAmt;
+            updateChartsAndBoxes();
+            updatePendingStats();
 
             sendDataToGoogleSheet(recordObj);
             alert('Bulk milk entry successfully recorded and synced!');
@@ -1092,7 +1191,7 @@
             let customElem = document.getElementById('retailCustCustom');
             let mobile = document.getElementById('retailMobile').value.trim();
             let name = selectElem.value === 'NEW' ? customElem.value.trim() : selectElem.value;
-            let liters = document.getElementById('retailLitermt').value;
+            let liters = parseFloat(document.getElementById('retailLitermt').value) || 0;
             let rate = document.getElementById('retailRate').value;
             let status = document.getElementById('retailStatus').value;
 
@@ -1133,8 +1232,12 @@
             masterLedgerHistory.push(recordObj);
             if(status === 'Pending') {
                 pendingRecords.push(recordObj);
-                updatePendingStats();
             }
+
+            liveStats.totalMilkLitres += liters;
+            liveStats.monthlyRevenue += calculatedRetailAmt;
+            updateChartsAndBoxes();
+            updatePendingStats();
 
             sendDataToGoogleSheet(recordObj);
             alert('Retail milk bill successfully saved and synced!');
@@ -1151,7 +1254,7 @@
             let partyCustom = document.getElementById('cattlePartyCustom');
             let partyMobile = document.getElementById('cattlePartyMobile').value.trim();
             let party = partySelect.value === 'NEW' ? partyCustom.value.trim() : partySelect.value;
-            let amount = document.getElementById('cattleAmount').value;
+            let amount = parseFloat(document.getElementById('cattleAmount').value) || 0;
             let status = document.getElementById('cattleStatus').value;
 
             if(!amount || !breed) { alert('Please fill Breed and Amount properly!'); return; }
@@ -1183,15 +1286,24 @@
                 name: party || 'Dealer',
                 mobile: partyMobile || '-',
                 details: `${breed} (Tag: ${tag})`,
-                amount: parseFloat(amount),
+                amount: amount,
                 status: status
             };
 
             masterLedgerHistory.push(recordObj);
             if(status === 'Pending') {
                 pendingRecords.push(recordObj);
-                updatePendingStats();
             }
+
+            if(type === 'Purchase') {
+                liveStats.totalInvestment += amount;
+                if(breed.toLowerCase().includes('cow')) liveStats.cows += 1;
+                else if(breed.toLowerCase().includes('buffalo')) liveStats.buffaloes += 1;
+            } else {
+                liveStats.monthlyRevenue += amount;
+            }
+            updateChartsAndBoxes();
+            updatePendingStats();
 
             sendDataToGoogleSheet(recordObj);
             alert('Cattle record saved successfully!');
@@ -1204,7 +1316,7 @@
             let prodCustom = document.getElementById('prodNameCustom');
             let prodName = prodSelect.value === 'NEW' ? prodCustom.value.trim() : prodSelect.value;
             let unitType = document.getElementById('prodUnitType').value;
-            let qtyNum = document.getElementById('prodQtyNum').value;
+            let qtyNum = parseFloat(document.getElementById('prodQtyNum').value) || 0;
             let rateUnit = document.getElementById('prodRatePerUnit').value;
             let partySelect = document.getElementById('prodPartySelect');
             let partyCustom = document.getElementById('prodPartyCustom');
@@ -1252,13 +1364,42 @@
             masterLedgerHistory.push(recordObj);
             if(status === 'Pending') {
                 pendingRecords.push(recordObj);
-                updatePendingStats();
             }
+
+            if(type === 'Purchase') liveStats.totalInvestment += calculatedProductTotalAmt;
+            else liveStats.monthlyRevenue += calculatedProductTotalAmt;
+            updateChartsAndBoxes();
+            updatePendingStats();
 
             sendDataToGoogleSheet(recordObj);
             alert('Product record saved successfully!');
         }
 
+        function saveExpenseEntry() {
+            let date = document.getElementById('expDate').value || new Date().toISOString().split('T')[0];
+            let catSelect = document.getElementById('expCategory');
+            let catCustom = document.getElementById('expCategoryCustom');
+            let category = catSelect.value === 'NEW' ? catCustom.value.trim() : catSelect.value;
+            let amount = parseFloat(document.getElementById('expAmount').value) || 0;
+            let desc = document.getElementById('expDesc').value || '-';
+
+            if(!amount || !category) { alert('Please fill Category and Amount properly!'); return; }
+
+            let tbody = document.getElementById('expenseTableBody');
+            if(tbody.innerHTML.includes('No expense records added yet')) tbody.innerHTML = '';
+
+            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                <td class="p-3">${date}</td><td class="p-3 text-blue-600 font-medium">${category}</td>
+                <td class="p-3">${desc}</td><td class="p-3 text-red-600 font-bold">₹ ${amount.toFixed(2)}</td>
+            </tr>`;
+            tbody.insertAdjacentHTML('afterbegin', newRow);
+
+            liveStats.totalInvestment += amount;
+            updateChartsAndBoxes();
+            alert('Expense entry saved successfully!');
+        }
+
+        // Live Pending Amount Calculation & Rendering
         function updatePendingStats() {
             let totalPending = pendingRecords.reduce((sum, item) => sum + item.amount, 0);
             document.getElementById('dashPendingAmount').innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
@@ -1267,88 +1408,49 @@
         function renderPendingCustomers() {
             let tbody = document.getElementById('pendingTableBody');
             if(pendingRecords.length === 0) {
-                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No pending customers found.</td></tr>`;
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No pending customers found. All accounts settled!</td></tr>`;
                 return;
             }
-            let html = '';
+
+            tbody.innerHTML = '';
             pendingRecords.forEach((item, index) => {
-                html += `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition customer-row" data-name="${item.name.toLowerCase()}" data-mobile="${item.mobile}">
+                let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                     <td class="p-3">${item.date}</td>
-                    <td class="p-3 font-semibold text-purple-600">${item.module}</td>
-                    <td class="p-3 font-bold text-slate-800">${item.name}</td>
+                    <td class="p-3 text-purple-600 font-medium">${item.module}</td>
+                    <td class="p-3 text-slate-800 font-bold">${item.name}</td>
                     <td class="p-3">${item.mobile}</td>
                     <td class="p-3">${item.details}</td>
-                    <td class="p-3 text-red-600 font-extrabold" id="amt-${index}">₹ ${item.amount.toFixed(2)}</td>
+                    <td class="p-3 text-red-600 font-extrabold">₹ ${item.amount.toFixed(2)}</td>
                     <td class="p-3">
-                        <button onclick="openEditBillingModal(${index})" class="bg-pink-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-pink-700 transition shadow-md flex items-center gap-1.5">
-                            <i class="fa-solid fa-pen-to-square"></i> Edit / Pay
+                        <button onclick="openEditModal(${index})" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:opacity-90 transition shadow">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit / Pay
                         </button>
                     </td>
                 </tr>`;
+                tbody.insertAdjacentHTML('beforeend', row);
             });
-            tbody.innerHTML = html;
-            updatePendingStats();
         }
 
         function filterPendingList() {
-            let query = document.getElementById('pendingSearchInput').value.toLowerCase().trim();
-            let rows = document.querySelectorAll('.customer-row');
+            let query = document.getElementById('pendingSearchInput').value.toLowerCase();
+            let rows = document.querySelectorAll('#pendingTableBody tr');
             rows.forEach(row => {
-                let name = row.getAttribute('data-name');
-                let mobile = row.getAttribute('data-mobile');
-                if(name.includes(query) || mobile.includes(query)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
+                let text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
             });
         }
 
-        function searchCustomerLedger() {
-            let query = document.getElementById('ledgerSearchInput').value.toLowerCase().trim();
-            let tbody = document.getElementById('ledgerTableBody');
-            let summaryBox = document.getElementById('ledgerSummaryBox');
-            
-            if(!query) { alert('Kripya customer ka naam ya mobile number dalein!'); return; }
-
-            let filteredHistory = masterLedgerHistory.filter(item => item.name.toLowerCase().includes(query) || item.mobile.includes(query));
-            let filteredPending = pendingRecords.filter(item => item.name.toLowerCase().includes(query) || item.mobile.includes(query));
-
-            if(filteredHistory.length === 0) {
-                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">Is naam ya mobile ka koi record nahi mila.</td></tr>`;
-                summaryBox.classList.add('hidden');
-                return;
-            }
-
-            summaryBox.classList.remove('hidden');
-            document.getElementById('summaryName').innerText = filteredHistory[0].name;
-            let totalOutstanding = filteredPending.reduce((sum, item) => sum + item.amount, 0);
-            document.getElementById('summaryPending').innerText = `₹ ${totalOutstanding.toFixed(2)}`;
-
-            let html = '';
-            filteredHistory.forEach(item => {
-                html += `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                    <td class="p-3">${item.date}</td>
-                    <td class="p-3 font-semibold text-purple-600">${item.module}</td>
-                    <td class="p-3">${item.details}</td>
-                    <td class="p-3 font-bold text-slate-800">₹ ${item.amount.toFixed(2)}</td>
-                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${item.status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700 border border-emerald-300'} font-semibold">${item.status}</span></td>
-                </tr>`;
-            });
-            tbody.innerHTML = html;
-        }
-
-        function openEditBillingModal(index) {
+        // Modal Payment Handling
+        function openEditModal(index) {
             let item = pendingRecords[index];
             document.getElementById('editRowIndex').value = index;
             document.getElementById('modalCustName').value = item.name;
-            document.getElementById('modalPayDate').valueAsDate = new Date();
+            document.getElementById('modalPayDate').value = new Date().toISOString().split('T')[0];
             document.getElementById('modalModule').value = item.module;
             document.getElementById('modalDetails').value = item.details;
-            document.getElementById('modalTotalAmt').value = item.amount.toFixed(2);
+            document.getElementById('modalTotalAmt').value = item.amount;
             document.getElementById('modalPayingAmt').value = '';
             document.getElementById('modalRemainingAmt').value = '₹ ' + item.amount.toFixed(2);
-            
             document.getElementById('editBillingModal').classList.remove('hidden');
         }
 
@@ -1357,216 +1459,89 @@
         }
 
         function autoCalculateOutstanding() {
-            let index = document.getElementById('editRowIndex').value;
-            let total = pendingRecords[index].amount;
+            let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
             let remaining = total - paying;
-            if(remaining < 0) remaining = 0;
-            document.getElementById('modalRemainingAmt').value = '₹ ' + remaining.toFixed(2);
+            document.getElementById('modalRemainingAmt').value = '₹ ' + (remaining > 0 ? remaining.toFixed(2) : '0.00 (Fully Paid)');
         }
 
         function saveModalPaymentUpdate() {
-            let index = document.getElementById('editRowIndex').value;
+            let index = parseInt(document.getElementById('editRowIndex').value);
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
-            let payDate = document.getElementById('modalPayDate').value;
+            let total = pendingRecords[index].amount;
 
-            if(paying <= 0) { alert('Kripya valid payment amount dalein!'); return; }
-            if(paying > pendingRecords[index].amount) { alert('Jama karne wali rashi pending amount se zyada nahi ho sakti!'); return; }
+            if(paying <= 0) { alert('Please enter a valid paying amount!'); return; }
 
-            pendingRecords[index].amount -= paying;
-            let currentRemaining = pendingRecords[index].amount;
-
-            if(currentRemaining <= 0) {
-                pendingRecords[index].status = 'Paid';
+            if(paying >= total) {
+                // Fully Paid, remove from pending
                 pendingRecords.splice(index, 1);
+                alert('Payment received in full! Account settled.');
+            } else {
+                // Partially paid, update remaining amount
+                pendingRecords[index].amount -= paying;
+                alert('Partial payment recorded successfully!');
             }
 
-            updatePendingStats();
-            renderPendingCustomers();
             closeEditModal();
-            alert(`Payment successfully updated on ${payDate}! Bacha hua balance: ₹ ${currentRemaining.toFixed(2)}`);
+            renderPendingCustomers();
+            updatePendingStats();
         }
 
-        function saveExpenseEntry() {
-            let date = document.getElementById('expDate').value || new Date().toISOString().split('T')[0];
-            let catSelect = document.getElementById('expCategory');
-            let catCustom = document.getElementById('expCategoryCustom');
-            let category = catSelect.value === 'NEW' ? catCustom.value.trim() : catSelect.value;
-            let amount = document.getElementById('expAmount').value;
-            let desc = document.getElementById('expDesc').value || '-';
+        // Payment Ledger Search Feature
+        function searchCustomerLedger() {
+            let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
+            let tbody = document.getElementById('ledgerTableBody');
+            let summaryBox = document.getElementById('ledgerSummaryBox');
 
-            if(!amount || !category) { alert('Please fill Category and Amount properly!'); return; }
+            if(!query) { alert('Please enter customer name or mobile number to search!'); return; }
 
-            if(catSelect.value === 'NEW' && category !== '') {
-                let newOpt = document.createElement('option'); newOpt.value = category; newOpt.text = category;
-                catSelect.insertBefore(newOpt, catSelect.lastElementChild); catSelect.value = category;
-                catCustom.classList.add('hidden'); catCustom.value = '';
+            let filtered = masterLedgerHistory.filter(item => 
+                item.name.toLowerCase().includes(query) || item.mobile.toLowerCase().includes(query)
+            );
+
+            if(filtered.length === 0) {
+                summaryBox.classList.add('hidden');
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No ledger records found for "${query}".</td></tr>`;
+                return;
             }
 
-            let tbody = document.getElementById('expenseTableBody');
-            if(tbody.innerHTML.includes('No expense records added yet')) tbody.innerHTML = '';
+            let custName = filtered[0].name;
+            let totalOutstanding = filtered.filter(i => i.status === 'Pending').reduce((sum, i) => sum + i.amount, 0);
 
-            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 font-semibold text-blue-600">${category}</td>
-                <td class="p-3">${desc}</td><td class="p-3 text-red-600 font-bold">₹ ${amount}</td>
-            </tr>`;
-            tbody.insertAdjacentHTML('afterbegin', newRow);
+            document.getElementById('summaryName').innerText = custName;
+            document.getElementById('summaryPending').innerText = `₹ ${totalOutstanding.toFixed(2)}`;
+            summaryBox.classList.remove('hidden');
 
-            let recordObj = {
-                date: date,
-                module: 'Expense_Management',
-                name: category,
-                mobile: '-',
-                details: desc,
-                amount: parseFloat(amount),
-                status: 'Paid'
-            };
-            sendDataToGoogleSheet(recordObj);
-
-            alert('Expense saved and synced successfully!');
-        }
-
-        function saveProfileChanges() {
-            let brand = document.getElementById('profileBrandName').value.trim();
-            let office = document.getElementById('profileOffice').value.trim();
-            let hub = document.getElementById('profileHub').value.trim();
-            let contact = document.getElementById('profileContact').value.trim();
-
-            if(!brand) { alert('Please enter Dairy / Brand Name!'); return; }
-
-            document.getElementById('headerBrandName').innerText = brand;
-            document.getElementById('headerOfficeLoc').innerHTML = `<i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: ${office}`;
-            document.getElementById('headerHubLoc').innerHTML = `<i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: ${hub}`;
-            document.getElementById('headerContactNum').innerHTML = `<i class="fa-solid fa-phone text-emerald-500 mr-1"></i>${contact}`;
-
-            alert('Dairy profile details updated successfully on screen!');
-        }
-
-        function saveBillTerms() {
-            alert('Bill terms and conditions saved successfully!');
+            tbody.innerHTML = '';
+            filtered.forEach(item => {
+                let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                    <td class="p-3">${item.date}</td>
+                    <td class="p-3 font-semibold text-cyan-700">${item.module}</td>
+                    <td class="p-3">${item.details}</td>
+                    <td class="p-3 font-bold text-emerald-600">₹ ${item.amount.toFixed(2)}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${item.status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700 border border-emerald-300'} font-semibold">${item.status}</span></td>
+                </tr>`;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
         }
 
         function updateWaTemplate(val) {
-            let msgBox = document.getElementById('waMessageText');
+            let textarea = document.getElementById('waMessageText');
             if(val === 'bill') {
-                msgBox.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
+                textarea.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
             } else if(val === 'welcome') {
-                msgBox.value = "Welcome to Shri Khatu Shyam Dairy family! We are delighted to serve you pure and fresh farm milk daily.";
+                textarea.value = "Welcome to Shri Khatu Shyam Dairy family! We are delighted to supply pure and fresh milk directly to your doorstep daily.";
             } else if(val === 'payment') {
-                msgBox.value = "Thank you! We have successfully received your payment for the milk supply. Keep supporting Shri Khatu Shyam Dairy.";
+                textarea.value = "Thank you! We have received your payment successfully. Your account ledger has been updated.";
             }
         }
 
         function sendWhatsAppMessage() {
-            let mobile = document.getElementById('waMobile').value.trim();
+            let mob = document.getElementById('waMobile').value.trim();
             let msg = encodeURIComponent(document.getElementById('waMessageText').value);
-            if(!mobile) { alert('Please enter customer WhatsApp mobile number!'); return; }
-            window.open(`https://wa.me/${mobile}?text=${msg}`, '_blank');
+            if(!mob) { alert('Please enter customer mobile number!'); return; }
+            window.open(`https://wa.me/${mob}?text=${msg}`, '_blank');
         }
-
-        window.onload = function() {
-            document.getElementById('billDate').valueAsDate = new Date();
-            document.getElementById('retailDate').valueAsDate = new Date();
-            document.getElementById('cattleDate').valueAsDate = new Date();
-            document.getElementById('prodDate').valueAsDate = new Date();
-            document.getElementById('expDate').valueAsDate = new Date();
-
-            Chart.register(ChartDataLabels);
-
-            new Chart(document.getElementById('cattleChart').getContext('2d'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Milking Cows (10)', 'Pregnant Cows (4)', 'Milking Buffaloes (8)', 'Calves (2)'],
-                    datasets: [{
-                        data: [10, 4, 8, 2],
-                        backgroundColor: ['#ec4899', '#8b5cf6', '#3b82f6', '#10b981'],
-                        borderWidth: 3,
-                        borderColor: '#ffffff',
-                        hoverOffset: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: '#334155', font: { weight: 'bold', size: 11 }, padding: 15 }
-                        },
-                        datalabels: {
-                            color: '#ffffff',
-                            font: { weight: 'bold', size: 13 },
-                            formatter: (value) => value
-                        }
-                    }
-                }
-            });
-
-            const ctx = document.getElementById('milkChart').getContext('2d');
-            let gradientCow = ctx.createLinearGradient(0, 0, 0, 200);
-            gradientCow.addColorStop(0, 'rgba(236, 72, 153, 0.35)');
-            gradientCow.addColorStop(1, 'rgba(236, 72, 153, 0.0)');
-
-            let gradientBuffalo = ctx.createLinearGradient(0, 0, 0, 200);
-            gradientBuffalo.addColorStop(0, 'rgba(59, 130, 246, 0.35)');
-            gradientBuffalo.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['1 Sept', '2 Sept', '3 Sept', '4 Sept', '5 Sept', '6 Sept', '7 Sept'],
-                    datasets: [
-                        {
-                            label: 'Cow Milk (L)',
-                            data: [85, 90, 88, 92, 95, 90, 93],
-                            borderColor: '#ec4899',
-                            backgroundColor: gradientCow,
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.35,
-                            pointBackgroundColor: '#ec4899',
-                            pointRadius: 4
-                        },
-                        {
-                            label: 'Buffalo Milk (L)',
-                            data: [55, 52, 58, 60, 57, 59, 62],
-                            borderColor: '#3b82f6',
-                            backgroundColor: gradientBuffalo,
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.35,
-                            pointBackgroundColor: '#3b82f6',
-                            pointRadius: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                            ticks: { color: '#334155', font: { weight: '500' } }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#334155', font: { weight: '500' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: { color: '#334155', font: { weight: 'bold', size: 11 } }
-                        },
-                        datalabels: {
-                            align: 'top',
-                            color: '#1e293b',
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (value) => value + 'L'
-                        }
-                    }
-                }
-            });
-        };
     </script>
 </body>
 </html>
