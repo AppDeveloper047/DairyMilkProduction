@@ -748,16 +748,16 @@
 
     <!-- JavaScript Functions -->
     <script>
-        pending-customers calculatedPerLiter = 0;
-        id="tab-pending-customers calculatedTotalAmt = 0;
-        pending-customers calculatedRetailAmt = 0;
-        pending-customers calculatedProductTotalAmt = 0;
+        let calculatedPerLiter = 0;
+        let calculatedTotalAmt = 0;
+        let calculatedRetailAmt = 0;
+        let calculatedProductTotalAmt = 0;
 
         // Global arrays to store pending records across modules
-        pending-customers pendingRecords = [];
+        let pendingRecords = [];
 
         // Directory to store customer/party mobile numbers dynamically
-        pending-customers customerDirectory = {
+        let customerDirectory = {
             "Rahul Sharma": "9876543210",
             "Amit Verma": "9123456789",
             "Shyamlal Traders": "9988776655",
@@ -1103,7 +1103,6 @@
                 updatePendingStats();
             }
 
-            
             alert('Product record saved successfully!');
         }
 
@@ -1113,33 +1112,34 @@
             document.getElementById('dashPendingAmount').innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
         }
 
-        
-    // Render Pending Table with View Details Button
-    function renderPendingCustomers() {
-    let tbody = document.getElementById('pendingTableBody');
-    if(pendingRecords.length === 0) {
-        tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No pending customers found.</td></tr>`;
-        return;
-    }
-    let html = '';
-    pendingRecords.forEach((item, index) => {
-        html += `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition customer-row" data-name="${item.name.toLowerCase()}" data-mobile="${item.mobile}">
-            <td class="p-3">${item.date}</td>
-            <td class="p-3 font-semibold text-purple-600">${item.module}</td>
-            <td class="p-3 font-bold text-slate-800">${item.name}</td>
-            <td class="p-3">${item.mobile}</td>
-            <td class="p-3">${item.details}</td>
-            <td class="p-3 text-red-600 font-extrabold" id="amt-${index}">₹ ${item.amount.toFixed(2)}</td>
-            <td class="p-3">
-                <button onclick="openCustomerDetailModal(${index})" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-indigo-700 transition shadow">
-                    <i class="fa-solid fa-eye mr-1"></i> View Details
-                </button>
-            </td>
-        </tr>`;
-    });
-    tbody.innerHTML = html;
-    updatePendingStats();
-}
+        // Render Pending Table with Instant Edit & Payment Clearance
+        function renderPendingCustomers() {
+            let tbody = document.getElementById('pendingTableBody');
+            if(pendingRecords.length === 0) {
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No pending customers found.</td></tr>`;
+                return;
+            }
+            let html = '';
+            pendingRecords.forEach((item, index) => {
+                html += `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition customer-row" data-name="${item.name.toLowerCase()}" data-mobile="${item.mobile}">
+                    <td class="p-3">${item.date}</td>
+                    <td class="p-3 font-semibold text-purple-600">${item.module}</td>
+                    <td class="p-3 font-bold text-slate-800">${item.name}</td>
+                    <td class="p-3">${item.mobile}</td>
+                    <td class="p-3">${item.details}</td>
+                    <td class="p-3 text-red-600 font-extrabold" id="amt-${index}">₹ ${item.amount.toFixed(2)}</td>
+                    <td class="p-3 space-y-2">
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="payInput-${index}" placeholder="Pay Amt" class="w-24 bg-white border border-slate-300 rounded-lg p-1.5 text-xs text-slate-800 focus:outline-none focus:border-red-500">
+                            <button onclick="updatePartialPayment(${index})" class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-700 transition">Update</button>
+                        </div>
+                        <button onclick="markAsPaid(${index})" class="bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-700 transition w-full">Clear Full Amt</button>
+                    </td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+            updatePendingStats();
+        }
 
         // Search Filter Function for Pending Customers
         function filterPendingList() {
@@ -1156,106 +1156,38 @@
             });
         }
 
-        // Open Billing & Customer Details Modal
-function openCustomerDetailModal(index) {
-    let item = pendingRecords[index];
-    let currentDate = new Date().toISOString().split('T')[0];
+        // Update Partial Payment & Show Remaining Balance with Date
+        function updatePartialPayment(index) {
+            let payInput = document.getElementById(`payInput-${index}`);
+            let payAmt = parseFloat(payInput.value) || 0;
+            if(payAmt <= 0) {
+                alert('Kripya valid payment amount dalein!');
+                return;
+            }
+            if(payAmt > pendingRecords[index].amount) {
+                alert('Jama karne wali rashi pending amount se zyada nahi ho sakti!');
+                return;
+            }
 
-    // Ek temporary modal create karenge agar HTML me nahi hai toh
-    let existingModal = document.getElementById('dynamicCustomerModal');
-    if(existingModal) existingModal.remove();
+            let currentDate = new Date().toISOString().split('T')[0];
+            let prevAmount = pendingRecords[index].amount;
+            pendingRecords[index].amount -= payAmt;
 
-    let modalHtml = `
-    <div id="dynamicCustomerModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in">
-            <!-- Modal Header -->
-            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 flex justify-between items-center">
-                <h3 class="font-bold text-lg"><i class="fa-solid fa-file-invoice-dollar mr-2"></i>Customer Billing Details</h3>
-                <button onclick="closeCustomerModal()" class="text-white hover:text-gray-200 font-bold text-lg">&times;</button>
-            </div>
-            
-            <!-- Modal Body / Complete Details -->
-            <div class="p-6 space-y-4 text-slate-700 text-sm">
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-                    <div class="flex justify-between"><span class="font-semibold text-slate-500">Party Name:</span> <span class="font-bold text-slate-800">${item.name}</span></div>
-                    <div class="flex justify-between"><span class="font-semibold text-slate-500">Mobile No:</span> <span>${item.mobile}</span></div>
-                    <div class="flex justify-between"><span class="font-semibold text-slate-500">Module / Type:</span> <span class="text-purple-600 font-semibold">${item.module}</span></div>
-                    <div class="flex justify-between"><span class="font-semibold text-slate-500">Details / Qty:</span> <span>${item.details}</span></div>
-                    <div class="flex justify-between"><span class="font-semibold text-slate-500">Entry Date:</span> <span>${item.date}</span></div>
-                </div>
+            alert(`Payment Update Success!\n- Jama Date: ${currentDate}\n- Jama Kiya: ₹ ${payAmt}\n- Bacha Hua Pending: ₹ ${pendingRecords[index].amount.toFixed(2)}`);
 
-                <div class="bg-red-50 p-3 rounded-xl border border-red-200 flex justify-between items-center">
-                    <span class="font-bold text-red-700">Due Outstanding:</span>
-                    <span class="text-red-600 font-extrabold text-lg">₹ ${item.amount.toFixed(2)}</span>
-                </div>
+            renderPendingCustomers();
+            filterPendingList();
+        }
 
-                <div class="space-y-2 pt-2 border-t border-slate-200">
-                    <label class="block font-semibold text-slate-600 text-xs">Deposit Date:</label>
-                    <input type="date" id="modalDepositDate" value="${currentDate}" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:outline-none focus:border-indigo-500">
-                    
-                    <label class="block font-semibold text-slate-600 text-xs mt-2">Enter Deposit Amount (₹):</label>
-                    <input type="number" id="modalDepositAmt" placeholder="Enter amount to pay" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:outline-none focus:border-indigo-500">
-                </div>
-            </div>
+        function markAsPaid(index) {
+            let currentDate = new Date().toISOString().split('T')[0];
+            let clearedAmt = pendingRecords[index].amount;
+            pendingRecords.splice(index, 1);
+            updatePendingStats();
+            renderPendingCustomers();
+            alert(`Full payment of ₹ ${clearedAmt.toFixed(2)} cleared successfully on ${currentDate}!`);
+        }
 
-            <!-- Modal Footer Actions -->
-            <div class="bg-slate-100 p-4 flex justify-between items-center border-t border-slate-200">
-                <button onclick="markFullPaidFromModal(${index})" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs font-bold transition">
-                    Clear Full Amt
-                </button>
-                <div class="space-x-2">
-                    <button onclick="closeCustomerModal()" class="bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded-lg text-xs font-bold transition">Cancel</button>
-                    <button onclick="submitDepositFromModal(${index})" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition">Save Payment</button>
-                </div>
-            </div>
-        </div>
-    </div>`;
-
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-}
-
-// Close Modal Function
-function closeCustomerModal() {
-    let modal = document.getElementById('dynamicCustomerModal');
-    if(modal) modal.remove();
-}
-        
-
-// Submit Partial / Deposit Payment from Modal
-function submitDepositFromModal(index) {
-    let depositDate = document.getElementById('modalDepositDate').value;
-    let payAmt = parseFloat(document.getElementById('modalDepositAmt').value) || 0;
-
-    if(payAmt <= 0) {
-        alert('Kripya valid deposit amount dalein!');
-        return;
-    }
-    if(payAmt > pendingRecords[index].amount) {
-        alert('Jama karne wali rashi pending amount se zyada nahi ho sakti!');
-        return;
-    }
-
-    pendingRecords[index].amount -= payAmt;
-    alert(`Payment Success!\n- Deposit Date: ${depositDate}\n- Deposited: ₹ ${payAmt}\n- Remaining Due: ₹ ${pendingRecords[index].amount.toFixed(2)}`);
-
-    closeCustomerModal();
-    renderPendingCustomers();
-    filterPendingList();
-}
-
-// Clear Full Amount from Modal
-function markFullPaidFromModal(index) {
-    let clearedAmt = pendingRecords[index].amount;
-    let depositDate = document.getElementById('modalDepositDate').value;
-
-    pendingRecords.splice(index, 1);
-    updatePendingStats();
-    renderPendingCustomers();
-    
-    closeCustomerModal();
-    alert(`Full payment of ₹ ${clearedAmt.toFixed(2)} cleared successfully on ${depositDate}!`);
-}
-        
         function saveExpenseEntry() {
             let date = document.getElementById('expDate').value || new Date().toISOString().split('T')[0];
             let catSelect = document.getElementById('expCategory');
@@ -1427,8 +1359,6 @@ function markFullPaidFromModal(index) {
                 }
             });
         };
-
-        
     </script>
 </body>
 </html>
