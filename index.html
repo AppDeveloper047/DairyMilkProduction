@@ -155,7 +155,7 @@
 
         <main class="p-6 space-y-6 flex-1">
             
-            <!-- Dashboard Home Tab (Row-aligned Grid Boxes) -->
+            <!-- Dashboard Home Tab -->
             <div id="tab-home" class="tab-content space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                     <div class="card-gradient-1 p-5 rounded-2xl flex flex-col justify-between">
@@ -242,7 +242,7 @@
                                     <th class="p-3">Mobile Number</th>
                                     <th class="p-3">Details / Quantity</th>
                                     <th class="p-3">Pending Amount</th>
-                                    <th class="p-3">Action / Pay Update</th>
+                                    <th class="p-3">Action / Edit</th>
                                 </tr>
                             </thead>
                             <tbody id="pendingTableBody" class="text-slate-700">
@@ -746,6 +746,60 @@
         </main>
     </div>
 
+    <!-- Edit Customer Billing Modal / Screen -->
+    <div id="editBillingModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="card-light-box p-6 rounded-3xl w-full max-w-lg space-y-4 shadow-2xl relative">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-lg font-bold text-pink-600"><i class="fa-solid fa-file-invoice-dollar mr-2"></i> Edit & Update Payment</h3>
+                <button onclick="closeEditModal()" class="text-slate-500 hover:text-slate-800 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <input type="hidden" id="editRowIndex">
+            
+            <div class="space-y-3 text-sm">
+                <div>
+                    <label class="block text-slate-700 font-medium mb-1">Customer / Party Name:</label>
+                    <input type="text" id="modalCustName" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800 font-bold" readonly>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Payment Date:</label>
+                        <input type="date" id="modalPayDate" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Module / Type:</label>
+                        <input type="text" id="modalModule" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 font-medium mb-1">Details / Quantity:</label>
+                    <input type="text" id="modalDetails" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Total / Outstanding Amt (₹):</label>
+                        <input type="number" id="modalTotalAmt" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-red-600 font-bold" readonly>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Paying Now (₹):</label>
+                        <input type="number" id="modalPayingAmt" placeholder="Enter amount" oninput="autoCalculateOutstanding()" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 font-medium mb-1">Remaining Outstanding Amount (Auto Calculated):</label>
+                    <input type="text" id="modalRemainingAmt" class="w-full bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-700 font-extrabold" readonly>
+                </div>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+                <button onclick="saveModalPaymentUpdate()" class="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-3 rounded-xl shadow-lg hover:opacity-90 transition">
+                    <i class="fa-solid fa-check mr-1"></i> Update Payment
+                </button>
+                <button onclick="closeEditModal()" class="bg-slate-200 text-slate-700 px-5 py-3 rounded-xl font-bold hover:bg-slate-300 transition">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript Functions -->
     <script>
         let calculatedPerLiter = 0;
@@ -940,7 +994,7 @@
                     name: dairyName,
                     mobile: '-',
                     details: `${qty} Ltr (${milkType})`,
-                    amount: parseFloat(calculatedTotalAbs = calculatedTotalAmt)
+                    amount: parseFloat(calculatedTotalAmt)
                 });
                 updatePendingStats();
             }
@@ -1112,7 +1166,7 @@
             document.getElementById('dashPendingAmount').innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
         }
 
-        // Render Pending Table with Instant Edit & Payment Clearance
+        // Render Pending Table with Edit Modal Trigger Button
         function renderPendingCustomers() {
             let tbody = document.getElementById('pendingTableBody');
             if(pendingRecords.length === 0) {
@@ -1128,12 +1182,10 @@
                     <td class="p-3">${item.mobile}</td>
                     <td class="p-3">${item.details}</td>
                     <td class="p-3 text-red-600 font-extrabold" id="amt-${index}">₹ ${item.amount.toFixed(2)}</td>
-                    <td class="p-3 space-y-2">
-                        <div class="flex items-center gap-2">
-                            <input type="number" id="payInput-${index}" placeholder="Pay Amt" class="w-24 bg-white border border-slate-300 rounded-lg p-1.5 text-xs text-slate-800 focus:outline-none focus:border-red-500">
-                            <button onclick="updatePartialPayment(${index})" class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-700 transition">Update</button>
-                        </div>
-                        <button onclick="markAsPaid(${index})" class="bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-700 transition w-full">Clear Full Amt</button>
+                    <td class="p-3">
+                        <button onclick="openEditBillingModal(${index})" class="bg-pink-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-pink-700 transition shadow-md flex items-center gap-1.5">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit / Pay
+                        </button>
                     </td>
                 </tr>`;
             });
@@ -1156,36 +1208,59 @@
             });
         }
 
-        // Update Partial Payment & Show Remaining Balance with Date
-        function updatePartialPayment(index) {
-            let payInput = document.getElementById(`payInput-${index}`);
-            let payAmt = parseFloat(payInput.value) || 0;
-            if(payAmt <= 0) {
+        // Modal Functions for Billing Edit & Payment Update
+        function openEditBillingModal(index) {
+            let item = pendingRecords[index];
+            document.getElementById('editRowIndex').value = index;
+            document.getElementById('modalCustName').value = item.name;
+            document.getElementById('modalPayDate').valueAsDate = new Date();
+            document.getElementById('modalModule').value = item.module;
+            document.getElementById('modalDetails').value = item.details;
+            document.getElementById('modalTotalAmt').value = item.amount.toFixed(2);
+            document.getElementById('modalPayingAmt').value = '';
+            document.getElementById('modalRemainingAmt').value = '₹ ' + item.amount.toFixed(2);
+            
+            document.getElementById('editBillingModal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editBillingModal').classList.add('hidden');
+        }
+
+        function autoCalculateOutstanding() {
+            let index = document.getElementById('editRowIndex').value;
+            let total = pendingRecords[index].amount;
+            let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
+            let remaining = total - paying;
+            if(remaining < 0) remaining = 0;
+            document.getElementById('modalRemainingAmt').value = '₹ ' + remaining.toFixed(2);
+        }
+
+        function saveModalPaymentUpdate() {
+            let index = document.getElementById('editRowIndex').value;
+            let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
+            let payDate = document.getElementById('modalPayDate').value;
+
+            if(paying <= 0) {
                 alert('Kripya valid payment amount dalein!');
                 return;
             }
-            if(payAmt > pendingRecords[index].amount) {
+            if(paying > pendingRecords[index].amount) {
                 alert('Jama karne wali rashi pending amount se zyada nahi ho sakti!');
                 return;
             }
 
-            let currentDate = new Date().toISOString().split('T')[0];
-            let prevAmount = pendingRecords[index].amount;
-            pendingRecords[index].amount -= payAmt;
+            pendingRecords[index].amount -= paying;
+            let currentRemaining = pendingRecords[index].amount;
 
-            alert(`Payment Update Success!\n- Jama Date: ${currentDate}\n- Jama Kiya: ₹ ${payAmt}\n- Bacha Hua Pending: ₹ ${pendingRecords[index].amount.toFixed(2)}`);
+            if(currentRemaining <= 0) {
+                pendingRecords.splice(index, 1);
+            }
 
-            renderPendingCustomers();
-            filterPendingList();
-        }
-
-        function markAsPaid(index) {
-            let currentDate = new Date().toISOString().split('T')[0];
-            let clearedAmt = pendingRecords[index].amount;
-            pendingRecords.splice(index, 1);
             updatePendingStats();
             renderPendingCustomers();
-            alert(`Full payment of ₹ ${clearedAmt.toFixed(2)} cleared successfully on ${currentDate}!`);
+            closeEditModal();
+            alert(`Payment successfully updated on ${payDate}! Bacha hua balance: ₹ ${currentRemaining.toFixed(2)}`);
         }
 
         function saveExpenseEntry() {
