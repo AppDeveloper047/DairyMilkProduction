@@ -104,6 +104,13 @@
                     </button>
                 </div>
             </div>
+            <!-- Ledger Menu Option -->
+                 <button onclick="switchTab('ledger')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 transition-all font-medium">
+                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+            <span>Payment Ledger</span>
+           </button>
 
             <!-- Pending Amount Menu Link -->
             <a href="#pending-customers" onclick="switchTab('pending-customers', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
@@ -154,6 +161,62 @@
         </header>
 
         <main class="p-6 space-y-6 flex-1">
+
+            <!-- Payment Ledger Tab Content -->
+<div id="tab-ledger" class="tab-content hidden space-y-6">
+    <div class="card-light-box p-6 rounded-3xl shadow-sm">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Customer Payment Ledger & Statement</h2>
+        
+        <!-- Search Bar Container -->
+        <div class="flex flex-col md:flex-row gap-4 mb-6">
+            <div class="flex-1">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Customer Name या Mobile Number दर्ज करें</label>
+                <input type="text" id="ledgerSearchInput" placeholder="जैसे: Ramesh Kumar या 9876543210" class="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+            <div class="flex items-end">
+                <button onclick="searchCustomerLedger()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-medium text-sm transition shadow-md">
+                    Search Ledger
+                </button>
+            </div>
+        </div>
+
+        <!-- Customer Summary Card (Hidden by default) -->
+        <div id="ledgerSummaryBox" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100">
+            <div>
+                <p class="text-xs text-gray-500 font-medium">Customer Name</p>
+                <p id="summaryName" class="text-lg font-bold text-gray-800">-</p>
+            </div>
+            <div>
+                <p class="text-xs text-gray-500 font-medium">Total Balance / Pending</p>
+                <p id="summaryPending" class="text-lg font-bold text-red-600">₹0</p>
+            </div>
+            <div class="flex justify-end items-center space-x-2">
+                <button onclick="printLedgerStatement()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-medium hover:bg-blue-700 transition">Print / PDF</button>
+            </div>
+        </div>
+
+        <!-- Transaction History Table -->
+        <div class="overflow-x-auto rounded-xl border border-gray-200">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 text-gray-600 text-xs uppercase font-semibold border-b">
+                        <th class="p-3">Date</th>
+                        <th class="p-3">Source / Module</th>
+                        <th class="p-3">Details / Ref</th>
+                        <th class="p-3">Amount</th>
+                        <th class="p-3">Status / Mode</th>
+                    </tr>
+                </thead>
+                <tbody id="ledgerTableBody" class="divide-y divide-gray-200 text-sm">
+                    <tr>
+                        <td colspan="5" class="p-4 text-center text-gray-400">कृपया किसी ग्राहक को खोजें (Search करें)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+            
             
             <!-- Dashboard Home Tab -->
             <div id="tab-home" class="tab-content space-y-6">
