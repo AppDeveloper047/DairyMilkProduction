@@ -869,12 +869,12 @@
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
-        // Global arrays to store pending records across modules & master ledger history
-        let pendingRecords = [];
-        let masterLedgerHistory = [];
+        // Load persisted data from localStorage or initialize empty
+        let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
+        let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
 
-        // Live Dashboard Dynamic Stats
-        let liveStats = {
+        // Live Dashboard Dynamic Stats loaded from localStorage if available
+        let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
             cows: 14,
             buffaloes: 10,
             totalInvestment: 850000,
@@ -903,7 +903,19 @@
         window.onload = function() {
             initCharts();
             updateDashboardBoxes();
+            restoreSavedTables();
         };
+
+        function persistAppData() {
+            localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
+            localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
+            localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
+        }
+
+        function restoreSavedTables() {
+            // Restore Sales/Ledger rows into respective previews if needed
+            updatePendingStats();
+        }
 
         function initCharts() {
             const ctxCattle = document.getElementById('cattleChart').getContext('2d');
@@ -952,6 +964,7 @@
                 cattleChartInstance.update();
             }
             updateDashboardBoxes();
+            persistAppData();
         }
 
         function updateDashboardBoxes() {
@@ -960,6 +973,7 @@
             document.getElementById('dashInvestment').innerText = `₹ ${liveStats.totalInvestment.toLocaleString('en-IN')}`;
             document.getElementById('dashMilkProd').innerText = `${liveStats.totalMilkLitres.toLocaleString('en-IN')} Liters`;
             document.getElementById('dashRevenue').innerText = `+ ₹ ${liveStats.monthlyRevenue.toLocaleString('en-IN')}`;
+            updatePendingStats();
         }
 
         function changeLanguage(lang) {
@@ -1006,7 +1020,6 @@
             if(window.innerWidth < 768) toggleSidebar();
         }
 
-        // Edit Profile Feature Implementation
         function saveProfileChanges() {
             let brandName = document.getElementById('profileBrandName').value.trim();
             let office = document.getElementById('profileOffice').value.trim();
@@ -1015,7 +1028,6 @@
 
             if(!brandName) { alert('Please enter Dairy/Brand Name!'); return; }
 
-            // Update Header & Sidebar Titles Dynamically
             document.getElementById('headerBrandName').innerText = brandName;
             document.getElementById('sidebarBrandTitle').innerText = brandName;
             document.getElementById('headerOfficeLoc').innerHTML = `<i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: ${office}`;
@@ -1026,7 +1038,6 @@
             alert('Profile updated successfully across all headers and invoices!');
         }
 
-        // Retail Customer Handlers
         function onRetailCustomerChange(val) {
             let customInput = document.getElementById('retailCustCustom');
             let mobInput = document.getElementById('retailMobile');
@@ -1175,7 +1186,6 @@
                 pendingRecords.push(recordObj);
             }
 
-            // Update Live Stats
             liveStats.totalMilkLitres += qty;
             liveStats.monthlyRevenue += calculatedTotalAmt;
             updateChartsAndBoxes();
@@ -1399,10 +1409,10 @@
             alert('Expense entry saved successfully!');
         }
 
-        // Live Pending Amount Calculation & Rendering
         function updatePendingStats() {
             let totalPending = pendingRecords.reduce((sum, item) => sum + item.amount, 0);
             document.getElementById('dashPendingAmount').innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
+            persistAppData();
         }
 
         function renderPendingCustomers() {
@@ -1440,7 +1450,6 @@
             });
         }
 
-        // Modal Payment Handling
         function openEditModal(index) {
             let item = pendingRecords[index];
             document.getElementById('editRowIndex').value = index;
@@ -1473,11 +1482,9 @@
             if(paying <= 0) { alert('Please enter a valid paying amount!'); return; }
 
             if(paying >= total) {
-                // Fully Paid, remove from pending
                 pendingRecords.splice(index, 1);
                 alert('Payment received in full! Account settled.');
             } else {
-                // Partially paid, update remaining amount
                 pendingRecords[index].amount -= paying;
                 alert('Partial payment recorded successfully!');
             }
@@ -1487,7 +1494,6 @@
             updatePendingStats();
         }
 
-        // Payment Ledger Search Feature
         function searchCustomerLedger() {
             let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
             let tbody = document.getElementById('ledgerTableBody');
