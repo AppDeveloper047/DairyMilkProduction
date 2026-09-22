@@ -115,6 +115,11 @@
                 <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span>Pending Amount</span>
             </a>
 
+            <!-- NEW FEATURE 1: Cattle Health & Vaccination Tracker Menu -->
+            <a href="#cattle-health" onclick="switchTab('cattle-health', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
+                <i class="fa-solid fa-syringe mr-3 text-teal-400 text-lg"></i> <span>Cattle Health & Vaccination</span>
+            </a>
+
             <a href="#expense" onclick="switchTab('expense', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>
             </a>
@@ -311,6 +316,185 @@
                                 <tr class="border-b border-slate-200/60 text-slate-500">
                                     <td colspan="7" class="p-4 text-center">No pending customers found.</td>
                                 </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW FEATURE 1 CODE: Cattle Health, Medical & Vaccination Tracker Section -->
+            <div id="tab-cattle-health" class="tab-content hidden space-y-6">
+                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-syringe mr-2"></i> Cattle Health, Medical & Vaccination Tracker</h2>
+                        <p class="text-slate-600 text-sm mt-1">Record animal treatments, vaccination schedules, deworming history, and veterinary expenses.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                            <input type="date" id="healthDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Cattle Tag Number / Name:</label>
+                            <input type="text" id="healthCattleTag" placeholder="e.g. TAG-405 or Cow #2" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Record Type:</label>
+                            <select id="healthRecordType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                                <option value="Vaccination">Vaccination (टीकाकरण)</option>
+                                <option value="Deworming">Deworming (पेट के कीड़े की दवा)</option>
+                                <option value="Medical Treatment">Medical Treatment (बीमारी का इलाज)</option>
+                                <option value="Artificial Insemination (AI)">Artificial Insemination / AI (कृत्रिम गर्भाधान)</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Medicine / Vaccine Name & Notes:</label>
+                            <input type="text" id="healthNotes" placeholder="e.g. FMD Vaccine given / Fever injection administered" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Doctor / Vet Fee (₹):</label>
+                            <input type="number" id="healthCost" placeholder="e.g. 500" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-teal-700 font-bold focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="saveHealthRecord()" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Health Record
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> Cattle Health History Sheet</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date</th><th class="p-3">Tag / Cattle</th><th class="p-3">Record Type</th><th class="p-3">Medicine & Details</th><th class="p-3">Vet Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody id="healthTableBody" class="text-slate-700">
+                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No health records added yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW FEATURE 2 CODE: Daily Milk Production Logbook & Yield Analytics Section -->
+            <div id="tab-milk-logbook" class="tab-content hidden space-y-6">
+                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-indigo-600"><i class="fa-solid fa-chart-line mr-2"></i> Daily Milk Production Logbook & Yield Analytics</h2>
+                        <p class="text-slate-600 text-sm mt-1">Log morning and evening individual milking yields to monitor animal milk production efficiency.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                            <input type="date" id="yieldDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-indigo-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Milking Shift:</label>
+                            <select id="yieldShift" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-indigo-500 focus:outline-none shadow-sm">
+                                <option value="Morning">Morning (सुबह)</option>
+                                <option value="Evening">Evening (शाम)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Total Milking Cows / Buffalos Count:</label>
+                            <input type="number" id="yieldCattleCount" placeholder="e.g. 20" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-indigo-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Cow Milk Yield (Liters):</label>
+                            <input type="number" step="0.5" id="yieldCowLitres" placeholder="e.g. 110" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-indigo-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Buffalo Milk Yield (Liters):</label>
+                            <input type="number" step="0.5" id="yieldBuffLitres" placeholder="e.g. 90" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-indigo-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Average Fat %:</label>
+                            <input type="number" step="0.1" id="yieldAvgFat" placeholder="e.g. 6.2" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-indigo-700 font-bold focus:border-indigo-500 focus:outline-none shadow-sm">
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="saveYieldRecord()" class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Yield Log
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                    <h3 class="text-lg font-bold text-indigo-700"><i class="fa-solid fa-table mr-2"></i> Yield Production History Sheet</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date</th><th class="p-3">Shift</th><th class="p-3">Cow Milk</th><th class="p-3">Buffalo Milk</th><th class="p-3">Total Yield</th><th class="p-3">Avg FAT</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yieldTableBody" class="text-slate-700">
+                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="6" class="p-4 text-center">No yield logs added yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW FEATURE 3 CODE: Milk Quality & SNF Testing Record Section -->
+            <div id="tab-quality-test" class="tab-content hidden space-y-6">
+                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-pink-700"><i class="fa-solid fa-vials mr-2"></i> Milk Quality & SNF Testing Record</h2>
+                        <p class="text-slate-600 text-sm mt-1">Record daily sample tests for FAT, SNF, CLR, and Water Adulteration check to ensure premium dairy quality.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date & Time:</label>
+                            <input type="datetime-local" id="testDateTime" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Sample Source / Supplier:</label>
+                            <input type="text" id="testSource" placeholder="e.g. Bulk Tank / Local Farmer #4" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">FAT %:</label>
+                            <input type="number" step="0.1" id="testFat" placeholder="e.g. 5.5" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">SNF %:</label>
+                            <input type="number" step="0.1" id="testSnf" placeholder="e.g. 8.8" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">CLR (Lacto Reading):</label>
+                            <input type="number" step="0.5" id="testClr" placeholder="e.g. 28.0" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Quality Status / Purity:</label>
+                            <select id="testQualityStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                <option value="Grade A (Pure)">Grade A (Pure & Premium)</option>
+                                <option value="Grade B (Standard)">Grade B (Standard)</option>
+                                <option value="Rejected (Low Quality)">Rejected (Low Quality / Watery)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="saveQualityTest()" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Quality Test
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                    <h3 class="text-lg font-bold text-pink-800"><i class="fa-solid fa-table mr-2"></i> Quality Testing Log Sheet</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date & Time</th><th class="p-3">Source</th><th class="p-3">FAT %</th><th class="p-3">SNF %</th><th class="p-3">CLR</th><th class="p-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="qualityTableBody" class="text-slate-700">
+                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="6" class="p-4 text-center">No quality test records added yet.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -913,7 +1097,6 @@
         }
 
         function restoreSavedTables() {
-            // Restore Sales/Ledger rows into respective previews if needed
             updatePendingStats();
         }
 
@@ -1272,11 +1455,10 @@
             if(partySelect.value === 'NEW' && party !== '') {
                 customerDirectory[party] = partyMobile;
                 let newOpt = document.createElement('option'); newOpt.value = party; newOpt.text = party;
-                partySelect.insertBefore(newOpt, partySelect.lastElementChild); 
+                partySelect.insertBefore(newOpt, partySelect.lastElementChild);
                 partySelect.value = party;
-                partyCustom.classList.add('hidden'); 
-                partyCustom.value = '';
-            } else if(party !== '' && partyMobile !== '') {
+                partyCustom.classList.add('hidden'); partyCustom.value = '';
+            } else if(partyMobile !== '') {
                 customerDirectory[party] = partyMobile;
             }
 
@@ -1284,105 +1466,101 @@
             if(tbody.innerHTML.includes('No cattle records added yet')) tbody.innerHTML = '';
 
             let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 text-amber-600 font-semibold">${type}</td><td class="p-3">${breed}</td><td class="p-3">${tag}</td>
-                <td class="p-3">${party || '-'}</td><td class="p-3">${partyMobile || '-'}</td><td class="p-3 text-emerald-600 font-bold">₹ ${amount}</td>
-                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-amber-100 text-amber-700 border border-amber-300'} font-semibold">${status}</span></td>
+                <td class="p-3">${date}</td><td class="p-3"><span class="px-2 py-1 rounded text-xs font-bold ${type === 'Purchase' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">${type}</span></td>
+                <td class="p-3 font-semibold text-slate-800">${breed}</td><td class="p-3">${tag}</td><td class="p-3">${party || 'Self'}</td><td class="p-3">${partyMobile || '-'}</td>
+                <td class="p-3 text-amber-700 font-bold">₹ ${amount.toLocaleString('en-IN')}</td>
+                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${status === 'Pending' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'} font-semibold">${status}</span></td>
             </tr>`;
             tbody.insertAdjacentHTML('afterbegin', newRow);
 
             let recordObj = {
                 date: date,
-                module: `Cattle_${type}`,
-                name: party || 'Dealer',
+                module: 'Cattle_Deal',
+                name: party || 'Cattle Dealer',
                 mobile: partyMobile || '-',
-                details: `${breed} (Tag: ${tag})`,
+                details: `${type} - ${breed} (Tag: ${tag})`,
                 amount: amount,
                 status: status
             };
 
             masterLedgerHistory.push(recordObj);
-            if(status === 'Pending') {
-                pendingRecords.push(recordObj);
-            }
+            if(status === 'Pending') pendingRecords.push(recordObj);
 
             if(type === 'Purchase') {
                 liveStats.totalInvestment += amount;
-                if(breed.toLowerCase().includes('cow')) liveStats.cows += 1;
-                else if(breed.toLowerCase().includes('buffalo')) liveStats.buffaloes += 1;
+                if(breed.toLowerCase().includes('cow')) liveStats.cows++;
+                else if(breed.toLowerCase().includes('buffalo')) liveStats.buffaloes++;
             } else {
                 liveStats.monthlyRevenue += amount;
+                if(breed.toLowerCase().includes('cow') && liveStats.cows > 0) liveStats.cows--;
+                else if(breed.toLowerCase().includes('buffalo') && liveStats.buffaloes > 0) liveStats.buffaloes--;
             }
+
             updateChartsAndBoxes();
             updatePendingStats();
-
             sendDataToGoogleSheet(recordObj);
-            alert('Cattle record saved successfully!');
+            alert('Cattle deal successfully recorded and synced!');
         }
 
         function saveProductEntry() {
             let date = document.getElementById('prodDate').value || new Date().toISOString().split('T')[0];
-            let type = document.getElementById('prodTxType').value;
-            let prodSelect = document.getElementById('prodNameSelect');
-            let prodCustom = document.getElementById('prodNameCustom');
-            let prodName = prodSelect.value === 'NEW' ? prodCustom.value.trim() : prodSelect.value;
+            let txType = document.getElementById('prodTxType').value;
+            let nameSelect = document.getElementById('prodNameSelect');
+            let nameCustom = document.getElementById('prodNameCustom');
+            let prodName = nameSelect.value === 'NEW' ? nameCustom.value.trim() : nameSelect.value;
             let unitType = document.getElementById('prodUnitType').value;
             let qtyNum = parseFloat(document.getElementById('prodQtyNum').value) || 0;
-            let rateUnit = document.getElementById('prodRatePerUnit').value;
+            let rateUnit = parseFloat(document.getElementById('prodRatePerUnit').value) || 0;
             let partySelect = document.getElementById('prodPartySelect');
             let partyCustom = document.getElementById('prodPartyCustom');
             let partyMobile = document.getElementById('prodPartyMobile').value.trim();
-            let party = partySelect.value === 'NEW' ? partyCustom.value.trim() : partySelect.value;
+            let partyName = partySelect.value === 'NEW' ? partyCustom.value.trim() : partySelect.value;
             let status = document.getElementById('prodStatus').value;
 
-            if(!prodName || !qtyNum || !rateUnit) { alert('Please fill Product Name, Quantity and Rate properly!'); return; }
+            if(!qtyNum || !rateUnit || !prodName) { alert('Please fill Product Name, Quantity and Rate properly!'); return; }
 
-            if(partySelect.value === 'NEW' && party !== '') {
-                customerDirectory[party] = partyMobile;
-                let newOpt = document.createElement('option'); newOpt.value = party; newOpt.text = party;
-                partySelect.insertBefore(newOpt, partySelect.lastElementChild); 
-                partySelect.value = party;
-                partyCustom.classList.add('hidden'); 
-                partyCustom.value = '';
-            } else if(party !== '' && partyMobile !== '') {
-                customerDirectory[party] = partyMobile;
+            if(partySelect.value === 'NEW' && partyName !== '') {
+                customerDirectory[partyName] = partyMobile;
+                let newOpt = document.createElement('option'); newOpt.value = partyName; newOpt.text = partyName;
+                partySelect.insertBefore(newOpt, partySelect.lastElementChild);
+                partySelect.value = partyName;
+                partyCustom.classList.add('hidden'); partyCustom.value = '';
+            } else if(partyMobile !== '') {
+                customerDirectory[partyName] = partyMobile;
             }
 
             let tbody = document.getElementById('prodTableBody');
             if(tbody.innerHTML.includes('No product records added yet')) tbody.innerHTML = '';
 
-            let formattedQty = `${qtyNum} ${unitType}${qtyNum > 1 && unitType !== 'Kg' && unitType !== 'Litre' ? 's' : ''}`;
-
             let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 text-emerald-600 font-semibold">${type}</td><td class="p-3 text-slate-800 font-medium">${prodName}</td>
-                <td class="p-3">${formattedQty}</td><td class="p-3">₹ ${rateUnit}</td>
-                <td class="p-3 text-emerald-600 font-bold">₹ ${calculatedProductTotalAmt.toFixed(2)}</td>
-                <td class="p-3">${party || '-'}</td><td class="p-3">${partyMobile || '-'}</td>
-                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700 border border-emerald-300'} font-semibold">${status}</span></td>
+                <td class="p-3">${date}</td><td class="p-3"><span class="px-2 py-1 rounded text-xs font-bold ${txType === 'Purchase' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">${txType}</span></td>
+                <td class="p-3 font-semibold text-slate-800">${prodName}</td><td class="p-3">${qtyNum} ${unitType}</td><td class="p-3">₹ ${rateUnit}</td>
+                <td class="p-3 text-emerald-700 font-bold">₹ ${calculatedProductTotalAmt.toLocaleString('en-IN')}</td>
+                <td class="p-3">${partyName || '-'}</td><td class="p-3">${partyMobile || '-'}</td>
+                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${status === 'Pending' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'} font-semibold">${status}</span></td>
             </tr>`;
             tbody.insertAdjacentHTML('afterbegin', newRow);
 
             let recordObj = {
                 date: date,
-                module: `Product_${type}`,
-                name: party || 'Vendor',
+                module: 'Other_Product',
+                name: partyName || 'Vendor/Party',
                 mobile: partyMobile || '-',
-                details: `${prodName} (${formattedQty})`,
-                amount: parseFloat(calculatedProductTotalAmt),
+                details: `${txType} - ${qtyNum} ${unitType} ${prodName}`,
+                amount: calculatedProductTotalAmt,
                 status: status
             };
 
             masterLedgerHistory.push(recordObj);
-            if(status === 'Pending') {
-                pendingRecords.push(recordObj);
-            }
+            if(status === 'Pending') pendingRecords.push(recordObj);
 
-            if(type === 'Purchase') liveStats.totalInvestment += calculatedProductTotalAmt;
+            if(txType === 'Purchase') liveStats.totalInvestment += calculatedProductTotalAmt;
             else liveStats.monthlyRevenue += calculatedProductTotalAmt;
+
             updateChartsAndBoxes();
             updatePendingStats();
-
             sendDataToGoogleSheet(recordObj);
-            alert('Product record saved successfully!');
+            alert('Product record successfully saved and synced!');
         }
 
         function saveExpenseEntry() {
@@ -1391,162 +1569,266 @@
             let catCustom = document.getElementById('expCategoryCustom');
             let category = catSelect.value === 'NEW' ? catCustom.value.trim() : catSelect.value;
             let amount = parseFloat(document.getElementById('expAmount').value) || 0;
-            let desc = document.getElementById('expDesc').value || '-';
+            let desc = document.getElementById('expDesc').value.trim() || '-';
 
-            if(!amount || !category) { alert('Please fill Category and Amount properly!'); return; }
+            if(!amount || !category) { alert('Please enter Category and Amount for expense!'); return; }
 
             let tbody = document.getElementById('expenseTableBody');
             if(tbody.innerHTML.includes('No expense records added yet')) tbody.innerHTML = '';
 
             let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 text-blue-600 font-medium">${category}</td>
-                <td class="p-3">${desc}</td><td class="p-3 text-red-600 font-bold">₹ ${amount.toFixed(2)}</td>
+                <td class="p-3">${date}</td><td class="p-3 font-semibold text-blue-700">${category}</td><td class="p-3">${desc}</td>
+                <td class="p-3 text-red-600 font-bold">₹ ${amount.toLocaleString('en-IN')}</td>
             </tr>`;
             tbody.insertAdjacentHTML('afterbegin', newRow);
 
+            let recordObj = {
+                date: date,
+                module: 'Farm_Expense',
+                name: 'Farm Expense',
+                mobile: '-',
+                details: `${category}: ${desc}`,
+                amount: amount,
+                status: 'Paid'
+            };
+
+            masterLedgerHistory.push(recordObj);
             liveStats.totalInvestment += amount;
             updateChartsAndBoxes();
-            alert('Expense entry saved successfully!');
+            sendDataToGoogleSheet(recordObj);
+            alert('Expense saved successfully!');
+        }
+
+        // NEW FEATURE 1 JAVASCRIPT: Cattle Health Record Saver
+        function saveHealthRecord() {
+            let date = document.getElementById('healthDate').value || new Date().toISOString().split('T')[0];
+            let tag = document.getElementById('healthCattleTag').value.trim() || 'General';
+            let recordType = document.getElementById('healthRecordType').value;
+            let notes = document.getElementById('healthNotes').value.trim() || '-';
+            let cost = parseFloat(document.getElementById('healthCost').value) || 0;
+
+            let tbody = document.getElementById('healthTableBody');
+            if(tbody.innerHTML.includes('No health records added yet')) tbody.innerHTML = '';
+
+            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                <td class="p-3">${date}</td><td class="p-3 font-bold text-teal-700">${tag}</td><td class="p-3"><span class="bg-teal-100 text-teal-800 px-2.5 py-1 rounded-lg text-xs font-semibold">${recordType}</span></td>
+                <td class="p-3">${notes}</td><td class="p-3 text-red-600 font-bold">₹ ${cost.toLocaleString('en-IN')}</td>
+            </tr>`;
+            tbody.insertAdjacentHTML('afterbegin', newRow);
+
+            liveStats.totalInvestment += cost;
+            updateChartsAndBoxes();
+            alert('Cattle health and vaccination record successfully saved!');
+        }
+
+        // NEW FEATURE 2 JAVASCRIPT: Yield Logbook Saver
+        function saveYieldRecord() {
+            let date = document.getElementById('yieldDate').value || new Date().toISOString().split('T')[0];
+            let shift = document.getElementById('yieldShift').value;
+            let cowL = parseFloat(document.getElementById('yieldCowLitres').value) || 0;
+            let buffL = parseFloat(document.getElementById('yieldBuffLitres').value) || 0;
+            let totalYield = cowL + buffL;
+            let avgFat = parseFloat(document.getElementById('yieldAvgFat').value) || 0;
+
+            let tbody = document.getElementById('yieldTableBody');
+            if(tbody.innerHTML.includes('No yield logs added yet')) tbody.innerHTML = '';
+
+            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                <td class="p-3">${date}</td><td class="p-3">${shift}</td><td class="p-3 text-blue-600 font-medium">${cowL} L</td>
+                <td class="p-3 text-emerald-600 font-medium">${buffL} L</td><td class="p-3 font-bold text-indigo-700">${totalYield} Liters</td><td class="p-3">${avgFat}%</td>
+            </tr>`;
+            tbody.insertAdjacentHTML('afterbegin', newRow);
+
+            liveStats.totalMilkLitres += totalYield;
+            updateChartsAndBoxes();
+            alert('Daily milk yield log saved successfully!');
+        }
+
+        // NEW FEATURE 3 JAVASCRIPT: Milk Quality Test Saver
+        function saveQualityTest() {
+            let dt = document.getElementById('testDateTime').value || new Date().toLocaleString();
+            let source = document.getElementById('testSource').value.trim() || 'General Tank';
+            let fat = parseFloat(document.getElementById('testFat').value) || 0;
+            let snf = parseFloat(document.getElementById('testSnf').value) || 0;
+            let clr = parseFloat(document.getElementById('testClr').value) || 0;
+            let status = document.getElementById('testQualityStatus').value;
+
+            let tbody = document.getElementById('qualityTableBody');
+            if(tbody.innerHTML.includes('No quality test records added yet')) tbody.innerHTML = '';
+
+            let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                <td class="p-3">${dt}</td><td class="p-3 font-semibold text-slate-800">${source}</td><td class="p-3">${fat}%</td>
+                <td class="p-3">${snf}%</td><td class="p-3">${clr}</td>
+                <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs font-bold ${status.includes('Grade A') ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">${status}</span></td>
+            </tr>`;
+            tbody.insertAdjacentHTML('afterbegin', newRow);
+            alert('Milk quality test record saved successfully!');
         }
 
         function updatePendingStats() {
-            let totalPending = pendingRecords.reduce((sum, item) => sum + item.amount, 0);
-            document.getElementById('dashPendingAmount').innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
-            persistAppData();
+            let totalPendingSum = 0;
+            pendingRecords.forEach(r => {
+                if(r.status === 'Pending') totalPendingSum += r.amount;
+            });
+            document.getElementById('dashPendingAmount').innerText = `₹ ${totalPendingSum.toLocaleString('en-IN')}`;
         }
 
         function renderPendingCustomers() {
             let tbody = document.getElementById('pendingTableBody');
-            if(pendingRecords.length === 0) {
-                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No pending customers found. All accounts settled!</td></tr>`;
+            tbody.innerHTML = '';
+
+            let activePendings = pendingRecords.filter(r => r.status === 'Pending');
+            if(activePendings.length === 0) {
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No pending customers found. All accounts clear!</td></tr>`;
                 return;
             }
 
-            tbody.innerHTML = '';
-            pendingRecords.forEach((item, index) => {
-                let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                    <td class="p-3">${item.date}</td>
-                    <td class="p-3 text-purple-600 font-medium">${item.module}</td>
-                    <td class="p-3 text-slate-800 font-bold">${item.name}</td>
-                    <td class="p-3">${item.mobile}</td>
-                    <td class="p-3">${item.details}</td>
-                    <td class="p-3 text-red-600 font-extrabold">₹ ${item.amount.toFixed(2)}</td>
+            activePendings.forEach((r, idx) => {
+                let rowHtml = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                    <td class="p-3">${r.date}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded text-xs bg-purple-100 text-purple-700 font-semibold">${r.module}</span></td>
+                    <td class="p-3 font-bold text-slate-800">${r.name}</td>
+                    <td class="p-3">${r.mobile}</td>
+                    <td class="p-3">${r.details}</td>
+                    <td class="p-3 text-red-600 font-extrabold">₹ ${r.amount.toLocaleString('en-IN')}</td>
                     <td class="p-3">
-                        <button onclick="openEditModal(${index})" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:opacity-90 transition shadow">
-                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit / Pay
+                        <button onclick="openEditModalForIndex(${idx})" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow hover:opacity-90 transition">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Pay / Edit
                         </button>
                     </td>
                 </tr>`;
-                tbody.insertAdjacentHTML('beforeend', row);
+                tbody.insertAdjacentHTML('beforeend', rowHtml);
             });
         }
 
         function filterPendingList() {
-            let query = document.getElementById('pendingSearchInput').value.toLowerCase();
-            let rows = document.querySelectorAll('#pendingTableBody tr');
-            rows.forEach(row => {
-                let text = row.innerText.toLowerCase();
-                row.style.display = text.includes(query) ? '' : 'none';
-            });
+            let keyword = document.getElementById('pendingSearchInput').value.toLowerCase();
+            let tbody = document.getElementById('pendingTableBody');
+            let rows = tbody.getElementsByTagName('tr');
+            
+            for(let i=0; i<rows.length; i++) {
+                let text = rows[i].innerText.toLowerCase();
+                if(text.includes(keyword) || keyword === '') {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
         }
 
-        function openEditModal(index) {
-            let item = pendingRecords[index];
-            document.getElementById('editRowIndex').value = index;
+        function openEditModalForIndex(idx) {
+            let activePendings = pendingRecords.filter(r => r.status === 'Pending');
+            let item = activePendings[idx];
+
+            document.getElementById('editRowIndex').value = masterLedgerHistory.indexOf(item);
             document.getElementById('modalCustName').value = item.name;
             document.getElementById('modalPayDate').value = new Date().toISOString().split('T')[0];
             document.getElementById('modalModule').value = item.module;
             document.getElementById('modalDetails').value = item.details;
             document.getElementById('modalTotalAmt').value = item.amount;
             document.getElementById('modalPayingAmt').value = '';
-            document.getElementById('modalRemainingAmt').value = '₹ ' + item.amount.toFixed(2);
-            document.getElementById('editBillingModal').classList.remove('hidden');
-        }
+            document.getElementById('modalRemainingAmt').value = '₹ ' + item.amount.toLocaleString('en-IN');
 
-        function closeEditModal() {
-            document.getElementById('editBillingModal').classList.add('hidden');
+            document.getElementById('editBillingModal').classList.remove('hidden');
         }
 
         function autoCalculateOutstanding() {
             let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
             let remaining = total - paying;
-            document.getElementById('modalRemainingAmt').value = '₹ ' + (remaining > 0 ? remaining.toFixed(2) : '0.00 (Fully Paid)');
+            if(remaining < 0) remaining = 0;
+            document.getElementById('modalRemainingAmt').value = '₹ ' + remaining.toLocaleString('en-IN');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editBillingModal').classList.add('hidden');
         }
 
         function saveModalPaymentUpdate() {
-            let index = parseInt(document.getElementById('editRowIndex').value);
+            let masterIdx = parseInt(document.getElementById('editRowIndex').value);
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
-            let total = pendingRecords[index].amount;
+            let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
 
-            if(paying <= 0) { alert('Please enter a valid paying amount!'); return; }
+            if(paying <= 0) { alert('Please enter valid paying amount!'); return; }
 
+            let item = masterLedgerHistory[masterIdx];
             if(paying >= total) {
-                pendingRecords.splice(index, 1);
-                alert('Payment received in full! Account settled.');
+                item.status = 'Paid';
             } else {
-                pendingRecords[index].amount -= paying;
-                alert('Partial payment recorded successfully!');
+                item.amount = total - paying;
+                item.details += ` (Partial Paid: ₹${paying})`;
             }
 
-            closeEditModal();
+            // Sync with pendingRecords array
+            pendingRecords = masterLedgerHistory.filter(r => r.status === 'Pending');
+            persistAppData();
             renderPendingCustomers();
             updatePendingStats();
+            closeEditModal();
+
+            alert('Payment successfully updated and ledger synced!');
         }
 
         function searchCustomerLedger() {
             let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
-            let tbody = document.getElementById('ledgerTableBody');
-            let summaryBox = document.getElementById('ledgerSummaryBox');
+            if(!query) { alert('Please enter Customer Name or Mobile Number to search!'); return; }
 
-            if(!query) { alert('Please enter customer name or mobile number to search!'); return; }
-
-            let filtered = masterLedgerHistory.filter(item => 
-                item.name.toLowerCase().includes(query) || item.mobile.toLowerCase().includes(query)
+            let matchedRecords = masterLedgerHistory.filter(r => 
+                r.name.toLowerCase().includes(query) || r.mobile.toLowerCase().includes(query)
             );
 
-            if(filtered.length === 0) {
-                summaryBox.classList.add('hidden');
+            let tbody = document.getElementById('ledgerTableBody');
+            tbody.innerHTML = '';
+
+            if(matchedRecords.length === 0) {
                 tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No ledger records found for "${query}".</td></tr>`;
+                document.getElementById('ledgerSummaryBox').classList.add('hidden');
                 return;
             }
 
-            let custName = filtered[0].name;
-            let totalOutstanding = filtered.filter(i => i.status === 'Pending').reduce((sum, i) => sum + i.amount, 0);
+            let custName = matchedRecords[0].name;
+            let currentOutstanding = 0;
+
+            matchedRecords.forEach(r => {
+                if(r.status === 'Pending') currentOutstanding += r.amount;
+                let rowHtml = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                    <td class="p-3">${r.date}</td>
+                    <td class="p-3 font-semibold text-cyan-700">${r.module}</td>
+                    <td class="p-3">${r.details}</td>
+                    <td class="p-3 font-bold text-slate-800">₹ ${r.amount.toLocaleString('en-IN')}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${r.status === 'Pending' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">${r.status}</span></td>
+                </tr>`;
+                tbody.insertAdjacentHTML('beforeend', rowHtml);
+            });
 
             document.getElementById('summaryName').innerText = custName;
-            document.getElementById('summaryPending').innerText = `₹ ${totalOutstanding.toFixed(2)}`;
-            summaryBox.classList.remove('hidden');
+            document.getElementById('summaryPending').innerText = `₹ ${currentOutstanding.toLocaleString('en-IN')}`;
+            document.getElementById('ledgerSummaryBox').classList.remove('hidden');
+        }
 
-            tbody.innerHTML = '';
-            filtered.forEach(item => {
-                let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                    <td class="p-3">${item.date}</td>
-                    <td class="p-3 font-semibold text-cyan-700">${item.module}</td>
-                    <td class="p-3">${item.details}</td>
-                    <td class="p-3 font-bold text-emerald-600">₹ ${item.amount.toFixed(2)}</td>
-                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${item.status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700 border border-emerald-300'} font-semibold">${item.status}</span></td>
-                </tr>`;
-                tbody.insertAdjacentHTML('beforeend', row);
-            });
+        function saveBillTerms() {
+            let terms = document.getElementById('billTermsText').value;
+            localStorage.setItem('shri_khatu_terms', terms);
+            alert('Bill terms and conditions saved successfully!');
         }
 
         function updateWaTemplate(val) {
-            let textarea = document.getElementById('waMessageText');
+            let textElem = document.getElementById('waMessageText');
             if(val === 'bill') {
-                textarea.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
+                textElem.value = `Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!`;
             } else if(val === 'welcome') {
-                textarea.value = "Welcome to Shri Khatu Shyam Dairy family! We are delighted to supply pure and fresh milk directly to your doorstep daily.";
+                textElem.value = `Welcome to Shri Khatu Shyam Dairy! Thank you for starting your pure milk subscription with us. We ensure 100% pure and fresh milk delivery daily.`;
             } else if(val === 'payment') {
-                textarea.value = "Thank you! We have received your payment successfully. Your account ledger has been updated.";
+                textElem.value = `Namaste! We have successfully received your payment. Thank you for your continued trust and business with Shri Khatu Shyam Dairy.`;
             }
         }
 
         function sendWhatsAppMessage() {
-            let mob = document.getElementById('waMobile').value.trim();
-            let msg = encodeURIComponent(document.getElementById('waMessageText').value);
-            if(!mob) { alert('Please enter customer mobile number!'); return; }
-            window.open(`https://wa.me/${mob}?text=${msg}`, '_blank');
+            let mobile = document.getElementById('waMobile').value.trim();
+            let msg = document.getElementById('waMessageText').value;
+            if(!mobile) { alert('Please enter customer mobile number!'); return; }
+            let url = `https://wa.me/${mobile}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
         }
     </script>
 </body>
