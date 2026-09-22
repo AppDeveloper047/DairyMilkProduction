@@ -161,35 +161,40 @@
         <main class="p-6 space-y-6 flex-1">
             
             <!-- Dashboard Home Tab -->
-            <!-- Total Cattle Count Box (Blue) -->
-<div class="card blue-card">
-    <div class="card-title">Total Cattle Count</div>
-    <div class="card-value" id="total-cattle-count">Loading...</div>
-</div>
+        <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+    
+    <!-- Total Cattle Count Box -->
+    <div class="card blue-card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
+        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
+        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+    </div>
 
-<!-- Total Investment Box (Green) -->
-<div class="card green-card">
-    <div class="card-title">Total Investment</div>
-    <div class="card-value" id="total-investment">Loading...</div>
-</div>
+    <!-- Total Investment Box -->
+    <div class="card green-card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
+        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Investment</div>
+        <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+    </div>
 
-<!-- Total Milk Production Box (Orange) -->
-<div class="card orange-card">
-    <div class="card-title">Total Milk Production</div>
-    <div class="card-value" id="total-milk">Loading...</div>
-</div>
+    <!-- Total Milk Production Box -->
+    <div class="card orange-card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
+        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Milk Production</div>
+        <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+    </div>
 
-<!-- Monthly Revenue Box (Red) -->
-<div class="card red-card">
-    <div class="card-title">Monthly Revenue</div>
-    <div class="card-value" id="monthly-revenue">Loading...</div>
-</div>
+    <!-- Monthly Revenue Box -->
+    <div class="card red-card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
+        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Monthly Revenue</div>
+        <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+    </div>
 
-<!-- Total Pending Amount Box (Purple) -->
-<div class="card purple-card">
-    <div class="card-title">Total Pending Amount</div>
-    <div class="card-value" id="pending-amount">Loading...</div>
+    <!-- Total Pending Amount Box -->
+    <div class="card purple-card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
+        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
+        <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+    </div>
+
 </div>
+            
             
                         <h3 id="dashPendingAmount" class="text-2xl font-extrabold mt-1">₹ 0</h3>
                     </div>
