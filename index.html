@@ -161,30 +161,36 @@
         <main class="p-6 space-y-6 flex-1">
             
             <!-- Dashboard Home Tab -->
-            <div id="tab-home" class="tab-content space-y-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                    <div class="card-gradient-1 p-5 rounded-2xl flex flex-col justify-between">
-                        <p class="text-white/80 text-sm font-medium">Total Cattle Count</p>
-                        <h3 id="dashCattleCount" class="text-2xl font-extrabold mt-1">24 <span class="text-xs font-normal">(Cows: 14, Buff: 10)</span></h3>
-                    </div>
-                    <div class="card-gradient-2 p-5 rounded-2xl flex flex-col justify-between">
-                        <p class="text-white/80 text-sm font-medium">Total Investment</p>
-                        <h3 id="dashInvestment" class="text-2xl font-extrabold mt-1">₹ 8,50,000</h3>
-                    </div>
-                    <div class="card-gradient-3 p-5 rounded-2xl flex flex-col justify-between">
-                        <p class="text-white/80 text-sm font-medium">Total Milk Production</p>
-                        <h3 id="dashMilkProd" class="text-2xl font-extrabold mt-1">4,250 Liters</h3>
-                    </div>
-                    <div class="card-gradient-4 p-5 rounded-2xl flex flex-col justify-between">
-                        <p class="text-white/80 text-sm font-medium">Monthly Revenue</p>
-                        <h3 id="dashRevenue" class="text-2xl font-extrabold mt-1">+ ₹ 2,47,500</h3>
-                    </div>
-                    <!-- Total Pending Amount Box -->
-                    <div onclick="switchTab('pending-customers', document.querySelector('a[href=\'#pending-customers\']'))" class="card-gradient-5 p-5 rounded-2xl flex flex-col justify-between cursor-pointer hover:scale-105 transition shadow-lg">
-                        <div class="flex justify-between items-center">
-                            <p class="text-white/80 text-sm font-medium">Total Pending Amount</p>
-                            <i class="fa-solid fa-arrow-right text-white/70"></i>
-                        </div>
+            <!-- Total Cattle Count Box (Blue) -->
+<div class="card blue-card">
+    <div class="card-title">Total Cattle Count</div>
+    <div class="card-value" id="total-cattle-count">Loading...</div>
+</div>
+
+<!-- Total Investment Box (Green) -->
+<div class="card green-card">
+    <div class="card-title">Total Investment</div>
+    <div class="card-value" id="total-investment">Loading...</div>
+</div>
+
+<!-- Total Milk Production Box (Orange) -->
+<div class="card orange-card">
+    <div class="card-title">Total Milk Production</div>
+    <div class="card-value" id="total-milk">Loading...</div>
+</div>
+
+<!-- Monthly Revenue Box (Red) -->
+<div class="card red-card">
+    <div class="card-title">Monthly Revenue</div>
+    <div class="card-value" id="monthly-revenue">Loading...</div>
+</div>
+
+<!-- Total Pending Amount Box (Purple) -->
+<div class="card purple-card">
+    <div class="card-title">Total Pending Amount</div>
+    <div class="card-value" id="pending-amount">Loading...</div>
+</div>
+            
                         <h3 id="dashPendingAmount" class="text-2xl font-extrabold mt-1">₹ 0</h3>
                     </div>
                 </div>
@@ -1598,5 +1604,44 @@
             alert('Bill terms and conditions saved successfully!');
         }
     </script>
+
+    <script>
+async function loadLiveDashboardData() {
+    // Yahan apna Google Apps Script ka Web App URL dalein jo Google Sheet se data JSON format me deta hai
+    const sheetApiUrl = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
+
+    try {
+        let response = await fetch(sheetApiUrl);
+        let data = await response.json();
+
+        // 1. Total Cattle Count (Sirf purchased animals ka data)
+        document.getElementById('total-cattle-count').innerText = 
+            `${data.totalCattle} (Cows: ${data.cows}, Buff: ${data.buff})`;
+
+        // 2. Total Investment
+        document.getElementById('total-investment').innerText = 
+            `₹ ${data.totalInvestment}`;
+
+        // 3. Total Milk Production
+        document.getElementById('total-milk').innerText = 
+            `${data.totalMilk} Liters`;
+
+        // 4. Monthly Revenue
+        document.getElementById('monthly-revenue').innerText = 
+            `+ ₹ ${data.monthlyRevenue}`;
+
+        // 5. Total Pending Amount
+        document.getElementById('pending-amount').innerText = 
+            `₹ ${data.pendingAmount}`;
+
+    } catch (error) {
+        console.error("Data load karne me error aaya:", error);
+    }
+}
+
+// Page load hote hi data fetch hoga
+window.onload = loadLiveDashboardData;
+        
+</script>
 </body>
 </html>
