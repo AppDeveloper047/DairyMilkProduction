@@ -156,67 +156,68 @@
                     <option value="hi">हिंदी (Hindi)</option>
                 </select>
             </div>
-        </header>
-
-        <main class="p-6 space-y-6 flex-1">
             
-            <!-- Dashboard Home Tab -->
-        <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+        </header><main class="p-6 space-y-6 flex-1">
+           
+    <!-- Dashboard Home Tab & Counting Cards Section -->
+    <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px;">
     
-    <!-- Yahan se container shuru hoga -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px;">
+        <!-- Total Cattle Count Box -->
+        <div class="card blue-card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
+            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
+            <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+        </div>
 
-    <!-- Total Cattle Count Box -->
-    <div class="card blue-card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
-        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
-        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-    </div>
+        <!-- Total Investment Box -->
+        <div class="card green-card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
+            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Investment</div>
+            <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+        </div>
 
-    <!-- Total Investment Box -->
-    <div class="card green-card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
-        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Investment</div>
-        <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-    </div>
+        <!-- Total Milk Production Box -->
+        <div class="card orange-card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
+            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Milk Production</div>
+            <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+        </div>
 
-    <!-- Total Milk Production Box -->
-    <div class="card orange-card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
-        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Milk Production</div>
-        <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-    </div>
+        <!-- Monthly Revenue Box -->
+        <div class="card red-card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
+            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Monthly Revenue</div>
+            <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+        </div>
 
-    <!-- Monthly Revenue Box -->
-    <div class="card red-card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
-        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Monthly Revenue</div>
-        <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-    </div>
+        <!-- Total Pending Amount Box -->
+        <div class="card purple-card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
+            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
+            <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+        </div>
 
-    <!-- Total Pending Amount Box -->
-    <div class="card purple-card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
-        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
-        <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-    </div>
-
-</div> <!-- Yahan container band ho jayega -->
-            
-            
-                        <h3 id="dashPendingAmount" class="text-2xl font-extrabold mt-1">₹ 0</h3>
-                    </div>
+    </div> 
+    <!-- Counting Cards Section End -->
+           
+    <!-- Charts Section Container (Desktop par side-by-side, Mobile par ek ke niche ek) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Cattle Ratio Breakdown Chart Card -->
+        <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                    <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
+                </h3>
+                <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
+            </div>
+            <div class="relative w-full flex justify-center items-center py-2">
+                <div class="w-[300px] h-[300px]">
+                    <canvas id="cattleChart"></canvas>
                 </div>
+            </div>
+        </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
-                            </h3>
-                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
-                        </div>
-                        <div class="relative w-full flex justify-center items-center py-2">
-                            <div class="w-[300px] h-[300px]">
-                                <canvas id="cattleChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Yahan aapka dusra chart (Bulk Milk Sales) aa jayega -->
+
+    </div>
+
+</main>
 
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden">
                         <div class="flex items-center justify-between mb-4">
