@@ -1597,51 +1597,50 @@
             let url = `https://wa.me/${mobile}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         }
+function saveBillTerms() {
+        let terms = document.getElementById('billTermsText').value;
+        localStorage.setItem('shri_khatu_terms', terms);
+        alert('Bill terms and conditions saved successfully!');
+    }
+</script>
 
-        function saveBillTerms() {
-            let terms = document.getElementById('billTermsText').value;
-            localStorage.setItem('shri_khatu_terms', terms);
-            alert('Bill terms and conditions saved successfully!');
-        }
-    </script>
-
-    <script>
+<script>
 async function loadLiveDashboardData() {
-    // Yahan apna Google Apps Script ka Web App URL dalein jo Google Sheet se data JSON format me deta hai
     const sheetApiUrl = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
 
     try {
         let response = await fetch(sheetApiUrl);
         let data = await response.json();
 
-        // 1. Total Cattle Count (Sirf purchased animals ka data)
-        document.getElementById('total-cattle-count').innerText = 
-            `${data.totalCattle} (Cows: ${data.cows}, Buff: ${data.buff})`;
+        // 1. Total Cattle Count
+        let cattleEl = document.getElementById('total-cattle-count');
+        if(cattleEl) cattleEl.innerText = `${data.totalCattle || 0} (Cows: ${data.cows || 0}, Buff: ${data.buff || 0})`;
 
         // 2. Total Investment
-        document.getElementById('total-investment').innerText = 
-            `₹ ${data.totalInvestment}`;
+        let invEl = document.getElementById('total-investment');
+        if(invEl) invEl.innerText = `₹ ${data.totalInvestment || 0}`;
 
         // 3. Total Milk Production
-        document.getElementById('total-milk').innerText = 
-            `${data.totalMilk} Liters`;
+        let milkEl = document.getElementById('total-milk');
+        if(milkEl) milkEl.innerText = `${data.totalMilk || 0} Liters`;
 
         // 4. Monthly Revenue
-        document.getElementById('monthly-revenue').innerText = 
-            `+ ₹ ${data.monthlyRevenue}`;
+        let revEl = document.getElementById('monthly-revenue');
+        if(revEl) revEl.innerText = `+ ₹ ${data.monthlyRevenue || 0}`;
 
         // 5. Total Pending Amount
-        document.getElementById('pending-amount').innerText = 
-            `₹ ${data.pendingAmount}`;
+        let pendEl = document.getElementById('pending-amount');
+        if(pendEl) pendEl.innerText = `₹ ${data.pendingAmount || 0}`;
 
     } catch (error) {
         console.error("Data load karne me error aaya:", error);
     }
 }
 
-// Page load hote hi data fetch hoga
-window.onload = loadLiveDashboardData;
-        
+// Yahan window.onload ko overwrite karne ki bajaye event listener use kiya hai taaki purana layout safe rahe
+window.addEventListener('load', function() {
+    loadLiveDashboardData();
+});
 </script>
 </body>
 </html>
