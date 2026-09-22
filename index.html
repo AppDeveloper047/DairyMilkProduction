@@ -935,7 +935,6 @@
         // LocalStorage initialization for pending records and ledger history
         let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
         let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
-        // Sirf Purchase kiye gaye cattle ka data store karne ke liye naya array
         let cattlePurchaseRecords = JSON.parse(localStorage.getItem('shri_khatu_cattle_purchases')) || [];
 
         // Live statistics state object
@@ -970,7 +969,7 @@
             initCharts();
             updateDashboardBoxes();
             restoreSavedTables();
-            updateCattleDashboardDisplay(); // 👉 Yeh line yahan jodni hai
+            updateCattleDashboardDisplay();
         };
         
         // Persist application data to browser localStorage
@@ -978,10 +977,17 @@
             localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
             localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
             localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
+            localStorage.setItem('shri_khatu_cattle_purchases', JSON.stringify(cattlePurchaseRecords));
         }
 
         function restoreSavedTables() {
             updatePendingStats();
+            
+            // Restore Ledger History Table agar data pehle se stored hai
+            let ledgerTbody = document.getElementById('ledgerTableBody');
+            if(masterLedgerHistory.length > 0 && ledgerTbody.innerHTML.includes('Please search')) {
+                // Table populated dynamically on search
+            }
         }
 
         // Initialize Chart.js interactive charts on Dashboard
@@ -1011,7 +1017,7 @@
                     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [{
                         label: 'Milk Output (Liters)',
-                        data: [0, 0, 0, 0, 0, 0, 0],
+                        data: [0, 0, 0, 0, 0, 0, liveStats.totalMilkLitres > 0 ? liveStats.totalMilkLitres : 0],
                         borderColor: '#3b82f6',
                         backgroundColor: 'rgba(59, 130, 246, 0.1)',
                         fill: true,
@@ -1359,13 +1365,15 @@
                 customerDirectory[party] = partyMobile;
             }
 
-            // 👉 Yahan check kar rahe hain ki agar type 'Purchase' hai toh live count mein add karein
+            // Cattle Purchase tracking save for live count
             if (type === 'Purchase') {
-            cattlePurchaseRecords.push({
-            breed: breed.toLowerCase()
-            });
-            localStorage.setItem('shri_khatu_cattle_purchases', JSON.stringify(cattlePurchaseRecords));
+                cattlePurchaseRecords.push({
+                    breed: breed.toLowerCase()
+                });
             }
+
+            let tbody = document.getElementById('cattleTableBody');
+            if(tbody.innerHTML.includes('No cattle records added yet')) tbody.innerHTML = '';
 
             let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                 <td class="p-3">${date}</td><td class="p-3 text-amber-600 font-bold">${type}</td><td class="p-3 font-medium">${breed}</td>
@@ -1393,12 +1401,13 @@
             if(type === 'Purchase') {
                 liveStats.totalInvestment += amount;
                 if(breed.toLowerCase().includes('cow')) liveStats.cows += 1;
-                else if(breed.toLowerCase().includes('buffalo')) liveStats.buffaloes += 1;
+                else if(breed.toLowerCase().includes('buffalo') || breed.toLowerCase().includes('buff')) liveStats.buffaloes += 1;
             } else {
                 if(breed.toLowerCase().includes('cow') && liveStats.cows > 0) liveStats.cows -= 1;
-                else if(breed.toLowerCase().includes('buffalo') && liveStats.buffaloes > 0) liveStats.buffaloes -= 1;
+                else if((breed.toLowerCase().includes('buffalo') || breed.toLowerCase().includes('buff')) && liveStats.buffaloes > 0) liveStats.buffaloes -= 1;
             }
 
+            updateCattleDashboardDisplay();
             updateChartsAndBoxes();
             updatePendingStats();
 
@@ -1686,15 +1695,16 @@
             let url = `https://wa.me/${mobile}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         }
-            // Save Bill Terms Handler
-            function saveBillTerms() {
+
+        // Save Bill Terms Handler
+        function saveBillTerms() {
             let terms = document.getElementById('billTermsText').value;
             localStorage.setItem('shri_khatu_terms', terms);
             alert('Bill terms and conditions saved successfully!');
         }
 
-            // 👉 Yeh wala 4 number ka function yahan paste kar do
-            function updateCattleDashboardDisplay() {
+        // Live Cattle Counting Update Function
+        function updateCattleDashboardDisplay() {
             let cowCount = 0;
             let buffCount = 0;
 
@@ -1706,13 +1716,15 @@
                 }
             });
 
+            liveStats.cows = cowCount;
+            liveStats.buffaloes = buffCount;
+
             let totalCattle = cowCount + buffCount;
             let cattleBox = document.getElementById('total-cattle-count');
             if(cattleBox) {
                 cattleBox.innerHTML = `${totalCattle} <span class="text-xs font-normal">(Cows: ${cowCount}, Buff: ${buffCount})</span>`;
             }
         }
-        
     </script>
 </body>
 </html>
