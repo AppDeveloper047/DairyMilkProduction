@@ -155,38 +155,38 @@
 
         <main class="p-6 space-y-6 flex-1">
            
-            <!-- Dashboard Home Tab & Counting Cards Section -->
+            <!-- Dashboard Home Tab & Counting Cards Section (All values set to 0 initially) -->
             <div id="tab-home" class="tab-content space-y-6">
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
                     <!-- Total Cattle Count Box -->
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
-                        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
                     <!-- Total Investment Box -->
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Investment</div>
-                        <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                        <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
                     <!-- Total Milk Production Box -->
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Milk Production</div>
-                        <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                        <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>
                     </div>
 
                     <!-- Monthly Revenue Box -->
                     <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Monthly Revenue</div>
-                        <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                        <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>
                     </div>
 
                     <!-- Total Pending Amount Box -->
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
-                        <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                        <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
                 </div> 
@@ -879,12 +879,13 @@
         let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
         let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
 
+        // ZERO DUMMY NUMBERS: Sabhi values ko 0 kar diya hai taaki real entries ke hisab se chale
         let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
-            cows: 14,
-            buffaloes: 10,
-            totalInvestment: 850000,
-            totalMilkLitres: 4250,
-            monthlyRevenue: 247500
+            cows: 0,
+            buffaloes: 0,
+            totalInvestment: 0,
+            totalMilkLitres: 0,
+            monthlyRevenue: 0
         };
 
         let customerDirectory = {
@@ -927,7 +928,7 @@
                 data: {
                     labels: ['Milking Cows', 'Milking Buffaloes', 'Heifers / Calves'],
                     datasets: [{
-                        data: [liveStats.cows, liveStats.buffaloes, 5],
+                        data: [liveStats.cows, liveStats.buffaloes, 0],
                         backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
                         borderWidth: 2
                     }]
@@ -946,7 +947,7 @@
                     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [{
                         label: 'Milk Output (Liters)',
-                        data: [600, 620, 590, 650, 640, 680, 670],
+                        data: [0, 0, 0, 0, 0, 0, 0],
                         borderColor: '#3b82f6',
                         backgroundColor: 'rgba(59, 130, 246, 0.1)',
                         fill: true,
@@ -963,7 +964,7 @@
 
         function updateChartsAndBoxes() {
             if(cattleChartInstance) {
-                cattleChartInstance.data.datasets[0].data = [liveStats.cows, liveStats.buffaloes, 5];
+                cattleChartInstance.data.datasets[0].data = [liveStats.cows, liveStats.buffaloes, 0];
                 cattleChartInstance.update();
             }
             updateDashboardBoxes();
