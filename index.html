@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dairy Management CRM</title>
-    <!-- Tailwind CSS -->
+    
+    <!-- ========================================== -->
+    <!-- EXTERNAL STYLESHEETS & SCRIPTS (CDN Links) -->
+    <!-- ========================================== -->
+    <!-- Tailwind CSS for modern responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
+    <!-- Chart.js for interactive graphs and dashboards -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Chart.js DataLabels Plugin -->
+    <!-- Chart.js DataLabels Plugin for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons for sidebar and UI icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ========================================== -->
+    <!-- CUSTOM CSS STYLING & 3D GLASSMORPHISM EFFECTS -->
+    <!-- ========================================== -->
     <style>
+        /* Main background gradient for the application body */
         body {
             background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
             color: #1e293b;
         }
+        /* Sidebar 3D background shadow and depth styling */
         .sidebar-3d-bg {
             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
             box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.2), inset -2px -2px 10px rgba(255, 255, 255, 0.05);
         }
+        /* Navigation Menu 3D Buttons styling with glassmorphism */
         .menu-3d-btn {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(10px);
@@ -40,6 +51,7 @@
             transform: translateY(1px) scale(0.99);
             border-color: #ec4899;
         }
+        /* Sub-menu buttons styling inside Billing Invoice dropdown */
         .sub-menu-btn {
             background: rgba(15, 23, 42, 0.4);
             backdrop-filter: blur(5px);
@@ -56,6 +68,7 @@
             border-bottom-right-radius: 30px;
             transition: transform 0.4s ease-in-out;
         }
+        /* Frosted glass container box style for content cards */
         .card-light-box {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
@@ -66,19 +79,24 @@
 </head>
 <body class="font-sans flex h-screen overflow-hidden">
 
-    <!-- 3D Sidebar Panel -->
+    <!-- ========================================== -->
+    <!-- 1. 3D SIDEBAR NAVIGATION PANEL SECTION   -->
+    <!-- ========================================== -->
     <div id="sidebar" class="w-72 sidebar-3d-bg text-white flex flex-col z-50 transform -translate-x-full md:translate-x-0 fixed md:relative h-full">
+        <!-- Sidebar Brand Logo and Title -->
         <div class="p-6 text-2xl font-extrabold tracking-wider flex items-center justify-between border-b border-white/15">
             <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-translate="app_title">Shri Khatu Shyam Dairy</span></span>
             <button onclick="toggleSidebar()" class="md:hidden text-white text-xl hover:text-pink-400 transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
+        <!-- Sidebar Navigation Menu Links -->
         <nav class="flex-1 px-4 py-6 space-y-3.5 overflow-y-auto">
+            <!-- Home / Dashboard Menu Link -->
             <a href="#home" onclick="switchTab('home', this)" class="menu-3d-btn active-tab flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-translate="menu_home">Dashboard</span>
             </a>
             
-            <!-- Master Billing Invoice Menu -->
+            <!-- Master Billing Invoice Menu Dropdown -->
             <div>
                 <button onclick="toggleBillingSubMenu()" class="menu-3d-btn w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                     <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-translate="menu_billing">Billing Invoice</span></span>
@@ -100,37 +118,45 @@
                 </div>
             </div>
 
-            <!-- Payment Ledger Menu Link -->
+            <!-- Payment Ledger Statement Menu Link -->
             <a href="#ledger" onclick="switchTab('ledger', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> <span>Payment Ledger</span>
             </a>
 
-            <!-- Pending Amount Menu Link -->
+            <!-- Pending Amount & Management Menu Link -->
             <a href="#pending-customers" onclick="switchTab('pending-customers', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span>Pending Amount</span>
             </a>
 
+            <!-- Expense Management Menu Link -->
             <a href="#expense" onclick="switchTab('expense', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>
             </a>
+            <!-- Edit Profile Menu Link -->
             <a href="#profile" onclick="switchTab('profile', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-translate="menu_profile">Edit Profile</span>
             </a>
+            <!-- Bill Terms & Conditions Menu Link -->
             <a href="#terms" onclick="switchTab('terms', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-translate="menu_terms">Bill Terms</span>
             </a>
+            <!-- WhatsApp Quick Message Menu Link -->
             <a href="#whatsapp" onclick="switchTab('whatsapp', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-translate="menu_whatsapp">WhatsApp Messages</span>
             </a>
         </nav>
 
+        <!-- Sidebar Footer Copyright Notice -->
         <div id="sidebarFooter" class="p-4 border-t border-white/15 text-xs text-center text-slate-400">
             © 2026 Shri Khatu Shyam Dairy Farming
         </div>
     </div>
 
-    <!-- Main Content Area -->
+    <!-- ========================================== -->
+    <!-- 2. MAIN CONTENT AREA & HEADER SECTION    -->
+    <!-- ========================================== -->
     <div class="flex-1 flex flex-col h-full overflow-y-auto">
+        <!-- Top Header Bar with Brand Name, Locations, and Language Selector -->
         <header class="bg-white/70 backdrop-blur-md border-b border-slate-200/80 p-4 flex justify-between items-center shadow-sm">
             <button onclick="toggleSidebar()" class="md:hidden text-slate-700 text-xl"><i class="fa-solid fa-bars"></i></button>
             
@@ -155,8 +181,11 @@
 
         <main class="p-6 space-y-6 flex-1">
            
-            <!-- Dashboard Home Tab & Counting Cards Section (All values set to 0 initially) -->
+            <!-- ========================================== -->
+            <!-- 3. DASHBOARD TAB & COUNTING CARDS SECTION  -->
+            <!-- ========================================== -->
             <div id="tab-home" class="tab-content space-y-6">
+                <!-- Top Statistics Counting Cards Grid -->
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
                     <!-- Total Cattle Count Box -->
@@ -191,10 +220,10 @@
 
                 </div> 
                 
-                <!-- Charts Section Container -->
+                <!-- Visual Charts Section Container (Chart.js graphs) -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     
-                    <!-- Cattle Ratio Breakdown Chart Card -->
+                    <!-- Cattle Ratio Breakdown Doughnut Chart Card -->
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
@@ -209,7 +238,7 @@
                         </div>
                     </div>
 
-                    <!-- Bulk Milk Sales & Trend Chart Card -->
+                    <!-- Bulk Milk Sales & Weekly Trend Line Chart Card -->
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
@@ -225,7 +254,9 @@
                 </div>
             </div>
 
-            <!-- Payment Ledger Tab Content -->
+            <!-- ========================================== -->
+            <!-- 4. CUSTOMER PAYMENT LEDGER STATEMENT TAB   -->
+            <!-- ========================================== -->
             <div id="tab-ledger" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl shadow-xl space-y-5">
                     <div class="border-b border-slate-200 pb-3">
@@ -233,6 +264,7 @@
                         <p class="text-slate-600 text-sm mt-1">Search customer name or mobile number to view complete transaction and ledger history.</p>
                     </div>
                     
+                    <!-- Customer Search Controls -->
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex-1">
                             <label class="block text-sm font-medium text-slate-700 mb-1">Customer Name / Mobile Number</label>
@@ -245,7 +277,7 @@
                         </div>
                     </div>
 
-                    <!-- Customer Summary Card -->
+                    <!-- Customer Summary Statement Card -->
                     <div id="ledgerSummaryBox" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4 bg-cyan-50/70 p-4 rounded-2xl border border-cyan-200">
                         <div>
                             <p class="text-xs text-slate-500 font-medium">Customer Name</p>
@@ -260,7 +292,7 @@
                         </div>
                     </div>
 
-                    <!-- Ledger Table -->
+                    <!-- Ledger Table Records View -->
                     <div class="overflow-x-auto rounded-xl border border-slate-200">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
@@ -282,7 +314,9 @@
                 </div>
             </div>
 
-            <!-- Pending Amount & Search Management Tab -->
+            <!-- ========================================== -->
+            <!-- 5. PENDING AMOUNT & MANAGEMENT TAB         -->
+            <!-- ========================================== -->
             <div id="tab-pending-customers" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -295,12 +329,13 @@
                         </button>
                     </div>
 
-                    <!-- Search Bar Feature -->
+                    <!-- Search Bar Feature for Pending Customers -->
                     <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
                         <i class="fa-solid fa-magnifying-glass text-slate-400 text-lg ml-2"></i>
                         <input type="text" id="pendingSearchInput" oninput="filterPendingList()" placeholder="Search by Customer Name or Mobile Number..." class="w-full bg-transparent text-slate-800 focus:outline-none text-sm font-medium">
                     </div>
 
+                    <!-- Pending Customers Table -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
@@ -324,9 +359,12 @@
                 </div>
             </div>
 
-            <!-- Billing Invoice Main Container -->
+            <!-- ========================================== -->
+            <!-- 6. BILLING INVOICE MASTER CONTAINER        -->
+            <!-- ========================================== -->
             <div id="tab-billing-invoice" class="tab-content hidden space-y-6">
-                <!-- Bulk Dairy Subtab -->
+                
+                <!-- Sub-tab 6.1: Bulk Dairy Milk Sales Entry & Sheet -->
                 <div id="subtab-bulk-dairy" class="sub-content space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -395,6 +433,7 @@
                         </div>
                     </div>
 
+                    <!-- Bulk Dairy Records Preview Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Milk Selling Record Sheet Preview</h3>
                         <div class="overflow-x-auto">
@@ -412,7 +451,7 @@
                     </div>
                 </div>
 
-                <!-- Retail Milk Subtab -->
+                <!-- Sub-tab 6.2: Retail Milk Selling Entry & Sheet -->
                 <div id="subtab-retail-milk" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -465,6 +504,7 @@
                         </div>
                     </div>
 
+                    <!-- Retail Records Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> Retail Milk Records</h3>
                         <div class="overflow-x-auto">
@@ -482,7 +522,7 @@
                     </div>
                 </div>
 
-                <!-- Cattle Deal Subtab -->
+                <!-- Sub-tab 6.3: Cattle Purchase & Sell Management -->
                 <div id="subtab-cattle-deal" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -549,6 +589,7 @@
                         </div>
                     </div>
 
+                    <!-- Cattle History Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> Cattle Deal History</h3>
                         <div class="overflow-x-auto">
@@ -566,7 +607,7 @@
                     </div>
                 </div>
 
-                <!-- Other Products Subtab -->
+                <!-- Sub-tab 6.4: Other Products Purchase & Sell -->
                 <div id="subtab-other-products" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -646,6 +687,7 @@
                         </div>
                     </div>
 
+                    <!-- Products History Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Products History</h3>
                         <div class="overflow-x-auto">
@@ -664,7 +706,9 @@
                 </div>
             </div>
 
-            <!-- Working Expense Management Section -->
+            <!-- ========================================== -->
+            <!-- 7. FARM & DAIRY EXPENSE MANAGEMENT TAB     -->
+            <!-- ========================================== -->
             <div id="tab-expense" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -705,6 +749,7 @@
                     </div>
                 </div>
 
+                <!-- Expense Records Sheet Table -->
                 <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                     <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> Expense Records Sheet</h3>
                     <div class="overflow-x-auto">
@@ -722,7 +767,9 @@
                 </div>
             </div>
 
-            <!-- Working Edit Profile Section -->
+            <!-- ========================================== -->
+            <!-- 8. EDIT PROFILE & BUSINESS INFO TAB        -->
+            <!-- ========================================== -->
             <div id="tab-profile" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -755,7 +802,9 @@
                 </div>
             </div>
 
-            <!-- Working Bill Terms Section -->
+            <!-- ========================================== -->
+            <!-- 9. BILL TERMS & CONDITIONS TAB             -->
+            <!-- ========================================== -->
             <div id="tab-terms" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -779,7 +828,9 @@
                 </div>
             </div>
 
-            <!-- Working WhatsApp Messages Section -->
+            <!-- ========================================== -->
+            <!-- 10. WHATSAPP MESSAGE GENERATOR TAB         -->
+            <!-- ========================================== -->
             <div id="tab-whatsapp" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -815,7 +866,9 @@
         </main>
     </div>
 
-    <!-- Edit Customer Billing Modal / Screen -->
+    <!-- ========================================== -->
+    <!-- 11. MODAL POPUP FOR EDITING & PAYING BILLS -->
+    <!-- ========================================== -->
     <div id="editBillingModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="card-light-box p-6 rounded-3xl w-full max-w-lg space-y-4 shadow-2xl relative">
             <div class="flex justify-between items-center border-b border-slate-200 pb-3">
@@ -869,17 +922,21 @@
         </div>
     </div>
 
-    <!-- JavaScript Functions -->
+    <!-- ========================================== -->
+    <!-- 12. JAVASCRIPT LOGIC & FUNCTIONS SECTION   -->
+    <!-- ========================================== -->
     <script>
+        // Global calculation variables
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
+        // LocalStorage initialization for pending records and ledger history
         let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
         let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
 
-        // ZERO DUMMY NUMBERS: Sabhi values ko 0 kar diya hai taaki real entries ke hisab se chale
+        // Live statistics state object
         let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
             cows: 0,
             buffaloes: 0,
@@ -888,6 +945,7 @@
             monthlyRevenue: 0
         };
 
+        // Predefined Customer and Vendor Directory mapping names to mobile numbers
         let customerDirectory = {
             "Rahul Sharma": "9876543210",
             "Amit Verma": "9123456789",
@@ -897,6 +955,7 @@
             "Shajapur Organic Hub": "9655443322"
         };
 
+        // Multi-language translation dictionaries
         const translations = {
             en: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" },
             hi: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" }
@@ -905,12 +964,14 @@
         let cattleChartInstance = null;
         let milkChartInstance = null;
 
+        // Window Load Handler: Initializes charts, dashboard cards, and tables on startup
         window.onload = function() {
             initCharts();
             updateDashboardBoxes();
             restoreSavedTables();
         };
 
+        // Persist application data to browser localStorage
         function persistAppData() {
             localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
             localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
@@ -921,6 +982,7 @@
             updatePendingStats();
         }
 
+        // Initialize Chart.js interactive charts on Dashboard
         function initCharts() {
             const ctxCattle = document.getElementById('cattleChart').getContext('2d');
             cattleChartInstance = new Chart(ctxCattle, {
@@ -962,6 +1024,7 @@
             });
         }
 
+        // Update Dashboard Charts, Boxes, and persist changes
         function updateChartsAndBoxes() {
             if(cattleChartInstance) {
                 cattleChartInstance.data.datasets[0].data = [liveStats.cows, liveStats.buffaloes, 0];
@@ -980,6 +1043,7 @@
             updatePendingStats();
         }
 
+        // Language translation handler
         function changeLanguage(lang) {
             const elements = document.querySelectorAll('[data-translate]');
             elements.forEach(el => {
@@ -988,8 +1052,10 @@
             });
         }
 
+        // Mobile responsive sidebar toggle handler
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
 
+        // Sidebar Billing Sub-menu accordion toggle handler
         function toggleBillingSubMenu() {
             const sub = document.getElementById('billingSubMenu');
             const arrow = document.getElementById('billingArrow');
@@ -997,6 +1063,7 @@
             arrow.classList.toggle('rotate-180');
         }
 
+        // Main Tab Switcher Function
         function switchTab(tabId, element) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             if(tabId === 'home') document.getElementById('tab-home').classList.remove('hidden');
@@ -1014,6 +1081,7 @@
             if(window.innerWidth < 768) toggleSidebar();
         }
 
+        // Sub-tab Switcher Function for Billing Module
         function switchSubTab(subId, element) {
             document.querySelectorAll('.sub-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('subtab-' + subId).classList.remove('hidden');
@@ -1024,6 +1092,7 @@
             if(window.innerWidth < 768) toggleSidebar();
         }
 
+        // Save and update Business Profile details across headers
         function saveProfileChanges() {
             let brandName = document.getElementById('profileBrandName').value.trim();
             let office = document.getElementById('profileOffice').value.trim();
@@ -1042,6 +1111,7 @@
             alert('Profile updated successfully across all headers and invoices!');
         }
 
+        // Retail customer dropdown change handler
         function onRetailCustomerChange(val) {
             let customInput = document.getElementById('retailCustCustom');
             let mobInput = document.getElementById('retailMobile');
@@ -1114,6 +1184,7 @@
             else { customInput.classList.add('hidden'); customInput.value = ''; }
         }
 
+        // Calculation Functions for Billing Modules
         function calculateFatBilling() {
             let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             let fat = parseFloat(document.getElementById('milkFat').value) || 0;
@@ -1138,6 +1209,7 @@
             document.getElementById('prodTotalAmount').value = calculatedProductTotalAmt > 0 ? '₹ ' + calculatedProductTotalAmt.toFixed(2) : '';
         }
 
+        // Google Sheets API Sync Function via Fetch POST
         function sendDataToGoogleSheet(recordData) {
             var scriptURL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
             fetch(scriptURL, {
@@ -1150,6 +1222,7 @@
             .catch(error => console.error('Sheet Sync Error!', error));
         }
 
+        // Save Bulk Milk Entry Handler
         function saveMilkEntry() {
             let date = document.getElementById('billDate').value || new Date().toISOString().split('T')[0];
             let shift = document.getElementById('billShift').value;
@@ -1198,6 +1271,7 @@
             alert('Bulk milk entry successfully recorded and synced!');
         }
 
+        // Save Retail Milk Entry Handler
         function saveRetailEntry() {
             let date = document.getElementById('retailDate').value || new Date().toISOString().split('T')[0];
             let selectElem = document.getElementById('retailCustSelect');
@@ -1256,6 +1330,7 @@
             alert('Retail milk bill successfully saved and synced!');
         }
 
+        // Save Cattle Deal Record Handler
         function saveCattleEntry() {
             let date = document.getElementById('cattleDate').value || new Date().toISOString().split('T')[0];
             let type = document.getElementById('cattleTxType').value;
@@ -1324,6 +1399,7 @@
             alert('Cattle deal successfully recorded and synced!');
         }
 
+        // Save Other Products Entry Handler
         function saveProductEntry() {
             let date = document.getElementById('prodDate').value || new Date().toISOString().split('T')[0];
             let type = document.getElementById('prodTxType').value;
@@ -1383,6 +1459,7 @@
             alert('Product record successfully saved and synced!');
         }
 
+        // Save Farm Expense Record Handler
         function saveExpenseEntry() {
             let date = document.getElementById('expDate').value || new Date().toISOString().split('T')[0];
             let catSelect = document.getElementById('expCategory');
@@ -1433,6 +1510,7 @@
             if(pendingAmtEl) pendingAmtEl.innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
         }
 
+        // Render Pending Customers Table
         function renderPendingCustomers() {
             let tbody = document.getElementById('pendingTableBody');
             tbody.innerHTML = '';
@@ -1460,6 +1538,7 @@
             });
         }
 
+        // Filter Pending Customers List based on Search Input
         function filterPendingList() {
             let query = document.getElementById('pendingSearchInput').value.toLowerCase();
             let tbody = document.getElementById('pendingTableBody');
@@ -1491,6 +1570,7 @@
             });
         }
 
+        // Modal Open / Close Handlers for Payment Update
         function openEditModal(index) {
             let rec = pendingRecords[index];
             document.getElementById('editRowIndex').value = index;
@@ -1538,6 +1618,7 @@
             closeEditModal();
         }
 
+        // Search Customer Ledger Statement Function
         function searchCustomerLedger() {
             let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
             let tbody = document.getElementById('ledgerTableBody');
@@ -1577,6 +1658,7 @@
             });
         }
 
+        // WhatsApp Quick Message Template Handler
         function updateWaTemplate(type) {
             let txtArea = document.getElementById('waMessageText');
             if(type === 'bill') {
@@ -1598,6 +1680,7 @@
             window.open(url, '_blank');
         }
 
+        // Save Bill Terms Handler
         function saveBillTerms() {
             let terms = document.getElementById('billTermsText').value;
             localStorage.setItem('shri_khatu_terms', terms);
