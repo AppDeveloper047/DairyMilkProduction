@@ -188,10 +188,10 @@
                 <!-- Top Statistics Counting Cards Grid -->
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
-                    <!-- Total Cattle Count Box -->
+                    <!-- Total Cattle Count Box (Updated with ID and dynamic layout) -->
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
-                        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
+                    <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count (Purchase)</div>
+                    <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
                     <!-- Total Investment Box -->
@@ -935,6 +935,8 @@
         // LocalStorage initialization for pending records and ledger history
         let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
         let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
+        // Sirf Purchase kiye gaye cattle ka data store karne ke liye naya array
+        let cattlePurchaseRecords = JSON.parse(localStorage.getItem('shri_khatu_cattle_purchases')) || [];
 
         // Live statistics state object
         let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
@@ -964,13 +966,13 @@
         let cattleChartInstance = null;
         let milkChartInstance = null;
 
-        // Window Load Handler: Initializes charts, dashboard cards, and tables on startup
         window.onload = function() {
             initCharts();
             updateDashboardBoxes();
             restoreSavedTables();
+            updateCattleDashboardDisplay(); // 👉 Yeh line yahan jodni hai
         };
-
+        
         // Persist application data to browser localStorage
         function persistAppData() {
             localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
@@ -1357,8 +1359,13 @@
                 customerDirectory[party] = partyMobile;
             }
 
-            let tbody = document.getElementById('cattleTableBody');
-            if(tbody.innerHTML.includes('No cattle records added yet')) tbody.innerHTML = '';
+            // 👉 Yahan check kar rahe hain ki agar type 'Purchase' hai toh live count mein add karein
+            if (type === 'Purchase') {
+            cattlePurchaseRecords.push({
+            breed: breed.toLowerCase()
+            });
+            localStorage.setItem('shri_khatu_cattle_purchases', JSON.stringify(cattlePurchaseRecords));
+            }
 
             let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                 <td class="p-3">${date}</td><td class="p-3 text-amber-600 font-bold">${type}</td><td class="p-3 font-medium">${breed}</td>
@@ -1679,12 +1686,31 @@
             let url = `https://wa.me/${mobile}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         }
-
-        // Save Bill Terms Handler
-        function saveBillTerms() {
+            // Save Bill Terms Handler
+            function saveBillTerms() {
             let terms = document.getElementById('billTermsText').value;
             localStorage.setItem('shri_khatu_terms', terms);
             alert('Bill terms and conditions saved successfully!');
+        }
+
+            // 👉 Yeh wala 4 number ka function yahan paste kar do
+            function updateCattleDashboardDisplay() {
+            let cowCount = 0;
+            let buffCount = 0;
+
+            cattlePurchaseRecords.forEach(item => {
+                if (item.breed.includes('cow')) {
+                    cowCount++;
+                } else if (item.breed.includes('buffalo') || item.breed.includes('buff')) {
+                    buffCount++;
+                }
+            });
+
+            let totalCattle = cowCount + buffCount;
+            let cattleBox = document.getElementById('total-cattle-count');
+            if(cattleBox) {
+                cattleBox.innerHTML = `${totalCattle} <span class="text-xs font-normal">(Cows: ${cowCount}, Buff: ${buffCount})</span>`;
+            }
         }
     </script>
 </body>
