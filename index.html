@@ -62,11 +62,6 @@
             border: 1px solid rgba(255, 255, 255, 0.9);
             box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12), 0 8px 12px -6px rgba(0, 0, 0, 0.08);
         }
-        .card-gradient-1 { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #fff; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
-        .card-gradient-2 { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
-        .card-gradient-3 { background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); color: #fff; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3); }
-        .card-gradient-4 { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
-        .card-gradient-5 { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); color: #fff; box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
     </style>
 </head>
 <body class="font-sans flex h-screen overflow-hidden">
@@ -156,70 +151,66 @@
                     <option value="hi">हिंदी (Hindi)</option>
                 </select>
             </div>
-            
-        </header><main class="p-6 space-y-6 flex-1">
+        </header>
+
+        <main class="p-6 space-y-6 flex-1">
            
-    <!-- Dashboard Home Tab & Counting Cards Section -->
-    <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px;">
-    
-        <!-- Total Cattle Count Box -->
-        <div class="card blue-card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
-            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
-            <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-        </div>
+            <!-- Dashboard Home Tab & Counting Cards Section -->
+            <div id="tab-home" class="tab-content space-y-6">
+                <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    
+                    <!-- Total Cattle Count Box -->
+                    <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
+                        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                    </div>
 
-        <!-- Total Investment Box -->
-        <div class="card green-card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
-            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Investment</div>
-            <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-        </div>
+                    <!-- Total Investment Box -->
+                    <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Investment</div>
+                        <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                    </div>
 
-        <!-- Total Milk Production Box -->
-        <div class="card orange-card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
-            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Milk Production</div>
-            <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-        </div>
+                    <!-- Total Milk Production Box -->
+                    <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Milk Production</div>
+                        <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                    </div>
 
-        <!-- Monthly Revenue Box -->
-        <div class="card red-card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
-            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Monthly Revenue</div>
-            <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-        </div>
+                    <!-- Monthly Revenue Box -->
+                    <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Monthly Revenue</div>
+                        <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                    </div>
 
-        <!-- Total Pending Amount Box -->
-        <div class="card purple-card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
-            <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
-            <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
-        </div>
+                    <!-- Total Pending Amount Box -->
+                    <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
+                        <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">Loading...</div>
+                    </div>
 
-    </div> 
-    <!-- Counting Cards Section End -->
-           
-    <!-- Charts Section Container (Desktop par side-by-side, Mobile par ek ke niche ek) -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- Cattle Ratio Breakdown Chart Card -->
-        <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                    <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
-                </h3>
-                <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
-            </div>
-            <div class="relative w-full flex justify-center items-center py-2">
-                <div class="w-[300px] h-[300px]">
-                    <canvas id="cattleChart"></canvas>
-                </div>
-            </div>
-        </div>
+                </div> 
+                
+                <!-- Charts Section Container -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Cattle Ratio Breakdown Chart Card -->
+                    <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
+                            </h3>
+                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
+                        </div>
+                        <div class="relative w-full flex justify-center items-center py-2">
+                            <div class="w-[300px] h-[300px]">
+                                <canvas id="cattleChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Yahan aapka dusra chart (Bulk Milk Sales) aa jayega -->
-
-    </div>
-
-</main>
-
-                    <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <!-- Bulk Milk Sales & Trend Chart Card -->
+                    <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
                                 <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend
@@ -230,6 +221,7 @@
                             <canvas id="milkChart" height="155"></canvas>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -884,11 +876,9 @@
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
-        // Load persisted data from localStorage or initialize empty
         let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
         let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
 
-        // Live Dashboard Dynamic Stats loaded from localStorage if available
         let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
             cows: 14,
             buffaloes: 10,
@@ -897,7 +887,6 @@
             monthlyRevenue: 247500
         };
 
-        // Directory to store customer/party mobile numbers dynamically
         let customerDirectory = {
             "Rahul Sharma": "9876543210",
             "Amit Verma": "9123456789",
@@ -983,10 +972,10 @@
 
         function updateDashboardBoxes() {
             let totalCows = liveStats.cows + liveStats.buffaloes;
-            document.getElementById('dashCattleCount').innerHTML = `${totalCows} <span class="text-xs font-normal">(Cows: ${liveStats.cows}, Buff: ${liveStats.buffaloes})</span>`;
-            document.getElementById('dashInvestment').innerText = `₹ ${liveStats.totalInvestment.toLocaleString('en-IN')}`;
-            document.getElementById('dashMilkProd').innerText = `${liveStats.totalMilkLitres.toLocaleString('en-IN')} Liters`;
-            document.getElementById('dashRevenue').innerText = `+ ₹ ${liveStats.monthlyRevenue.toLocaleString('en-IN')}`;
+            document.getElementById('total-cattle-count').innerHTML = `${totalCows} <span class="text-xs font-normal">(Cows: ${liveStats.cows}, Buff: ${liveStats.buffaloes})</span>`;
+            document.getElementById('total-investment').innerText = `₹ ${liveStats.totalInvestment.toLocaleString('en-IN')}`;
+            document.getElementById('total-milk').innerText = `${liveStats.totalMilkLitres.toLocaleString('en-IN')} Liters`;
+            document.getElementById('monthly-revenue').innerText = `+ ₹ ${liveStats.monthlyRevenue.toLocaleString('en-IN')}`;
             updatePendingStats();
         }
 
@@ -1439,7 +1428,8 @@
 
         function updatePendingStats() {
             let totalPending = pendingRecords.reduce((sum, item) => sum + (parseFloat(item.amount) || 0), 0);
-            document.getElementById('dashPendingAmount').innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
+            let pendingAmtEl = document.getElementById('pending-amount');
+            if(pendingAmtEl) pendingAmtEl.innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
         }
 
         function renderPendingCustomers() {
@@ -1606,50 +1596,12 @@
             let url = `https://wa.me/${mobile}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         }
-function saveBillTerms() {
-        let terms = document.getElementById('billTermsText').value;
-        localStorage.setItem('shri_khatu_terms', terms);
-        alert('Bill terms and conditions saved successfully!');
-    }
-</script>
 
-<script>
-async function loadLiveDashboardData() {
-    const sheetApiUrl = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
-
-    try {
-        let response = await fetch(sheetApiUrl);
-        let data = await response.json();
-
-        // 1. Total Cattle Count
-        let cattleEl = document.getElementById('total-cattle-count');
-        if(cattleEl) cattleEl.innerText = `${data.totalCattle || 0} (Cows: ${data.cows || 0}, Buff: ${data.buff || 0})`;
-
-        // 2. Total Investment
-        let invEl = document.getElementById('total-investment');
-        if(invEl) invEl.innerText = `₹ ${data.totalInvestment || 0}`;
-
-        // 3. Total Milk Production
-        let milkEl = document.getElementById('total-milk');
-        if(milkEl) milkEl.innerText = `${data.totalMilk || 0} Liters`;
-
-        // 4. Monthly Revenue
-        let revEl = document.getElementById('monthly-revenue');
-        if(revEl) revEl.innerText = `+ ₹ ${data.monthlyRevenue || 0}`;
-
-        // 5. Total Pending Amount
-        let pendEl = document.getElementById('pending-amount');
-        if(pendEl) pendEl.innerText = `₹ ${data.pendingAmount || 0}`;
-
-    } catch (error) {
-        console.error("Data load karne me error aaya:", error);
-    }
-}
-
-// Yahan window.onload ko overwrite karne ki bajaye event listener use kiya hai taaki purana layout safe rahe
-window.addEventListener('load', function() {
-    loadLiveDashboardData();
-});
-</script>
+        function saveBillTerms() {
+            let terms = document.getElementById('billTermsText').value;
+            localStorage.setItem('shri_khatu_terms', terms);
+            alert('Bill terms and conditions saved successfully!');
+        }
+    </script>
 </body>
 </html>
