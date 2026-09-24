@@ -188,10 +188,10 @@
                 <!-- Top Statistics Counting Cards Grid -->
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
-                    <!-- Total Cattle Count Box (Updated with ID and dynamic layout) -->
+                    <!-- Total Cattle Count Box -->
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
-                    <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count (Purchase)</div>
-                    <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count (Purchase)</div>
+                        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
                     <!-- Total Investment Box -->
@@ -216,6 +216,24 @@
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
                         <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
+                    </div>
+
+                    <!-- NEW: Daily Expenses Box with Date-to-Date Filter -->
+                    <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white; grid-column: span 1 / span 1;">
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-calculator mr-1"></i> Daily Expenses (Custom Range)</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-2 text-xs">
+                            <div>
+                                <label class="block opacity-80">From:</label>
+                                <input type="date" id="dashExpStart" onchange="calculateFilteredExpenses()" class="w-full bg-white/20 border border-white/30 rounded px-1.5 py-1 text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block opacity-80">To:</label>
+                                <input type="date" id="dashExpEnd" onchange="calculateFilteredExpenses()" class="w-full bg-white/20 border border-white/30 rounded px-1.5 py-1 text-white focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="card-value mt-2" id="filtered-expense-display" style="font-size: 19px; font-weight: bold;">₹ 0</div>
                     </div>
 
                 </div> 
@@ -966,10 +984,20 @@
         let milkChartInstance = null;
 
         window.onload = function() {
+            // Set default date range for Daily Expenses (Current Month start and today)
+            let today = new Date();
+            let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            
+            let startInput = document.getElementById('dashExpStart');
+            let endInput = document.getElementById('dashExpEnd');
+            if(startInput) startInput.valueAsDate = firstDay;
+            if(endInput) endInput.valueAsDate = today;
+
             initCharts();
             updateDashboardBoxes();
             restoreSavedTables();
             updateCattleDashboardDisplay();
+            calculateFilteredExpenses();
         };
         
         // Persist application data to browser localStorage
@@ -983,10 +1011,20 @@
         function restoreSavedTables() {
             updatePendingStats();
             
-            // Restore Ledger History Table agar data pehle se stored hai
-            let ledgerTbody = document.getElementById('ledgerTableBody');
-            if(masterLedgerHistory.length > 0 && ledgerTbody.innerHTML.includes('Please search')) {
-                // Table populated dynamically on search
+            // Restore Expense Table if data exists in ledger
+            let expTbody = document.getElementById('expenseTableBody');
+            if(expTbody) {
+                let expenseRecords = masterLedgerHistory.filter(r => r.module === 'Farm_Expense' || r.module === 'Other_Products');
+                if(expenseRecords.length > 0) {
+                    expTbody.innerHTML = '';
+                    expenseRecords.forEach(rec => {
+                        let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                            <td class="p-3">${rec.date}</td><td class="p-3 font-semibold text-blue-600">${rec.name}</td>
+                            <td class="p-3">${rec.details}</td><td class="p-3 text-red-600 font-bold">- ₹ ${rec.amount.toLocaleString('en-IN')}</td>
+                        </tr>`;
+                        expTbody.insertAdjacentHTML('afterbegin', row);
+                    });
+                }
             }
         }
 
@@ -1039,6 +1077,7 @@
                 cattleChartInstance.update();
             }
             updateDashboardBoxes();
+            calculateFilteredExpenses();
             persistAppData();
         }
 
@@ -1049,6 +1088,35 @@
             document.getElementById('total-milk').innerText = `${liveStats.totalMilkLitres.toLocaleString('en-IN')} Liters`;
             document.getElementById('monthly-revenue').innerText = `+ ₹ ${liveStats.monthlyRevenue.toLocaleString('en-IN')}`;
             updatePendingStats();
+        }
+
+        // Calculate Filtered Daily Expenses between Start Date and End Date
+        function calculateFilteredExpenses() {
+            let startDateStr = document.getElementById('dashExpStart').value;
+            let endDateStr = document.getElementById('dashExpEnd').value;
+            let displayElem = document.getElementById('filtered-expense-display');
+
+            if(!startDateStr || !endDateStr) {
+                displayElem.innerText = "₹ 0";
+                return;
+            }
+
+            let startDate = new Date(startDateStr);
+            let endDate = new Date(endDateStr);
+
+            // Filter masterLedgerHistory for Farm Expenses and Other Product Purchases (excluding Cattle Deals)
+            let totalExp = 0;
+            masterLedgerHistory.forEach(rec => {
+                // Only consider expenses or product purchases, exclude cattle purchase/deal and revenue modules
+                if(rec.date && (rec.module === 'Farm_Expense' || rec.module === 'Other_Products')) {
+                    let recDate = new Date(rec.date);
+                    if(recDate >= startDate && recDate <= endDate) {
+                        totalExp += parseFloat(rec.amount) || 0;
+                    }
+                }
+            });
+
+            displayElem.innerText = `₹ ${totalExp.toLocaleString('en-IN')}`;
         }
 
         // Language translation handler
@@ -1470,6 +1538,12 @@
                 pendingRecords.push(recordObj);
             }
 
+            // If product purchase, also count as operational expense (excluding from livestock investment if required, or included in operational expenses)
+            if(type === 'Purchase') {
+                liveStats.totalInvestment += calculatedProductTotalAmt;
+            }
+
+            updateChartsAndBoxes();
             updatePendingStats();
             sendDataToGoogleSheet(recordObj);
             alert('Product record successfully saved and synced!');
@@ -1497,13 +1571,12 @@
             if(tbody.innerHTML.includes('No expense records added yet')) tbody.innerHTML = '';
 
             let newRow = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
-                <td class="p-3">${date}</td><td class="p-3 text-blue-600 font-bold">${category}</td>
+                <td class="p-3">${date}</td><td class="p-3 font-semibold text-blue-600">${category}</td>
                 <td class="p-3">${desc}</td><td class="p-3 text-red-600 font-bold">- ₹ ${amount.toLocaleString('en-IN')}</td>
             </tr>`;
             tbody.insertAdjacentHTML('afterbegin', newRow);
 
             liveStats.totalInvestment += amount;
-            updateChartsAndBoxes();
 
             let recordObj = {
                 date: date,
@@ -1516,6 +1589,7 @@
             };
             masterLedgerHistory.push(recordObj);
 
+            updateChartsAndBoxes();
             sendDataToGoogleSheet(recordObj);
             alert('Expense recorded successfully!');
         }
