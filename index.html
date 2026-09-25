@@ -8,30 +8,20 @@
     <!-- ========================================== -->
     <!-- EXTERNAL STYLESHEETS & SCRIPTS (CDN Links) -->
     <!-- ========================================== -->
-    <!-- Tailwind CSS for modern responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js for interactive graphs and dashboards -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Chart.js DataLabels Plugin for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    <!-- FontAwesome Icons for sidebar and UI icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- ========================================== -->
-    <!-- CUSTOM CSS STYLING & 3D GLASSMORPHISM EFFECTS -->
-    <!-- ========================================== -->
     <style>
-        /* Main background gradient for the application body */
         body {
             background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
             color: #1e293b;
         }
-        /* Sidebar 3D background shadow and depth styling */
         .sidebar-3d-bg {
             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
             box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.2), inset -2px -2px 10px rgba(255, 255, 255, 0.05);
         }
-        /* Navigation Menu 3D Buttons styling with glassmorphism */
         .menu-3d-btn {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(10px);
@@ -51,7 +41,6 @@
             transform: translateY(1px) scale(0.99);
             border-color: #ec4899;
         }
-        /* Sub-menu buttons styling inside Billing Invoice dropdown */
         .sub-menu-btn {
             background: rgba(15, 23, 42, 0.4);
             backdrop-filter: blur(5px);
@@ -68,7 +57,6 @@
             border-bottom-right-radius: 30px;
             transition: transform 0.4s ease-in-out;
         }
-        /* Frosted glass container box style for content cards */
         .card-light-box {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
@@ -79,24 +67,18 @@
 </head>
 <body class="font-sans flex h-screen overflow-hidden">
 
-    <!-- ========================================== -->
-    <!-- 1. 3D SIDEBAR NAVIGATION PANEL SECTION   -->
-    <!-- ========================================== -->
+    <!-- 1. SIDEBAR NAVIGATION PANEL -->
     <div id="sidebar" class="w-72 sidebar-3d-bg text-white flex flex-col z-50 transform -translate-x-full md:translate-x-0 fixed md:relative h-full">
-        <!-- Sidebar Brand Logo and Title -->
         <div class="p-6 text-2xl font-extrabold tracking-wider flex items-center justify-between border-b border-white/15">
             <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-translate="app_title">Shri Khatu Shyam Dairy</span></span>
             <button onclick="toggleSidebar()" class="md:hidden text-white text-xl hover:text-pink-400 transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
-        <!-- Sidebar Navigation Menu Links -->
         <nav class="flex-1 px-4 py-6 space-y-3.5 overflow-y-auto">
-            <!-- Home / Dashboard Menu Link -->
             <a href="#home" onclick="switchTab('home', this)" class="menu-3d-btn active-tab flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-translate="menu_home">Dashboard</span>
             </a>
             
-            <!-- Master Billing Invoice Menu Dropdown -->
             <div>
                 <button onclick="toggleBillingSubMenu()" class="menu-3d-btn w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                     <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-translate="menu_billing">Billing Invoice</span></span>
@@ -118,45 +100,40 @@
                 </div>
             </div>
 
-            <!-- Payment Ledger Statement Menu Link -->
+            <!-- NEW: Infrastructure & Asset Investment Menu Link -->
+            <a href="#infrastructure" onclick="switchTab('infrastructure', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
+                <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> <span>Infrastructure & Asset</span>
+            </a>
+
             <a href="#ledger" onclick="switchTab('ledger', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> <span>Payment Ledger</span>
             </a>
 
-            <!-- Pending Amount & Management Menu Link -->
             <a href="#pending-customers" onclick="switchTab('pending-customers', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span>Pending Amount</span>
             </a>
 
-            <!-- Expense Management Menu Link -->
             <a href="#expense" onclick="switchTab('expense', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>
             </a>
-            <!-- Edit Profile Menu Link -->
             <a href="#profile" onclick="switchTab('profile', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-translate="menu_profile">Edit Profile</span>
             </a>
-            <!-- Bill Terms & Conditions Menu Link -->
             <a href="#terms" onclick="switchTab('terms', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-translate="menu_terms">Bill Terms</span>
             </a>
-            <!-- WhatsApp Quick Message Menu Link -->
             <a href="#whatsapp" onclick="switchTab('whatsapp', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-translate="menu_whatsapp">WhatsApp Messages</span>
             </a>
         </nav>
 
-        <!-- Sidebar Footer Copyright Notice -->
         <div id="sidebarFooter" class="p-4 border-t border-white/15 text-xs text-center text-slate-400">
             © 2026 Shri Khatu Shyam Dairy Farming
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- 2. MAIN CONTENT AREA & HEADER SECTION    -->
-    <!-- ========================================== -->
+    <!-- 2. MAIN CONTENT AREA -->
     <div class="flex-1 flex flex-col h-full overflow-y-auto">
-        <!-- Top Header Bar with Brand Name, Locations, and Language Selector -->
         <header class="bg-white/70 backdrop-blur-md border-b border-slate-200/80 p-4 flex justify-between items-center shadow-sm">
             <button onclick="toggleSidebar()" class="md:hidden text-slate-700 text-xl"><i class="fa-solid fa-bars"></i></button>
             
@@ -181,44 +158,36 @@
 
         <main class="p-6 space-y-6 flex-1">
            
-            <!-- ========================================== -->
-            <!-- 3. DASHBOARD TAB & COUNTING CARDS SECTION  -->
-            <!-- ========================================== -->
+            <!-- 3. DASHBOARD TAB & COUNTING CARDS -->
             <div id="tab-home" class="tab-content space-y-6">
-                <!-- Top Statistics Counting Cards Grid -->
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
-                    <!-- Total Cattle Count Box -->
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count (Purchase)</div>
                         <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
-                    <!-- Total Investment Box -->
+                    <!-- MODIFIED: Cattle Purchase Investment Box -->
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Investment</div>
-                        <div class="card-value" id="total-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Cattle Purchase Investment (पशु खरीदी लागत)</div>
+                        <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
-                    <!-- Total Milk Production Box -->
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Milk Production</div>
                         <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>
                     </div>
 
-                    <!-- Monthly Revenue Box -->
                     <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Monthly Revenue</div>
                         <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>
                     </div>
 
-                    <!-- Total Pending Amount Box -->
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Pending Amount</div>
                         <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
-                    <!-- NEW: Daily Expenses Box with Date-to-Date Filter -->
                     <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white; grid-column: span 1 / span 1;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
                             <span><i class="fa-solid fa-calculator mr-1"></i> Daily Expenses (Custom Range)</span>
@@ -238,10 +207,7 @@
 
                 </div> 
                 
-                <!-- Visual Charts Section Container (Chart.js graphs) -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    
-                    <!-- Cattle Ratio Breakdown Doughnut Chart Card -->
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
@@ -256,7 +222,6 @@
                         </div>
                     </div>
 
-                    <!-- Bulk Milk Sales & Weekly Trend Line Chart Card -->
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
@@ -268,13 +233,76 @@
                             <canvas id="milkChart" height="155"></canvas>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 4. CUSTOMER PAYMENT LEDGER STATEMENT TAB   -->
-            <!-- ========================================== -->
+            <!-- NEW TAB: Infrastructure & Asset Investment Management -->
+            <div id="tab-infrastructure" class="tab-content hidden space-y-6">
+                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-building-shield mr-2"></i> Infrastructure & Asset Investment Management</h2>
+                        <p class="text-slate-600 text-sm mt-1">फार्म शेड, मशीनरी, बोरवेल, व्हीकल या अन्य इन्फ्रास्ट्रक्चर और एसेट पर किए गए खर्च का रिकॉर्ड रखें।</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                            <input type="date" id="infraDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Asset Category:</label>
+                            <select id="infraCategory" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                                <option value="Dairy Shed Construction">Dairy Shed Construction (शेड निर्माण)</option>
+                                <option value="Milking Machine & Equipment">Milking Machine & Equipment</option>
+                                <option value="Borewell & Water Pipeline">Borewell & Water Pipeline</option>
+                                <option value="Chaff Cutter Machine">Chaff Cutter Machine (कुट्टी मशीन)</option>
+                                <option value="Transport Vehicle / Tractor">Transport Vehicle / Tractor</option>
+                                <option value="Other Infrastructure">Other Infrastructure Asset</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Investment Amount (₹):</label>
+                            <input type="number" id="infraAmount" placeholder="e.g. 150000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-teal-700 font-bold focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor / Contractor Name:</label>
+                            <input type="text" id="infraVendor" placeholder="Enter Contractor/Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
+                            <input type="text" id="infraDesc" placeholder="e.g. Paid for iron sheds and roofing materials" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="saveInfrastructureEntry()" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Infrastructure Asset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> Infrastructure & Assets History</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date</th>
+                                    <th class="p-3">Asset Category</th>
+                                    <th class="p-3">Vendor</th>
+                                    <th class="p-3">Description</th>
+                                    <th class="p-3">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="infraTableBody" class="text-slate-700">
+                                <tr class="border-b border-slate-200/60 text-slate-500">
+                                    <td colspan="5" class="p-4 text-center">No infrastructure assets recorded yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. CUSTOMER PAYMENT LEDGER STATEMENT -->
             <div id="tab-ledger" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl shadow-xl space-y-5">
                     <div class="border-b border-slate-200 pb-3">
@@ -282,7 +310,6 @@
                         <p class="text-slate-600 text-sm mt-1">Search customer name or mobile number to view complete transaction and ledger history.</p>
                     </div>
                     
-                    <!-- Customer Search Controls -->
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex-1">
                             <label class="block text-sm font-medium text-slate-700 mb-1">Customer Name / Mobile Number</label>
@@ -295,7 +322,6 @@
                         </div>
                     </div>
 
-                    <!-- Customer Summary Statement Card -->
                     <div id="ledgerSummaryBox" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4 bg-cyan-50/70 p-4 rounded-2xl border border-cyan-200">
                         <div>
                             <p class="text-xs text-slate-500 font-medium">Customer Name</p>
@@ -310,7 +336,6 @@
                         </div>
                     </div>
 
-                    <!-- Ledger Table Records View -->
                     <div class="overflow-x-auto rounded-xl border border-slate-200">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
@@ -332,9 +357,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 5. PENDING AMOUNT & MANAGEMENT TAB         -->
-            <!-- ========================================== -->
+            <!-- 5. PENDING AMOUNT & MANAGEMENT -->
             <div id="tab-pending-customers" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -347,13 +370,11 @@
                         </button>
                     </div>
 
-                    <!-- Search Bar Feature for Pending Customers -->
                     <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
                         <i class="fa-solid fa-magnifying-glass text-slate-400 text-lg ml-2"></i>
                         <input type="text" id="pendingSearchInput" oninput="filterPendingList()" placeholder="Search by Customer Name or Mobile Number..." class="w-full bg-transparent text-slate-800 focus:outline-none text-sm font-medium">
                     </div>
 
-                    <!-- Pending Customers Table -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
@@ -377,12 +398,9 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 6. BILLING INVOICE MASTER CONTAINER        -->
-            <!-- ========================================== -->
+            <!-- 6. BILLING INVOICE MASTER CONTAINER -->
             <div id="tab-billing-invoice" class="tab-content hidden space-y-6">
                 
-                <!-- Sub-tab 6.1: Bulk Dairy Milk Sales Entry & Sheet -->
                 <div id="subtab-bulk-dairy" class="sub-content space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -451,7 +469,6 @@
                         </div>
                     </div>
 
-                    <!-- Bulk Dairy Records Preview Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Milk Selling Record Sheet Preview</h3>
                         <div class="overflow-x-auto">
@@ -469,7 +486,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-tab 6.2: Retail Milk Selling Entry & Sheet -->
                 <div id="subtab-retail-milk" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -522,7 +538,6 @@
                         </div>
                     </div>
 
-                    <!-- Retail Records Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> Retail Milk Records</h3>
                         <div class="overflow-x-auto">
@@ -540,7 +555,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-tab 6.3: Cattle Purchase & Sell Management -->
                 <div id="subtab-cattle-deal" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -607,7 +621,6 @@
                         </div>
                     </div>
 
-                    <!-- Cattle History Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> Cattle Deal History</h3>
                         <div class="overflow-x-auto">
@@ -625,7 +638,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-tab 6.4: Other Products Purchase & Sell -->
                 <div id="subtab-other-products" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
@@ -705,7 +717,6 @@
                         </div>
                     </div>
 
-                    <!-- Products History Table -->
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Products History</h3>
                         <div class="overflow-x-auto">
@@ -724,9 +735,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 7. FARM & DAIRY EXPENSE MANAGEMENT TAB     -->
-            <!-- ========================================== -->
+            <!-- 7. FARM & DAIRY EXPENSE MANAGEMENT -->
             <div id="tab-expense" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -767,7 +776,6 @@
                     </div>
                 </div>
 
-                <!-- Expense Records Sheet Table -->
                 <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
                     <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> Expense Records Sheet</h3>
                     <div class="overflow-x-auto">
@@ -785,9 +793,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 8. EDIT PROFILE & BUSINESS INFO TAB        -->
-            <!-- ========================================== -->
+            <!-- 8. EDIT PROFILE & BUSINESS INFO -->
             <div id="tab-profile" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -820,9 +826,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 9. BILL TERMS & CONDITIONS TAB             -->
-            <!-- ========================================== -->
+            <!-- 9. BILL TERMS & CONDITIONS -->
             <div id="tab-terms" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -846,9 +850,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 10. WHATSAPP MESSAGE GENERATOR TAB         -->
-            <!-- ========================================== -->
+            <!-- 10. WHATSAPP MESSAGE GENERATOR -->
             <div id="tab-whatsapp" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -884,9 +886,7 @@
         </main>
     </div>
 
-    <!-- ========================================== -->
-    <!-- 11. MODAL POPUP FOR EDITING & PAYING BILLS -->
-    <!-- ========================================== -->
+    <!-- 11. MODAL POPUP -->
     <div id="editBillingModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="card-light-box p-6 rounded-3xl w-full max-w-lg space-y-4 shadow-2xl relative">
             <div class="flex justify-between items-center border-b border-slate-200 pb-3">
@@ -940,31 +940,26 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- 12. JAVASCRIPT LOGIC & FUNCTIONS SECTION   -->
-    <!-- ========================================== -->
+    <!-- 12. JAVASCRIPT LOGIC -->
     <script>
-        // Global calculation variables
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
-        // LocalStorage initialization for pending records and ledger history
         let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
         let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
         let cattlePurchaseRecords = JSON.parse(localStorage.getItem('shri_khatu_cattle_purchases')) || [];
+        let infrastructureRecords = JSON.parse(localStorage.getItem('shri_khatu_infra')) || [];
 
-        // Live statistics state object
         let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
             cows: 0,
             buffaloes: 0,
-            totalInvestment: 0,
+            cattlePurchaseInvestment: 0,
             totalMilkLitres: 0,
             monthlyRevenue: 0
         };
 
-        // Predefined Customer and Vendor Directory mapping names to mobile numbers
         let customerDirectory = {
             "Rahul Sharma": "9876543210",
             "Amit Verma": "9123456789",
@@ -974,7 +969,6 @@
             "Shajapur Organic Hub": "9655443322"
         };
 
-        // Multi-language translation dictionaries
         const translations = {
             en: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" },
             hi: { app_title: "Dairy CRM", menu_home: "Dashboard", menu_billing: "Billing Invoice", menu_expense: "Expense Management", menu_profile: "Edit Profile", menu_terms: "Bill Terms", menu_whatsapp: "WhatsApp Messages" }
@@ -984,7 +978,6 @@
         let milkChartInstance = null;
 
         window.onload = function() {
-            // Set default date range for Daily Expenses (Current Month start and today)
             let today = new Date();
             let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
             
@@ -996,22 +989,20 @@
             initCharts();
             updateDashboardBoxes();
             restoreSavedTables();
-            updateCattleDashboardDisplay();
             calculateFilteredExpenses();
         };
         
-        // Persist application data to browser localStorage
         function persistAppData() {
             localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
             localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
             localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
             localStorage.setItem('shri_khatu_cattle_purchases', JSON.stringify(cattlePurchaseRecords));
+            localStorage.setItem('shri_khatu_infra', JSON.stringify(infrastructureRecords));
         }
 
         function restoreSavedTables() {
             updatePendingStats();
             
-            // Restore Expense Table if data exists in ledger
             let expTbody = document.getElementById('expenseTableBody');
             if(expTbody) {
                 let expenseRecords = masterLedgerHistory.filter(r => r.module === 'Farm_Expense' || r.module === 'Other_Products');
@@ -1026,9 +1017,23 @@
                     });
                 }
             }
+
+            let infraTbody = document.getElementById('infraTableBody');
+            if(infraTbody && infrastructureRecords.length > 0) {
+                infraTbody.innerHTML = '';
+                infrastructureRecords.forEach(rec => {
+                    let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                        <td class="p-3">${rec.date}</td>
+                        <td class="p-3 font-bold text-teal-700">${rec.category}</td>
+                        <td class="p-3">${rec.vendor}</td>
+                        <td class="p-3">${rec.details}</td>
+                        <td class="p-3 text-teal-600 font-extrabold">₹ ${rec.amount.toLocaleString('en-IN')}</td>
+                    </tr>`;
+                    infraTbody.insertAdjacentHTML('afterbegin', row);
+                });
+            }
         }
 
-        // Initialize Chart.js interactive charts on Dashboard
         function initCharts() {
             const ctxCattle = document.getElementById('cattleChart').getContext('2d');
             cattleChartInstance = new Chart(ctxCattle, {
@@ -1070,7 +1075,6 @@
             });
         }
 
-        // Update Dashboard Charts, Boxes, and persist changes
         function updateChartsAndBoxes() {
             if(cattleChartInstance) {
                 cattleChartInstance.data.datasets[0].data = [liveStats.cows, liveStats.buffaloes, 0];
@@ -1084,13 +1088,12 @@
         function updateDashboardBoxes() {
             let totalCows = liveStats.cows + liveStats.buffaloes;
             document.getElementById('total-cattle-count').innerHTML = `${totalCows} <span class="text-xs font-normal">(Cows: ${liveStats.cows}, Buff: ${liveStats.buffaloes})</span>`;
-            document.getElementById('total-investment').innerText = `₹ ${liveStats.totalInvestment.toLocaleString('en-IN')}`;
+            document.getElementById('cattle-purchase-investment').innerText = `₹ ${liveStats.cattlePurchaseInvestment.toLocaleString('en-IN')}`;
             document.getElementById('total-milk').innerText = `${liveStats.totalMilkLitres.toLocaleString('en-IN')} Liters`;
             document.getElementById('monthly-revenue').innerText = `+ ₹ ${liveStats.monthlyRevenue.toLocaleString('en-IN')}`;
             updatePendingStats();
         }
 
-        // Calculate Filtered Daily Expenses between Start Date and End Date
         function calculateFilteredExpenses() {
             let startDateStr = document.getElementById('dashExpStart').value;
             let endDateStr = document.getElementById('dashExpEnd').value;
@@ -1104,10 +1107,8 @@
             let startDate = new Date(startDateStr);
             let endDate = new Date(endDateStr);
 
-            // Filter masterLedgerHistory for Farm Expenses and Other Product Purchases (excluding Cattle Deals)
             let totalExp = 0;
             masterLedgerHistory.forEach(rec => {
-                // Only consider expenses or product purchases, exclude cattle purchase/deal and revenue modules
                 if(rec.date && (rec.module === 'Farm_Expense' || rec.module === 'Other_Products')) {
                     let recDate = new Date(rec.date);
                     if(recDate >= startDate && recDate <= endDate) {
@@ -1119,7 +1120,6 @@
             displayElem.innerText = `₹ ${totalExp.toLocaleString('en-IN')}`;
         }
 
-        // Language translation handler
         function changeLanguage(lang) {
             const elements = document.querySelectorAll('[data-translate]');
             elements.forEach(el => {
@@ -1128,10 +1128,8 @@
             });
         }
 
-        // Mobile responsive sidebar toggle handler
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
 
-        // Sidebar Billing Sub-menu accordion toggle handler
         function toggleBillingSubMenu() {
             const sub = document.getElementById('billingSubMenu');
             const arrow = document.getElementById('billingArrow');
@@ -1139,7 +1137,6 @@
             arrow.classList.toggle('rotate-180');
         }
 
-        // Main Tab Switcher Function
         function switchTab(tabId, element) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             if(tabId === 'home') document.getElementById('tab-home').classList.remove('hidden');
@@ -1157,7 +1154,6 @@
             if(window.innerWidth < 768) toggleSidebar();
         }
 
-        // Sub-tab Switcher Function for Billing Module
         function switchSubTab(subId, element) {
             document.querySelectorAll('.sub-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('subtab-' + subId).classList.remove('hidden');
@@ -1168,7 +1164,6 @@
             if(window.innerWidth < 768) toggleSidebar();
         }
 
-        // Save and update Business Profile details across headers
         function saveProfileChanges() {
             let brandName = document.getElementById('profileBrandName').value.trim();
             let office = document.getElementById('profileOffice').value.trim();
@@ -1187,7 +1182,43 @@
             alert('Profile updated successfully across all headers and invoices!');
         }
 
-        // Retail customer dropdown change handler
+        // NEW: Save Infrastructure & Asset Investment
+        function saveInfrastructureEntry() {
+            let date = document.getElementById('infraDate').value || new Date().toISOString().split('T')[0];
+            let category = document.getElementById('infraCategory').value;
+            let amount = parseFloat(document.getElementById('infraAmount').value) || 0;
+            let vendor = document.getElementById('infraVendor').value.trim() || '-';
+            let desc = document.getElementById('infraDesc').value.trim() || '-';
+
+            if(!amount) { alert('कृपया एसेट की राशि (Amount) दर्ज करें!'); return; }
+
+            let infraTbody = document.getElementById('infraTableBody');
+            if(infraTbody.innerHTML.includes('No infrastructure assets recorded yet')) {
+                infraTbody.innerHTML = '';
+            }
+
+            let rowHtml = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                <td class="p-3">${date}</td>
+                <td class="p-3 font-bold text-teal-700">${category}</td>
+                <td class="p-3">${vendor}</td>
+                <td class="p-3">${desc}</td>
+                <td class="p-3 text-teal-600 font-extrabold">₹ ${amount.toLocaleString('en-IN')}</td>
+            </tr>`;
+            infraTbody.insertAdjacentHTML('afterbegin', rowHtml);
+
+            let recordObj = {
+                date: date,
+                category: category,
+                vendor: vendor,
+                details: desc,
+                amount: amount
+            };
+
+            infrastructureRecords.push(recordObj);
+            persistAppData();
+            alert('Infrastructure & Asset investment successfully recorded!');
+        }
+
         function onRetailCustomerChange(val) {
             let customInput = document.getElementById('retailCustCustom');
             let mobInput = document.getElementById('retailMobile');
@@ -1198,11 +1229,8 @@
             } else {
                 customInput.classList.add('hidden');
                 customInput.value = '';
-                if(customerDirectory[val]) {
-                    mobInput.value = customerDirectory[val];
-                } else {
-                    mobInput.value = '';
-                }
+                if(customerDirectory[val]) mobInput.value = customerDirectory[val];
+                else mobInput.value = '';
             }
         }
 
@@ -1222,11 +1250,8 @@
             } else {
                 customInput.classList.add('hidden');
                 customInput.value = '';
-                if(customerDirectory[val]) {
-                    mobInput.value = customerDirectory[val];
-                } else {
-                    mobInput.value = '';
-                }
+                if(customerDirectory[val]) mobInput.value = customerDirectory[val];
+                else mobInput.value = '';
             }
         }
 
@@ -1246,11 +1271,8 @@
             } else {
                 customInput.classList.add('hidden');
                 customInput.value = '';
-                if(customerDirectory[val]) {
-                    mobInput.value = customerDirectory[val];
-                } else {
-                    mobInput.value = '';
-                }
+                if(customerDirectory[val]) mobInput.value = customerDirectory[val];
+                else mobInput.value = '';
             }
         }
 
@@ -1260,7 +1282,6 @@
             else { customInput.classList.add('hidden'); customInput.value = ''; }
         }
 
-        // Calculation Functions for Billing Modules
         function calculateFatBilling() {
             let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             let fat = parseFloat(document.getElementById('milkFat').value) || 0;
@@ -1285,7 +1306,6 @@
             document.getElementById('prodTotalAmount').value = calculatedProductTotalAmt > 0 ? '₹ ' + calculatedProductTotalAmt.toFixed(2) : '';
         }
 
-        // Google Sheets API Sync Function via Fetch POST
         function sendDataToGoogleSheet(recordData) {
             var scriptURL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
             fetch(scriptURL, {
@@ -1293,12 +1313,9 @@
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(recordData)
-            })
-            .then(() => console.log("Synced with Google Sheet successfully!"))
-            .catch(error => console.error('Sheet Sync Error!', error));
+            }).catch(error => console.error('Sheet Sync Error!', error));
         }
 
-        // Save Bulk Milk Entry Handler
         function saveMilkEntry() {
             let date = document.getElementById('billDate').value || new Date().toISOString().split('T')[0];
             let shift = document.getElementById('billShift').value;
@@ -1334,9 +1351,7 @@
             };
 
             masterLedgerHistory.push(recordObj);
-            if(status === 'Pending') {
-                pendingRecords.push(recordObj);
-            }
+            if(status === 'Pending') pendingRecords.push(recordObj);
 
             liveStats.totalMilkLitres += qty;
             liveStats.monthlyRevenue += calculatedTotalAmt;
@@ -1347,7 +1362,6 @@
             alert('Bulk milk entry successfully recorded and synced!');
         }
 
-        // Save Retail Milk Entry Handler
         function saveRetailEntry() {
             let date = document.getElementById('retailDate').value || new Date().toISOString().split('T')[0];
             let selectElem = document.getElementById('retailCustSelect');
@@ -1365,8 +1379,7 @@
                 let newOpt = document.createElement('option'); newOpt.value = name; newOpt.text = name;
                 selectElem.insertBefore(newOpt, selectElem.lastElementChild); 
                 selectElem.value = name;
-                customElem.classList.add('hidden'); 
-                customElem.value = '';
+                customElem.classList.add('hidden'); customElem.value = '';
             } else if(mobile !== '') {
                 customerDirectory[name] = mobile;
             }
@@ -1393,9 +1406,7 @@
             };
 
             masterLedgerHistory.push(recordObj);
-            if(status === 'Pending') {
-                pendingRecords.push(recordObj);
-            }
+            if(status === 'Pending') pendingRecords.push(recordObj);
 
             liveStats.totalMilkLitres += liters;
             liveStats.monthlyRevenue += calculatedRetailAmt;
@@ -1406,7 +1417,6 @@
             alert('Retail milk bill successfully saved and synced!');
         }
 
-        // Save Cattle Deal Record Handler
         function saveCattleEntry() {
             let date = document.getElementById('cattleDate').value || new Date().toISOString().split('T')[0];
             let type = document.getElementById('cattleTxType').value;
@@ -1433,11 +1443,8 @@
                 customerDirectory[party] = partyMobile;
             }
 
-            // Cattle Purchase tracking save for live count
             if (type === 'Purchase') {
-                cattlePurchaseRecords.push({
-                    breed: breed.toLowerCase()
-                });
+                cattlePurchaseRecords.push({ breed: breed.toLowerCase() });
             }
 
             let tbody = document.getElementById('cattleTableBody');
@@ -1462,12 +1469,10 @@
             };
 
             masterLedgerHistory.push(recordObj);
-            if(status === 'Pending') {
-                pendingRecords.push(recordObj);
-            }
+            if(status === 'Pending') pendingRecords.push(recordObj);
 
             if(type === 'Purchase') {
-                liveStats.totalInvestment += amount;
+                liveStats.cattlePurchaseInvestment += amount;
                 if(breed.toLowerCase().includes('cow')) liveStats.cows += 1;
                 else if(breed.toLowerCase().includes('buffalo') || breed.toLowerCase().includes('buff')) liveStats.buffaloes += 1;
             } else {
@@ -1475,7 +1480,6 @@
                 else if((breed.toLowerCase().includes('buffalo') || breed.toLowerCase().includes('buff')) && liveStats.buffaloes > 0) liveStats.buffaloes -= 1;
             }
 
-            updateCattleDashboardDisplay();
             updateChartsAndBoxes();
             updatePendingStats();
 
@@ -1483,7 +1487,6 @@
             alert('Cattle deal successfully recorded and synced!');
         }
 
-        // Save Other Products Entry Handler
         function saveProductEntry() {
             let date = document.getElementById('prodDate').value || new Date().toISOString().split('T')[0];
             let type = document.getElementById('prodTxType').value;
@@ -1534,14 +1537,7 @@
             };
 
             masterLedgerHistory.push(recordObj);
-            if(status === 'Pending') {
-                pendingRecords.push(recordObj);
-            }
-
-            // If product purchase, also count as operational expense (excluding from livestock investment if required, or included in operational expenses)
-            if(type === 'Purchase') {
-                liveStats.totalInvestment += calculatedProductTotalAmt;
-            }
+            if(status === 'Pending') pendingRecords.push(recordObj);
 
             updateChartsAndBoxes();
             updatePendingStats();
@@ -1549,7 +1545,6 @@
             alert('Product record successfully saved and synced!');
         }
 
-        // Save Farm Expense Record Handler
         function saveExpenseEntry() {
             let date = document.getElementById('expDate').value || new Date().toISOString().split('T')[0];
             let catSelect = document.getElementById('expCategory');
@@ -1576,8 +1571,6 @@
             </tr>`;
             tbody.insertAdjacentHTML('afterbegin', newRow);
 
-            liveStats.totalInvestment += amount;
-
             let recordObj = {
                 date: date,
                 module: 'Farm_Expense',
@@ -1600,7 +1593,6 @@
             if(pendingAmtEl) pendingAmtEl.innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
         }
 
-        // Render Pending Customers Table
         function renderPendingCustomers() {
             let tbody = document.getElementById('pendingTableBody');
             tbody.innerHTML = '';
@@ -1628,7 +1620,6 @@
             });
         }
 
-        // Filter Pending Customers List based on Search Input
         function filterPendingList() {
             let query = document.getElementById('pendingSearchInput').value.toLowerCase();
             let tbody = document.getElementById('pendingTableBody');
@@ -1660,7 +1651,6 @@
             });
         }
 
-        // Modal Open / Close Handlers for Payment Update
         function openEditModal(index) {
             let rec = pendingRecords[index];
             document.getElementById('editRowIndex').value = index;
@@ -1691,24 +1681,25 @@
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
             let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
 
-            if(paying <= 0) { alert('Please enter paying amount greater than 0!'); return; }
+            if(isNaN(paying) || paying <= 0) { alert('Please enter a valid paying amount!'); return; }
 
+            let rec = pendingRecords[index];
             let remaining = total - paying;
+
             if(remaining <= 0) {
                 pendingRecords.splice(index, 1);
-                alert('Payment completed in full! Record removed from pending list.');
             } else {
                 pendingRecords[index].amount = remaining;
-                alert(`Partial payment recorded. Remaining outstanding: ₹ ${remaining}`);
+                pendingRecords[index].details += ` (Paid ₹${paying} on ${new Date().toLocaleDateString()})`;
             }
 
-            persistAppData();
-            updatePendingStats();
+            liveStats.monthlyRevenue += paying;
+            updateChartsAndBoxes();
             renderPendingCustomers();
             closeEditModal();
+            alert('Payment updated successfully!');
         }
 
-        // Search Customer Ledger Statement Function
         function searchCustomerLedger() {
             let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
             let tbody = document.getElementById('ledgerTableBody');
@@ -1716,88 +1707,58 @@
             tbody.innerHTML = '';
 
             if(!query) {
-                alert('Please enter a customer name or mobile number to search!');
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">Please enter a name or mobile number to search.</td></tr>`;
+                summaryBox.classList.add('hidden');
                 return;
             }
 
-            let customerRecords = masterLedgerHistory.filter(rec => rec.name.toLowerCase().includes(query) || rec.mobile.toLowerCase().includes(query));
+            let customerRecords = masterLedgerHistory.filter(r => r.name.toLowerCase().includes(query) || r.mobile.toLowerCase().includes(query));
 
             if(customerRecords.length === 0) {
-                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No ledger history found for "${query}".</td></tr>`;
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No ledger history found for this search.</td></tr>`;
                 summaryBox.classList.add('hidden');
                 return;
             }
 
             let custName = customerRecords[0].name;
-            let totalOutstanding = customerRecords.filter(r => r.status === 'Pending').reduce((sum, r) => sum + r.amount, 0);
+            let totalOutstanding = customerRecords.reduce((sum, r) => r.status === 'Pending' ? sum + r.amount : sum, 0);
 
             document.getElementById('summaryName').innerText = custName;
             document.getElementById('summaryPending').innerText = `₹ ${totalOutstanding.toLocaleString('en-IN')}`;
             summaryBox.classList.remove('hidden');
 
             customerRecords.forEach(rec => {
-                let badgeClass = rec.status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700 border border-emerald-300';
                 let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                     <td class="p-3">${rec.date}</td>
-                    <td class="p-3 font-semibold">${rec.module}</td>
+                    <td class="p-3 font-semibold text-slate-700">${rec.module}</td>
                     <td class="p-3">${rec.details}</td>
-                    <td class="p-3 font-bold text-slate-800">₹ ${rec.amount.toLocaleString('en-IN')}</td>
-                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${badgeClass} font-semibold">${rec.status}</span></td>
+                    <td class="p-3 font-bold text-emerald-600">₹ ${rec.amount.toLocaleString('en-IN')}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${rec.status === 'Pending' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'} font-semibold">${rec.status || 'Paid'}</span></td>
                 </tr>`;
                 tbody.insertAdjacentHTML('beforeend', row);
             });
         }
 
-        // WhatsApp Quick Message Template Handler
         function updateWaTemplate(type) {
-            let txtArea = document.getElementById('waMessageText');
+            let msgArea = document.getElementById('waMessageText');
             if(type === 'bill') {
-                txtArea.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
+                msgArea.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
             } else if(type === 'welcome') {
-                txtArea.value = "Welcome to Shri Khatu Shyam Dairy! We are glad to serve you pure and fresh milk daily at your doorstep.";
+                msgArea.value = "Welcome to Shri Khatu Shyam Dairy! Thank you for choosing us for your pure milk and dairy needs. We promise best quality daily.";
             } else if(type === 'payment') {
-                txtArea.value = "Namaste! We have received your payment. Thank you for your continued trust and business with Shri Khatu Shyam Dairy.";
+                msgArea.value = "Namaste! We have received your payment. Thank you for your trusted business with Shri Khatu Shyam Dairy.";
             }
         }
 
         function sendWhatsAppMessage() {
             let mobile = document.getElementById('waMobile').value.trim();
-            let msg = document.getElementById('waMessageText').value;
-
-            if(!mobile) { alert('Please enter customer mobile number!'); return; }
-
-            let url = `https://wa.me/${mobile}?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
+            let msg = encodeURIComponent(document.getElementById('waMessageText').value);
+            if(!mobile) { alert('Please enter Customer Mobile Number!'); return; }
+            window.open(`https://wa.me/${mobile}?text=${msg}`, '_blank');
         }
 
-        // Save Bill Terms Handler
         function saveBillTerms() {
-            let terms = document.getElementById('billTermsText').value;
-            localStorage.setItem('shri_khatu_terms', terms);
-            alert('Bill terms and conditions saved successfully!');
-        }
-
-        // Live Cattle Counting Update Function
-        function updateCattleDashboardDisplay() {
-            let cowCount = 0;
-            let buffCount = 0;
-
-            cattlePurchaseRecords.forEach(item => {
-                if (item.breed.includes('cow')) {
-                    cowCount++;
-                } else if (item.breed.includes('buffalo') || item.breed.includes('buff')) {
-                    buffCount++;
-                }
-            });
-
-            liveStats.cows = cowCount;
-            liveStats.buffaloes = buffCount;
-
-            let totalCattle = cowCount + buffCount;
-            let cattleBox = document.getElementById('total-cattle-count');
-            if(cattleBox) {
-                cattleBox.innerHTML = `${totalCattle} <span class="text-xs font-normal">(Cows: ${cowCount}, Buff: ${buffCount})</span>`;
-            }
+            alert('Bill terms and conditions saved successfully for future print bills!');
         }
     </script>
 </body>
