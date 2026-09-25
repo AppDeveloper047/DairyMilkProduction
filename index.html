@@ -1632,8 +1632,8 @@
                 return;
             }
 
-            filtered.forEach((rec) => {
-                let originalIdx = pendingRecords.indexOf(rec);
+            filtered.forEach((rec, idx) => {
+                let originalIndex = pendingRecords.indexOf(rec);
                 let rowHtml = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                     <td class="p-3">${rec.date}</td>
                     <td class="p-3 font-semibold text-slate-600">${rec.module}</td>
@@ -1642,7 +1642,7 @@
                     <td class="p-3">${rec.details}</td>
                     <td class="p-3 text-red-600 font-extrabold">₹ ${rec.amount.toLocaleString('en-IN')}</td>
                     <td class="p-3">
-                        <button onclick="openEditModal(${originalIdx})" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow hover:opacity-90 transition">
+                        <button onclick="openEditModal(${originalIndex})" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow hover:opacity-90 transition">
                             <i class="fa-solid fa-pen-to-square mr-1"></i> Edit / Pay
                         </button>
                     </td>
@@ -1655,7 +1655,7 @@
             let rec = pendingRecords[index];
             document.getElementById('editRowIndex').value = index;
             document.getElementById('modalCustName').value = rec.name;
-            document.getElementById('modalPayDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('modalPayDate').valueAsDate = new Date();
             document.getElementById('modalModule').value = rec.module;
             document.getElementById('modalDetails').value = rec.details;
             document.getElementById('modalTotalAmt').value = rec.amount;
@@ -1681,7 +1681,7 @@
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
             let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
 
-            if(isNaN(paying) || paying <= 0) { alert('Please enter a valid paying amount!'); return; }
+            if(paying <= 0) { alert('Please enter a valid paying amount!'); return; }
 
             let rec = pendingRecords[index];
             let remaining = total - paying;
@@ -1689,76 +1689,76 @@
             if(remaining <= 0) {
                 pendingRecords.splice(index, 1);
             } else {
-                pendingRecords[index].amount = remaining;
-                pendingRecords[index].details += ` (Paid ₹${paying} on ${new Date().toLocaleDateString()})`;
+                rec.amount = remaining;
             }
 
             liveStats.monthlyRevenue += paying;
             updateChartsAndBoxes();
             renderPendingCustomers();
             closeEditModal();
-            alert('Payment updated successfully!');
+            alert('Payment successfully updated and recorded!');
         }
 
         function searchCustomerLedger() {
             let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
             let tbody = document.getElementById('ledgerTableBody');
             let summaryBox = document.getElementById('ledgerSummaryBox');
-            tbody.innerHTML = '';
+            
+            if(!query) { alert('Please enter a Customer Name or Mobile Number to search!'); return; }
 
-            if(!query) {
-                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">Please enter a name or mobile number to search.</td></tr>`;
+            let matches = masterLedgerHistory.filter(r => r.name.toLowerCase().includes(query) || r.mobile.toLowerCase().includes(query));
+
+            if(matches.length === 0) {
                 summaryBox.classList.add('hidden');
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No ledger records found for "${query}".</td></tr>`;
                 return;
             }
 
-            let customerRecords = masterLedgerHistory.filter(r => r.name.toLowerCase().includes(query) || r.mobile.toLowerCase().includes(query));
-
-            if(customerRecords.length === 0) {
-                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No ledger history found for this search.</td></tr>`;
-                summaryBox.classList.add('hidden');
-                return;
-            }
-
-            let custName = customerRecords[0].name;
-            let totalOutstanding = customerRecords.reduce((sum, r) => r.status === 'Pending' ? sum + r.amount : sum, 0);
+            let custName = matches[0].name;
+            let totalOutstanding = matches.reduce((sum, item) => item.status === 'Pending' ? sum + item.amount : sum, 0);
 
             document.getElementById('summaryName').innerText = custName;
-            document.getElementById('summaryPending').innerText = `₹ ${totalOutstanding.toLocaleString('en-IN')}`;
+            document.getElementById('summaryPending').innerText = '₹ ' + totalOutstanding.toLocaleString('en-IN');
             summaryBox.classList.remove('hidden');
 
-            customerRecords.forEach(rec => {
+            tbody.innerHTML = '';
+            matches.forEach(rec => {
                 let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                     <td class="p-3">${rec.date}</td>
-                    <td class="p-3 font-semibold text-slate-700">${rec.module}</td>
+                    <td class="p-3 font-semibold text-cyan-700">${rec.module}</td>
                     <td class="p-3">${rec.details}</td>
-                    <td class="p-3 font-bold text-emerald-600">₹ ${rec.amount.toLocaleString('en-IN')}</td>
-                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${rec.status === 'Pending' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'} font-semibold">${rec.status || 'Paid'}</span></td>
+                    <td class="p-3 font-bold text-slate-800">₹ ${rec.amount.toLocaleString('en-IN')}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${rec.status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700 border border-emerald-300'} font-semibold">${rec.status || 'Paid'}</span></td>
                 </tr>`;
                 tbody.insertAdjacentHTML('beforeend', row);
             });
         }
 
         function updateWaTemplate(type) {
-            let msgArea = document.getElementById('waMessageText');
+            let msgBox = document.getElementById('waMessageText');
             if(type === 'bill') {
-                msgArea.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
+                msgBox.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
             } else if(type === 'welcome') {
-                msgArea.value = "Welcome to Shri Khatu Shyam Dairy! Thank you for choosing us for your pure milk and dairy needs. We promise best quality daily.";
+                msgBox.value = "Welcome to Shri Khatu Shyam Dairy family! Thank you for choosing our pure and fresh milk products. For any query, contact us.";
             } else if(type === 'payment') {
-                msgArea.value = "Namaste! We have received your payment. Thank you for your trusted business with Shri Khatu Shyam Dairy.";
+                msgBox.value = "Namaste! We have successfully received your payment. Thank you for your continued trust and business with Shri Khatu Shyam Dairy.";
             }
         }
 
         function sendWhatsAppMessage() {
             let mobile = document.getElementById('waMobile').value.trim();
-            let msg = encodeURIComponent(document.getElementById('waMessageText').value);
-            if(!mobile) { alert('Please enter Customer Mobile Number!'); return; }
-            window.open(`https://wa.me/${mobile}?text=${msg}`, '_blank');
+            let message = encodeURIComponent(document.getElementById('waMessageText').value.trim());
+
+            if(!mobile) { alert('Please enter a WhatsApp mobile number!'); return; }
+
+            let whatsappUrl = `https://wa.me/${mobile}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         function saveBillTerms() {
-            alert('Bill terms and conditions saved successfully for future print bills!');
+            let terms = document.getElementById('billTermsText').value;
+            localStorage.setItem('shri_khatu_terms', terms);
+            alert('Bill terms and conditions successfully updated!');
         }
     </script>
 </body>
