@@ -138,13 +138,13 @@
             <button onclick="toggleSidebar()" class="md:hidden text-slate-700 text-xl"><i class="fa-solid fa-bars"></i></button>
             
             <div class="flex-1 flex flex-col items-center justify-center text-center px-4">
-                <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Tiwari & Son's Dairy Farm</h1>
+                <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Shri Khatu Shyam Dairy</h1>
                 <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600 mt-0.5 font-medium">
-                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Tingajpur, Madhya Pradesh</span>
+                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Shajapur, Madhya Pradesh</span>
                     <span>|</span>
-                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Tingajpur, Madhya Pradesh</span>
+                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Indore, Madhya Pradesh</span>
                     <span>|</span>
-                    <span id="headerContactNum"><i class="fa-solid fa-phone text-emerald-500 mr-1"></i>+91 9752266047</span>
+                    <span id="headerContactNum"><i class="fa-solid fa-phone text-emerald-500 mr-1"></i>+91 9876543210</span>
                 </div>
             </div>
             
@@ -223,7 +223,7 @@
                         <div class="card-value mt-2" id="filtered-expense-display" style="font-size: 19px; font-weight: bold;">₹ 0</div>
                     </div>
 
-                    <!-- NEW: Net Profit Box (Auto Calculation: Revenue - Expenses) -->
+                    <!-- NET PROFIT BOX -->
                     <div class="card" style="background: linear-gradient(135deg, #059669, #047857); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
                             <span><i class="fa-solid fa-chart-line mr-1"></i> Net Profit</span>
@@ -1162,7 +1162,7 @@
             if(netProfitElem) {
                 netProfitElem.innerText = `₹ ${netProfit.toLocaleString('en-IN')}`;
                 if(netProfit < 0) {
-                    netProfitElem.style.color = "#fca5a5"; // Light red if negative
+                    netProfitElem.style.color = "#fca5a5"; 
                 } else {
                     netProfitElem.style.color = "#ffffff";
                 }
@@ -1626,16 +1626,9 @@
             let catCustom = document.getElementById('expCategoryCustom');
             let category = catSelect.value === 'NEW' ? catCustom.value.trim() : catSelect.value;
             let amount = parseFloat(document.getElementById('expAmount').value) || 0;
-            let desc = document.getElementById('expDesc').value || '-';
+            let desc = document.getElementById('expDesc').value.trim() || '-';
 
-            if(!amount || !category) { alert('Please fill Category and Amount properly!'); return; }
-
-            if(catSelect.value === 'NEW' && category !== '') {
-                let newOpt = document.createElement('option'); newOpt.value = category; newOpt.text = category;
-                catSelect.insertBefore(newOpt, catSelect.lastElementChild);
-                catSelect.value = category;
-                catCustom.classList.add('hidden'); catCustom.value = '';
-            }
+            if(!amount || !category) { alert('Please enter Category and Amount properly!'); return; }
 
             let tbody = document.getElementById('expenseTableBody');
             if(tbody.innerHTML.includes('No expense records added yet')) tbody.innerHTML = '';
@@ -1655,17 +1648,172 @@
                 amount: parseFloat(amount),
                 status: 'Paid'
             };
-            masterLedgerHistory.push(recordObj);
 
+            masterLedgerHistory.push(recordObj);
             updateChartsAndBoxes();
+            restoreSavedTables();
             sendDataToGoogleSheet(recordObj);
-            alert('Expense recorded successfully!');
+            alert('Expense entry successfully recorded and synced!');
         }
 
         function updatePendingStats() {
-            let totalPending = pendingRecords.reduce((sum, item) => sum + (parseFloat(item.amount) || 0), 0);
-            let pendingAmtEl = document.getElementById('pending-amount');
-            if(pendingAmtEl) pendingAmtEl.innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
+            let totalPending = 0;
+            pendingRecords.forEach(r => {
+                if(r.status === 'Pending') totalPending += (parseFloat(r.amount) || 0);
+            });
+            let pendingElem = document.getElementById('pending-amount');
+            if(pendingElem) pendingElem.innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
+        }
+
+        function renderPendingCustomers() {
+            let tbody = document.getElementById('pendingTableBody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+
+            let activePending = pendingRecords.filter(r => r.status === 'Pending');
+            if(activePending.length === 0) {
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No pending customers found.</td></tr>`;
+                return;
+            }
+
+            activePending.forEach((rec, index) => {
+                let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                    <td class="p-3">${rec.date}</td>
+                    <td class="p-3 font-semibold text-purple-700">${rec.module}</td>
+                    <td class="p-3 font-bold text-slate-800">${rec.name}</td>
+                    <td class="p-3">${rec.mobile || '-'}</td>
+                    <td class="p-3">${rec.details}</td>
+                    <td class="p-3 text-red-600 font-extrabold">₹ ${parseFloat(rec.amount).toLocaleString('en-IN')}</td>
+                    <td class="p-3">
+                        <button onclick="openEditModal(${index})" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold hover:opacity-90 shadow transition">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit/Pay
+                        </button>
+                    </td>
+                </tr>`;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        function filterPendingList() {
+            let query = document.getElementById('pendingSearchInput').value.toLowerCase();
+            let rows = document.querySelectorAll('#pendingTableBody tr');
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                if(text.includes(query) || query === '') row.style.display = '';
+                else row.style.display = 'none';
+            });
+        }
+
+        function openEditModal(index) {
+            let activePending = pendingRecords.filter(r => r.status === 'Pending');
+            let rec = activePending[index];
+            if(!rec) return;
+
+            document.getElementById('editRowIndex').value = index;
+            document.getElementById('modalCustName').value = rec.name;
+            document.getElementById('modalPayDate').valueAsDate = new Date();
+            document.getElementById('modalModule').value = rec.module;
+            document.getElementById('modalDetails').value = rec.details;
+            document.getElementById('modalTotalAmt').value = rec.amount;
+            document.getElementById('modalPayingAmt').value = '';
+            document.getElementById('modalRemainingAmt').value = '₹ ' + rec.amount;
+
+            document.getElementById('editBillingModal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editBillingModal').classList.add('hidden');
+        }
+
+        function autoCalculateOutstanding() {
+            let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
+            let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
+            let rem = total - paying;
+            if(rem < 0) rem = 0;
+            document.getElementById('modalRemainingAmt').value = '₹ ' + rem.toFixed(2);
+        }
+
+        function saveModalPaymentUpdate() {
+            let index = parseInt(document.getElementById('editRowIndex').value);
+            let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
+            let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
+
+            let activePending = pendingRecords.filter(r => r.status === 'Pending');
+            let rec = activePending[index];
+            if(!rec) return;
+
+            let rem = total - paying;
+            if(rem <= 0) {
+                rec.status = 'Paid';
+                // Remove from active pending array
+                let masterIdx = pendingRecords.indexOf(rec);
+                if(masterIdx > -1) pendingRecords.splice(masterIdx, 1);
+            } else {
+                rec.amount = rem;
+            }
+
+            liveStats.monthlyRevenue += paying;
+            updateChartsAndBoxes();
+            renderPendingCustomers();
+            closeEditModal();
+            alert('Payment successfully updated!');
+        }
+
+        function searchCustomerLedger() {
+            let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
+            let tbody = document.getElementById('ledgerTableBody');
+            let summaryBox = document.getElementById('ledgerSummaryBox');
+            if(!query) { alert('Please enter a name or mobile number to search!'); return; }
+
+            let matchedRecords = masterLedgerHistory.filter(r => r.name.toLowerCase().includes(query) || r.mobile.toLowerCase().includes(query));
+            tbody.innerHTML = '';
+
+            if(matchedRecords.length === 0) {
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No transaction records found for this customer.</td></tr>`;
+                summaryBox.classList.add('hidden');
+                return;
+            }
+
+            let custName = matchedRecords[0].name;
+            let totalPendingBal = 0;
+
+            matchedRecords.forEach(rec => {
+                if(rec.status === 'Pending') totalPendingBal += (parseFloat(rec.amount) || 0);
+                let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                    <td class="p-3">${rec.date}</td>
+                    <td class="p-3 font-semibold text-cyan-700">${rec.module}</td>
+                    <td class="p-3">${rec.details}</td>
+                    <td class="p-3 font-bold text-slate-800">₹ ${parseFloat(rec.amount).toLocaleString('en-IN')}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${rec.status === 'Pending' ? 'bg-red-100 text-red-700 font-semibold' : 'bg-emerald-100 text-emerald-700 font-semibold'}">${rec.status || 'Paid'}</span></td>
+                </tr>`;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+
+            document.getElementById('summaryName').innerText = custName;
+            document.getElementById('summaryPending').innerText = `₹ ${totalPendingBal.toLocaleString('en-IN')}`;
+            summaryBox.classList.remove('hidden');
+        }
+
+        function saveBillTerms() {
+            alert('Bill terms & conditions successfully updated!');
+        }
+
+        function updateWaTemplate(type) {
+            let msgBox = document.getElementById('waMessageText');
+            if(type === 'bill') {
+                msgBox.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
+            } else if(type === 'welcome') {
+                msgBox.value = "Welcome to Shri Khatu Shyam Dairy! We are delighted to serve you pure and fresh farm milk daily.";
+            } else if(type === 'payment') {
+                msgBox.value = "Thank you! We have successfully received your payment. Your ledger balance has been updated.";
+            }
+        }
+
+        function sendWhatsAppMessage() {
+            let mob = document.getElementById('waMobile').value.trim();
+            let msg = encodeURIComponent(document.getElementById('waMessageText').value);
+            if(!mob) { alert('Please enter customer mobile number!'); return; }
+            window.open(`https://wa.me/${mob}?text=${msg}`, '_blank');
         }
     </script>
 </body>
