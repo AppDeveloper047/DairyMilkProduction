@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <!-- NEW: Infrastructure & Asset Investment Menu Link -->
+            <!-- Infrastructure & Asset Investment Menu Link -->
             <a href="#infrastructure" onclick="switchTab('infrastructure', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> <span>Infrastructure & Asset</span>
             </a>
@@ -167,10 +167,28 @@
                         <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
-                    <!-- MODIFIED: Cattle Purchase Investment Box -->
+                    <!-- Cattle Purchase Investment Box -->
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Cattle Purchase Investment (पशु खरीदी लागत)</div>
                         <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
+                    </div>
+
+                    <!-- NEW: Infrastructure & Asset Investment Box with Date-to-Date Filter -->
+                    <div class="card" style="background: linear-gradient(135deg, #0d9488, #0f766e); padding: 15px; border-radius: 12px; color: white;">
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-building-shield mr-1"></i> Infrastructure & Asset</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-2 text-xs">
+                            <div>
+                                <label class="block opacity-80">From:</label>
+                                <input type="date" id="infraExpStart" onchange="calculateFilteredInfrastructure()" class="w-full bg-white/20 border border-white/30 rounded px-1.5 py-1 text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block opacity-80">To:</label>
+                                <input type="date" id="infraExpEnd" onchange="calculateFilteredInfrastructure()" class="w-full bg-white/20 border border-white/30 rounded px-1.5 py-1 text-white focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="card-value mt-2" id="filtered-infra-display" style="font-size: 19px; font-weight: bold;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
@@ -188,7 +206,7 @@
                         <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
-                    <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white; grid-column: span 1 / span 1;">
+                    <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
                             <span><i class="fa-solid fa-calculator mr-1"></i> Daily Expenses (Custom Range)</span>
                         </div>
@@ -236,7 +254,7 @@
                 </div>
             </div>
 
-            <!-- NEW TAB: Infrastructure & Asset Investment Management -->
+            <!-- Infrastructure & Asset Investment Management Tab -->
             <div id="tab-infrastructure" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
@@ -986,10 +1004,16 @@
             if(startInput) startInput.valueAsDate = firstDay;
             if(endInput) endInput.valueAsDate = today;
 
+            let infraStart = document.getElementById('infraExpStart');
+            let infraEnd = document.getElementById('infraExpEnd');
+            if(infraStart) infraStart.valueAsDate = firstDay;
+            if(infraEnd) infraEnd.valueAsDate = today;
+
             initCharts();
             updateDashboardBoxes();
             restoreSavedTables();
             calculateFilteredExpenses();
+            calculateFilteredInfrastructure();
         };
         
         function persistAppData() {
@@ -1082,6 +1106,7 @@
             }
             updateDashboardBoxes();
             calculateFilteredExpenses();
+            calculateFilteredInfrastructure();
             persistAppData();
         }
 
@@ -1118,6 +1143,32 @@
             });
 
             displayElem.innerText = `₹ ${totalExp.toLocaleString('en-IN')}`;
+        }
+
+        function calculateFilteredInfrastructure() {
+            let startDateStr = document.getElementById('infraExpStart').value;
+            let endDateStr = document.getElementById('infraExpEnd').value;
+            let displayElem = document.getElementById('filtered-infra-display');
+
+            if(!startDateStr || !endDateStr) {
+                displayElem.innerText = "₹ 0";
+                return;
+            }
+
+            let startDate = new Date(startDateStr);
+            let endDate = new Date(endDateStr);
+
+            let totalInfra = 0;
+            infrastructureRecords.forEach(rec => {
+                if(rec.date) {
+                    let recDate = new Date(rec.date);
+                    if(recDate >= startDate && recDate <= endDate) {
+                        totalInfra += parseFloat(rec.amount) || 0;
+                    }
+                }
+            });
+
+            displayElem.innerText = `₹ ${totalInfra.toLocaleString('en-IN')}`;
         }
 
         function changeLanguage(lang) {
@@ -1182,7 +1233,6 @@
             alert('Profile updated successfully across all headers and invoices!');
         }
 
-        // NEW: Save Infrastructure & Asset Investment
         function saveInfrastructureEntry() {
             let date = document.getElementById('infraDate').value || new Date().toISOString().split('T')[0];
             let category = document.getElementById('infraCategory').value;
@@ -1215,6 +1265,7 @@
             };
 
             infrastructureRecords.push(recordObj);
+            calculateFilteredInfrastructure();
             persistAppData();
             alert('Infrastructure & Asset investment successfully recorded!');
         }
@@ -1660,7 +1711,7 @@
             document.getElementById('modalDetails').value = rec.details;
             document.getElementById('modalTotalAmt').value = rec.amount;
             document.getElementById('modalPayingAmt').value = '';
-            document.getElementById('modalRemainingAmt').value = '₹ ' + rec.amount;
+            document.getElementById('modalRemainingAmt').value = '₹ ' + rec.amount.toLocaleString('en-IN');
             document.getElementById('editBillingModal').classList.remove('hidden');
         }
 
@@ -1673,7 +1724,7 @@
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
             let remaining = total - paying;
             if(remaining < 0) remaining = 0;
-            document.getElementById('modalRemainingAmt').value = '₹ ' + remaining.toFixed(2);
+            document.getElementById('modalRemainingAmt').value = '₹ ' + remaining.toLocaleString('en-IN');
         }
 
         function saveModalPaymentUpdate() {
@@ -1681,7 +1732,7 @@
             let paying = parseFloat(document.getElementById('modalPayingAmt').value) || 0;
             let total = parseFloat(document.getElementById('modalTotalAmt').value) || 0;
 
-            if(paying <= 0) { alert('Please enter a valid paying amount!'); return; }
+            if(paying <= 0) { alert('Please enter valid paying amount!'); return; }
 
             let rec = pendingRecords[index];
             let remaining = total - paying;
@@ -1689,76 +1740,80 @@
             if(remaining <= 0) {
                 pendingRecords.splice(index, 1);
             } else {
-                rec.amount = remaining;
+                pendingRecords[index].amount = remaining;
+                pendingRecords[index].details += ` (Paid ₹${paying} on partial)`;
             }
 
-            liveStats.monthlyRevenue += paying;
-            updateChartsAndBoxes();
+            updatePendingStats();
             renderPendingCustomers();
             closeEditModal();
-            alert('Payment successfully updated and recorded!');
+            persistAppData();
+            alert('Payment successfully updated!');
         }
 
         function searchCustomerLedger() {
             let query = document.getElementById('ledgerSearchInput').value.trim().toLowerCase();
             let tbody = document.getElementById('ledgerTableBody');
             let summaryBox = document.getElementById('ledgerSummaryBox');
-            
-            if(!query) { alert('Please enter a Customer Name or Mobile Number to search!'); return; }
+            tbody.innerHTML = '';
 
-            let matches = masterLedgerHistory.filter(r => r.name.toLowerCase().includes(query) || r.mobile.toLowerCase().includes(query));
+            if(!query) {
+                summaryBox.classList.add('hidden');
+                tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">Please enter a valid search query.</td></tr>`;
+                return;
+            }
 
-            if(matches.length === 0) {
+            let filtered = masterLedgerHistory.filter(r => r.name.toLowerCase().includes(query) || r.mobile.toLowerCase().includes(query));
+
+            if(filtered.length === 0) {
                 summaryBox.classList.add('hidden');
                 tbody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="5" class="p-4 text-center">No ledger records found for "${query}".</td></tr>`;
                 return;
             }
 
-            let custName = matches[0].name;
-            let totalOutstanding = matches.reduce((sum, item) => item.status === 'Pending' ? sum + item.amount : sum, 0);
+            let customerName = filtered[0].name;
+            let totalPendingForCust = 0;
 
-            document.getElementById('summaryName').innerText = custName;
-            document.getElementById('summaryPending').innerText = '₹ ' + totalOutstanding.toLocaleString('en-IN');
-            summaryBox.classList.remove('hidden');
-
-            tbody.innerHTML = '';
-            matches.forEach(rec => {
+            filtered.forEach(rec => {
+                if(rec.status === 'Pending') totalPendingForCust += parseFloat(rec.amount) || 0;
                 let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
                     <td class="p-3">${rec.date}</td>
                     <td class="p-3 font-semibold text-cyan-700">${rec.module}</td>
                     <td class="p-3">${rec.details}</td>
-                    <td class="p-3 font-bold text-slate-800">₹ ${rec.amount.toLocaleString('en-IN')}</td>
-                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs ${rec.status === 'Pending' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-emerald-100 text-emerald-700 border border-emerald-300'} font-semibold">${rec.status || 'Paid'}</span></td>
+                    <td class="p-3 font-bold ${rec.status === 'Pending' ? 'text-red-600' : 'text-emerald-600'}">₹ ${rec.amount.toLocaleString('en-IN')}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${rec.status === 'Pending' ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'}">${rec.status || 'Paid'}</span></td>
                 </tr>`;
                 tbody.insertAdjacentHTML('beforeend', row);
             });
+
+            document.getElementById('summaryName').innerText = customerName;
+            document.getElementById('summaryPending').innerText = `₹ ${totalPendingForCust.toLocaleString('en-IN')}`;
+            summaryBox.classList.remove('hidden');
         }
 
         function updateWaTemplate(type) {
-            let msgBox = document.getElementById('waMessageText');
+            let msgArea = document.getElementById('waMessageText');
             if(type === 'bill') {
-                msgBox.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
+                msgArea.value = "Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!";
             } else if(type === 'welcome') {
-                msgBox.value = "Welcome to Shri Khatu Shyam Dairy family! Thank you for choosing our pure and fresh milk products. For any query, contact us.";
+                msgArea.value = "Welcome to Shri Khatu Shyam Dairy! Thank you for choosing our farm-fresh pure milk and dairy products. We promise best quality always.";
             } else if(type === 'payment') {
-                msgBox.value = "Namaste! We have successfully received your payment. Thank you for your continued trust and business with Shri Khatu Shyam Dairy.";
+                msgArea.value = "Thank you! We have successfully received your payment. Your ledger balance has been updated.";
             }
         }
 
         function sendWhatsAppMessage() {
-            let mobile = document.getElementById('waMobile').value.trim();
-            let message = encodeURIComponent(document.getElementById('waMessageText').value.trim());
-
-            if(!mobile) { alert('Please enter a WhatsApp mobile number!'); return; }
-
-            let whatsappUrl = `https://wa.me/${mobile}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
+            let mob = document.getElementById('waMobile').value.trim();
+            let text = document.getElementById('waMessageText').value.trim();
+            if(!mob) { alert('Please enter customer mobile number!'); return; }
+            let url = `https://wa.me/${mob}?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
         }
 
         function saveBillTerms() {
             let terms = document.getElementById('billTermsText').value;
             localStorage.setItem('shri_khatu_terms', terms);
-            alert('Bill terms and conditions successfully updated!');
+            alert('Bill terms and conditions saved successfully!');
         }
     </script>
 </body>
