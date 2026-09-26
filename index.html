@@ -161,7 +161,6 @@
             <!-- 3. DASHBOARD TAB & GLOBAL DATE-TO-DATE FILTER BAR -->
             <div id="tab-home" class="tab-content space-y-6">
                 
-                <!-- Global Date-to-Date Filter Control Box Added at the Very Top -->
                 <div class="card-light-box p-4 rounded-2xl shadow-md bg-white/90 flex flex-col md:flex-row items-center justify-between gap-4 border border-pink-200">
                     <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
                         <i class="fa-solid fa-calendar-days text-pink-600 text-lg"></i>
@@ -184,19 +183,16 @@
 
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
-                    <!-- 1. Total Cattle Count (Unchanged as requested) -->
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
                         <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
-                    <!-- 2. Cattle Purchase Investment Box (Unchanged as requested) -->
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Cattle Purchase</div>
                         <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
-                    <!-- 3. Infrastructure & Asset Investment Box (Now auto-linked to Global Filter) -->
                     <div class="card" style="background: linear-gradient(135deg, #0d9488, #0f766e); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
                             <span><i class="fa-solid fa-building-shield mr-1"></i> Infrastructure & Asset</span>
@@ -204,25 +200,21 @@
                         <div class="card-value mt-4" id="filtered-infra-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
 
-                    <!-- 4. Milk Production Box (Auto-linked to Global Filter) -->
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Milk Production</div>
                         <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>
                     </div>
 
-                    <!-- 5. Revenue Box (Auto-linked to Global Filter) -->
                     <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Revenue</div>
                         <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>
                     </div>
 
-                    <!-- 6. Pending Amount Box (Unchanged as requested) -->
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title" style="font-size: 14px; opacity: 0.9;">Pending Amount</div>
                         <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
-                    <!-- 7. Expenses Box (Auto-linked to Global Filter) -->
                     <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
                             <span><i class="fa-solid fa-calculator mr-1"></i>Expenses</span>
@@ -230,7 +222,6 @@
                         <div class="card-value mt-4" id="filtered-expense-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
 
-                    <!-- 8. Net Profit Box (Auto Calculation: Revenue - Expenses based on Global Filter) -->
                     <div class="card" style="background: linear-gradient(135deg, #059669, #047857); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
                             <span><i class="fa-solid fa-chart-line mr-1"></i> Net Profit</span>
@@ -973,7 +964,7 @@
         </div>
     </div>
 
-    <!-- 12. JAVASCRIPT LOGIC WITH GLOBAL DATE FILTER INTEGRATION -->
+    <!-- 12. JAVASCRIPT LOGIC WITH AUTO-CALCULATION & SIDEBAR AUTO-HIDE FIXES -->
     <script>
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
@@ -1036,7 +1027,6 @@
             let endDate = endVal ? new Date(endVal) : new Date(8640000000000000);
             endDate.setHours(23, 59, 59, 999);
 
-            // Filter Milk Production & Revenue from Ledger
             let filteredMilkLiters = 0;
             let filteredRevenue = 0;
             let filteredExpenses = 0;
@@ -1062,7 +1052,6 @@
                 }
             });
 
-            // Update UI Boxes (Cattle Count, Cattle Purchase & Pending Amount remain untouched as requested)
             document.getElementById('total-milk').innerText = filteredMilkLiters.toFixed(1) + " Liters";
             document.getElementById('monthly-revenue').innerText = "+ ₹ " + filteredRevenue.toLocaleString('en-IN');
             document.getElementById('filtered-expense-display').innerText = "₹ " + filteredExpenses.toLocaleString('en-IN');
@@ -1170,7 +1159,7 @@
             });
         }
 
-        // Navigation helpers
+        // Navigation & Sidebar Auto-Hide Logic
         function toggleSidebar() {
             let sb = document.getElementById('sidebar');
             sb.classList.toggle('-translate-x-full');
@@ -1181,6 +1170,9 @@
             document.getElementById('tab-' + tabId).classList.remove('hidden');
             document.querySelectorAll('.menu-3d-btn').forEach(btn => btn.classList.remove('active-tab'));
             if(el) el.classList.add('active-tab');
+            
+            // Automatically close sidebar on click/selection (Fixes issue #2)
+            document.getElementById('sidebar').classList.add('-translate-x-full');
         }
 
         function toggleBillingSubMenu() {
@@ -1196,6 +1188,45 @@
             document.getElementById('subtab-' + subId).classList.remove('hidden');
             document.querySelectorAll('.sub-menu-btn').forEach(btn => btn.classList.remove('active-sub'));
             if(el) el.classList.add('active-sub');
+            
+            // Automatically close sidebar on sub-option selection (Fixes issue #2)
+            document.getElementById('sidebar').classList.add('-translate-x-full');
+        }
+
+        // ==========================================
+        // RESTORED AUTO-CALCULATION FUNCTIONS (Fixes issue #1)
+        // ==========================================
+        function calculateFatBilling() {
+            let qty = parseFloat(document.getElementById('milkQty').value) || 0;
+            let fat = parseFloat(document.getElementById('milkFat').value) || 0;
+            let fatRate = parseFloat(document.getElementById('fatRate').value) || 0;
+
+            // Standard FAT calculation logic
+            let ratePerLiter = fat * fatRate;
+            calculatedPerLiter = ratePerLiter;
+            document.getElementById('perLiterRate').value = ratePerLiter.toFixed(2);
+
+            let total = qty * ratePerLiter;
+            calculatedTotalAmt = total;
+            document.getElementById('totalAmount').value = total.toFixed(2);
+        }
+
+        function calculateRetailBilling() {
+            let liters = parseFloat(document.getElementById('retailLitermt').value) || 0;
+            let rate = parseFloat(document.getElementById('retailRate').value) || 0;
+
+            let total = liters * rate;
+            calculatedRetailAmt = total;
+            document.getElementById('retailTotalAmt').value = total.toFixed(2);
+        }
+
+        function calculateProductTotal() {
+            let qty = parseFloat(document.getElementById('prodQtyNum').value) || 0;
+            let rate = parseFloat(document.getElementById('prodRatePerUnit').value) || 0;
+
+            let total = qty * rate;
+            calculatedProductTotalAmt = total;
+            document.getElementById('prodTotalAmount').value = total.toFixed(2);
         }
 
         // Saving Infrastructure Entry
@@ -1215,8 +1246,7 @@
             alert('Infrastructure Asset saved successfully!');
         }
 
-        // Additional utility stubs required for standalone operation
-        function calculateFatBilling() {}
+        // Additional stubs
         function saveMilkEntry() {}
         function saveRetailEntry() {}
         function saveCattleEntry() {}
