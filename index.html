@@ -100,9 +100,9 @@
                 </div>
             </div>
 
-            <!-- Infrastructure & Asset Investment Menu Link -->
+            <!-- Updated Infrastructure & Asset / Demand Menu Link -->
             <a href="#infrastructure" onclick="switchTab('infrastructure', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> <span>Infrastructure & Asset</span>
+                <i class="fa-solid fa-bullhorn mr-3 text-teal-400 text-lg"></i> <span>Demand & Infrastructure</span>
             </a>
 
             <a href="#ledger" onclick="switchTab('ledger', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
@@ -195,7 +195,7 @@
 
                     <div class="card" style="background: linear-gradient(135deg, #0d9488, #0f766e); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-building-shield mr-1"></i> Infrastructure & Asset</span>
+                            <span><i class="fa-solid fa-bullhorn mr-1"></i> Demand & Infrastructure</span>
                         </div>
                         <div class="card-value mt-4" id="filtered-infra-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
@@ -260,12 +260,12 @@
                 </div>
             </div>
 
-            <!-- Infrastructure & Asset Investment Management Tab -->
+            <!-- Demand & Infrastructure Investment Management Tab -->
             <div id="tab-infrastructure" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-building-shield mr-2"></i> Infrastructure & Asset Investment Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">फार्म शेड, मशीनरी, बोरवेल, व्हीकल या अन्य इन्फ्रास्ट्रक्चर और एसेट पर किए गए खर्च का रिकॉर्ड रखें।</p>
+                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-bullhorn mr-2"></i> Demand & Infrastructure Management</h2>
+                        <p class="text-slate-600 text-sm mt-1">Grahak ki demand, farm ki requirement, aur infrastructure ya asset par kiye gaye kharche ka record yahan rakhein.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div>
@@ -273,52 +273,52 @@
                             <input type="date" id="infraDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Asset Category:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Demand / Asset Category:</label>
                             <select id="infraCategory" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                                <option value="Customer Bulk Milk Demand">Customer Bulk Milk Demand</option>
+                                <option value="Special Product Requirement">Special Product Requirement</option>
                                 <option value="Dairy Shed Construction">Dairy Shed Construction</option>
                                 <option value="Milking Machine & Equipment">Milking Machine & Equipment</option>
                                 <option value="Borewell & Water Pipeline">Borewell & Water Pipeline</option>
-                                <option value="Chaff Cutter Machine">Chaff Cutter Machine</option>
-                                <option value="Transport Vehicle / Tractor">Transport Vehicle</option>
                                 <option value="Other Infrastructure">Other Infrastructure Asset</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Investment Amount (₹):</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Estimated Amount / Value (₹):</label>
                             <input type="number" id="infraAmount" placeholder="e.g. 150000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-teal-700 font-bold focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor / Contractor Name:</label>
-                            <input type="text" id="infraVendor" placeholder="Enter Contractor/Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customer / Vendor Name:</label>
+                            <input type="text" id="infraVendor" placeholder="Enter Party/Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
-                            <input type="text" id="infraDesc" placeholder="e.g. Paid for iron sheds and roofing materials" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Demand Details / Notes:</label>
+                            <input type="text" id="infraDesc" placeholder="e.g. Special requirement for buffalo milk or shed materials" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveInfrastructureEntry()" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Infrastructure Asset
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Demand & Asset
                         </button>
                     </div>
                 </div>
 
                 <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> Infrastructure & Assets History</h3>
+                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> Demand & Infrastructure History</h3>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
                                     <th class="p-3">Date</th>
-                                    <th class="p-3">Asset Category</th>
-                                    <th class="p-3">Vendor</th>
-                                    <th class="p-3">Description</th>
+                                    <th class="p-3">Category</th>
+                                    <th class="p-3">Party / Vendor</th>
+                                    <th class="p-3">Details</th>
                                     <th class="p-3">Amount</th>
                                 </tr>
                             </thead>
                             <tbody id="infraTableBody" class="text-slate-700">
                                 <tr class="border-b border-slate-200/60 text-slate-500">
-                                    <td colspan="5" class="p-4 text-center">No infrastructure assets recorded yet.</td>
+                                    <td colspan="5" class="p-4 text-center">No demand or infrastructure records recorded yet.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1171,7 +1171,6 @@
             document.querySelectorAll('.menu-3d-btn').forEach(btn => btn.classList.remove('active-tab'));
             if(el) el.classList.add('active-tab');
             
-            // Automatically close sidebar on click/selection (Fixes issue #2)
             document.getElementById('sidebar').classList.add('-translate-x-full');
         }
 
@@ -1189,19 +1188,17 @@
             document.querySelectorAll('.sub-menu-btn').forEach(btn => btn.classList.remove('active-sub'));
             if(el) el.classList.add('active-sub');
             
-            // Automatically close sidebar on sub-option selection (Fixes issue #2)
             document.getElementById('sidebar').classList.add('-translate-x-full');
         }
 
         // ==========================================
-        // RESTORED AUTO-CALCULATION FUNCTIONS (Fixes issue #1)
+        // RESTORED AUTO-CALCULATION FUNCTIONS
         // ==========================================
         function calculateFatBilling() {
             let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             let fat = parseFloat(document.getElementById('milkFat').value) || 0;
             let fatRate = parseFloat(document.getElementById('fatRate').value) || 0;
 
-            // Standard FAT calculation logic
             let ratePerLiter = fat * fatRate;
             calculatedPerLiter = ratePerLiter;
             document.getElementById('perLiterRate').value = ratePerLiter.toFixed(2);
@@ -1229,7 +1226,7 @@
             document.getElementById('prodTotalAmount').value = total.toFixed(2);
         }
 
-        // Saving Infrastructure Entry
+        // Saving Infrastructure & Demand Entry
         function saveInfrastructureEntry() {
             let date = document.getElementById('infraDate').value || new Date().toISOString().split('T')[0];
             let category = document.getElementById('infraCategory').value;
@@ -1237,13 +1234,13 @@
             let vendor = document.getElementById('infraVendor').value || 'Self';
             let details = document.getElementById('infraDesc').value || '-';
 
-            if(amount <= 0) { alert('Please enter a valid investment amount.'); return; }
+            if(amount <= 0) { alert('Please enter a valid amount or value.'); return; }
 
             infrastructureRecords.push({ date, category, amount, vendor, details });
             persistAppData();
             restoreSavedTables();
             applyGlobalDateFilter();
-            alert('Infrastructure Asset saved successfully!');
+            alert('Demand & Infrastructure entry saved successfully!');
         }
 
         // Additional stubs
