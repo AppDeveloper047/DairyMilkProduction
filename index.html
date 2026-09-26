@@ -70,65 +70,65 @@
     <!-- 1. SIDEBAR NAVIGATION PANEL -->
     <div id="sidebar" class="w-72 sidebar-3d-bg text-white flex flex-col z-50 transform -translate-x-full md:translate-x-0 fixed md:relative h-full">
         <div class="p-6 text-2xl font-extrabold tracking-wider flex items-center justify-between border-b border-white/15">
-            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-translate="app_title">Shri Khatu Shyam Dairy</span></span>
+            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-translate="app_title">Shri Khatu Shyam Dairy</span>[span_4](start_span)[span_4](end_span)</span>
             <button onclick="toggleSidebar()" class="md:hidden text-white text-xl hover:text-pink-400 transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
         <nav class="flex-1 px-4 py-6 space-y-3.5 overflow-y-auto">
             <a href="#home" onclick="switchTab('home', this)" class="menu-3d-btn active-tab flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-translate="menu_home">Dashboard</span>
+                <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-translate="menu_home">Dashboard</span>[span_5](start_span)[span_5](end_span)
             </a>
             
             <div>
                 <button onclick="toggleBillingSubMenu()" class="menu-3d-btn w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                    <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-translate="menu_billing">Billing Invoice</span></span>
-                    <i class="fa-solid fa-chevron-down text-xs text-gray-300 transition-transform duration-300" id="billingArrow"></i>
+                    <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-translate="menu_billing">Billing Invoice</span>[span_6](start_span)[span_6](end_span)</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-300 transition-transform duration-300" id="billingArrow"></i>[span_7](start_span)[span_7](end_span)
                 </button>
                 <div id="billingSubMenu" class="hidden pl-4 pr-2 py-2 space-y-2 mt-2 bg-black/30 rounded-xl border border-white/10 backdrop-blur-md">
                     <button onclick="switchSubTab('bulk-dairy', this)" class="sub-menu-btn active-sub w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-industry mr-2 text-pink-400 text-xs"></i> Bulk Dairy Billing
+                        <i class="fa-solid fa-industry mr-2 text-pink-400 text-xs"></i> Bulk Dairy Billing[span_8](start_span)[span_8](end_span)
                     </button>
                     <button onclick="switchSubTab('retail-milk', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-store mr-2 text-purple-400 text-xs"></i> Retail Milk Selling
+                        <i class="fa-solid fa-store mr-2 text-purple-400 text-xs"></i> Retail Milk Selling[span_9](start_span)[span_9](end_span)
                     </button>
                     <button onclick="switchSubTab('cattle-deal', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-horse mr-2 text-amber-400 text-xs"></i> Cattle Purchase & Sell
+                        <i class="fa-solid fa-horse mr-2 text-amber-400 text-xs"></i> Cattle Purchase & Sell[span_10](start_span)[span_10](end_span)
                     </button>
                     <button onclick="switchSubTab('other-products', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-boxes-stacked mr-2 text-emerald-400 text-xs"></i> Other Products Buy/Sell
+                        <i class="fa-solid fa-boxes-stacked mr-2 text-emerald-400 text-xs"></i> Other Products Buy/Sell[span_11](start_span)[span_11](end_span)
                     </button>
                 </div>
             </div>
 
-            <!-- Updated Infrastructure & Asset / Demand Menu Link -->
+            <!-- Infrastructure & Asset Investment Menu Link (Name unchanged as requested) -->
             <a href="#infrastructure" onclick="switchTab('infrastructure', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-bullhorn mr-3 text-teal-400 text-lg"></i> <span>Demand & Infrastructure</span>
+                <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> <span>Infrastructure & Asset</span>[span_12](start_span)[span_12](end_span)
             </a>
 
             <a href="#ledger" onclick="switchTab('ledger', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> <span>Payment Ledger</span>
+                <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> <span>Payment Ledger</span>[span_13](start_span)[span_13](end_span)
             </a>
 
             <a href="#pending-customers" onclick="switchTab('pending-customers', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span>Pending Amount</span>
+                <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span>Pending Amount</span>[span_14](start_span)[span_14](end_span)
             </a>
 
             <a href="#expense" onclick="switchTab('expense', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>
+                <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>[span_15](start_span)[span_15](end_span)
             </a>
             <a href="#profile" onclick="switchTab('profile', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-translate="menu_profile">Edit Profile</span>
+                <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-translate="menu_profile">Edit Profile</span>[span_16](start_span)[span_16](end_span)
             </a>
             <a href="#terms" onclick="switchTab('terms', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-translate="menu_terms">Bill Terms</span>
+                <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-translate="menu_terms">Bill Terms</span>[span_17](start_span)[span_17](end_span)
             </a>
             <a href="#whatsapp" onclick="switchTab('whatsapp', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-translate="menu_whatsapp">WhatsApp Messages</span>
+                <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-translate="menu_whatsapp">WhatsApp Messages</span>[span_18](start_span)[span_18](end_span)
             </a>
         </nav>
 
         <div id="sidebarFooter" class="p-4 border-t border-white/15 text-xs text-center text-slate-400">
-            © 2026 Shri Khatu Shyam Dairy Farming
+            © 2026 Shri Khatu Shyam Dairy Farming[span_19](start_span)[span_19](end_span)
         </div>
     </div>
 
@@ -138,13 +138,13 @@
             <button onclick="toggleSidebar()" class="md:hidden text-slate-700 text-xl"><i class="fa-solid fa-bars"></i></button>
             
             <div class="flex-1 flex flex-col items-center justify-center text-center px-4">
-                <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Tiwari & Son's Dairy Farm</h1>
+                <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Tiwari & Son's Dairy Farm</h1>[span_20](start_span)[span_20](end_span)
                 <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600 mt-0.5 font-medium">
-                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Tingajpur, Madhya Pradesh</span>
+                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Tingajpur, Madhya Pradesh</span>[span_21](start_span)[span_21](end_span)
                     <span>|</span>
-                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Tingajpur, Madhya Pradesh</span>
+                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Tingajpur, Madhya Pradesh</span>[span_22](start_span)[span_22](end_span)
                     <span>|</span>
-                    <span id="headerContactNum"><i class="fa-solid fa-phone text-emerald-500 mr-1"></i>+91 9752266047</span>
+                    <span id="headerContactNum"><i class="fa-solid fa-phone text-emerald-500 mr-1"></i>+91 9752266047</span>[span_23](start_span)[span_23](end_span)
                 </div>
             </div>
             
@@ -158,25 +158,25 @@
 
         <main class="p-6 space-y-6 flex-1">
            
-            <!-- 3. DASHBOARD TAB & GLOBAL DATE-TO-DATE FILTER BAR -->
+            <!-- 3. DASHBOARD TAB -->
             <div id="tab-home" class="tab-content space-y-6">
                 
                 <div class="card-light-box p-4 rounded-2xl shadow-md bg-white/90 flex flex-col md:flex-row items-center justify-between gap-4 border border-pink-200">
                     <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
                         <i class="fa-solid fa-calendar-days text-pink-600 text-lg"></i>
-                        <span>Global Date-to-Date Dashboard Filter (डैशबोर्ड दिनांक फ़िल्टर):</span>
+                        <span>Global Date-to-Date Dashboard Filter (डैशबोर्ड दिनांक फ़िल्टर):</span>[span_24](start_span)[span_24](end_span)
                     </div>
                     <div class="flex items-center gap-3 w-full md:w-auto">
                         <div class="flex items-center gap-1.5 text-xs">
-                            <label class="font-semibold text-slate-600">From:</label>
-                            <input type="date" id="globalFilterStart" onchange="applyGlobalDateFilter()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-pink-500">
+                            <label class="font-semibold text-slate-600">From:</label>[span_25](start_span)[span_25](end_span)
+                            <input type="date" id="globalFilterStart" onchange="applyGlobalDateFilter()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-pink-500">[span_26](start_span)[span_26](end_span)
                         </div>
                         <div class="flex items-center gap-1.5 text-xs">
-                            <label class="font-semibold text-slate-600">To:</label>
-                            <input type="date" id="globalFilterEnd" onchange="applyGlobalDateFilter()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-pink-500">
+                            <label class="font-semibold text-slate-600">To:</label>[span_27](start_span)[span_27](end_span)
+                            <input type="date" id="globalFilterEnd" onchange="applyGlobalDateFilter()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-pink-500">[span_28](start_span)[span_28](end_span)
                         </div>
                         <button onclick="resetGlobalDateFilter()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> Reset
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Reset[span_29](start_span)[span_29](end_span)
                         </button>
                     </div>
                 </div>
@@ -184,49 +184,49 @@
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
-                        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>[span_30](start_span)[span_30](end_span)
+                        <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>[span_31](start_span)[span_31](end_span)
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Cattle Purchase</div>
-                        <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Cattle Purchase</div>[span_32](start_span)[span_32](end_span)
+                        <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>[span_33](start_span)[span_33](end_span)
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0d9488, #0f766e); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-bullhorn mr-1"></i> Demand & Infrastructure</span>
+                            <span><i class="fa-solid fa-building-shield mr-1"></i> Infrastructure & Asset</span>[span_34](start_span)[span_34](end_span)
                         </div>
-                        <div class="card-value mt-4" id="filtered-infra-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
+                        <div class="card-value mt-4" id="filtered-infra-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>[span_35](start_span)[span_35](end_span)
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Milk Production</div>
-                        <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Milk Production</div>[span_36](start_span)[span_36](end_span)
+                        <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>[span_37](start_span)[span_37](end_span)
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Revenue</div>
-                        <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Revenue</div>[span_38](start_span)[span_38](end_span)
+                        <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>[span_39](start_span)[span_39](end_span)
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Pending Amount</div>
-                        <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
+                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Pending Amount</div>[span_40](start_span)[span_40](end_span)
+                        <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>[span_41](start_span)[span_41](end_span)
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-calculator mr-1"></i>Expenses</span>
+                            <span><i class="fa-solid fa-calculator mr-1"></i>Expenses</span>[span_42](start_span)[span_42](end_span)
                         </div>
-                        <div class="card-value mt-4" id="filtered-expense-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
+                        <div class="card-value mt-4" id="filtered-expense-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>[span_43](start_span)[span_43](end_span)
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #059669, #047857); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-chart-line mr-1"></i> Net Profit</span>
+                            <span><i class="fa-solid fa-chart-line mr-1"></i> Net Profit</span>[span_44](start_span)[span_44](end_span)
                         </div>
-                        <div class="card-value mt-4" id="net-profit-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
+                        <div class="card-value mt-4" id="net-profit-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>[span_45](start_span)[span_45](end_span)
                     </div>
 
                 </div> 
@@ -235,9 +235,9 @@
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
+                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown[span_46](start_span)[span_46](end_span)
                             </h3>
-                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
+                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>[span_47](start_span)[span_47](end_span)
                         </div>
                         <div class="relative w-full flex justify-center items-center py-2">
                             <div class="w-[300px] h-[300px]">
@@ -249,9 +249,9 @@
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                                <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend
+                                <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend[span_48](start_span)[span_48](end_span)
                             </h3>
-                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Live Filtered Output</span>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Live Filtered Output</span>[span_49](start_span)[span_49](end_span)
                         </div>
                         <div class="relative w-full py-2">
                             <canvas id="milkChart" height="155"></canvas>
@@ -260,65 +260,65 @@
                 </div>
             </div>
 
-            <!-- Demand & Infrastructure Investment Management Tab -->
+            <!-- Infrastructure & Asset Investment Management Tab -->
             <div id="tab-infrastructure" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-bullhorn mr-2"></i> Demand & Infrastructure Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Grahak ki demand, farm ki requirement, aur infrastructure ya asset par kiye gaye kharche ka record yahan rakhein.</p>
+                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-building-shield mr-2"></i> Infrastructure & Asset Investment Management</h2>[span_50](start_span)[span_50](end_span)
+                        <p class="text-slate-600 text-sm mt-1">फार्म शेड, मशीनरी, बोरवेल, व्हीकल या अन्य इन्फ्रास्ट्रक्चर और एसेट पर किए गए खर्च का रिकॉर्ड रखें।</p>[span_51](start_span)[span_51](end_span)
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                            <input type="date" id="infraDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>[span_52](start_span)[span_52](end_span)
+                            <input type="date" id="infraDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">[span_53](start_span)[span_53](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Demand / Asset Category:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Asset Category:</label>[span_54](start_span)[span_54](end_span)
                             <select id="infraCategory" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
-                                <option value="Customer Bulk Milk Demand">Customer Bulk Milk Demand</option>
-                                <option value="Special Product Requirement">Special Product Requirement</option>
-                                <option value="Dairy Shed Construction">Dairy Shed Construction</option>
-                                <option value="Milking Machine & Equipment">Milking Machine & Equipment</option>
-                                <option value="Borewell & Water Pipeline">Borewell & Water Pipeline</option>
-                                <option value="Other Infrastructure">Other Infrastructure Asset</option>
+                                <option value="Dairy Shed Construction">Dairy Shed Construction</option>[span_55](start_span)[span_55](end_span)
+                                <option value="Milking Machine & Equipment">Milking Machine & Equipment</option>[span_56](start_span)[span_56](end_span)
+                                <option value="Borewell & Water Pipeline">Borewell & Water Pipeline</option>[span_57](start_span)[span_57](end_span)
+                                <option value="Chaff Cutter Machine">Chaff Cutter Machine</option>[span_58](start_span)[span_58](end_span)
+                                <option value="Transport Vehicle / Tractor">Transport Vehicle</option>[span_59](start_span)[span_59](end_span)
+                                <option value="Other Infrastructure">Other Infrastructure Asset</option>[span_60](start_span)[span_60](end_span)
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Estimated Amount / Value (₹):</label>
-                            <input type="number" id="infraAmount" placeholder="e.g. 150000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-teal-700 font-bold focus:border-teal-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Investment Amount (₹):</label>[span_61](start_span)[span_61](end_span)
+                            <input type="number" id="infraAmount" placeholder="e.g. 150000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-teal-700 font-bold focus:border-teal-500 focus:outline-none shadow-sm">[span_62](start_span)[span_62](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customer / Vendor Name:</label>
-                            <input type="text" id="infraVendor" placeholder="Enter Party/Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor / Contractor Name:</label>[span_63](start_span)[span_63](end_span)
+                            <input type="text" id="infraVendor" placeholder="Enter Contractor/Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">[span_64](start_span)[span_64](end_span)
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Demand Details / Notes:</label>
-                            <input type="text" id="infraDesc" placeholder="e.g. Special requirement for buffalo milk or shed materials" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>[span_65](start_span)[span_65](end_span)
+                            <input type="text" id="infraDesc" placeholder="e.g. Paid for iron sheds and roofing materials" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">[span_66](start_span)[span_66](end_span)
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveInfrastructureEntry()" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Demand & Asset
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Infrastructure Asset[span_67](start_span)[span_67](end_span)
                         </button>
                     </div>
                 </div>
 
                 <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> Demand & Infrastructure History</h3>
+                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> Infrastructure & Assets History</h3>[span_68](start_span)[span_68](end_span)
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th>
-                                    <th class="p-3">Category</th>
-                                    <th class="p-3">Party / Vendor</th>
-                                    <th class="p-3">Details</th>
-                                    <th class="p-3">Amount</th>
+                                    <th class="p-3">Date</th>[span_69](start_span)[span_69](end_span)
+                                    <th class="p-3">Asset Category</th>[span_70](start_span)[span_70](end_span)
+                                    <th class="p-3">Vendor</th>[span_71](start_span)[span_71](end_span)
+                                    <th class="p-3">Description</th>[span_72](start_span)[span_72](end_span)
+                                    <th class="p-3">Amount</th>[span_73](start_span)[span_73](end_span)
                                 </tr>
                             </thead>
                             <tbody id="infraTableBody" class="text-slate-700">
                                 <tr class="border-b border-slate-200/60 text-slate-500">
-                                    <td colspan="5" class="p-4 text-center">No demand or infrastructure records recorded yet.</td>
+                                    <td colspan="5" class="p-4 text-center">No infrastructure assets recorded yet.</td>[span_74](start_span)[span_74](end_span)
                                 </tr>
                             </tbody>
                         </table>
@@ -330,33 +330,33 @@
             <div id="tab-ledger" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl shadow-xl space-y-5">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-cyan-700"><i class="fa-solid fa-book-open mr-2"></i> Customer Payment Ledger & Statement</h2>
-                        <p class="text-slate-600 text-sm mt-1">Search customer name or mobile number to view complete transaction and ledger history.</p>
+                        <h2 class="text-xl font-bold text-cyan-700"><i class="fa-solid fa-book-open mr-2"></i> Customer Payment Ledger & Statement</h2>[span_75](start_span)[span_75](end_span)
+                        <p class="text-slate-600 text-sm mt-1">Search customer name or mobile number to view complete transaction and ledger history.</p>[span_76](start_span)[span_76](end_span)
                     </div>
                     
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex-1">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Customer Name / Mobile Number</label>
-                            <input type="text" id="ledgerSearchInput" placeholder="Enter Name or Mobile Number..." class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-cyan-500 outline-none shadow-sm">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Customer Name / Mobile Number</label>[span_77](start_span)[span_77](end_span)
+                            <input type="text" id="ledgerSearchInput" placeholder="Enter Name or Mobile Number..." class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-cyan-500 outline-none shadow-sm">[span_78](start_span)[span_78](end_span)
                         </div>
                         <div class="flex items-end">
                             <button onclick="searchCustomerLedger()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl font-medium text-sm transition shadow-md">
-                                <i class="fa-solid fa-magnifying-glass mr-1"></i> Search Ledger
+                                <i class="fa-solid fa-magnifying-glass mr-1"></i> Search Ledger[span_79](start_span)[span_79](end_span)
                             </button>
                         </div>
                     </div>
 
                     <div id="ledgerSummaryBox" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4 bg-cyan-50/70 p-4 rounded-2xl border border-cyan-200">
                         <div>
-                            <p class="text-xs text-slate-500 font-medium">Customer Name</p>
-                            <p id="summaryName" class="text-lg font-bold text-slate-800">-</p>
+                            <p class="text-xs text-slate-500 font-medium">Customer Name</p>[span_80](start_span)[span_80](end_span)
+                            <p id="summaryName" class="text-lg font-bold text-slate-800">-</p>[span_81](start_span)[span_81](end_span)
                         </div>
                         <div>
-                            <p class="text-xs text-slate-500 font-medium">Current Outstanding Balance</p>
-                            <p id="summaryPending" class="text-lg font-bold text-red-600">₹0</p>
+                            <p class="text-xs text-slate-500 font-medium">Current Outstanding Balance</p>[span_82](start_span)[span_82](end_span)
+                            <p id="summaryPending" class="text-lg font-bold text-red-600">₹0</p>[span_83](start_span)[span_83](end_span)
                         </div>
                         <div class="flex justify-end items-center">
-                            <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition shadow"><i class="fa-solid fa-print mr-1"></i> Print Statement</button>
+                            <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition shadow"><i class="fa-solid fa-print mr-1"></i> Print Statement</button>[span_84](start_span)[span_84](end_span)
                         </div>
                     </div>
 
@@ -364,16 +364,16 @@
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th>
-                                    <th class="p-3">Module / Type</th>
-                                    <th class="p-3">Details / Ref</th>
-                                    <th class="p-3">Amount</th>
-                                    <th class="p-3">Status</th>
+                                    <th class="p-3">Date</th>[span_85](start_span)[span_85](end_span)
+                                    <th class="p-3">Module / Type</th>[span_86](start_span)[span_86](end_span)
+                                    <th class="p-3">Details / Ref</th>[span_87](start_span)[span_87](end_span)
+                                    <th class="p-3">Amount</th>[span_88](start_span)[span_88](end_span)
+                                    <th class="p-3">Status</th>[span_89](start_span)[span_89](end_span)
                                 </tr>
                             </thead>
                             <tbody id="ledgerTableBody" class="text-slate-700">
                                 <tr class="border-b border-slate-200/60 text-slate-500">
-                                    <td colspan="5" class="p-4 text-center">Please search a customer to view ledger history.</td>
+                                    <td colspan="5" class="p-4 text-center">Please search a customer to view ledger history.</td>[span_90](start_span)[span_90](end_span)
                                 </tr>
                             </tbody>
                         </table>
@@ -386,35 +386,35 @@
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
-                            <h2 class="text-xl font-bold text-red-600"><i class="fa-solid fa-indian-rupee-sign mr-2"></i> Pending Amount & Customer Management</h2>
-                            <p class="text-slate-600 text-sm mt-1">Search by customer name or mobile number to record payments and track remaining balance.</p>
+                            <h2 class="text-xl font-bold text-red-600"><i class="fa-solid fa-indian-rupee-sign mr-2"></i> Pending Amount & Customer Management</h2>[span_91](start_span)[span_91](end_span)
+                            <p class="text-slate-600 text-sm mt-1">Search by customer name or mobile number to record payments and track remaining balance.</p>[span_92](start_span)[span_92](end_span)
                         </div>
                         <button onclick="renderPendingCustomers()" class="bg-red-100 text-red-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-200 transition">
-                            <i class="fa-solid fa-rotate mr-1"></i> Refresh List
+                            <i class="fa-solid fa-rotate mr-1"></i> Refresh List[span_93](start_span)[span_93](end_span)
                         </button>
                     </div>
 
                     <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
-                        <i class="fa-solid fa-magnifying-glass text-slate-400 text-lg ml-2"></i>
-                        <input type="text" id="pendingSearchInput" oninput="filterPendingList()" placeholder="Search by Customer Name or Mobile Number..." class="w-full bg-transparent text-slate-800 focus:outline-none text-sm font-medium">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 text-lg ml-2"></i>[span_94](start_span)[span_94](end_span)
+                        <input type="text" id="pendingSearchInput" oninput="filterPendingList()" placeholder="Search by Customer Name or Mobile Number..." class="w-full bg-transparent text-slate-800 focus:outline-none text-sm font-medium">[span_95](start_span)[span_95](end_span)
                     </div>
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th>
-                                    <th class="p-3">Module / Type</th>
-                                    <th class="p-3">Customer / Party Name</th>
-                                    <th class="p-3">Mobile Number</th>
-                                    <th class="p-3">Details / Quantity</th>
-                                    <th class="p-3">Pending Amount</th>
-                                    <th class="p-3">Action / Edit</th>
+                                    <th class="p-3">Date</th>[span_96](start_span)[span_96](end_span)
+                                    <th class="p-3">Module / Type</th>[span_97](start_span)[span_97](end_span)
+                                    <th class="p-3">Customer / Party Name</th>[span_98](start_span)[span_98](end_span)
+                                    <th class="p-3">Mobile Number</th>[span_99](start_span)[span_99](end_span)
+                                    <th class="p-3">Details / Quantity</th>[span_100](start_span)[span_100](end_span)
+                                    <th class="p-3">Pending Amount</th>[span_101](start_span)[span_101](end_span)
+                                    <th class="p-3">Action / Edit</th>[span_102](start_span)[span_102](end_span)
                                 </tr>
                             </thead>
                             <tbody id="pendingTableBody" class="text-slate-700">
                                 <tr class="border-b border-slate-200/60 text-slate-500">
-                                    <td colspan="7" class="p-4 text-center">No pending customers found.</td>
+                                    <td colspan="7" class="p-4 text-center">No pending customers found.</td>[span_103](start_span)[span_103](end_span)
                                 </tr>
                             </tbody>
                         </table>
@@ -428,82 +428,90 @@
                 <div id="subtab-bulk-dairy" class="sub-content space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-pink-600"><i class="fa-solid fa-industry mr-2"></i> Bulk Dairy Milk Sales Entry</h2>
-                            <p class="text-slate-600 text-sm mt-1">Enter FAT and Fat Rate; Rate per Liter and Total Amount will calculate automatically.</p>
+                            <h2 class="text-xl font-bold text-pink-600"><i class="fa-solid fa-industry mr-2"></i> Bulk Dairy Milk Sales Entry</h2>[span_104](start_span)[span_104](end_span)[span_105](start_span)[span_105](end_span)
+                            <p class="text-slate-600 text-sm mt-1">Enter FAT and Fat Rate; Rate per Liter and Total Amount will calculate automatically.</p>[span_106](start_span)[span_106](end_span)[span_107](start_span)[span_107](end_span)
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="billDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>[span_108](start_span)[span_108](end_span)[span_109](start_span)[span_109](end_span)
+                                <input type="date" id="billDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">[span_110](start_span)[span_110](end_span)[span_111](start_span)[span_111](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Shift:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Shift:</label>[span_112](start_span)[span_112](end_span)[span_113](start_span)[span_113](end_span)
                                 <select id="billShift" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Morning">Morning</option>
-                                    <option value="Evening">Evening</option>
+                                    <option value="Morning">Morning</option>[span_114](start_span)[span_114](end_span)[span_115](start_span)[span_115](end_span)
+                                    <option value="Evening">Evening</option>[span_116](start_span)[span_116](end_span)[span_117](start_span)[span_117](end_span)
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Milk Type:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Milk Type:</label>[span_118](start_span)[span_118](end_span)[span_119](start_span)[span_119](end_span)[span_120](start_span)[span_120](end_span)
                                 <select id="milkType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Cow Milk">Cow Milk</option>
-                                    <option value="Buffalo Milk">Buffalo Milk</option>
+                                    <option value="Cow Milk">Cow Milk</option>[span_121](start_span)[span_121](end_span)[span_122](start_span)[span_122](end_span)[span_123](start_span)[span_123](end_span)
+                                    <option value="Buffalo Milk">Buffalo Milk</option>[span_124](start_span)[span_124](end_span)
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Quantity (Liters):</label>
-                                <input type="number" id="milkQty" placeholder="e.g. 85" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Quantity (Liters):</label>[span_125](start_span)[span_125](end_span)[span_126](start_span)[span_126](end_span)[span_127](start_span)[span_127](end_span)
+                                <input type="number" id="milkQty" placeholder="e.g. 85" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">[span_128](start_span)[span_128](end_span)[span_129](start_span)[span_129](end_span)[span_130](start_span)[span_130](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">FAT %:</label>
-                                <input type="number" step="0.1" id="milkFat" placeholder="e.g. 5.0" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">FAT %:</label>[span_131](start_span)[span_131](end_span)[span_132](start_span)[span_132](end_span)[span_133](start_span)[span_133](end_span)
+                                <input type="number" step="0.1" id="milkFat" placeholder="e.g. 5.0" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">[span_134](start_span)[span_134](end_span)[span_135](start_span)[span_135](end_span)[span_136](start_span)[span_136](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Fat Rate (₹):</label>
-                                <input type="number" step="0.5" id="fatRate" placeholder="e.g. 10" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Fat Rate (₹):</label>[span_137](start_span)[span_137](end_span)[span_138](start_span)[span_138](end_span)[span_139](start_span)[span_139](end_span)
+                                <input type="number" step="0.5" id="fatRate" placeholder="e.g. 10" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">[span_140](start_span)[span_140](end_span)[span_141](start_span)[span_141](end_span)[span_142](start_span)[span_142](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">SNF / CLR:</label>
-                                <input type="number" step="0.1" id="milkSnf" placeholder="e.g. 8.5" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">SNF / CLR:</label>[span_143](start_span)[span_143](end_span)[span_144](start_span)[span_144](end_span)[span_145](start_span)[span_145](end_span)
+                                <input type="number" step="0.1" id="milkSnf" placeholder="e.g. 8.5" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">[span_146](start_span)[span_146](end_span)[span_147](start_span)[span_147](end_span)[span_148](start_span)[span_148](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Liter (Auto):</label>
-                                <input type="text" id="perLiterRate" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-purple-700 font-bold shadow-sm" readonly>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Liter (Auto):</label>[span_149](start_span)[span_149](end_span)[span_150](start_span)[span_150](end_span)
+                                <input type="text" id="perLiterRate" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-purple-700 font-bold shadow-sm" readonly>[span_151](start_span)[span_151](end_span)[span_152](start_span)[span_152](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
-                                <input type="text" id="totalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>[span_153](start_span)[span_153](end_span)[span_154](start_span)[span_154](end_span)
+                                <input type="text" id="totalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>[span_155](start_span)[span_155](end_span)[span_156](start_span)[span_156](end_span)
                             </div>
                             <div class="md:col-span-2">
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Collection Center Name:</label>
-                                <input type="text" id="dairyName" placeholder="Enter Dairy / Collection Center Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Collection Center Name:</label>[span_157](start_span)[span_157](end_span)[span_158](start_span)[span_158](end_span)
+                                <!-- Updated from input text to dropdown list -->
+                                <select id="dairyName" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                    <option value="">Select Dairy / Collection Center</option>
+                                    <option value="Shyamlal Traders">Shyamlal Traders</option>
+                                    <option value="Kishan Singh">Kishan Singh</option>
+                                    <option value="Rahul Sharma">Rahul Sharma</option>
+                                    <option value="Amit Verma">Amit Verma</option>
+                                    <option value="Shajapur Dairy Hub">Shajapur Dairy Hub</option>
+                                </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>[span_159](start_span)[span_159](end_span)[span_160](start_span)[span_160](end_span)
                                 <select id="paymentStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Pending">Pending</option>
-                                    <option value="Paid">Paid</option>
+                                    <option value="Pending">Pending</option>[span_161](start_span)[span_161](end_span)[span_162](start_span)[span_162](end_span)
+                                    <option value="Paid">Paid</option>[span_163](start_span)[span_163](end_span)
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveMilkEntry()" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bulk Entry
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bulk Entry[span_164](start_span)[span_164](end_span)
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Milk Selling Record Sheet Preview</h3>
+                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Milk Selling Record Sheet Preview</h3>[span_165](start_span)[span_165](end_span)
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Shift</th><th class="p-3">Milk Type</th><th class="p-3">Quantity</th><th class="p-3">FAT %</th><th class="p-3">Fat Rate</th><th class="p-3">SNF / CLR</th><th class="p-3">Rate/L</th><th class="p-3">Total Amt</th><th class="p-3">Dairy</th><th class="p-3">Status</th>
+                                        <th class="p-3">Date</th><th class="p-3">Shift</th><th class="p-3">Milk Type</th><th class="p-3">Quantity</th><th class="p-3">FAT %</th><th class="p-3">Fat Rate</th><th class="p-3">SNF / CLR</th><th class="p-3">Rate/L</th><th class="p-3">Total Amt</th><th class="p-3">Dairy</th><th class="p-3">Status</th>[span_166](start_span)[span_166](end_span)
                                     </tr>
                                 </thead>
                                 <tbody id="salesTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added yet.</td></tr>[span_167](start_span)[span_167](end_span)
                                 </tbody>
                             </table>
                         </div>
@@ -513,66 +521,66 @@
                 <div id="subtab-retail-milk" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-purple-600"><i class="fa-solid fa-store mr-2"></i> Retail Milk Selling Entry</h2>
-                            <p class="text-slate-600 text-sm mt-1">Direct customer retail billing without FAT/CLR calculations.</p>
+                            <h2 class="text-xl font-bold text-purple-600"><i class="fa-solid fa-store mr-2"></i> Retail Milk Selling Entry</h2>[span_168](start_span)[span_168](end_span)
+                            <p class="text-slate-600 text-sm mt-1">Direct customer retail billing without FAT/CLR calculations.</p>[span_169](start_span)[span_169](end_span)
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="retailDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>[span_170](start_span)[span_170](end_span)
+                                <input type="date" id="retailDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">[span_171](start_span)[span_171](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Name:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Name:</label>[span_172](start_span)[span_172](end_span)
                                 <select id="retailCustSelect" onchange="onRetailCustomerChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Customer</option>
-                                    <option value="Rahul Sharma">Rahul Sharma</option>
-                                    <option value="Amit Verma">Amit Verma</option>
-                                    <option value="NEW">+ Add New Customer</option>
+                                    <option value="">Select Customer</option>[span_173](start_span)[span_173](end_span)
+                                    <option value="Rahul Sharma">Rahul Sharma</option>[span_174](start_span)[span_174](end_span)
+                                    <option value="Amit Verma">Amit Verma</option>[span_175](start_span)[span_175](end_span)
+                                    <option value="NEW">+ Add New Customer</option>[span_176](start_span)[span_176](end_span)
                                 </select>
-                                <input type="text" id="retailCustCustom" placeholder="Enter New Customer Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-purple-500 focus:outline-none shadow-sm">
+                                <input type="text" id="retailCustCustom" placeholder="Enter New Customer Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-purple-500 focus:outline-none shadow-sm">[span_177](start_span)[span_177](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number:</label>
-                                <input type="text" id="retailMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number:</label>[span_178](start_span)[span_178](end_span)
+                                <input type="text" id="retailMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">[span_179](start_span)[span_179](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Liters:</label>
-                                <input type="number" step="0.5" id="retailLitermt" placeholder="e.g. 5" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Liters:</label>[span_180](start_span)[span_180](end_span)
+                                <input type="number" step="0.5" id="retailLitermt" placeholder="e.g. 5" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">[span_181](start_span)[span_181](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Per Liter Rate (₹):</label>
-                                <input type="number" id="retailRate" placeholder="e.g. 60" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Per Liter Rate (₹):</label>[span_182](start_span)[span_182](end_span)
+                                <input type="number" id="retailRate" placeholder="e.g. 60" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">[span_183](start_span)[span_183](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
-                                <input type="text" id="retailTotalAmt" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>[span_184](start_span)[span_184](end_span)
+                                <input type="text" id="retailTotalAmt" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>[span_185](start_span)[span_185](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>[span_186](start_span)[span_186](end_span)
                                 <select id="retailStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
+                                    <option value="Paid">Paid</option>[span_187](start_span)[span_187](end_span)
+                                    <option value="Pending">Pending</option>[span_188](start_span)[span_188](end_span)
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveRetailEntry()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Retail Bill
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Retail Bill[span_189](start_span)[span_189](end_span)
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> Retail Milk Records</h3>
+                        <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> Retail Milk Records</h3>[span_190](start_span)[span_190](end_span)
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Customer Name</th><th class="p-3">Mobile</th><th class="p-3">Liters</th><th class="p-3">Rate/L</th><th class="p-3">Total Amount</th><th class="p-3">Status</th>
+                                        <th class="p-3">Date</th><th class="p-3">Customer Name</th><th class="p-3">Mobile</th><th class="p-3">Liters</th><th class="p-3">Rate/L</th><th class="p-3">Total Amount</th><th class="p-3">Status</th>[span_191](start_span)[span_191](end_span)
                                     </tr>
                                 </thead>
                                 <tbody id="retailTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No retail records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No retail records added yet.</td></tr>[span_192](start_span)[span_192](end_span)
                                 </tbody>
                             </table>
                         </div>
@@ -582,80 +590,80 @@
                 <div id="subtab-cattle-deal" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-horse mr-2"></i> Cattle Purchase & Sell Management</h2>
-                            <p class="text-slate-600 text-sm mt-1">Record cattle buying and selling details with tag number and pricing.</p>
+                            <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-horse mr-2"></i> Cattle Purchase & Sell Management</h2>[span_193](start_span)[span_193](end_span)
+                            <p class="text-slate-600 text-sm mt-1">Record cattle buying and selling details with tag number and pricing.</p>[span_194](start_span)[span_194](end_span)
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="cattleDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>[span_195](start_span)[span_195](end_span)
+                                <input type="date" id="cattleDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">[span_196](start_span)[span_196](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>[span_197](start_span)[span_197](end_span)
                                 <select id="cattleTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Purchase">Purchase</option>
-                                    <option value="Sell">Sell</option>
+                                    <option value="Purchase">Purchase</option>[span_198](start_span)[span_198](end_span)
+                                    <option value="Sell">Sell</option>[span_199](start_span)[span_199](end_span)
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Cattle Breed / Category:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Cattle Breed / Category:</label>[span_200](start_span)[span_200](end_span)
                                 <select id="cattleBreedSelect" onchange="checkNewCattleCategory(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Milking Cow">Milking Cow</option>
-                                    <option value="Milking Buffalo">Milking Buffalo</option>
-                                    <option value="Heifer / Calf">Heifer / Calf</option>
-                                    <option value="Pregnant Animal">Pregnant Animal</option>
-                                    <option value="NEW">+ Add New Category</option>
+                                    <option value="Milking Cow">Milking Cow</option>[span_201](start_span)[span_201](end_span)
+                                    <option value="Milking Buffalo">Milking Buffalo</option>[span_202](start_span)[span_202](end_span)
+                                    <option value="Heifer / Calf">Heifer / Calf</option>[span_203](start_span)[span_203](end_span)
+                                    <option value="Pregnant Animal">Pregnant Animal</option>[span_204](start_span)[span_204](end_span)
+                                    <option value="NEW">+ Add New Category</option>[span_205](start_span)[span_205](end_span)
                                 </select>
-                                <input type="text" id="cattleBreedCustom" placeholder="Enter New Category" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
+                                <input type="text" id="cattleBreedCustom" placeholder="Enter New Category" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">[span_206](start_span)[span_206](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Tag Number / Identification:</label>
-                                <input type="text" id="cattleTag" placeholder="e.g. TAG-405" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Tag Number / Identification:</label>[span_207](start_span)[span_207](end_span)
+                                <input type="text" id="cattleTag" placeholder="e.g. TAG-405" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">[span_208](start_span)[span_208](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Name (Dealer/Farmer):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Name (Dealer/Farmer):</label>[span_209](start_span)[span_209](end_span)
                                 <select id="cattlePartySelect" onchange="onCattlePartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Party</option>
-                                    <option value="Shyamlal Traders">Shyamlal Traders</option>
-                                    <option value="Kishan Singh">Kishan Singh</option>
-                                    <option value="NEW">+ Add New Party</option>
+                                    <option value="">Select Party</option>[span_210](start_span)[span_210](end_span)
+                                    <option value="Shyamlal Traders">Shyamlal Traders</option>[span_211](start_span)[span_211](end_span)
+                                    <option value="Kishan Singh">Kishan Singh</option>[span_212](start_span)[span_212](end_span)
+                                    <option value="NEW">+ Add New Party</option>[span_213](start_span)[span_213](end_span)
                                 </select>
-                                <input type="text" id="cattlePartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
+                                <input type="text" id="cattlePartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">[span_214](start_span)[span_214](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>
-                                <input type="text" id="cattlePartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>[span_215](start_span)[span_215](end_span)
+                                <input type="text" id="cattlePartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">[span_216](start_span)[span_216](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
-                                <input type="number" id="cattleAmount" placeholder="e.g. 65000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-amber-700 font-bold focus:border-amber-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>[span_217](start_span)[span_217](end_span)
+                                <input type="number" id="cattleAmount" placeholder="e.g. 65000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-amber-700 font-bold focus:border-amber-500 focus:outline-none shadow-sm">[span_218](start_span)[span_218](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>[span_219](start_span)[span_219](end_span)
                                 <select id="cattleStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
+                                    <option value="Paid">Paid</option>[span_220](start_span)[span_220](end_span)
+                                    <option value="Pending">Pending</option>[span_221](start_span)[span_221](end_span)
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveCattleEntry()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Cattle Record
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Cattle Record[span_222](start_span)[span_222](end_span)
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> Cattle Deal History</h3>
+                        <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> Cattle Deal History</h3>[span_223](start_span)[span_223](end_span)
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Breed</th><th class="p-3">Tag No.</th><th class="p-3">Party Name</th><th class="p-3">Mobile</th><th class="p-3">Amount</th><th class="p-3">Status</th>
+                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Breed</th><th class="p-3">Tag No.</th><th class="p-3">Party Name</th><th class="p-3">Mobile</th><th class="p-3">Amount</th><th class="p-3">Status</th>[span_224](start_span)[span_224](end_span)
                                     </tr>
                                 </thead>
                                 <tbody id="cattleTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="8" class="p-4 text-center">No cattle records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="8" class="p-4 text-center">No cattle records added yet.</td></tr>[span_225](start_span)[span_225](end_span)
                                 </tbody>
                             </table>
                         </div>
@@ -665,93 +673,93 @@
                 <div id="subtab-other-products" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-boxes-stacked mr-2"></i> Other Products Purchase & Sell</h2>
-                            <p class="text-slate-600 text-sm mt-1">Manage inventory with per Bag, Kg, Litre, Pcs calculation options.</p>
+                            <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-boxes-stacked mr-2"></i> Other Products Purchase & Sell</h2>[span_226](start_span)[span_226](end_span)
+                            <p class="text-slate-600 text-sm mt-1">Manage inventory with per Bag, Kg, Litre, Pcs calculation options.</p>[span_227](start_span)[span_227](end_span)
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                                <input type="date" id="prodDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>[span_228](start_span)[span_228](end_span)
+                                <input type="date" id="prodDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">[span_229](start_span)[span_229](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>[span_230](start_span)[span_230](end_span)
                                 <select id="prodTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Purchase">Purchase</option>
-                                    <option value="Sell">Sell</option>
+                                    <option value="Purchase">Purchase</option>[span_231](start_span)[span_231](end_span)
+                                    <option value="Sell">Sell</option>[span_232](start_span)[span_232](end_span)
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Product Name:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Product Name:</label>[span_233](start_span)[span_233](end_span)
                                 <select id="prodNameSelect" onchange="checkNewProduct(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Cattle Feed (Pashu Aahar)">Cattle Feed (Pashu Aahar)</option>
-                                    <option value="Vermicompost Fertilizer">Vermicompost Fertilizer</option>
-                                    <option value="Chaff / Straw">Chaff / Straw</option>
-                                    <option value="Veterinary Medicine">Veterinary Medicine</option>
-                                    <option value="NEW">+ Add New Product</option>
+                                    <option value="Cattle Feed (Pashu Aahar)">Cattle Feed (Pashu Aahar)</option>[span_234](start_span)[span_234](end_span)
+                                    <option value="Vermicompost Fertilizer">Vermicompost Fertilizer</option>[span_235](start_span)[span_235](end_span)
+                                    <option value="Chaff / Straw">Chaff / Straw</option>[span_236](start_span)[span_236](end_span)
+                                    <option value="Veterinary Medicine">Veterinary Medicine</option>[span_237](start_span)[span_237](end_span)
+                                    <option value="NEW">+ Add New Product</option>[span_238](start_span)[span_238](end_span)
                                 </select>
-                                <input type="text" id="prodNameCustom" placeholder="Enter New Product Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
+                                <input type="text" id="prodNameCustom" placeholder="Enter New Product Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">[span_239](start_span)[span_239](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Unit Option:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Unit Option:</label>[span_240](start_span)[span_240](end_span)
                                 <select id="prodUnitType" onchange="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Bag">Per Bag (बैग)</option>
-                                    <option value="Kg">Per Kg (किलोग्राम)</option>
-                                    <option value="Litre">Per Litre (लीटर)</option>
-                                    <option value="Pcs">Per Piece (नंग)</option>
+                                    <option value="Bag">Per Bag (बैग)</option>[span_241](start_span)[span_241](end_span)
+                                    <option value="Kg">Per Kg (किलोग्राम)</option>[span_242](start_span)[span_242](end_span)
+                                    <option value="Litre">Per Litre (लीटर)</option>[span_243](start_span)[span_243](end_span)
+                                    <option value="Pcs">Per Piece (नंग)</option>[span_244](start_span)[span_244](end_span)
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Quantity:</label>
-                                <input type="number" step="0.1" id="prodQtyNum" placeholder="e.g. 10" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Quantity:</label>[span_245](start_span)[span_245](end_span)
+                                <input type="number" step="0.1" id="prodQtyNum" placeholder="e.g. 10" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">[span_246](start_span)[span_246](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Unit (₹):</label>
-                                <input type="number" step="0.5" id="prodRatePerUnit" placeholder="e.g. 1250" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Unit (₹):</label>[span_247](start_span)[span_247](end_span)
+                                <input type="number" step="0.5" id="prodRatePerUnit" placeholder="e.g. 1250" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">[span_248](start_span)[span_248](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto Calc):</label>
-                                <input type="text" id="prodTotalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-emerald-700 font-bold shadow-sm" readonly>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto Calc):</label>[span_249](start_span)[span_249](end_span)
+                                <input type="text" id="prodTotalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-emerald-700 font-bold shadow-sm" readonly>[span_250](start_span)[span_250](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party / Vendor Name:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party / Vendor Name:</label>[span_251](start_span)[span_251](end_span)
                                 <select id="prodPartySelect" onchange="onProductPartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Party</option>
-                                    <option value="Agri Feed Suppliers">Agri Feed Suppliers</option>
-                                    <option value="Shajapur Organic Hub">Shajapur Organic Hub</option>
-                                    <option value="NEW">+ Add New Party</option>
+                                    <option value="">Select Party</option>[span_252](start_span)[span_252](end_span)
+                                    <option value="Agri Feed Suppliers">Agri Feed Suppliers</option>[span_253](start_span)[span_253](end_span)
+                                    <option value="Shajapur Organic Hub">Shajapur Organic Hub</option>[span_254](start_span)[span_254](end_span)
+                                    <option value="NEW">+ Add New Party</option>[span_255](start_span)[span_255](end_span)
                                 </select>
-                                <input type="text" id="prodPartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
+                                <input type="text" id="prodPartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">[span_256](start_span)[span_256](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>
-                                <input type="text" id="prodPartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>[span_257](start_span)[span_257](end_span)
+                                <input type="text" id="prodPartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">[span_258](start_span)[span_258](end_span)
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>[span_259](start_span)[span_259](end_span)
                                 <select id="prodStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
+                                    <option value="Paid">Paid</option>[span_260](start_span)[span_260](end_span)
+                                    <option value="Pending">Pending</option>[span_261](start_span)[span_261](end_span)
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveProductEntry()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Product Record
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Product Record[span_262](start_span)[span_262](end_span)
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Products History</h3>
+                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Products History</h3>[span_263](start_span)[span_263](end_span)
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Product Name</th><th class="p-3">Quantity & Unit</th><th class="p-3">Rate/Unit</th><th class="p-3">Total Amount</th><th class="p-3">Party</th><th class="p-3">Mobile</th><th class="p-3">Status</th>
+                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Product Name</th><th class="p-3">Quantity & Unit</th><th class="p-3">Rate/Unit</th><th class="p-3">Total Amount</th><th class="p-3">Party</th><th class="p-3">Mobile</th><th class="p-3">Status</th>[span_264](start_span)[span_264](end_span)
                                     </tr>
                                 </thead>
                                 <tbody id="prodTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="9" class="p-4 text-center">No product records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="9" class="p-4 text-center">No product records added yet.</td></tr>[span_265](start_span)[span_265](end_span)
                                 </tbody>
                             </table>
                         </div>
@@ -763,54 +771,54 @@
             <div id="tab-expense" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-blue-600"><i class="fa-solid fa-wallet mr-2"></i> Farm & Dairy Expense Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
+                        <h2 class="text-xl font-bold text-blue-600"><i class="fa-solid fa-wallet mr-2"></i> Farm & Dairy Expense Management</h2>[span_266](start_span)[span_266](end_span)
+                        <p class="text-slate-600 text-sm mt-1">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>[span_267](start_span)[span_267](end_span)
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                            <input type="date" id="expDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>[span_268](start_span)[span_268](end_span)
+                            <input type="date" id="expDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">[span_269](start_span)[span_269](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Expense Category:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Expense Category:</label>[span_270](start_span)[span_270](end_span)
                             <select id="expCategory" onchange="checkNewExpenseCategory(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
-                                <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>
-                                <option value="Veterinary & Medicine">Veterinary & Medicine</option>
-                                <option value="Electricity & Water">Electricity & Water</option>
-                                <option value="Labour Wages">Labour Wages</option>
-                                <option value="Transport & Logistics">Transport & Logistics</option>
-                                <option value="Maintenance & Miscellaneous">Maintenance & Miscellaneous</option>
-                                <option value="NEW">+ Add New Category</option>
+                                <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>[span_271](start_span)[span_271](end_span)
+                                <option value="Veterinary & Medicine">Veterinary & Medicine</option>[span_272](start_span)[span_272](end_span)
+                                <option value="Electricity & Water">Electricity & Water</option>[span_273](start_span)[span_273](end_span)
+                                <option value="Labour Wages">Labour Wages</option>[span_274](start_span)[span_274](end_span)
+                                <option value="Transport & Logistics">Transport & Logistics</option>[span_275](start_span)[span_275](end_span)
+                                <option value="Maintenance & Miscellaneous">Maintenance & Miscellaneous</option>[span_276](start_span)[span_276](end_span)
+                                <option value="NEW">+ Add New Category</option>[span_277](start_span)[span_277](end_span)
                             </select>
-                            <input type="text" id="expCategoryCustom" placeholder="Enter New Category Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-blue-500 focus:outline-none shadow-sm">
+                            <input type="text" id="expCategoryCustom" placeholder="Enter New Category Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-blue-500 focus:outline-none shadow-sm">[span_278](start_span)[span_278](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
-                            <input type="number" id="expAmount" placeholder="e.g. 2500" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-blue-700 font-bold focus:border-blue-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>[span_279](start_span)[span_279](end_span)
+                            <input type="number" id="expAmount" placeholder="e.g. 2500" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-blue-700 font-bold focus:border-blue-500 focus:outline-none shadow-sm">[span_280](start_span)[span_280](end_span)
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
-                            <input type="text" id="expDesc" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>[span_281](start_span)[span_281](end_span)
+                            <input type="text" id="expDesc" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">[span_282](start_span)[span_282](end_span)
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveExpenseEntry()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Expense
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Expense[span_283](start_span)[span_283](end_span)
                         </button>
                     </div>
                 </div>
 
                 <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                    <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> Expense Records Sheet</h3>
+                    <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> Expense Records Sheet</h3>[span_284](start_span)[span_284](end_span)
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th><th class="p-3">Category</th><th class="p-3">Description</th><th class="p-3">Amount</th>
+                                    <th class="p-3">Date</th><th class="p-3">Category</th><th class="p-3">Description</th><th class="p-3">Amount</th>[span_285](start_span)[span_285](end_span)
                                 </tr>
                             </thead>
                             <tbody id="expenseTableBody" class="text-slate-700">
-                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="4" class="p-4 text-center">No expense records added yet.</td></tr>
+                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="4" class="p-4 text-center">No expense records added yet.</td></tr>[span_286](start_span)[span_286](end_span)
                             </tbody>
                         </table>
                     </div>
@@ -821,30 +829,30 @@
             <div id="tab-profile" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-gear mr-2"></i> Edit Farm & Business Profile</h2>
-                        <p class="text-slate-600 text-sm mt-1">Update your dairy brand name, head office address, and contact details for invoices.</p>
+                        <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-gear mr-2"></i> Edit Farm & Business Profile</h2>[span_287](start_span)[span_287](end_span)
+                        <p class="text-slate-600 text-sm mt-1">Update your dairy brand name, head office address, and contact details for invoices.</p>[span_288](start_span)[span_288](end_span)
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Brand Name:</label>
-                            <input type="text" id="profileBrandName" value="Shri Khatu Shyam Dairy" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Brand Name:</label>[span_289](start_span)[span_289](end_span)
+                            <input type="text" id="profileBrandName" value="Shri Khatu Shyam Dairy" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">[span_290](start_span)[span_290](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Head Office Location:</label>
-                            <input type="text" id="profileOffice" value="Shajapur, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Head Office Location:</label>[span_291](start_span)[span_291](end_span)
+                            <input type="text" id="profileOffice" value="Shajapur, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">[span_292](start_span)[span_292](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Packaging Hub Location:</label>
-                            <input type="text" id="profileHub" value="Indore, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Packaging Hub Location:</label>[span_293](start_span)[span_293](end_span)
+                            <input type="text" id="profileHub" value="Indore, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">[span_294](start_span)[span_294](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Contact Number / Helpline:</label>
-                            <input type="text" id="profileContact" value="+91 9876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Contact Number / Helpline:</label>[span_295](start_span)[span_295](end_span)
+                            <input type="text" id="profileContact" value="+91 9876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">[span_296](start_span)[span_296](end_span)
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveProfileChanges()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Update Profile
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Update Profile[span_297](start_span)[span_297](end_span)
                         </button>
                     </div>
                 </div>
@@ -854,21 +862,21 @@
             <div id="tab-terms" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-file-contract mr-2"></i> Bill Terms & Conditions Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Define standard terms that will appear at the bottom of customer invoices and bills.</p>
+                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-file-contract mr-2"></i> Bill Terms & Conditions Management</h2>[span_298](start_span)[span_298](end_span)
+                        <p class="text-slate-600 text-sm mt-1">Define standard terms that will appear at the bottom of customer invoices and bills.</p>[span_299](start_span)[span_299](end_span)
                     </div>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Invoice Terms & Policy (HTML / Text):</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Invoice Terms & Policy (HTML / Text):</label>[span_300](start_span)[span_300](end_span)
                             <textarea id="billTermsText" rows="6" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">1. Goods once sold will not be taken back without prior inspection.
 2. Payment must be cleared within 7 days from the date of billing.
 3. All disputes are subject to Shajapur (M.P.) jurisdiction only.
-4. Thank you for your trusted business with Shri Khatu Shyam Dairy.</textarea>
+4. Thank you for your trusted business with Shri Khatu Shyam Dairy.</textarea>[span_301](start_span)[span_301](end_span)
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveBillTerms()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bill Terms
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bill Terms[span_302](start_span)[span_302](end_span)
                         </button>
                     </div>
                 </div>
@@ -878,30 +886,30 @@
             <div id="tab-whatsapp" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp Quick Message Generator</h2>
-                        <p class="text-slate-600 text-sm mt-1">Send bills, payment reminders, or daily milk delivery updates directly to customers via WhatsApp.</p>
+                        <h2 class="text-xl font-bold text-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp Quick Message Generator</h2>[span_303](start_span)[span_303](end_span)
+                        <p class="text-slate-600 text-sm mt-1">Send bills, payment reminders, or daily milk delivery updates directly to customers via WhatsApp.</p>[span_304](start_span)[span_304](end_span)
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Mobile Number:</label>
-                            <input type="text" id="waMobile" placeholder="e.g. 919876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Mobile Number:</label>[span_305](start_span)[span_305](end_span)
+                            <input type="text" id="waMobile" placeholder="e.g. 919876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">[span_306](start_span)[span_306](end_span)
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Message Template Type:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Message Template Type:</label>[span_307](start_span)[span_307](end_span)
                             <select id="waTemplateType" onchange="updateWaTemplate(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
-                                <option value="bill">Daily Milk Bill & Payment Reminder</option>
-                                <option value="welcome">Welcome New Retail Customer</option>
-                                <option value="payment">Payment Receipt Acknowledgement</option>
+                                <option value="bill">Daily Milk Bill & Payment Reminder</option>[span_308](start_span)[span_308](end_span)
+                                <option value="welcome">Welcome New Retail Customer</option>[span_309](start_span)[span_309](end_span)
+                                <option value="payment">Payment Receipt Acknowledgement</option>[span_310](start_span)[span_310](end_span)
                             </select>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customizable Message:</label>
-                            <textarea id="waMessageText" rows="4" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!</textarea>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customizable Message:</label>[span_311](start_span)[span_311](end_span)
+                            <textarea id="waMessageText" rows="4" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">Namaste! Your daily milk supply bill from Shri Khatu Shyam Dairy has been generated. Please check and clear your payment. Thank you!</textarea>[span_312](start_span)[span_312](end_span)
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="sendWhatsAppMessage()" class="bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Send via WhatsApp
+                            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Send via WhatsApp[span_313](start_span)[span_313](end_span)
                         </button>
                     </div>
                 </div>
@@ -914,67 +922,67 @@
     <div id="editBillingModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="card-light-box p-6 rounded-3xl w-full max-w-lg space-y-4 shadow-2xl relative">
             <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-                <h3 class="text-lg font-bold text-pink-600"><i class="fa-solid fa-file-invoice-dollar mr-2"></i> Edit & Update Payment</h3>
-                <button onclick="closeEditModal()" class="text-slate-500 hover:text-slate-800 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+                <h3 class="text-lg font-bold text-pink-600"><i class="fa-solid fa-file-invoice-dollar mr-2"></i> Edit & Update Payment</h3>[span_314](start_span)[span_314](end_span)
+                <button onclick="closeEditModal()" class="text-slate-500 hover:text-slate-800 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>[span_315](start_span)[span_315](end_span)
             </div>
             
-            <input type="hidden" id="editRowIndex">
+            <input type="hidden" id="editRowIndex">[span_316](start_span)[span_316](end_span)
             
             <div class="space-y-3 text-sm">
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">Customer / Party Name:</label>
-                    <input type="text" id="modalCustName" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800 font-bold" readonly>
+                    <label class="block text-slate-700 font-medium mb-1">Customer / Party Name:</label>[span_317](start_span)[span_317](end_span)
+                    <input type="text" id="modalCustName" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800 font-bold" readonly>[span_318](start_span)[span_318](end_span)
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Payment Date:</label>
-                        <input type="date" id="modalPayDate" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
+                        <label class="block text-slate-700 font-medium mb-1">Payment Date:</label>[span_319](start_span)[span_319](end_span)
+                        <input type="date" id="modalPayDate" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">[span_320](start_span)[span_320](end_span)
                     </div>
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Module / Type:</label>
-                        <input type="text" id="modalModule" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
+                        <label class="block text-slate-700 font-medium mb-1">Module / Type:</label>[span_321](start_span)[span_321](end_span)
+                        <input type="text" id="modalModule" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>[span_322](start_span)[span_322](end_span)
                     </div>
                 </div>
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">Details / Quantity:</label>
-                    <input type="text" id="modalDetails" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
+                    <label class="block text-slate-700 font-medium mb-1">Details / Quantity:</label>[span_323](start_span)[span_323](end_span)
+                    <input type="text" id="modalDetails" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>[span_324](start_span)[span_324](end_span)
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Total / Outstanding Amt (₹):</label>
-                        <input type="number" id="modalTotalAmt" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-red-600 font-bold" readonly>
+                        <label class="block text-slate-700 font-medium mb-1">Total / Outstanding Amt (₹):</label>[span_325](start_span)[span_325](end_span)
+                        <input type="number" id="modalTotalAmt" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-red-600 font-bold" readonly>[span_326](start_span)[span_326](end_span)
                     </div>
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Paying Now (₹):</label>
-                        <input type="number" id="modalPayingAmt" placeholder="Enter amount" oninput="autoCalculateOutstanding()" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
+                        <label class="block text-slate-700 font-medium mb-1">Paying Now (₹):</label>[span_327](start_span)[span_327](end_span)
+                        <input type="number" id="modalPayingAmt" placeholder="Enter amount" oninput="autoCalculateOutstanding()" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">[span_328](start_span)[span_328](end_span)
                     </div>
                 </div>
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">Remaining Outstanding Amount (Auto Calculated):</label>
-                    <input type="text" id="modalRemainingAmt" class="w-full bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-700 font-extrabold" readonly>
+                    <label class="block text-slate-700 font-medium mb-1">Remaining Outstanding Amount (Auto Calculated):</label>[span_329](start_span)[span_329](end_span)
+                    <input type="text" id="modalRemainingAmt" class="w-full bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-700 font-extrabold" readonly>[span_330](start_span)[span_330](end_span)
                 </div>
             </div>
 
             <div class="flex gap-3 pt-2">
                 <button onclick="saveModalPaymentUpdate()" class="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-3 rounded-xl shadow-lg hover:opacity-90 transition">
-                    <i class="fa-solid fa-check mr-1"></i> Update Payment
+                    <i class="fa-solid fa-check mr-1"></i> Update Payment[span_331](start_span)[span_331](end_span)
                 </button>
-                <button onclick="closeEditModal()" class="bg-slate-200 text-slate-700 px-5 py-3 rounded-xl font-bold hover:bg-slate-300 transition">Cancel</button>
+                <button onclick="closeEditModal()" class="bg-slate-200 text-slate-700 px-5 py-3 rounded-xl font-bold hover:bg-slate-300 transition">Cancel</button>[span_332](start_span)[span_332](end_span)
             </div>
         </div>
     </div>
 
-    <!-- 12. JAVASCRIPT LOGIC WITH AUTO-CALCULATION & SIDEBAR AUTO-HIDE FIXES -->
+    <!-- 12. JAVASCRIPT LOGIC -->
     <script>
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
-        let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
-        let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
-        let cattlePurchaseRecords = JSON.parse(localStorage.getItem('shri_khatu_cattle_purchases')) || [];
-        let infrastructureRecords = JSON.parse(localStorage.getItem('shri_khatu_infra')) || [];
+        let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];[span_333](start_span)[span_333](end_span)
+        let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];[span_334](start_span)[span_334](end_span)
+        let cattlePurchaseRecords = JSON.parse(localStorage.getItem('shri_khatu_cattle_purchases')) || [];[span_335](start_span)[span_335](end_span)
+        let infrastructureRecords = JSON.parse(localStorage.getItem('shri_khatu_infra')) || [];[span_336](start_span)[span_336](end_span)
 
         let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
             cows: 0,
@@ -982,7 +990,7 @@
             cattlePurchaseInvestment: 0,
             totalMilkLitres: 0,
             monthlyRevenue: 0
-        };
+        };[span_337](start_span)[span_337](end_span)
 
         let customerDirectory = {
             "Rahul Sharma": "9876543210",
@@ -991,7 +999,7 @@
             "Kishan Singh": "9811223344",
             "Agri Feed Suppliers": "9722334455",
             "Shajapur Organic Hub": "9655443322"
-        };
+        };[span_338](start_span)[span_338](end_span)
 
         let cattleChartInstance = null;
         let milkChartInstance = null;
@@ -1008,7 +1016,7 @@
             initCharts();
             applyGlobalDateFilter();
             restoreSavedTables();
-        };
+        };[span_339](start_span)[span_339](end_span)
         
         function persistAppData() {
             localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
@@ -1016,9 +1024,8 @@
             localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
             localStorage.setItem('shri_khatu_cattle_purchases', JSON.stringify(cattlePurchaseRecords));
             localStorage.setItem('shri_khatu_infra', JSON.stringify(infrastructureRecords));
-        }
+        }[span_340](start_span)[span_340](end_span)
 
-        // Global Date Filter Application across Dashboard Boxes
         function applyGlobalDateFilter() {
             let startVal = document.getElementById('globalFilterStart').value;
             let endVal = document.getElementById('globalFilterEnd').value;
@@ -1063,7 +1070,7 @@
             netProfitEl.style.color = netProfit >= 0 ? "#ffffff" : "#fca5a5";
 
             updateCattleStatsDisplay();
-        }
+        }[span_341](start_span)[span_341](end_span)
 
         function resetGlobalDateFilter() {
             let today = new Date();
@@ -1071,7 +1078,7 @@
             document.getElementById('globalFilterStart').valueAsDate = firstDay;
             document.getElementById('globalFilterEnd').valueAsDate = today;
             applyGlobalDateFilter();
-        }
+        }[span_342](start_span)[span_342](end_span)
 
         function updateCattleStatsDisplay() {
             let totalCows = liveStats.cows || 0;
@@ -1082,14 +1089,14 @@
             document.getElementById('cattle-purchase-investment').innerText = `₹ ${(liveStats.cattlePurchaseInvestment || 0).toLocaleString('en-IN')}`;
             
             updatePendingStats();
-        }
+        }[span_343](start_span)[span_343](end_span)
 
         function updatePendingStats() {
             let totalPending = 0;
             pendingRecords.forEach(p => { totalPending += (p.pendingAmount || 0); });
             let pendingEl = document.getElementById('pending-amount');
             if(pendingEl) pendingEl.innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
-        }
+        }[span_344](start_span)[span_344](end_span)
 
         function restoreSavedTables() {
             updatePendingStats();
@@ -1123,9 +1130,8 @@
                     infraTbody.insertAdjacentHTML('afterbegin', row);
                 });
             }
-        }
+        }[span_345](start_span)[span_345](end_span)
 
-        // Chart Initializations
         function initCharts() {
             const ctxCattle = document.getElementById('cattleChart').getContext('2d');
             cattleChartInstance = new Chart(ctxCattle, {
@@ -1157,29 +1163,27 @@
                 },
                 options: { responsive: true, maintainAspectRatio: false }
             });
-        }
+        }[span_346](start_span)[span_346](end_span)
 
-        // Navigation & Sidebar Auto-Hide Logic
         function toggleSidebar() {
             let sb = document.getElementById('sidebar');
             sb.classList.toggle('-translate-x-full');
-        }
+        }[span_347](start_span)[span_347](end_span)
 
         function switchTab(tabId, el) {
             document.querySelectorAll('.tab-content').forEach(tc => tc.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
             document.querySelectorAll('.menu-3d-btn').forEach(btn => btn.classList.remove('active-tab'));
             if(el) el.classList.add('active-tab');
-            
             document.getElementById('sidebar').classList.add('-translate-x-full');
-        }
+        }[span_348](start_span)[span_348](end_span)
 
         function toggleBillingSubMenu() {
             let sub = document.getElementById('billingSubMenu');
             let arrow = document.getElementById('billingArrow');
             sub.classList.toggle('hidden');
             arrow.classList.toggle('rotate-180');
-        }
+        }[span_349](start_span)[span_349](end_span)
 
         function switchSubTab(subId, el) {
             switchTab('billing-invoice', null);
@@ -1187,13 +1191,9 @@
             document.getElementById('subtab-' + subId).classList.remove('hidden');
             document.querySelectorAll('.sub-menu-btn').forEach(btn => btn.classList.remove('active-sub'));
             if(el) el.classList.add('active-sub');
-            
             document.getElementById('sidebar').classList.add('-translate-x-full');
-        }
+        }[span_350](start_span)[span_350](end_span)
 
-        // ==========================================
-        // RESTORED AUTO-CALCULATION FUNCTIONS
-        // ==========================================
         function calculateFatBilling() {
             let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             let fat = parseFloat(document.getElementById('milkFat').value) || 0;
@@ -1206,7 +1206,7 @@
             let total = qty * ratePerLiter;
             calculatedTotalAmt = total;
             document.getElementById('totalAmount').value = total.toFixed(2);
-        }
+        }[span_351](start_span)[span_351](end_span)
 
         function calculateRetailBilling() {
             let liters = parseFloat(document.getElementById('retailLitermt').value) || 0;
@@ -1215,7 +1215,7 @@
             let total = liters * rate;
             calculatedRetailAmt = total;
             document.getElementById('retailTotalAmt').value = total.toFixed(2);
-        }
+        }[span_352](start_span)[span_352](end_span)
 
         function calculateProductTotal() {
             let qty = parseFloat(document.getElementById('prodQtyNum').value) || 0;
@@ -1224,9 +1224,8 @@
             let total = qty * rate;
             calculatedProductTotalAmt = total;
             document.getElementById('prodTotalAmount').value = total.toFixed(2);
-        }
+        }[span_353](start_span)[span_353](end_span)
 
-        // Saving Infrastructure & Demand Entry
         function saveInfrastructureEntry() {
             let date = document.getElementById('infraDate').value || new Date().toISOString().split('T')[0];
             let category = document.getElementById('infraCategory').value;
@@ -1234,16 +1233,15 @@
             let vendor = document.getElementById('infraVendor').value || 'Self';
             let details = document.getElementById('infraDesc').value || '-';
 
-            if(amount <= 0) { alert('Please enter a valid amount or value.'); return; }
+            if(amount <= 0) { alert('Please enter a valid investment amount.'); return; }
 
             infrastructureRecords.push({ date, category, amount, vendor, details });
             persistAppData();
             restoreSavedTables();
             applyGlobalDateFilter();
-            alert('Demand & Infrastructure entry saved successfully!');
-        }
+            alert('Infrastructure Asset saved successfully!');
+        }[span_354](start_span)[span_354](end_span)
 
-        // Additional stubs
         function saveMilkEntry() {}
         function saveRetailEntry() {}
         function saveCattleEntry() {}
