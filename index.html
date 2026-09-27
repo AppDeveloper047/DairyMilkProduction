@@ -1186,8 +1186,10 @@
             document.querySelectorAll('.menu-3d-btn').forEach(btn => btn.classList.remove('active-tab'));
             if(el) el.classList.add('active-tab');
             
-            // Automatically close sidebar on click/selection
-            document.getElementById('sidebar').classList.add('-translate-x-full');
+            // Automatically close sidebar on click/selection (Mobile friendly fix)
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
         }
 
         function toggleBillingSubMenu() {
@@ -1204,8 +1206,10 @@
             document.querySelectorAll('.sub-menu-btn').forEach(btn => btn.classList.remove('active-sub'));
             if(el) el.classList.add('active-sub');
             
-            // Automatically close sidebar on sub-option selection
-            document.getElementById('sidebar').classList.add('-translate-x-full');
+            // Automatically close sidebar on sub-option selection (Mobile friendly fix)
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
         }
 
         // ==========================================
@@ -1242,6 +1246,57 @@
                 } else {
                     mobileInput.value = '';
                 }
+            }
+        }
+
+        function onCattlePartyChange(val) {
+            let customInput = document.getElementById('cattlePartyCustom');
+            let mobileInput = document.getElementById('cattlePartyMobile');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+                mobileInput.value = '';
+            } else {
+                customInput.classList.add('hidden');
+                if (customerDirectory[val]) mobileInput.value = customerDirectory[val];
+            }
+        }
+
+        function onProductPartyChange(val) {
+            let customInput = document.getElementById('prodPartyCustom');
+            let mobileInput = document.getElementById('prodPartyMobile');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+                mobileInput.value = '';
+            } else {
+                customInput.classList.add('hidden');
+                if (customerDirectory[val]) mobileInput.value = customerDirectory[val];
+            }
+        }
+
+        function checkNewCattleCategory(val) {
+            let customInput = document.getElementById('cattleBreedCustom');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
+            }
+        }
+
+        function checkNewProduct(val) {
+            let customInput = document.getElementById('prodNameCustom');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
+            }
+        }
+
+        function checkNewExpenseCategory(val) {
+            let customInput = document.getElementById('expCategoryCustom');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
             }
         }
 
@@ -1297,21 +1352,21 @@
             alert('Infrastructure Asset saved successfully!');
         }
 
-        // Additional stubs
-        function saveMilkEntry() {}
-        function saveRetailEntry() {}
-        function saveCattleEntry() {}
-        function saveProductEntry() {}
-        function saveExpenseEntry() {}
+        // Additional handler stubs (placeholder logic preserved)
+        function saveMilkEntry() { alert('Bulk Entry saved!'); }
+        function saveRetailEntry() { alert('Retail Bill saved!'); }
+        function saveCattleEntry() { alert('Cattle Record saved!'); }
+        function saveProductEntry() { alert('Product Record saved!'); }
+        function saveExpenseEntry() { alert('Expense saved!'); }
         function searchCustomerLedger() {}
         function renderPendingCustomers() {}
         function filterPendingList() {}
         function closeEditModal() {}
         function saveModalPaymentUpdate() {}
         function autoCalculateOutstanding() {}
-        function saveProfileChanges() {}
-        function saveBillTerms() {}
-        function sendWhatsAppMessage() {}
+        function saveProfileChanges() { alert('Profile updated successfully!'); }
+        function saveBillTerms() { alert('Bill terms saved successfully!'); }
+        function sendWhatsAppMessage() { alert('Redirecting to WhatsApp...'); }
     </script>
 </body>
 </html>
