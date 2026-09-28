@@ -184,12 +184,16 @@
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Total Cattle Count</div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-cow mr-1"></i> Total Cattle Count</span>
+                        </div>
                         <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Cattle Purchase</div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-horse mr-1"></i> Cattle Purchase</span>
+                        </div>
                         <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
@@ -201,30 +205,36 @@
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Milk Production</div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-glass-water mr-1"></i> Milk Production</span>
+                        </div>
                         <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Revenue</div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-chart-line mr-1"></i> Revenue</span>
+                        </div>
                         <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title" style="font-size: 14px; opacity: 0.9;">Pending Amount</div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-indian-rupee-sign mr-1"></i> Pending Amount</span>
+                        </div>
                         <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-calculator mr-1"></i>Expenses</span>
+                            <span><i class="fa-solid fa-calculator mr-1"></i> Expenses</span>
                         </div>
                         <div class="card-value mt-4" id="filtered-expense-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #059669, #047857); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-chart-line mr-1"></i> Net Profit</span>
+                            <span><i class="fa-solid fa-arrow-trend-up mr-1"></i> Net Profit</span>
                         </div>
                         <div class="card-value mt-4" id="net-profit-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
@@ -289,13 +299,13 @@
                         </div>
                         
                         <div class="mb-3">
-                        <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor / Contractor Name:</label>
-                        <select id="infraVendorSelect" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm mb-2" onchange="handleInfraVendorChange(this)">
-                        <option value="">Select Vendor / Contractor</option>
-                        <option value="Self">Self</option>
-                        <option value="NEW">+ Add New Vendor</option>
-                        </select>
-                        <input type="text" id="infraVendorCustom" placeholder="Enter New Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm hidden">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor / Contractor Name:</label>
+                            <select id="infraVendorSelect" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm mb-2" onchange="handleInfraVendorChange(this)">
+                                <option value="">Select Vendor / Contractor</option>
+                                <option value="Self">Self</option>
+                                <option value="NEW">+ Add New Vendor</option>
+                            </select>
+                            <input type="text" id="infraVendorCustom" placeholder="Enter New Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm hidden">
                         </div>
                         
                         <div class="md:col-span-2">
@@ -482,7 +492,6 @@
                                 <input type="text" id="totalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
                             </div>
                             
-                            <!-- UPDATED SECTION FOR DROP DOWN AND AUTO MOBILE -->
                             <div>
                                 <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Party Name:</label>
                                 <select id="bulkDairySelect" onchange="onBulkPartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
@@ -861,7 +870,7 @@
                         </div>
                         <div>
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Contact Number / Helpline:</label>
-                            <input type="text" id="profileContact" value="+91 9876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            <input type="text" id="profileContact" value="+91 9752266047" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                         </div>
                     </div>
                     <div class="pt-2">
@@ -906,7 +915,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Mobile Number:</label>
-                            <input type="text" id="waMobile" placeholder="e.g. 919876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
+                            <input type="text" id="waMobile" value="9752266047" placeholder="e.g. 919876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Message Template Type:</label>
@@ -1193,7 +1202,6 @@
             document.querySelectorAll('.menu-3d-btn').forEach(btn => btn.classList.remove('active-tab'));
             if(el) el.classList.add('active-tab');
             
-            // Automatically close sidebar on click/selection (Mobile friendly fix)
             if (window.innerWidth < 768) {
                 document.getElementById('sidebar').classList.add('-translate-x-full');
             }
@@ -1213,15 +1221,11 @@
             document.querySelectorAll('.sub-menu-btn').forEach(btn => btn.classList.remove('active-sub'));
             if(el) el.classList.add('active-sub');
             
-            // Automatically close sidebar on sub-option selection (Mobile friendly fix)
             if (window.innerWidth < 768) {
                 document.getElementById('sidebar').classList.add('-translate-x-full');
             }
         }
 
-        // ==========================================
-        // AUTOMATIC MOBILE NUMBER FILLING FOR DROP DOWNS
-        // ==========================================
         function onBulkPartyChange(val) {
             let customInput = document.getElementById('bulkDairyCustom');
             let mobileInput = document.getElementById('bulkDairyMobile');
@@ -1307,9 +1311,6 @@
             }
         }
 
-        // ==========================================
-        // RESTORED AUTO-CALCULATION FUNCTIONS
-        // ==========================================
         function calculateFatBilling() {
             let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             let fat = parseFloat(document.getElementById('milkFat').value) || 0;
@@ -1342,7 +1343,6 @@
             document.getElementById('prodTotalAmount').value = total.toFixed(2);
         }
 
-        // Vendor Dropdown Handler for Infrastructure
         function handleInfraVendorChange(selectObj) {
             let customInput = document.getElementById('infraVendorCustom');
             if (selectObj.value === 'NEW') {
@@ -1354,9 +1354,7 @@
                 customInput.value = selectObj.value;
             }
         }
-        
 
-        // Updated Saving Infrastructure Entry
         function saveInfrastructureEntry() {
             let date = document.getElementById('infraDate').value || new Date().toISOString().split('T')[0];
             let category = document.getElementById('infraCategory').value;
@@ -1375,7 +1373,6 @@
             restoreSavedTables();
             applyGlobalDateFilter();
             
-            // Clear / Reset Fields
             document.getElementById('infraAmount').value = '';
             document.getElementById('infraVendorSelect').value = '';
             document.getElementById('infraVendorCustom').value = '';
@@ -1385,7 +1382,6 @@
             alert('Infrastructure Asset saved successfully!');
         }
         
-        // Additional handler stubs (placeholder logic preserved)
         function saveMilkEntry() { alert('Bulk Entry saved!'); }
         function saveRetailEntry() { alert('Retail Bill saved!'); }
         function saveCattleEntry() { alert('Cattle Record saved!'); }
@@ -1399,7 +1395,11 @@
         function autoCalculateOutstanding() {}
         function saveProfileChanges() { alert('Profile updated successfully!'); }
         function saveBillTerms() { alert('Bill terms saved successfully!'); }
-        function sendWhatsAppMessage() { alert('Redirecting to WhatsApp...'); }
+        function sendWhatsAppMessage() { 
+            let mobile = document.getElementById('waMobile').value || '9752266047';
+            let message = encodeURIComponent(document.getElementById('waMessageText').value);
+            window.open(`https://wa.me/${mobile}?text=${message}`, '_blank');
+        }
     </script>
 </body>
 </html>
