@@ -70,64 +70,63 @@
     <!-- 1. SIDEBAR NAVIGATION PANEL -->
     <div id="sidebar" class="w-72 sidebar-3d-bg text-white flex flex-col z-50 transform -translate-x-full md:translate-x-0 fixed md:relative h-full">
         <div class="p-6 text-2xl font-extrabold tracking-wider flex items-center justify-between border-b border-white/15">
-            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-translate="app_title">Tiwari & Son's</span></span>
+            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-lang-en="Tiwari & Son's" data-lang-hi="तिवारी एण्ड सन्र्स">Tiwari & Son's</span></span>
             <button onclick="toggleSidebar()" class="md:hidden text-white text-xl hover:text-pink-400 transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
         <nav class="flex-1 px-4 py-6 space-y-3.5 overflow-y-auto">
             <a href="#home" onclick="switchTab('home', this)" class="menu-3d-btn active-tab flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-translate="menu_home">Dashboard</span>
+                <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-lang-en="Dashboard" data-lang-hi="डैशबोर्ड">Dashboard</span>
             </a>
             
             <div>
                 <button onclick="toggleBillingSubMenu()" class="menu-3d-btn w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                    <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-translate="menu_billing">Billing Invoice</span></span>
+                    <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-lang-en="Billing Invoice" data-lang-hi="बिलिंग और रसीद">Billing Invoice</span></span>
                     <i class="fa-solid fa-chevron-down text-xs text-gray-300 transition-transform duration-300" id="billingArrow"></i>
                 </button>
                 <div id="billingSubMenu" class="hidden pl-4 pr-2 py-2 space-y-2 mt-2 bg-black/30 rounded-xl border border-white/10 backdrop-blur-md">
                     <button onclick="switchSubTab('bulk-dairy', this)" class="sub-menu-btn active-sub w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-industry mr-2 text-pink-400 text-xs"></i> Bulk Dairy Billing
+                        <i class="fa-solid fa-industry mr-2 text-pink-400 text-xs"></i> <span data-lang-en="Bulk Dairy Billing" data-lang-hi="बल्क डेयरी बिक्री">Bulk Dairy Billing</span>
                     </button>
                     <button onclick="switchSubTab('retail-milk', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-store mr-2 text-purple-400 text-xs"></i> Retail Milk Selling
+                        <i class="fa-solid fa-store mr-2 text-purple-400 text-xs"></i> <span data-lang-en="Retail Milk Selling" data-lang-hi="खुला दूध बिक्री (रिटेल)">Retail Milk Selling</span>
                     </button>
                     <button onclick="switchSubTab('cattle-deal', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-horse mr-2 text-amber-400 text-xs"></i> Cattle Purchase & Sell
+                        <i class="fa-solid fa-horse mr-2 text-amber-400 text-xs"></i> <span data-lang-en="Cattle Purchase & Sell" data-lang-hi="पशु खरीद-बिक्री">Cattle Purchase & Sell</span>
                     </button>
                     <button onclick="switchSubTab('other-products', this)" class="sub-menu-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center">
-                        <i class="fa-solid fa-boxes-stacked mr-2 text-emerald-400 text-xs"></i> Other Products Buy/Sell
+                        <i class="fa-solid fa-boxes-stacked mr-2 text-emerald-400 text-xs"></i> <span data-lang-en="Other Products Buy/Sell" data-lang-hi="अन्य उत्पाद क्रय-विक्रय">Other Products Buy/Sell</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Infrastructure & Asset Investment Menu Link -->
             <a href="#infrastructure" onclick="switchTab('infrastructure', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> <span>Infrastructure & Asset</span>
+                <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> <span data-lang-en="Infrastructure & Asset" data-lang-hi="बुनियादी ढांचा एवं संपत्ति">Infrastructure & Asset</span>
             </a>
 
             <a href="#ledger" onclick="switchTab('ledger', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> <span>Payment Ledger</span>
+                <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> <span data-lang-en="Payment Ledger" data-lang-hi="खाता बही (लेजर)">Payment Ledger</span>
             </a>
 
             <a href="#pending-customers" onclick="switchTab('pending-customers', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span>Pending Amount</span>
+                <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span data-lang-en="Pending Amount" data-lang-hi="बकाया राशि">Pending Amount</span>
             </a>
 
             <a href="#expense" onclick="switchTab('expense', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>
+                <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-lang-en="Expense Management" data-lang-hi="खर्च प्रबंधन">Expense Management</span>
             </a>
             <a href="#profile" onclick="switchTab('profile', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-translate="menu_profile">Edit Profile</span>
+                <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-lang-en="Edit Profile" data-lang-hi="प्रोफ़ाइल संपादित करें">Edit Profile</span>
             </a>
             <a href="#terms" onclick="switchTab('terms', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-translate="menu_terms">Bill Terms</span>
+                <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-lang-en="Bill Terms" data-lang-hi="बिल के नियम व शर्तें">Bill Terms</span>
             </a>
             <a href="#whatsapp" onclick="switchTab('whatsapp', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-translate="menu_whatsapp">WhatsApp Messages</span>
+                <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-lang-en="WhatsApp Messages" data-lang-hi="व्हाट्सएप संदेश">WhatsApp Messages</span>
             </a>
         </nav>
 
-        <div id="sidebarFooter" class="p-4 border-t border-white/15 text-xs text-center text-slate-400">
+        <div id="sidebarFooter" class="p-4 border-t border-white/15 text-xs text-center text-slate-400" data-lang-en="© 2026 Tiwari & Sons Farming" data-lang-hi="© 2026 तिवारी एंड सन्र्स फार्मिंग">
             © 2026 Tiwari & Sons Farming
         </div>
     </div>
@@ -138,11 +137,11 @@
             <button onclick="toggleSidebar()" class="md:hidden text-slate-700 text-xl"><i class="fa-solid fa-bars"></i></button>
             
             <div class="flex-1 flex flex-col items-center justify-center text-center px-4">
-                <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Tiwari & Son's Dairy Farm</h1>
+                <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600" data-lang-en="Tiwari & Son's Dairy Farm" data-lang-hi="तिवारी एण्ड सन्र्स डेयरी फार्म">Tiwari & Son's Dairy Farm</h1>
                 <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600 mt-0.5 font-medium">
-                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Tingajpur, Madhya Pradesh</span>
+                    <span id="headerOfficeLoc" data-lang-en="Head Office: Tingajpur, Madhya Pradesh" data-lang-hi="प्रधान कार्यालय: टिंगजपुर, मध्य प्रदेश"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Tingajpur, Madhya Pradesh</span>
                     <span>|</span>
-                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Tingajpur, Madhya Pradesh</span>
+                    <span id="headerHubLoc" data-lang-en="Hub: Tingajpur, Madhya Pradesh" data-lang-hi="हब: टिंगजपुर, मध्य प्रदेश"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Tingajpur, Madhya Pradesh</span>
                     <span>|</span>
                     <span id="headerContactNum"><i class="fa-solid fa-phone text-emerald-500 mr-1"></i>+91 9752266047</span>
                 </div>
@@ -164,19 +163,19 @@
                 <div class="card-light-box p-4 rounded-2xl shadow-md bg-white/90 flex flex-col md:flex-row items-center justify-between gap-4 border border-pink-200">
                     <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
                         <i class="fa-solid fa-calendar-days text-pink-600 text-lg"></i>
-                        <span>Global Date-to-Date Dashboard Filter:</span>
+                        <span data-lang-en="Global Date-to-Date Dashboard Filter:" data-lang-hi="दिनांक अनुसार डैशबोर्ड फ़िल्टर:">Global Date-to-Date Dashboard Filter:</span>
                     </div>
                     <div class="flex items-center gap-3 w-full md:w-auto">
                         <div class="flex items-center gap-1.5 text-xs">
-                            <label class="font-semibold text-slate-600">From:</label>
+                            <label class="font-semibold text-slate-600" data-lang-en="From:" data-lang-hi="से:">From:</label>
                             <input type="date" id="globalFilterStart" onchange="applyGlobalDateFilter()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-pink-500">
                         </div>
                         <div class="flex items-center gap-1.5 text-xs">
-                            <label class="font-semibold text-slate-600">To:</label>
+                            <label class="font-semibold text-slate-600" data-lang-en="To:" data-lang-hi="तक:">To:</label>
                             <input type="date" id="globalFilterEnd" onchange="applyGlobalDateFilter()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-pink-500">
                         </div>
                         <button onclick="resetGlobalDateFilter()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> Reset
+                            <i class="fa-solid fa-rotate-right mr-1"></i> <span data-lang-en="Reset" data-lang-hi="रीसेट">Reset</span>
                         </button>
                     </div>
                 </div>
@@ -185,56 +184,56 @@
                     
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-cow mr-1"></i> Total Cattle Count</span>
+                            <span><i class="fa-solid fa-cow mr-1"></i> <span data-lang-en="Total Cattle Count" data-lang-hi="कुल पशु संख्या">Total Cattle Count</span></span>
                         </div>
                         <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-horse mr-1"></i> Cattle Purchase</span>
+                            <span><i class="fa-solid fa-horse mr-1"></i> <span data-lang-en="Cattle Purchase" data-lang-hi="पशु खरीद निवेश">Cattle Purchase</span></span>
                         </div>
                         <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0d9488, #0f766e); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-building-shield mr-1"></i> Infrastructure & Asset</span>
+                            <span><i class="fa-solid fa-building-shield mr-1"></i> <span data-lang-en="Infrastructure & Asset" data-lang-hi="बुनियादी ढांचा एवं संपत्ति">Infrastructure & Asset</span></span>
                         </div>
                         <div class="card-value mt-4" id="filtered-infra-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-glass-water mr-1"></i> Milk Production</span>
+                            <span><i class="fa-solid fa-glass-water mr-1"></i> <span data-lang-en="Milk Production" data-lang-hi="दूध उत्पादन">Milk Production</span></span>
                         </div>
                         <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-chart-line mr-1"></i> Revenue</span>
+                            <span><i class="fa-solid fa-chart-line mr-1"></i> <span data-lang-en="Revenue" data-lang-hi="कुल आय">Revenue</span></span>
                         </div>
                         <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-indian-rupee-sign mr-1"></i> Pending Amount</span>
+                            <span><i class="fa-solid fa-indian-rupee-sign mr-1"></i> <span data-lang-en="Pending Amount" data-lang-hi="कुल बकाया राशि">Pending Amount</span></span>
                         </div>
                         <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-calculator mr-1"></i> Expenses</span>
+                            <span><i class="fa-solid fa-calculator mr-1"></i> <span data-lang-en="Expenses" data-lang-hi="कुल खर्च">Expenses</span></span>
                         </div>
                         <div class="card-value mt-4" id="filtered-expense-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #059669, #047857); padding: 15px; border-radius: 12px; color: white;">
                         <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
-                            <span><i class="fa-solid fa-arrow-trend-up mr-1"></i> Net Profit</span>
+                            <span><i class="fa-solid fa-arrow-trend-up mr-1"></i> <span data-lang-en="Net Profit" data-lang-hi="शुद्ध लाभ">Net Profit</span></span>
                         </div>
                         <div class="card-value mt-4" id="net-profit-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
@@ -245,9 +244,9 @@
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
+                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> <span data-lang-en="Cattle Ratio Breakdown" data-lang-hi="पशु अनुपात विवरण">Cattle Ratio Breakdown</span>
                             </h3>
-                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
+                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold" data-lang-en="Live Share" data-lang-hi="लाइव शेयर">Live Share</span>
                         </div>
                         <div class="relative w-full flex justify-center items-center py-2">
                             <div class="w-[300px] h-[300px]">
@@ -259,9 +258,9 @@
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                                <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend
+                                <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> <span data-lang-en="Bulk Milk Sales & Trend" data-lang-hi="दूध बिक्री और रुझान">Bulk Milk Sales & Trend</span>
                             </h3>
-                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Live Filtered Output</span>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold" data-lang-en="Live Filtered Output" data-lang-hi="लाइव फ़िल्टर परिणाम">Live Filtered Output</span>
                         </div>
                         <div class="relative w-full py-2">
                             <canvas id="milkChart" height="155"></canvas>
@@ -274,68 +273,68 @@
             <div id="tab-infrastructure" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-building-shield mr-2"></i> Infrastructure & Asset Investment Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Keep a record of expenses incurred on farm sheds, machinery, borewells, vehicles, or other infrastructure and assets.</p>
+                        <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-building-shield mr-2"></i> <span data-lang-en="Infrastructure & Asset Investment Management" data-lang-hi="बुनियादी ढांचा और संपत्ति निवेश प्रबंधन">Infrastructure & Asset Investment Management</span></h2>
+                        <p class="text-slate-600 text-sm mt-1" data-lang-en="Keep a record of expenses incurred on farm sheds, machinery, borewells, vehicles, or other infrastructure and assets." data-lang-hi="फार्म शेड, मशीनरी, बोरवेल, वाहन या अन्य बुनियादी ढांचे पर किए गए खर्चों का रिकॉर्ड रखें।">Keep a record of expenses incurred on farm sheds, machinery, borewells, vehicles, or other infrastructure and assets.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Date:" data-lang-hi="दिनांक:">Date:</label>
                             <input type="date" id="infraDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Asset Category:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Asset Category:" data-lang-hi="संपत्ति श्रेणी:">Asset Category:</label>
                             <select id="infraCategory" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
-                                <option value="Dairy Shed Construction">Dairy Shed Construction</option>
-                                <option value="Milking Machine & Equipment">Milking Machine & Equipment</option>
-                                <option value="Borewell & Water Pipeline">Borewell & Water Pipeline</option>
-                                <option value="Chaff Cutter Machine">Chaff Cutter Machine</option>
-                                <option value="Transport Vehicle / Tractor">Transport Vehicle</option>
-                                <option value="Other Infrastructure">Other Infrastructure Asset</option>
+                                <option value="Dairy Shed Construction" data-lang-en="Dairy Shed Construction" data-lang-hi="डेयरी शेड निर्माण">Dairy Shed Construction</option>
+                                <option value="Milking Machine & Equipment" data-lang-en="Milking Machine & Equipment" data-lang-hi="मिल्किंग मशीन और उपकरण">Milking Machine & Equipment</option>
+                                <option value="Borewell & Water Pipeline" data-lang-en="Borewell & Water Pipeline" data-lang-hi="बोरवेल और पानी की पाइपलाइन">Borewell & Water Pipeline</option>
+                                <option value="Chaff Cutter Machine" data-lang-en="Chaff Cutter Machine" data-lang-hi="चारा काटने की मशीन (कुट्टी मशीन)">Chaff Cutter Machine</option>
+                                <option value="Transport Vehicle / Tractor" data-lang-en="Transport Vehicle" data-lang-hi="परिवहन वाहन / ट्रैक्टर">Transport Vehicle</option>
+                                <option value="Other Infrastructure" data-lang-en="Other Infrastructure Asset" data-lang-hi="अन्य बुनियादी ढांचा संपत्ति">Other Infrastructure Asset</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Investment Amount (₹):</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Investment Amount (₹):" data-lang-hi="निवेश राशि (₹):">Investment Amount (₹):</label>
                             <input type="number" id="infraAmount" placeholder="e.g. 150000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-teal-700 font-bold focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                         
                         <div class="mb-3">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor / Contractor Name:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Vendor / Contractor Name:" data-lang-hi="विक्रेता / ठेकेदार का नाम:">Vendor / Contractor Name:</label>
                             <select id="infraVendorSelect" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm mb-2" onchange="handleInfraVendorChange(this)">
-                                <option value="">Select Vendor / Contractor</option>
-                                <option value="Self">Self</option>
-                                <option value="NEW">+ Add New Vendor</option>
+                                <option value="" data-lang-en="Select Vendor / Contractor" data-lang-hi="विक्रेता / ठेकेदार चुनें">Select Vendor / Contractor</option>
+                                <option value="Self" data-lang-en="Self" data-lang-hi="स्वयं">Self</option>
+                                <option value="NEW" data-lang-en="+ Add New Vendor" data-lang-hi="+ नया विक्रेता जोड़ें">+ Add New Vendor</option>
                             </select>
                             <input type="text" id="infraVendorCustom" placeholder="Enter New Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm hidden">
                         </div>
                         
                         <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Description / Notes:" data-lang-hi="विवरण / नोट्स:">Description / Notes:</label>
                             <input type="text" id="infraDesc" placeholder="e.g. Paid for iron sheds and roofing materials" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveInfrastructureEntry()" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Infrastructure Asset
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save Infrastructure Asset" data-lang-hi="बुनियादी ढांचा संपत्ति सहेजें">Save Infrastructure Asset</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> Infrastructure & Assets History</h3>
+                    <h3 class="text-lg font-bold text-teal-700"><i class="fa-solid fa-table mr-2"></i> <span data-lang-en="Infrastructure & Assets History" data-lang-hi="बुनियादी ढांचा और संपत्ति इतिहास">Infrastructure & Assets History</span></h3>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th>
-                                    <th class="p-3">Asset Category</th>
-                                    <th class="p-3">Vendor</th>
-                                    <th class="p-3">Description</th>
-                                    <th class="p-3">Amount</th>
+                                    <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                    <th class="p-3" data-lang-en="Asset Category" data-lang-hi="संपत्ति श्रेणी">Asset Category</th>
+                                    <th class="p-3" data-lang-en="Vendor" data-lang-hi="विक्रेता">Vendor</th>
+                                    <th class="p-3" data-lang-en="Description" data-lang-hi="विवरण">Description</th>
+                                    <th class="p-3" data-lang-en="Amount" data-lang-hi="राशि">Amount</th>
                                 </tr>
                             </thead>
                             <tbody id="infraTableBody" class="text-slate-700">
                                 <tr class="border-b border-slate-200/60 text-slate-500">
-                                    <td colspan="5" class="p-4 text-center">No infrastructure assets recorded yet.</td>
+                                    <td colspan="5" class="p-4 text-center" data-lang-en="No infrastructure assets recorded yet." data-lang-hi="अभी तक कोई बुनियादी ढांचा संपत्ति दर्ज नहीं की गई है।">No infrastructure assets recorded yet.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -347,33 +346,33 @@
             <div id="tab-ledger" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl shadow-xl space-y-5">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-cyan-700"><i class="fa-solid fa-book-open mr-2"></i> Customer Payment Ledger & Statement</h2>
-                        <p class="text-slate-600 text-sm mt-1">Search customer name or mobile number to view complete transaction and ledger history.</p>
+                        <h2 class="text-xl font-bold text-cyan-700"><i class="fa-solid fa-book-open mr-2"></i> <span data-lang-en="Customer Payment Ledger & Statement" data-lang-hi="ग्राहक खाता बही और स्टेटमेंट">Customer Payment Ledger & Statement</span></h2>
+                        <p class="text-slate-600 text-sm mt-1" data-lang-en="Search customer name or mobile number to view complete transaction and ledger history." data-lang-hi="पूर्ण लेनदेन और लेजर इतिहास देखने के लिए ग्राहक का नाम या मोबाइल नंबर खोजें।">Search customer name or mobile number to view complete transaction and ledger history.</p>
                     </div>
                     
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex-1">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Customer Name / Mobile Number</label>
+                            <label class="block text-sm font-medium text-slate-700 mb-1" data-lang-en="Customer Name / Mobile Number" data-lang-hi="ग्राहक का नाम / मोबाइल नंबर">Customer Name / Mobile Number</label>
                             <input type="text" id="ledgerSearchInput" placeholder="Enter Name or Mobile Number..." class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-cyan-500 outline-none shadow-sm">
                         </div>
                         <div class="flex items-end">
                             <button onclick="searchCustomerLedger()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl font-medium text-sm transition shadow-md">
-                                <i class="fa-solid fa-magnifying-glass mr-1"></i> Search Ledger
+                                <i class="fa-solid fa-magnifying-glass mr-1"></i> <span data-lang-en="Search Ledger" data-lang-hi="खाता खोजें">Search Ledger</span>
                             </button>
                         </div>
                     </div>
 
                     <div id="ledgerSummaryBox" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4 bg-cyan-50/70 p-4 rounded-2xl border border-cyan-200">
                         <div>
-                            <p class="text-xs text-slate-500 font-medium">Customer Name</p>
+                            <p class="text-xs text-slate-500 font-medium" data-lang-en="Customer Name" data-lang-hi="ग्राहक का नाम">Customer Name</p>
                             <p id="summaryName" class="text-lg font-bold text-slate-800">-</p>
                         </div>
                         <div>
-                            <p class="text-xs text-slate-500 font-medium">Current Outstanding Balance</p>
+                            <p class="text-xs text-slate-500 font-medium" data-lang-en="Current Outstanding Balance" data-lang-hi="वर्तमान बकाया राशि">Current Outstanding Balance</p>
                             <p id="summaryPending" class="text-lg font-bold text-red-600">₹0</p>
                         </div>
                         <div class="flex justify-end items-center">
-                            <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition shadow"><i class="fa-solid fa-print mr-1"></i> Print Statement</button>
+                            <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition shadow"><i class="fa-solid fa-print mr-1"></i> <span data-lang-en="Print Statement" data-lang-hi="स्टेटमेंट प्रिंट करें">Print Statement</span></button>
                         </div>
                     </div>
 
@@ -381,16 +380,16 @@
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th>
-                                    <th class="p-3">Module / Type</th>
-                                    <th class="p-3">Details / Ref</th>
-                                    <th class="p-3">Amount</th>
-                                    <th class="p-3">Status</th>
+                                    <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                    <th class="p-3" data-lang-en="Module / Type" data-lang-hi="माड्यूल / प्रकार">Module / Type</th>
+                                    <th class="p-3" data-lang-en="Details / Ref" data-lang-hi="विवरण / संदर्भ">Details / Ref</th>
+                                    <th class="p-3" data-lang-en="Amount" data-lang-hi="राशि">Amount</th>
+                                    <th class="p-3" data-lang-en="Status" data-lang-hi="स्थिति">Status</th>
                                 </tr>
                             </thead>
                             <tbody id="ledgerTableBody" class="text-slate-700">
                                 <tr class="border-b border-slate-200/60 text-slate-500">
-                                    <td colspan="5" class="p-4 text-center">Please search a customer to view ledger history.</td>
+                                    <td colspan="5" class="p-4 text-center" data-lang-en="Please search a customer to view ledger history." data-lang-hi="लेजर इतिहास देखने für कृपया किसी ग्राहक को खोजें।">Please search a customer to view ledger history.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -403,11 +402,11 @@
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
-                            <h2 class="text-xl font-bold text-red-600"><i class="fa-solid fa-indian-rupee-sign mr-2"></i> Pending Amount & Customer Management</h2>
-                            <p class="text-slate-600 text-sm mt-1">Search by customer name or mobile number to record payments and track remaining balance.</p>
+                            <h2 class="text-xl font-bold text-red-600"><i class="fa-solid fa-indian-rupee-sign mr-2"></i> <span data-lang-en="Pending Amount & Customer Management" data-lang-hi="बकाया राशि एवं ग्राहक प्रबंधन">Pending Amount & Customer Management</span></h2>
+                            <p class="text-slate-600 text-sm mt-1" data-lang-en="Search by customer name or mobile number to record payments and track remaining balance." data-lang-hi="भुगतान दर्ज करने और शेष राशि ट्रैक करने के लिए ग्राहक नाम या मोबाइल नंबर से खोजें।">Search by customer name or mobile number to record payments and track remaining balance.</p>
                         </div>
                         <button onclick="renderPendingCustomers()" class="bg-red-100 text-red-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-200 transition">
-                            <i class="fa-solid fa-rotate mr-1"></i> Refresh List
+                            <i class="fa-solid fa-rotate mr-1"></i> <span data-lang-en="Refresh List" data-lang-hi="सूची रिफ्रेश करें">Refresh List</span>
                         </button>
                     </div>
 
@@ -420,18 +419,18 @@
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th>
-                                    <th class="p-3">Module / Type</th>
-                                    <th class="p-3">Customer / Party Name</th>
-                                    <th class="p-3">Mobile Number</th>
-                                    <th class="p-3">Details / Quantity</th>
-                                    <th class="p-3">Pending Amount</th>
-                                    <th class="p-3">Action / Edit</th>
+                                    <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                    <th class="p-3" data-lang-en="Module / Type" data-lang-hi="माड्यूल / प्रकार">Module / Type</th>
+                                    <th class="p-3" data-lang-en="Customer / Party Name" data-lang-hi="ग्राहक / पार्टी का नाम">Customer / Party Name</th>
+                                    <th class="p-3" data-lang-en="Mobile Number" data-lang-hi="मोबाइल नंबर">Mobile Number</th>
+                                    <th class="p-3" data-lang-en="Details / Quantity" data-lang-hi="विवरण / मात्रा">Details / Quantity</th>
+                                    <th class="p-3" data-lang-en="Pending Amount" data-lang-hi="बकाया राशि">Pending Amount</th>
+                                    <th class="p-3" data-lang-en="Action / Edit" data-lang-hi="कारवाई / संपादित करें">Action / Edit</th>
                                 </tr>
                             </thead>
                             <tbody id="pendingTableBody" class="text-slate-700">
                                 <tr class="border-b border-slate-200/60 text-slate-500">
-                                    <td colspan="7" class="p-4 text-center">No pending customers found.</td>
+                                    <td colspan="7" class="p-4 text-center" data-lang-en="No pending customers found." data-lang-hi="कोई बकाया ग्राहक नहीं मिला।">No pending customers found.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -445,96 +444,106 @@
                 <div id="subtab-bulk-dairy" class="sub-content space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-pink-600"><i class="fa-solid fa-industry mr-2"></i> Bulk Dairy Milk Sales Entry</h2>
-                            <p class="text-slate-600 text-sm mt-1">Enter FAT and Fat Rate; Rate per Liter and Total Amount will calculate automatically.</p>
+                            <h2 class="text-xl font-bold text-pink-600"><i class="fa-solid fa-industry mr-2"></i> <span data-lang-en="Bulk Dairy Milk Sales Entry" data-lang-hi="बल्क डेयरी दूध बिक्री प्रविष्टि">Bulk Dairy Milk Sales Entry</span></h2>
+                            <p class="text-slate-600 text-sm mt-1" data-lang-en="Enter FAT and Fat Rate; Rate per Liter and Total Amount will calculate automatically." data-lang-hi="FAT और फैट रेट दर्ज करें; प्रति लीटर दर और कुल राशि अपने आप गणना हो जाएगी।">Enter FAT and Fat Rate; Rate per Liter and Total Amount will calculate automatically.</p>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Date:" data-lang-hi="दिनांक:">Date:</label>
                                 <input type="date" id="billDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Shift:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Shift:" data-lang-hi="शिफ्ट (समय):">Shift:</label>
                                 <select id="billShift" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Morning">Morning</option>
-                                    <option value="Evening">Evening</option>
+                                    <option value="Morning" data-lang-en="Morning" data-lang-hi="सुबह (Morning)">Morning</option>
+                                    <option value="Evening" data-lang-en="Evening" data-lang-hi="शाम (Evening)">Evening</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Milk Type:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Milk Type:" data-lang-hi="दूध का प्रकार:">Milk Type:</label>
                                 <select id="milkType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Cow Milk">Cow Milk</option>
-                                    <option value="Buffalo Milk">Buffalo Milk</option>
+                                    <option value="Cow Milk" data-lang-en="Cow Milk" data-lang-hi="गाय का दूध (Cow Milk)">Cow Milk</option>
+                                    <option value="Buffalo Milk" data-lang-en="Buffalo Milk" data-lang-hi="भैस का दूध (Buffalo Milk)">Buffalo Milk</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Quantity (Liters):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Quantity (Liters):" data-lang-hi="मात्रा (लीटर):">Quantity (Liters):</label>
                                 <input type="number" id="milkQty" placeholder="e.g. 85" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">FAT %:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="FAT %:" data-lang-hi="फैट % (FAT):">FAT %:</label>
                                 <input type="number" step="0.1" id="milkFat" placeholder="e.g. 5.0" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Fat Rate (₹):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Fat Rate (₹):" data-lang-hi="फैट रेट (₹):">Fat Rate (₹):</label>
                                 <input type="number" step="0.5" id="fatRate" placeholder="e.g. 10" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">SNF / CLR:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="SNF / CLR:" data-lang-hi="एसएनएफ / सीएलआर (SNF / CLR):">SNF / CLR:</label>
                                 <input type="number" step="0.1" id="milkSnf" placeholder="e.g. 8.5" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Liter (Auto):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Rate per Liter (Auto):" data-lang-hi="प्रति लीटर दर (ऑटो):">Rate per Liter (Auto):</label>
                                 <input type="text" id="perLiterRate" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-purple-700 font-bold shadow-sm" readonly>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Total Amount (Auto):" data-lang-hi="कुल राशि (ऑटो):">Total Amount (Auto):</label>
                                 <input type="text" id="totalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
                             </div>
                             
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Party Name:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Dairy / Party Name:" data-lang-hi="डेयरी / पार्टी का नाम:">Dairy / Party Name:</label>
                                 <select id="bulkDairySelect" onchange="onBulkPartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Party / Dairy</option>
+                                    <option value="" data-lang-en="Select Party / Dairy" data-lang-hi="पार्टी / डेयरी चुनें">Select Party / Dairy</option>
                                     <option value="Shyamlal Traders">Shyamlal Traders</option>
                                     <option value="Kishan Singh">Kishan Singh</option>
                                     <option value="Agri Feed Suppliers">Agri Feed Suppliers</option>
                                     <option value="Shajapur Organic Hub">Shajapur Organic Hub</option>
-                                    <option value="NEW">+ Add New Party</option>
+                                    <option value="NEW" data-lang-en="+ Add New Party" data-lang-hi="+ नई पार्टी जोड़ें">+ Add New Party</option>
                                 </select>
                                 <input type="text" id="bulkDairyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-pink-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number (Auto):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Mobile Number (Auto):" data-lang-hi="मोबाइल नंबर (ऑटो):">Mobile Number (Auto):</label>
                                 <input type="text" id="bulkDairyMobile" placeholder="Auto-filled Mobile Number" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-slate-800 font-bold shadow-sm">
                             </div>
                             
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Payment Status:" data-lang-hi="भुगतान स्थिति:">Payment Status:</label>
                                 <select id="paymentStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
-                                    <option value="Pending">Pending</option>
-                                    <option value="Paid">Paid</option>
+                                    <option value="Pending" data-lang-en="Pending" data-lang-hi="बाकी (Pending)">Pending</option>
+                                    <option value="Paid" data-lang-en="Paid" data-lang-hi="चुक्ता (Paid)">Paid</option>
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveMilkEntry()" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bulk Entry
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save Bulk Entry" data-lang-hi="बल्क एंट्री सहेजें">Save Bulk Entry</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Milk Selling Record Sheet Preview</h3>
+                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> <span data-lang-en="Milk Selling Record Sheet Preview" data-lang-hi="दूध बिक्री रिकॉर्ड शीट पूर्वावलोकन">Milk Selling Record Sheet Preview</span></h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Shift</th><th class="p-3">Milk Type</th><th class="p-3">Quantity</th><th class="p-3">FAT %</th><th class="p-3">Fat Rate</th><th class="p-3">SNF / CLR</th><th class="p-3">Rate/L</th><th class="p-3">Total Amt</th><th class="p-3">Dairy</th><th class="p-3">Status</th>
+                                        <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                        <th class="p-3" data-lang-en="Shift" data-lang-hi="शिफ्ट">Shift</th>
+                                        <th class="p-3" data-lang-en="Milk Type" data-lang-hi="दूध प्रकार">Milk Type</th>
+                                        <th class="p-3" data-lang-en="Quantity" data-lang-hi="मात्रा">Quantity</th>
+                                        <th class="p-3">FAT %</th>
+                                        <th class="p-3" data-lang-en="Fat Rate" data-lang-hi="फैट रेट">Fat Rate</th>
+                                        <th class="p-3">SNF / CLR</th>
+                                        <th class="p-3" data-lang-en="Rate/L" data-lang-hi="दर/लीटर">Rate/L</th>
+                                        <th class="p-3" data-lang-en="Total Amt" data-lang-hi="कुल राशि">Total Amt</th>
+                                        <th class="p-3" data-lang-en="Dairy" data-lang-hi="डेयरी">Dairy</th>
+                                        <th class="p-3" data-lang-en="Status" data-lang-hi="स्थिति">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="salesTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center" data-lang-en="No records added yet." data-lang-hi="अभी तक कोई रिकॉर्ड नहीं जोड़ा गया है।">No records added yet.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -544,66 +553,72 @@
                 <div id="subtab-retail-milk" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-purple-600"><i class="fa-solid fa-store mr-2"></i> Retail Milk Selling Entry</h2>
-                            <p class="text-slate-600 text-sm mt-1">Direct customer retail billing without FAT/CLR calculations.</p>
+                            <h2 class="text-xl font-bold text-purple-600"><i class="fa-solid fa-store mr-2"></i> <span data-lang-en="Retail Milk Selling Entry" data-lang-hi="रिटेल दूध बिक्री प्रविष्टि">Retail Milk Selling Entry</span></h2>
+                            <p class="text-slate-600 text-sm mt-1" data-lang-en="Direct customer retail billing without FAT/CLR calculations." data-lang-hi="बिना FAT/CLR गणना के सीधे ग्राहक खुदरा बिलिंग।">Direct customer retail billing without FAT/CLR calculations.</p>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Date:" data-lang-hi="दिनांक:">Date:</label>
                                 <input type="date" id="retailDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Name:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Customer Name:" data-lang-hi="ग्राहक का नाम:">Customer Name:</label>
                                 <select id="retailCustSelect" onchange="onRetailCustomerChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Customer</option>
+                                    <option value="" data-lang-en="Select Customer" data-lang-hi="ग्राहक चुनें">Select Customer</option>
                                     <option value="Rahul Sharma">Rahul Sharma</option>
                                     <option value="Amit Verma">Amit Verma</option>
-                                    <option value="NEW">+ Add New Customer</option>
+                                    <option value="NEW" data-lang-en="+ Add New Customer" data-lang-hi="+ नया ग्राहक जोड़ें">+ Add New Customer</option>
                                 </select>
                                 <input type="text" id="retailCustCustom" placeholder="Enter New Customer Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-purple-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Mobile Number:" data-lang-hi="मोबाइल नंबर:">Mobile Number:</label>
                                 <input type="text" id="retailMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Liters:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Total Liters:" data-lang-hi="कुल लीटर:">Total Liters:</label>
                                 <input type="number" step="0.5" id="retailLitermt" placeholder="e.g. 5" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Per Liter Rate (₹):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Per Liter Rate (₹):" data-lang-hi="प्रति लीटर दर (₹):">Per Liter Rate (₹):</label>
                                 <input type="number" id="retailRate" placeholder="e.g. 60" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Total Amount (Auto):" data-lang-hi="कुल राशि (ऑटो):">Total Amount (Auto):</label>
                                 <input type="text" id="retailTotalAmt" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Payment Status:" data-lang-hi="भुगतान स्थिति:">Payment Status:</label>
                                 <select id="retailStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
+                                    <option value="Paid" data-lang-en="Paid" data-lang-hi="चुक्ता (Paid)">Paid</option>
+                                    <option value="Pending" data-lang-en="Pending" data-lang-hi="बाकी (Pending)">Pending</option>
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveRetailEntry()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Retail Bill
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save Retail Bill" data-lang-hi="रिटेल बिल सहेजें">Save Retail Bill</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> Retail Milk Records</h3>
+                        <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> <span data-lang-en="Retail Milk Records" data-lang-hi="रिटेल दूध रिकॉर्ड">Retail Milk Records</span></h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Customer Name</th><th class="p-3">Mobile</th><th class="p-3">Liters</th><th class="p-3">Rate/L</th><th class="p-3">Total Amount</th><th class="p-3">Status</th>
+                                        <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                        <th class="p-3" data-lang-en="Customer Name" data-lang-hi="ग्राहक का नाम">Customer Name</th>
+                                        <th class="p-3" data-lang-en="Mobile" data-lang-hi="मोबाइल">Mobile</th>
+                                        <th class="p-3" data-lang-en="Liters" data-lang-hi="लीटर">Liters</th>
+                                        <th class="p-3" data-lang-en="Rate/L" data-lang-hi="दर/लीटर">Rate/L</th>
+                                        <th class="p-3" data-lang-en="Total Amount" data-lang-hi="कुल राशि">Total Amount</th>
+                                        <th class="p-3" data-lang-en="Status" data-lang-hi="स्थिति">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="retailTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No retail records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center" data-lang-en="No retail records added yet." data-lang-hi="अभी तक कोई रिटेल रिकॉर्ड नहीं जोड़ा गया है।">No retail records added yet.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -613,80 +628,87 @@
                 <div id="subtab-cattle-deal" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-horse mr-2"></i> Cattle Purchase & Sell Management</h2>
-                            <p class="text-slate-600 text-sm mt-1">Record cattle buying and selling details with tag number and pricing.</p>
+                            <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-horse mr-2"></i> <span data-lang-en="Cattle Purchase & Sell Management" data-lang-hi="पशु खरीद और बिक्री प्रबंधन">Cattle Purchase & Sell Management</span></h2>
+                            <p class="text-slate-600 text-sm mt-1" data-lang-en="Record cattle buying and selling details with tag number and pricing." data-lang-hi="टैग नंबर और मूल्य निर्धारण के साथ पशु खरीद और बिक्री का विवरण दर्ज करें।">Record cattle buying and selling details with tag number and pricing.</p>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Date:" data-lang-hi="दिनांक:">Date:</label>
                                 <input type="date" id="cattleDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Transaction Type:" data-lang-hi="लेनदेन का प्रकार:">Transaction Type:</label>
                                 <select id="cattleTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Purchase">Purchase</option>
-                                    <option value="Sell">Sell</option>
+                                    <option value="Purchase" data-lang-en="Purchase" data-lang-hi="खरीद (Purchase)">Purchase</option>
+                                    <option value="Sell" data-lang-en="Sell" data-lang-hi="बिक्री (Sell)">Sell</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Cattle Breed / Category:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Cattle Breed / Category:" data-lang-hi="पशु नस्ल / श्रेणी:">Cattle Breed / Category:</label>
                                 <select id="cattleBreedSelect" onchange="checkNewCattleCategory(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Milking Cow">Milking Cow</option>
-                                    <option value="Milking Buffalo">Milking Buffalo</option>
-                                    <option value="Heifer / Calf">Heifer / Calf</option>
-                                    <option value="Pregnant Animal">Pregnant Animal</option>
-                                    <option value="NEW">+ Add New Category</option>
+                                    <option value="Milking Cow" data-lang-en="Milking Cow" data-lang-hi="दूध देने वाली गाय">Milking Cow</option>
+                                    <option value="Milking Buffalo" data-lang-en="Milking Buffalo" data-lang-hi="दूध देने वाली भैंस">Milking Buffalo</option>
+                                    <option value="Heifer / Calf" data-lang-en="Heifer / Calf" data-lang-hi="बछिया / बछड़ा">Heifer / Calf</option>
+                                    <option value="Pregnant Animal" data-lang-en="Pregnant Animal" data-lang-hi="गाभिन पशु">Pregnant Animal</option>
+                                    <option value="NEW" data-lang-en="+ Add New Category" data-lang-hi="+ नई श्रेणी जोड़ें">+ Add New Category</option>
                                 </select>
                                 <input type="text" id="cattleBreedCustom" placeholder="Enter New Category" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Tag Number / Identification:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Tag Number / Identification:" data-lang-hi="टैग नंबर / पहचान:">Tag Number / Identification:</label>
                                 <input type="text" id="cattleTag" placeholder="e.g. TAG-405" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Name (Dealer/Farmer):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Party Name (Dealer/Farmer):" data-lang-hi="पार्टी का नाम (डीलर/किसान):">Party Name (Dealer/Farmer):</label>
                                 <select id="cattlePartySelect" onchange="onCattlePartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Party</option>
+                                    <option value="" data-lang-en="Select Party" data-lang-hi="पार्टी चुनें">Select Party</option>
                                     <option value="Shyamlal Traders">Shyamlal Traders</option>
                                     <option value="Kishan Singh">Kishan Singh</option>
-                                    <option value="NEW">+ Add New Party</option>
+                                    <option value="NEW" data-lang-en="+ Add New Party" data-lang-hi="+ नई पार्टी जोड़ें">+ Add New Party</option>
                                 </select>
                                 <input type="text" id="cattlePartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Party Mobile Number:" data-lang-hi="पार्टी का मोबाइल नंबर:">Party Mobile Number:</label>
                                 <input type="text" id="cattlePartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Amount (₹):" data-lang-hi="राशि (₹):">Amount (₹):</label>
                                 <input type="number" id="cattleAmount" placeholder="e.g. 65000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-amber-700 font-bold focus:border-amber-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Payment Status:" data-lang-hi="भुगतान स्थिति:">Payment Status:</label>
                                 <select id="cattleStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
+                                    <option value="Paid" data-lang-en="Paid" data-lang-hi="चुक्ता (Paid)">Paid</option>
+                                    <option value="Pending" data-lang-en="Pending" data-lang-hi="बाकी (Pending)">Pending</option>
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveCattleEntry()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Cattle Record
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save Cattle Record" data-lang-hi="पशु रिकॉर्ड सहेजें">Save Cattle Record</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> Cattle Deal History</h3>
+                        <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> <span data-lang-en="Cattle Deal History" data-lang-hi="पशु सौदा इतिहास">Cattle Deal History</span></h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Breed</th><th class="p-3">Tag No.</th><th class="p-3">Party Name</th><th class="p-3">Mobile</th><th class="p-3">Amount</th><th class="p-3">Status</th>
+                                        <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                        <th class="p-3" data-lang-en="Type" data-lang-hi="प्रकार">Type</th>
+                                        <th class="p-3" data-lang-en="Breed" data-lang-hi="नस्ल">Breed</th>
+                                        <th class="p-3" data-lang-en="Tag No." data-lang-hi="टैग नं.">Tag No.</th>
+                                        <th class="p-3" data-lang-en="Party Name" data-lang-hi="पार्टी का नाम">Party Name</th>
+                                        <th class="p-3" data-lang-en="Mobile" data-lang-hi="मोबाइल">Mobile</th>
+                                        <th class="p-3" data-lang-en="Amount" data-lang-hi="राशि">Amount</th>
+                                        <th class="p-3" data-lang-en="Status" data-lang-hi="स्थिति">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="cattleTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="8" class="p-4 text-center">No cattle records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="8" class="p-4 text-center" data-lang-en="No cattle records added yet." data-lang-hi="अभी तक कोई पशु रिकॉर्ड नहीं जोड़ा गया है।">No cattle records added yet.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -696,93 +718,101 @@
                 <div id="subtab-other-products" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                         <div class="border-b border-slate-200 pb-3">
-                            <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-boxes-stacked mr-2"></i> Other Products Purchase & Sell</h2>
-                            <p class="text-slate-600 text-sm mt-1">Manage inventory with per Bag, Kg, Litre, Pcs calculation options.</p>
+                            <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-boxes-stacked mr-2"></i> <span data-lang-en="Other Products Purchase & Sell" data-lang-hi="अन्य उत्पाद क्रय एवं विक्रय">Other Products Purchase & Sell</span></h2>
+                            <p class="text-slate-600 text-sm mt-1" data-lang-en="Manage inventory with per Bag, Kg, Litre, Pcs calculation options." data-lang-hi="प्रति बोरी, किलो, लीटर, नग गणना विकल्पों के साथ इन्वेंट्री प्रबंधित करें।">Manage inventory with per Bag, Kg, Litre, Pcs calculation options.</p>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Date:" data-lang-hi="दिनांक:">Date:</label>
                                 <input type="date" id="prodDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Transaction Type:" data-lang-hi="लेनदेन का प्रकार:">Transaction Type:</label>
                                 <select id="prodTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Purchase">Purchase</option>
-                                    <option value="Sell">Sell</option>
+                                    <option value="Purchase" data-lang-en="Purchase" data-lang-hi="खरीद (Purchase)">Purchase</option>
+                                    <option value="Sell" data-lang-en="Sell" data-lang-hi="बिक्री (Sell)">Sell</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Product Name:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Product Name:" data-lang-hi="उत्पाद का नाम:">Product Name:</label>
                                 <select id="prodNameSelect" onchange="checkNewProduct(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Cattle Feed (Pashu Aahar)">Cattle Feed (Pashu Aahar)</option>
-                                    <option value="Vermicompost Fertilizer">Vermicompost Fertilizer</option>
-                                    <option value="Chaff / Straw">Chaff / Straw</option>
-                                    <option value="Veterinary Medicine">Veterinary Medicine</option>
-                                    <option value="NEW">+ Add New Product</option>
+                                    <option value="Cattle Feed (Pashu Aahar)" data-lang-en="Cattle Feed (Pashu Aahar)" data-lang-hi="पशु आहार (दाना)">Cattle Feed (Pashu Aahar)</option>
+                                    <option value="Vermicompost Fertilizer" data-lang-en="Vermicompost Fertilizer" data-lang-hi="केंचुआ खाद (वर्मीकंपोस्ट)">Vermicompost Fertilizer</option>
+                                    <option value="Chaff / Straw" data-lang-en="Chaff / Straw" data-lang-hi="चारा / भूसा">Chaff / Straw</option>
+                                    <option value="Veterinary Medicine" data-lang-en="Veterinary Medicine" data-lang-hi="पशु चिकित्सा दवाएं">Veterinary Medicine</option>
+                                    <option value="NEW" data-lang-en="+ Add New Product" data-lang-hi="+ नया उत्पाद जोड़ें">+ Add New Product</option>
                                 </select>
                                 <input type="text" id="prodNameCustom" placeholder="Enter New Product Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Unit Option:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Unit Option:" data-lang-hi="इकाई विकल्प (Unit):">Unit Option:</label>
                                 <select id="prodUnitType" onchange="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Bag">Per Bag</option>
-                                    <option value="Kg">Per Kg</option>
-                                    <option value="Litre">Per Litre</option>
-                                    <option value="Pcs">Per Piece</option>
+                                    <option value="Bag" data-lang-en="Per Bag" data-lang-hi="प्रति बोरी (Bag)">Per Bag</option>
+                                    <option value="Kg" data-lang-en="Per Kg" data-lang-hi="प्रति किलो (Kg)">Per Kg</option>
+                                    <option value="Litre" data-lang-en="Per Litre" data-lang-hi="प्रति लीटर (Litre)">Per Litre</option>
+                                    <option value="Pcs" data-lang-en="Per Piece" data-lang-hi="प्रति नग (Pcs)">Per Piece</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Quantity:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Total Quantity:" data-lang-hi="कुल मात्रा:">Total Quantity:</label>
                                 <input type="number" step="0.1" id="prodQtyNum" placeholder="e.g. 10" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Unit (₹):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Rate per Unit (₹):" data-lang-hi="प्रति यूनिट दर (₹):">Rate per Unit (₹):</label>
                                 <input type="number" step="0.5" id="prodRatePerUnit" placeholder="e.g. 1250" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto Calc):</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Total Amount (Auto Calc):" data-lang-hi="कुल राशि (ऑटो):">Total Amount (Auto Calc):</label>
                                 <input type="text" id="prodTotalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-emerald-700 font-bold shadow-sm" readonly>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party / Vendor Name:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Party / Vendor Name:" data-lang-hi="पार्टी / विक्रेता का नाम:">Party / Vendor Name:</label>
                                 <select id="prodPartySelect" onchange="onProductPartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="">Select Party</option>
+                                    <option value="" data-lang-en="Select Party" data-lang-hi="पार्टी चुनें">Select Party</option>
                                     <option value="Agri Feed Suppliers">Agri Feed Suppliers</option>
                                     <option value="Shajapur Organic Hub">Shajapur Organic Hub</option>
-                                    <option value="NEW">+ Add New Party</option>
+                                    <option value="NEW" data-lang-en="+ Add New Party" data-lang-hi="+ नई पार्टी जोड़ें">+ Add New Party</option>
                                 </select>
                                 <input type="text" id="prodPartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Party Mobile Number:" data-lang-hi="पार्टी का मोबाइल नंबर:">Party Mobile Number:</label>
                                 <input type="text" id="prodPartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Payment Status:" data-lang-hi="भुगतान स्थिति:">Payment Status:</label>
                                 <select id="prodStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
-                                    <option value="Paid">Paid</option>
-                                    <option value="Pending">Pending</option>
+                                    <option value="Paid" data-lang-en="Paid" data-lang-hi="चुक्ता (Paid)">Paid</option>
+                                    <option value="Pending" data-lang-en="Pending" data-lang-hi="बाकी (Pending)">Pending</option>
                                 </select>
                             </div>
                         </div>
                         <div class="pt-2">
                             <button onclick="saveProductEntry()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Product Record
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save Product Record" data-lang-hi="उत्पाद रिकॉर्ड सहेजें">Save Product Record</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Products History</h3>
+                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> <span data-lang-en="Products History" data-lang-hi="उत्पाद इतिहास">Products History</span></h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Product Name</th><th class="p-3">Quantity & Unit</th><th class="p-3">Rate/Unit</th><th class="p-3">Total Amount</th><th class="p-3">Party</th><th class="p-3">Mobile</th><th class="p-3">Status</th>
+                                        <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                        <th class="p-3" data-lang-en="Type" data-lang-hi="प्रकार">Type</th>
+                                        <th class="p-3" data-lang-en="Product Name" data-lang-hi="उत्पाद नाम">Product Name</th>
+                                        <th class="p-3" data-lang-en="Quantity & Unit" data-lang-hi="मात्रा और इकाई">Quantity & Unit</th>
+                                        <th class="p-3" data-lang-en="Rate/Unit" data-lang-hi="दर/यूनिट">Rate/Unit</th>
+                                        <th class="p-3" data-lang-en="Total Amount" data-lang-hi="कुल राशि">Total Amount</th>
+                                        <th class="p-3" data-lang-en="Party" data-lang-hi="पार्टी">Party</th>
+                                        <th class="p-3" data-lang-en="Mobile" data-lang-hi="मोबाइल">Mobile</th>
+                                        <th class="p-3" data-lang-en="Status" data-lang-hi="स्थिति">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="prodTableBody" class="text-slate-700">
-                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="9" class="p-4 text-center">No product records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="9" class="p-4 text-center" data-lang-en="No product records added yet." data-lang-hi="अभी तक कोई उत्पाद रिकॉर्ड नहीं जोड़ा गया है।">No product records added yet.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -794,54 +824,57 @@
             <div id="tab-expense" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-blue-600"><i class="fa-solid fa-wallet mr-2"></i> Farm & Dairy Expense Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
+                        <h2 class="text-xl font-bold text-blue-600"><i class="fa-solid fa-wallet mr-2"></i> <span data-lang-en="Farm & Dairy Expense Management" data-lang-hi="फार्म एवं डेयरी खर्च प्रबंधन">Farm & Dairy Expense Management</span></h2>
+                        <p class="text-slate-600 text-sm mt-1" data-lang-en="Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses." data-lang-hi="पशु आहार, बिजली, मजदूरी और पशु चिकित्सा खर्च जैसे दैनिक परिचालन लागतों को ट्रैक करें।">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Date:" data-lang-hi="दिनांक:">Date:</label>
                             <input type="date" id="expDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Expense Category:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Expense Category:" data-lang-hi="खर्च की श्रेणी:">Expense Category:</label>
                             <select id="expCategory" onchange="checkNewExpenseCategory(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
-                                <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>
-                                <option value="Veterinary & Medicine">Veterinary & Medicine</option>
-                                <option value="Electricity & Water">Electricity & Water</option>
-                                <option value="Labour Wages">Labour Wages</option>
-                                <option value="Transport & Logistics">Transport & Logistics</option>
-                                <option value="Maintenance & Miscellaneous">Maintenance & Miscellaneous</option>
-                                <option value="NEW">+ Add New Category</option>
+                                <option value="Cattle Feed & Dana" data-lang-en="Cattle Feed & Dana" data-lang-hi="पशु आहार एवं दाना">Cattle Feed & Dana</option>
+                                <option value="Veterinary & Medicine" data-lang-en="Veterinary & Medicine" data-lang-hi="पशु चिकित्सा और दवा">Veterinary & Medicine</option>
+                                <option value="Electricity & Water" data-lang-en="Electricity & Water" data-lang-hi="बिजली और पानी">Electricity & Water</option>
+                                <option value="Labour Wages" data-lang-en="Labour Wages" data-lang-hi="मजदूरी (Labour)">Labour Wages</option>
+                                <option value="Transport & Logistics" data-lang-en="Transport & Logistics" data-lang-hi="परिवहन और ढुलाई">Transport & Logistics</option>
+                                <option value="Maintenance & Miscellaneous" data-lang-en="Maintenance & Miscellaneous" data-lang-hi="रखरखाव और अन्य विविध खर्च">Maintenance & Miscellaneous</option>
+                                <option value="NEW" data-lang-en="+ Add New Category" data-lang-hi="+ नई श्रेणी जोड़ें">+ Add New Category</option>
                             </select>
                             <input type="text" id="expCategoryCustom" placeholder="Enter New Category Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-blue-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Amount (₹):" data-lang-hi="राशि (₹):">Amount (₹):</label>
                             <input type="number" id="expAmount" placeholder="e.g. 2500" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-blue-700 font-bold focus:border-blue-500 focus:outline-none shadow-sm">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Description / Notes:" data-lang-hi="विवरण / नोट्स:">Description / Notes:</label>
                             <input type="text" id="expDesc" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveExpenseEntry()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Expense
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save Expense" data-lang-hi="खर्च सहेजें">Save Expense</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                    <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> Expense Records Sheet</h3>
+                    <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> <span data-lang-en="Expense Records Sheet" data-lang-hi="खर्च रिकॉर्ड शीट">Expense Records Sheet</span></h3>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
                                 <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
-                                    <th class="p-3">Date</th><th class="p-3">Category</th><th class="p-3">Description</th><th class="p-3">Amount</th>
+                                    <th class="p-3" data-lang-en="Date" data-lang-hi="दिनांक">Date</th>
+                                    <th class="p-3" data-lang-en="Category" data-lang-hi="श्रेणी">Category</th>
+                                    <th class="p-3" data-lang-en="Description" data-lang-hi="विवरण">Description</th>
+                                    <th class="p-3" data-lang-en="Amount" data-lang-hi="राशि">Amount</th>
                                 </tr>
                             </thead>
                             <tbody id="expenseTableBody" class="text-slate-700">
-                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="4" class="p-4 text-center">No expense records added yet.</td></tr>
+                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="4" class="p-4 text-center" data-lang-en="No expense records added yet." data-lang-hi="अभी तक कोई खर्च रिकॉर्ड नहीं जोड़ा गया है।">No expense records added yet.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -852,30 +885,30 @@
             <div id="tab-profile" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-gear mr-2"></i> Edit Farm & Business Profile</h2>
-                        <p class="text-slate-600 text-sm mt-1">Update your dairy brand name, head office address, and contact details for invoices.</p>
+                        <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-gear mr-2"></i> <span data-lang-en="Edit Farm & Business Profile" data-lang-hi="फार्म एवं व्यवसाय प्रोफ़ाइल संपादित करें">Edit Farm & Business Profile</span></h2>
+                        <p class="text-slate-600 text-sm mt-1" data-lang-en="Update your dairy brand name, head office address, and contact details for invoices." data-lang-hi="रसीदों के लिए अपने डेयरी ब्रांड का नाम, प्रधान कार्यालय का पता और संपर्क विवरण अपडेट करें।">Update your dairy brand name, head office address, and contact details for invoices.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Brand Name:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Dairy / Brand Name:" data-lang-hi="डेयरी / ब्रांड का नाम:">Dairy / Brand Name:</label>
                             <input type="text" id="profileBrandName" value="Tiwari & Son's" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Head Office Location:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Head Office Location:" data-lang-hi="प्रधान कार्यालय का स्थान:">Head Office Location:</label>
                             <input type="text" id="profileOffice" value="Shajapur, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Packaging Hub Location:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Packaging Hub Location:" data-lang-hi="पैकेजिंग हब का स्थान:">Packaging Hub Location:</label>
                             <input type="text" id="profileHub" value="Indore, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Contact Number / Helpline:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Contact Number / Helpline:" data-lang-hi="संपर्क नंबर / हेल्पलाइन:">Contact Number / Helpline:</label>
                             <input type="text" id="profileContact" value="+91 9752266047" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="saveProfileChanges()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Update Profile
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Update Profile" data-lang-hi="प्रोफ़ाइल अपडेट करें">Update Profile</span>
                         </button>
                     </div>
                 </div>
@@ -885,12 +918,12 @@
             <div id="tab-terms" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-file-contract mr-2"></i> Bill Terms & Conditions Management</h2>
-                        <p class="text-slate-600 text-sm mt-1">Define standard terms that will appear at the bottom of customer invoices and bills.</p>
+                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-file-contract mr-2"></i> <span data-lang-en="Bill Terms & Conditions Management" data-lang-hi="बिल के नियम व शर्तें प्रबंधन">Bill Terms & Conditions Management</span></h2>
+                        <p class="text-slate-600 text-sm mt-1" data-lang-en="Define standard terms that will appear at the bottom of customer invoices and bills." data-lang-hi="मानक शर्तें तय करें जो ग्राहक के बिल और रसीद के नीचे दिखाई देंगी।">Define standard terms that will appear at the bottom of customer invoices and bills.</p>
                     </div>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Invoice Terms & Policy (HTML / Text):</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Invoice Terms & Policy (HTML / Text):" data-lang-hi="बिल की शर्तें और नीति (HTML / Text):">Invoice Terms & Policy (HTML / Text):</label>
                             <textarea id="billTermsText" rows="6" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">1. Goods once sold will not be taken back without prior inspection.
 2. Payment must be cleared within 7 days from the date of billing.
 3. All disputes are subject to Shajapur (M.P.) jurisdiction only.
@@ -899,7 +932,7 @@
                     </div>
                     <div class="pt-2">
                         <button onclick="saveBillTerms()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bill Terms
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save Bill Terms" data-lang-hi="बिल शर्तें सहेजें">Save Bill Terms</span>
                         </button>
                     </div>
                 </div>
@@ -909,30 +942,30 @@
             <div id="tab-whatsapp" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp Quick Message Generator</h2>
-                        <p class="text-slate-600 text-sm mt-1">Send bills, payment reminders, or daily milk delivery updates directly to customers via WhatsApp.</p>
+                        <h2 class="text-xl font-bold text-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> <span data-lang-en="WhatsApp Quick Message Generator" data-lang-hi="व्हाट्सएप त्वरित संदेश जनरेटर">WhatsApp Quick Message Generator</span></h2>
+                        <p class="text-slate-600 text-sm mt-1" data-lang-en="Send bills, payment reminders, or daily milk delivery updates directly to customers via WhatsApp." data-lang-hi="व्हाट्सएप के माध्यम से ग्राहकों को सीधे बिल, भुगतान अनुस्मारक या दैनिक दूध वितरण अपडेट भेजें।">Send bills, payment reminders, or daily milk delivery updates directly to customers via WhatsApp.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Mobile Number:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Customer Mobile Number:" data-lang-hi="ग्राहक का मोबाइल नंबर:">Customer Mobile Number:</label>
                             <input type="text" id="waMobile" value="9752266047" placeholder="e.g. 919876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Message Template Type:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Message Template Type:" data-lang-hi="संदेश टेम्पलेट प्रकार:">Message Template Type:</label>
                             <select id="waTemplateType" onchange="updateWaTemplate(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
-                                <option value="bill">Daily Milk Bill & Payment Reminder</option>
-                                <option value="welcome">Welcome New Retail Customer</option>
-                                <option value="payment">Payment Receipt Acknowledgement</option>
+                                <option value="bill" data-lang-en="Daily Milk Bill & Payment Reminder" data-lang-hi="दैनिक दूध बिल और भुगतान अनुस्मारक">Daily Milk Bill & Payment Reminder</option>
+                                <option value="welcome" data-lang-en="Welcome New Retail Customer" data-lang-hi="नये रिटेल ग्राहक का स्वागत">Welcome New Retail Customer</option>
+                                <option value="payment" data-lang-en="Payment Receipt Acknowledgement" data-lang-hi="भुगतान रसीद पावती">Payment Receipt Acknowledgement</option>
                             </select>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customizable Message:</label>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Customizable Message:" data-lang-hi="अनुकूलन योग्य संदेश:">Customizable Message:</label>
                             <textarea id="waMessageText" rows="4" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">Namaste! Your daily milk supply bill from Tiwari & Son's has been generated. Please check and clear your payment. Thank you!</textarea>
                         </div>
                     </div>
                     <div class="pt-2">
                         <button onclick="sendWhatsAppMessage()" class="bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Send via WhatsApp
+                            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> <span data-lang-en="Send via WhatsApp" data-lang-hi="व्हाट्सएप पर भेजें">Send via WhatsApp</span>
                         </button>
                     </div>
                 </div>
@@ -945,7 +978,7 @@
     <div id="editBillingModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="card-light-box p-6 rounded-3xl w-full max-w-lg space-y-4 shadow-2xl relative">
             <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-                <h3 class="text-lg font-bold text-pink-600"><i class="fa-solid fa-file-invoice-dollar mr-2"></i> Edit & Update Payment</h3>
+                <h3 class="text-lg font-bold text-pink-600"><i class="fa-solid fa-file-invoice-dollar mr-2"></i> <span data-lang-en="Edit & Update Payment" data-lang-hi="भुगतान संपादित करें और अपडेट करें">Edit & Update Payment</span></h3>
                 <button onclick="closeEditModal()" class="text-slate-500 hover:text-slate-800 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
@@ -953,44 +986,44 @@
             
             <div class="space-y-3 text-sm">
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">Customer / Party Name:</label>
+                    <label class="block text-slate-700 font-medium mb-1" data-lang-en="Customer / Party Name:" data-lang-hi="ग्राहक / पार्टी का नाम:">Customer / Party Name:</label>
                     <input type="text" id="modalCustName" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800 font-bold" readonly>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Payment Date:</label>
+                        <label class="block text-slate-700 font-medium mb-1" data-lang-en="Payment Date:" data-lang-hi="भुगतान दिनांक:">Payment Date:</label>
                         <input type="date" id="modalPayDate" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Module / Type:</label>
+                        <label class="block text-slate-700 font-medium mb-1" data-lang-en="Module / Type:" data-lang-hi="माड्यूल / प्रकार:">Module / Type:</label>
                         <input type="text" id="modalModule" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
                     </div>
                 </div>
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">Details / Quantity:</label>
+                    <label class="block text-slate-700 font-medium mb-1" data-lang-en="Details / Quantity:" data-lang-hi="विवरण / मात्रा:">Details / Quantity:</label>
                     <input type="text" id="modalDetails" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Total / Outstanding Amt (₹):</label>
+                        <label class="block text-slate-700 font-medium mb-1" data-lang-en="Total / Outstanding Amt (₹):" data-lang-hi="कुल / बकाया राशि (₹):">Total / Outstanding Amt (₹):</label>
                         <input type="number" id="modalTotalAmt" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-red-600 font-bold" readonly>
                     </div>
                     <div>
-                        <label class="block text-slate-700 font-medium mb-1">Paying Now (₹):</label>
+                        <label class="block text-slate-700 font-medium mb-1" data-lang-en="Paying Now (₹):" data-lang-hi="अब भुगतान कर रहे हैं (₹):">Paying Now (₹):</label>
                         <input type="number" id="modalPayingAmt" placeholder="Enter amount" oninput="autoCalculateOutstanding()" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">Remaining Outstanding Amount (Auto Calculated):</label>
+                    <label class="block text-slate-700 font-medium mb-1" data-lang-en="Remaining Outstanding Amount (Auto Calculated):" data-lang-hi="शेष बकाया राशि (ऑटो):">Remaining Outstanding Amount (Auto Calculated):</label>
                     <input type="text" id="modalRemainingAmt" class="w-full bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-700 font-extrabold" readonly>
                 </div>
             </div>
 
             <div class="flex gap-3 pt-2">
                 <button onclick="saveModalPaymentUpdate()" class="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-3 rounded-xl shadow-lg hover:opacity-90 transition">
-                    <i class="fa-solid fa-check mr-1"></i> Update Payment
+                    <i class="fa-solid fa-check mr-1"></i> <span data-lang-en="Update Payment" data-lang-hi="भुगतान अपडेट करें">Update Payment</span>
                 </button>
-                <button onclick="closeEditModal()" class="bg-slate-200 text-slate-700 px-5 py-3 rounded-xl font-bold hover:bg-slate-300 transition">Cancel</button>
+                <button onclick="closeEditModal()" class="bg-slate-200 text-slate-700 px-5 py-3 rounded-xl font-bold hover:bg-slate-300 transition" data-lang-en="Cancel" data-lang-hi="रद्द करें">Cancel</button>
             </div>
         </div>
     </div>
@@ -1039,8 +1072,34 @@
             initCharts();
             applyGlobalDateFilter();
             restoreSavedTables();
+            
+            // Load saved language preference if any
+            let savedLang = localStorage.getItem('shri_khatu_lang') || 'en';
+            document.getElementById('langSelect').value = savedLang;
+            changeLanguage(savedLang);
         };
         
+        function changeLanguage(lang) {
+            localStorage.setItem('shri_khatu_lang', lang);
+            document.querySelectorAll('[data-lang-en]').forEach(el => {
+                let text = el.getAttribute('data-lang-' + lang);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        // Keep internal icons if present
+                        let icon = el.querySelector('i');
+                        if (icon) {
+                            let iconHTML = icon.outerHTML;
+                            el.innerHTML = iconHTML + ' ' + text;
+                        } else {
+                            el.innerText = text;
+                        }
+                    }
+                }
+            });
+        }
+
         function persistAppData() {
             localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
             localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
@@ -1083,7 +1142,10 @@
                 }
             });
 
-            document.getElementById('total-milk').innerText = filteredMilkLiters.toFixed(1) + " Liters";
+            let currentLang = document.getElementById('langSelect').value;
+            let literText = currentLang === 'hi' ? ' लीटर' : ' Liters';
+
+            document.getElementById('total-milk').innerText = filteredMilkLiters.toFixed(1) + literText;
             document.getElementById('monthly-revenue').innerText = "+ ₹ " + filteredRevenue.toLocaleString('en-IN');
             document.getElementById('filtered-expense-display').innerText = "₹ " + filteredExpenses.toLocaleString('en-IN');
             document.getElementById('filtered-infra-display').innerText = "₹ " + filteredInfra.toLocaleString('en-IN');
@@ -1109,7 +1171,11 @@
             let totalBuff = liveStats.buffaloes || 0;
             let totalCattle = totalCows + totalBuff;
             
-            document.getElementById('total-cattle-count').innerText = `${totalCattle} (Cows: ${totalCows}, Buff: ${totalBuff})`;
+            let currentLang = document.getElementById('langSelect').value;
+            let cowLabel = currentLang === 'hi' ? 'गाय' : 'Cows';
+            let buffLabel = currentLang === 'hi' ? 'भैंस' : 'Buff';
+            
+            document.getElementById('total-cattle-count').innerText = `${totalCattle} (${cowLabel}: ${totalCows}, ${buffLabel}: ${totalBuff})`;
             document.getElementById('cattle-purchase-investment').innerText = `₹ ${(liveStats.cattlePurchaseInvestment || 0).toLocaleString('en-IN')}`;
             
             updatePendingStats();
@@ -1141,6 +1207,9 @@
             }
 
             let infraTbody = document.getElementById('infraTableBody');
+            let currentLang = document.getElementById('langSelect').value;
+            let emptyInfraMsg = currentLang === 'hi' ? 'अभी तक कोई बुनियादी ढांचा संपत्ति दर्ज नहीं की गई है।' : 'No infrastructure assets recorded yet.';
+            
             if(infraTbody && infrastructureRecords.length > 0) {
                 infraTbody.innerHTML = '';
                 infrastructureRecords.forEach(rec => {
@@ -1366,7 +1435,12 @@
             
             let details = document.getElementById('infraDesc').value || '-';
 
-            if(amount <= 0) { alert('Please enter a valid investment amount.'); return; }
+            let currentLang = document.getElementById('langSelect').value;
+
+            if(amount <= 0) { 
+                alert(currentLang === 'hi' ? 'कृपया एक वैध निवेश राशि दर्ज करें।' : 'Please enter a valid investment amount.'); 
+                return; 
+            }
 
             infrastructureRecords.push({ date, category, amount, vendor, details });
             persistAppData();
@@ -1379,22 +1453,22 @@
             document.getElementById('infraVendorCustom').classList.add('hidden');
             document.getElementById('infraDesc').value = '';
 
-            alert('Infrastructure Asset saved successfully!');
+            alert(currentLang === 'hi' ? 'बुनियादी ढांचा संपत्ति सफलतापूर्वक सहेजी गई!' : 'Infrastructure Asset saved successfully!');
         }
         
-        function saveMilkEntry() { alert('Bulk Entry saved!'); }
-        function saveRetailEntry() { alert('Retail Bill saved!'); }
-        function saveCattleEntry() { alert('Cattle Record saved!'); }
-        function saveProductEntry() { alert('Product Record saved!'); }
-        function saveExpenseEntry() { alert('Expense saved!'); }
+        function saveMilkEntry() { let l = document.getElementById('langSelect').value; alert(l === 'hi' ? 'बल्क एंट्री सहेजी गई!' : 'Bulk Entry saved!'); }
+        function saveRetailEntry() { let l = document.getElementById('langSelect').value; alert(l === 'hi' ? 'रिटेल बिल सहेजा गया!' : 'Retail Bill saved!'); }
+        function saveCattleEntry() { let l = document.getElementById('langSelect').value; alert(l === 'hi' ? 'पशु रिकॉर्ड सहेजा गया!' : 'Cattle Record saved!'); }
+        function saveProductEntry() { let l = document.getElementById('langSelect').value; alert(l === 'hi' ? 'उत्पाद रिकॉर्ड सहेजा गया!' : 'Product Record saved!'); }
+        function saveExpenseEntry() { let l = document.getElementById('langSelect').value; alert(l === 'hi' ? 'खर्च सहेजा गया!' : 'Expense saved!'); }
         function searchCustomerLedger() {}
         function renderPendingCustomers() {}
         function filterPendingList() {}
         function closeEditModal() {}
         function saveModalPaymentUpdate() {}
         function autoCalculateOutstanding() {}
-        function saveProfileChanges() { alert('Profile updated successfully!'); }
-        function saveBillTerms() { alert('Bill terms saved successfully!'); }
+        function saveProfileChanges() { let l = document.getElementById('langSelect').value; alert(l === 'hi' ? 'प्रोफ़ाइल सफलतापूर्वक अपडेट की गई!' : 'Profile updated successfully!'); }
+        function saveBillTerms() { let l = document.getElementById('langSelect').value; alert(l === 'hi' ? 'बिल की शर्तें सफलतापूर्वक सहेजी गईं!' : 'Bill terms saved successfully!'); }
         function sendWhatsAppMessage() { 
             let mobile = document.getElementById('waMobile').value || '9752266047';
             let message = encodeURIComponent(document.getElementById('waMessageText').value);
