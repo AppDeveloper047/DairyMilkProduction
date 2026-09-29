@@ -991,8 +991,8 @@
                         <button onclick="saveGoogleSheetUrl()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
                             <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save URL Link" data-lang-hi="यूआरएल लिंक सहेजें">Save URL Link</span>
                         </button>
-                        <button onclick="syncDataToGoogleSheet()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-cloud-arrow-up mr-2"></i> <span data-lang-en="Sync Data Now" data-lang-hi="डेटा सिंक करें">Sync Data Now</span>
+                        <button onclick="syncDataFromGoogleSheet()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-cloud-arrow-down mr-2"></i> <span data-lang-en="Fetch Data From Google Sheet" data-lang-hi="गूगल शीट से डेटा लोड करें">Fetch Data From Google Sheet</span>
                         </button>
                     </div>
                 </div>
@@ -1062,12 +1062,13 @@
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
-        let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
-        let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
-        let cattlePurchaseRecords = JSON.parse(localStorage.getItem('shri_khatu_cattle_purchases')) || [];
-        let infrastructureRecords = JSON.parse(localStorage.getItem('shri_khatu_infra')) || [];
+        // Fully zero/empty arrays and objects (NO DUMMY VALUES)
+        let pendingRecords = [];
+        let masterLedgerHistory = [];
+        let cattlePurchaseRecords = [];
+        let infrastructureRecords = [];
 
-        let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
+        let liveStats = {
             cows: 0,
             buffaloes: 0,
             cattlePurchaseInvestment: 0,
@@ -1102,8 +1103,14 @@
             }
 
             initCharts();
-            applyGlobalDateFilter();
-            restoreSavedTables();
+            
+            // Automatically fetch fresh live data from Google Sheet if URL exists
+            if(savedUrl) {
+                syncDataFromGoogleSheet();
+            } else {
+                applyGlobalDateFilter();
+                restoreSavedTables();
+            }
             
             let savedLang = localStorage.getItem('shri_khatu_lang') || 'en';
             document.getElementById('langSelect').value = savedLang;
@@ -1116,31 +1123,47 @@
             alert("Google Sheet Web App URL saved successfully!");
         }
 
-        function syncDataToGoogleSheet() {
+        // FETCH / SYNC LIVE DATA DIRECTLY FROM GOOGLE SHEET
+        function syncDataFromGoogleSheet() {
             let urlVal = localStorage.getItem('shri_khatu_sheet_url') || document.getElementById('googleSheetUrlInput').value.trim();
             if(!urlVal) {
                 alert("Please enter and save your Google Sheets Web App URL first!");
                 return;
             }
             
-            let syncData = {
-                pending: pendingRecords,
-                ledger: masterLedgerHistory,
-                cattle: cattlePurchaseRecords,
-                infra: infrastructureRecords
-            };
+            // Fetch live data from Google Sheets Web App endpoint
+            fetch(urlVal)
+                .then(response => response.json())
+                .then(data => {
+                    if(data) {
+                        pendingRecords = data.pending || [];
+                        masterLedgerHistory = data.ledger || [];
+                        cattlePurchaseRecords = data.cattle || [];
+                        infrastructureRecords = data.infra || [];
+                        
+                        if(data.stats) {
+                            liveStats = data.stats;
+                        } else {
+                            recalculateLiveStats();
+                        }
 
-            fetch(urlVal, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(syncData)
-            }).then(() => {
-                alert("Data synchronization request sent successfully to Google Sheet!");
-            }).catch(err => {
-                console.error(err);
-                alert("Error during sync. Please check your Web App URL.");
-            });
+                        restoreSavedTables();
+                        applyGlobalDateFilter();
+                        alert("Live data successfully loaded and synced from Google Sheet!");
+                    }
+                })
+                .catch(err => {
+                    console.error("Sheet Fetch Error:", err);
+                    alert("Could not fetch data from Google Sheet. Please check your Web App URL or deployment permissions.");
+                });
+        }
+
+        function recalculateLiveStats() {
+            liveStats.cows = cattlePurchaseRecords.filter(r => r.txType === 'Purchase' && r.breed.toLowerCase().includes('cow')).length;
+            liveStats.buffaloes = cattlePurchaseRecords.filter(r => r.txType === 'Purchase' && !r.breed.toLowerCase().includes('cow')).length;
+            liveStats.cattlePurchaseInvestment = cattlePurchaseRecords.filter(r => r.txType === 'Purchase').reduce((sum, r) => sum + (r.amount || 0), 0);
+            liveStats.totalMilkLitres = masterLedgerHistory.filter(r => r.module === 'Bulk Dairy' || r.module === 'Retail Milk').reduce((sum, r) => sum + (r.qty || 0), 0);
+            liveStats.monthlyRevenue = masterLedgerHistory.filter(r => r.status === 'Paid').reduce((sum, r) => sum + (r.totalAmt || r.amount || 0), 0);
         }
         
         function changeLanguage(lang) {
@@ -1243,14 +1266,10 @@
                 pendingRecords.push(record);
             }
 
-            localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
-            localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
-
             liveStats.totalMilkLitres += qty;
             if(status === 'Paid') liveStats.monthlyRevenue += calculatedTotalAmt;
-            localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
 
-            alert("Bulk Milk Entry saved successfully!");
+            alert("Bulk Milk Entry added locally! Please sync with your Google Sheet Web App.");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1298,13 +1317,9 @@
                 pendingRecords.push(record);
             }
 
-            localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
-            localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
-
             if(status === 'Paid') liveStats.monthlyRevenue += calculatedRetailAmt;
-            localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
 
-            alert("Retail Bill saved successfully!");
+            alert("Retail Bill added locally! Please sync with your Google Sheet Web App.");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1352,18 +1367,13 @@
             masterLedgerHistory.push(record);
             if(status === 'Pending') pendingRecords.push(record);
 
-            localStorage.setItem('shri_khatu_cattle_purchases', JSON.stringify(cattlePurchaseRecords));
-            localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
-            localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
-
             if(txType === 'Purchase') {
                 liveStats.cattlePurchaseInvestment += amount;
                 if(breed.toLowerCase().includes('cow')) liveStats.cows++;
                 else liveStats.buffaloes++;
             }
-            localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
 
-            alert("Cattle record saved successfully!");
+            alert("Cattle record added locally! Please sync with your Google Sheet Web App.");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1419,10 +1429,7 @@
             masterLedgerHistory.push(record);
             if(status === 'Pending') pendingRecords.push(record);
 
-            localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
-            localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
-
-            alert("Product record saved successfully!");
+            alert("Product record added locally!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1448,9 +1455,8 @@
 
             let record = { date, category, amount, vendor, desc, module: 'Infrastructure' };
             infrastructureRecords.push(record);
-            localStorage.setItem('shri_khatu_infra', JSON.stringify(infrastructureRecords));
 
-            alert("Infrastructure asset saved successfully!");
+            alert("Infrastructure asset added locally!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1475,9 +1481,8 @@
 
             let record = { date, category, amount, desc, module: 'Expense' };
             masterLedgerHistory.push(record);
-            localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
 
-            alert("Expense saved successfully!");
+            alert("Expense added locally!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1533,7 +1538,7 @@
 
             let bulkRows = masterLedgerHistory.filter(r => r.module === 'Bulk Dairy' || r.module === 'Retail Milk');
             if(bulkRows.length === 0) {
-                salesBody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added yet.</td></tr>`;
+                salesBody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added from Google Sheet yet.</td></tr>`;
             } else {
                 bulkRows.forEach(r => {
                     salesBody.innerHTML += `<tr class="border-b border-slate-200/60">
@@ -1723,9 +1728,6 @@
                 if(r.totalAmt) r.totalAmt = rem;
                 else r.amount = rem;
             }
-
-            localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
-            localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
 
             closeEditModal();
             alert("Payment updated successfully!");
