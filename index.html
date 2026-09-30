@@ -1030,7 +1030,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Yahan apna Google Apps Script ka Web App URL seedha fix kar dein
+        // Yahan apna Google Apps Script ka Web App URL seedha fix kar diya hai
         const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
 
         let calculatedPerLiter = 0;
@@ -1074,8 +1074,8 @@
 
             initCharts();
             
-            // Website load hote hi Google Sheet se live data fetch karega
-            if(GOOGLE_WEB_APP_URL && GOOGLE_WEB_APP_URL !== "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec") {
+            // Website load hote hi Google Sheet से live data fetch karega
+            if(GOOGLE_WEB_APP_URL) {
                 syncDataFromGoogleSheet();
             } else {
                 applyGlobalDateFilter();
@@ -1087,9 +1087,9 @@
             changeLanguage(savedLang);
         };
 
-        // BACKGROUND SYNC: Google Sheet se data fetch karne ke liye
+        // BACKGROUND SYNC: Google Sheet से data fetch karne ke liye
         function syncDataFromGoogleSheet() {
-            if(!GOOGLE_WEB_APP_URL || GOOGLE_WEB_APP_URL === "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec") return;
+            if(!GOOGLE_WEB_APP_URL) return;
             
             fetch(GOOGLE_WEB_APP_URL)
                 .then(response => response.json())
@@ -1117,7 +1117,7 @@
 
         // BACKGROUND SYNC: Website par entry save hote hi Google Sheet par bhejne ke liye
         function postEntryToGoogleSheet(record) {
-            if(!GOOGLE_WEB_APP_URL || GOOGLE_WEB_APP_URL.includes("https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec")) return;
+            if(!GOOGLE_WEB_APP_URL) return;
 
             fetch(GOOGLE_WEB_APP_URL, {
                 method: "POST",
@@ -1238,7 +1238,7 @@
             liveStats.totalMilkLitres += qty;
             if(status === 'Paid') liveStats.monthlyRevenue += calculatedTotalAmt;
 
-            postEntryToGoogleSheet(record); // Auto sync to Google Sheet
+            postEntryToGoogleSheet(record);
             alert("Bulk Milk Entry saved and sent to Google Sheet!");
             restoreSavedTables();
             applyGlobalDateFilter();
