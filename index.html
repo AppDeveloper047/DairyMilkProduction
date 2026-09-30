@@ -1117,18 +1117,18 @@
 
         // BACKGROUND SYNC: Website par entry save hote hi Google Sheet par bhejne ke liye
         function postEntryToGoogleSheet(record) {
-            if(!GOOGLE_WEB_APP_URL || GOOGLE_WEB_APP_URL === "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec") return;
+            if(!GOOGLE_WEB_APP_URL || GOOGLE_WEB_APP_URL.includes("https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec")) return;
 
             fetch(GOOGLE_WEB_APP_URL, {
                 method: "POST",
                 mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify(record)
             })
             .then(res => console.log("Data successfully pushed to Google Sheet"))
             .catch(err => console.error("Push Error:", err));
         }
-
+        
         function recalculateLiveStats() {
             liveStats.cows = cattlePurchaseRecords.filter(r => r.txType === 'Purchase' && r.breed.toLowerCase().includes('cow')).length;
             liveStats.buffaloes = cattlePurchaseRecords.filter(r => r.txType === 'Purchase' && !r.breed.toLowerCase().includes('cow')).length;
