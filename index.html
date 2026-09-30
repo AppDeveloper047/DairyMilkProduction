@@ -124,9 +124,6 @@
             <a href="#whatsapp" onclick="switchTab('whatsapp', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
                 <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-lang-en="WhatsApp Messages" data-lang-hi="व्हाट्सएप संदेश">WhatsApp Messages</span>
             </a>
-            <a href="#sheet-sync" onclick="switchTab('sheet-sync', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-file-excel mr-3 text-emerald-400 text-lg"></i> <span data-lang-en="Google Sheets Sync" data-lang-hi="गूगल शीट्स सिंक">Google Sheets Sync</span>
-            </a>
         </nav>
 
         <div id="sidebarFooter" class="p-4 border-t border-white/15 text-xs text-center text-slate-400" data-lang-en="© 2026 Tiwari & Sons Farming" data-lang-hi="© 2026 तिवारी एंड सन्र्स फार्मिंग">
@@ -974,30 +971,6 @@
                 </div>
             </div>
 
-            <!-- 11. GOOGLE SHEETS SYNC TAB -->
-            <div id="tab-sheet-sync" class="tab-content hidden space-y-6">
-                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                    <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-file-excel mr-2"></i> <span data-lang-en="Google Sheets Web App Integration" data-lang-hi="गूगल शीट्स वेब एप एकीकरण">Google Sheets Web App Integration</span></h2>
-                        <p class="text-slate-600 text-sm mt-1" data-lang-en="Enter your Google Apps Script Web App URL below to send and sync all CRM data directly to your online Google Sheet." data-lang-hi="अपने सभी सीआरएम डेटा को सीधे ऑनलाइन गूगल शीट पर भेजने और सिंक करने के लिए नीचे अपना गूगल ऐप्स स्क्रिप्ट वेब एप यूआरएल दर्ज करें।">Enter your Google Apps Script Web App URL below to send and sync all CRM data directly to your online Google Sheet.</p>
-                    </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium" data-lang-en="Google Apps Script Web App URL Link:" data-lang-hi="गूगल ऐप्स स्क्रिप्ट वेब एप यूआरएल लिंक:">Google Apps Script Web App URL Link:</label>
-                            <input type="text" id="googleSheetUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm text-sm">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 pt-2">
-                        <button onclick="saveGoogleSheetUrl()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i> <span data-lang-en="Save URL Link" data-lang-hi="यूआरएल लिंक सहेजें">Save URL Link</span>
-                        </button>
-                        <button onclick="syncDataFromGoogleSheet()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
-                            <i class="fa-solid fa-cloud-arrow-down mr-2"></i> <span data-lang-en="Fetch Data From Google Sheet" data-lang-hi="गूगल शीट से डेटा लोड करें">Fetch Data From Google Sheet</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </main>
     </div>
 
@@ -1057,12 +1030,14 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // Yahan apna Google Apps Script ka Web App URL seedha fix kar dein
+        const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
+
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
-        // Fully zero/empty arrays and objects (NO DUMMY VALUES)
         let pendingRecords = [];
         let masterLedgerHistory = [];
         let cattlePurchaseRecords = [];
@@ -1097,15 +1072,10 @@
             if(gStart) gStart.valueAsDate = firstDay;
             if(gEnd) gEnd.valueAsDate = today;
 
-            let savedUrl = localStorage.getItem('shri_khatu_sheet_url') || '';
-            if(document.getElementById('googleSheetUrlInput')) {
-                document.getElementById('googleSheetUrlInput').value = savedUrl;
-            }
-
             initCharts();
             
-            // Automatically fetch fresh live data from Google Sheet if URL exists
-            if(savedUrl) {
+            // Website load hote hi Google Sheet se live data fetch karega
+            if(GOOGLE_WEB_APP_URL && GOOGLE_WEB_APP_URL !== "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec") {
                 syncDataFromGoogleSheet();
             } else {
                 applyGlobalDateFilter();
@@ -1117,22 +1087,11 @@
             changeLanguage(savedLang);
         };
 
-        function saveGoogleSheetUrl() {
-            let urlVal = document.getElementById('googleSheetUrlInput').value.trim();
-            localStorage.setItem('shri_khatu_sheet_url', urlVal);
-            alert("Google Sheet Web App URL saved successfully!");
-        }
-
-        // FETCH / SYNC LIVE DATA DIRECTLY FROM GOOGLE SHEET
+        // BACKGROUND SYNC: Google Sheet se data fetch karne ke liye
         function syncDataFromGoogleSheet() {
-            let urlVal = localStorage.getItem('shri_khatu_sheet_url') || document.getElementById('googleSheetUrlInput').value.trim();
-            if(!urlVal) {
-                alert("Please enter and save your Google Sheets Web App URL first!");
-                return;
-            }
+            if(!GOOGLE_WEB_APP_URL || GOOGLE_WEB_APP_URL === "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec") return;
             
-            // Fetch live data from Google Sheets Web App endpoint
-            fetch(urlVal)
+            fetch(GOOGLE_WEB_APP_URL)
                 .then(response => response.json())
                 .then(data => {
                     if(data) {
@@ -1149,13 +1108,25 @@
 
                         restoreSavedTables();
                         applyGlobalDateFilter();
-                        alert("Live data successfully loaded and synced from Google Sheet!");
                     }
                 })
                 .catch(err => {
                     console.error("Sheet Fetch Error:", err);
-                    alert("Could not fetch data from Google Sheet. Please check your Web App URL or deployment permissions.");
                 });
+        }
+
+        // BACKGROUND SYNC: Website par entry save hote hi Google Sheet par bhejne ke liye
+        function postEntryToGoogleSheet(record) {
+            if(!GOOGLE_WEB_APP_URL || GOOGLE_WEB_APP_URL === "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec") return;
+
+            fetch(GOOGLE_WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(record)
+            })
+            .then(res => console.log("Data successfully pushed to Google Sheet"))
+            .catch(err => console.error("Push Error:", err));
         }
 
         function recalculateLiveStats() {
@@ -1262,14 +1233,13 @@
             };
 
             masterLedgerHistory.push(record);
-            if(status === 'Pending') {
-                pendingRecords.push(record);
-            }
+            if(status === 'Pending') pendingRecords.push(record);
 
             liveStats.totalMilkLitres += qty;
             if(status === 'Paid') liveStats.monthlyRevenue += calculatedTotalAmt;
 
-            alert("Bulk Milk Entry added locally! Please sync with your Google Sheet Web App.");
+            postEntryToGoogleSheet(record); // Auto sync to Google Sheet
+            alert("Bulk Milk Entry saved and sent to Google Sheet!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1313,13 +1283,11 @@
             };
 
             masterLedgerHistory.push(record);
-            if(status === 'Pending') {
-                pendingRecords.push(record);
-            }
-
+            if(status === 'Pending') pendingRecords.push(record);
             if(status === 'Paid') liveStats.monthlyRevenue += calculatedRetailAmt;
 
-            alert("Retail Bill added locally! Please sync with your Google Sheet Web App.");
+            postEntryToGoogleSheet(record);
+            alert("Retail Bill saved and sent to Google Sheet!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1373,7 +1341,8 @@
                 else liveStats.buffaloes++;
             }
 
-            alert("Cattle record added locally! Please sync with your Google Sheet Web App.");
+            postEntryToGoogleSheet(record);
+            alert("Cattle record saved and sent to Google Sheet!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1429,7 +1398,8 @@
             masterLedgerHistory.push(record);
             if(status === 'Pending') pendingRecords.push(record);
 
-            alert("Product record added locally!");
+            postEntryToGoogleSheet(record);
+            alert("Product record saved and sent to Google Sheet!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1456,7 +1426,8 @@
             let record = { date, category, amount, vendor, desc, module: 'Infrastructure' };
             infrastructureRecords.push(record);
 
-            alert("Infrastructure asset added locally!");
+            postEntryToGoogleSheet(record);
+            alert("Infrastructure asset saved and sent to Google Sheet!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1482,7 +1453,8 @@
             let record = { date, category, amount, desc, module: 'Expense' };
             masterLedgerHistory.push(record);
 
-            alert("Expense added locally!");
+            postEntryToGoogleSheet(record);
+            alert("Expense saved and sent to Google Sheet!");
             restoreSavedTables();
             applyGlobalDateFilter();
         }
@@ -1538,7 +1510,7 @@
 
             let bulkRows = masterLedgerHistory.filter(r => r.module === 'Bulk Dairy' || r.module === 'Retail Milk');
             if(bulkRows.length === 0) {
-                salesBody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added from Google Sheet yet.</td></tr>`;
+                salesBody.innerHTML = `<tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added yet.</td></tr>`;
             } else {
                 bulkRows.forEach(r => {
                     salesBody.innerHTML += `<tr class="border-b border-slate-200/60">
