@@ -431,10 +431,14 @@
 
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
-        let pendingRecords = [];
-        let masterLedgerHistory = [];
-        let cattlePurchaseRecords = [];
-        let infrastructureRecords = [];
+        let bulkDairyData = [];
+        let retailMilkData = [];
+        let cattleDealData = [];
+        let productsData = [];
+        let infrastructureData = [];
+        let expensesData = [];
+        let ledgerData = [];
+        
         let liveStats = { cows: 0, buffaloes: 0, cattlePurchaseInvestment: 0, totalMilkLitres: 0, monthlyRevenue: 0 };
 
         window.onload = function() {
@@ -453,10 +457,14 @@
                 .then(response => response.json())
                 .then(data => {
                     if(data) {
-                        pendingRecords = data.pending || [];
-                        masterLedgerHistory = data.ledger || [];
-                        cattlePurchaseRecords = data.cattle || [];
-                        infrastructureRecords = data.infra || [];
+                        bulkDairyData = data.bulkDairy || [];
+                        retailMilkData = data.retailMilk || [];
+                        cattleDealData = data.cattleDeal || [];
+                        productsData = data.products || [];
+                        infrastructureData = data.infrastructure || [];
+                        expensesData = data.expenses || [];
+                        ledgerData = data.ledger || [];
+
                         recalculateLiveStats();
                         restoreSavedTables();
                         applyGlobalDateFilter();
@@ -475,11 +483,18 @@
         }
 
         function recalculateLiveStats() {
-            liveStats.cows = cattlePurchaseRecords.filter(r => r.txType === 'Purchase' && String(r.breed||r.Name||'').toLowerCase().includes('cow')).length;
-            liveStats.buffaloes = cattlePurchaseRecords.filter(r => r.txType === 'Purchase' && !String(r.breed||r.Name||'').toLowerCase().includes('cow')).length;
-            liveStats.cattlePurchaseInvestment = cattlePurchaseRecords.filter(r => r.txType === 'Purchase').reduce((sum, r) => sum + (parseFloat(r.Amount || r.amount || 0)), 0);
-            liveStats.totalMilkLitres = masterLedgerHistory.filter(r => r.module === 'Bulk Dairy' || r.module === 'Retail_Milk').reduce((sum, r) => sum + (parseFloat(r.qty || 0)), 0);
-            liveStats.monthlyRevenue = masterLedgerHistory.filter(r => String(r.Status || r.status || '').toLowerCase() === 'paid').reduce((sum, r) => sum + (parseFloat(r.Amount || r.totalAmt || r.amount || 0)), 0);
+            liveStats.cows = cattleDealData.filter(r => (r.txType || r.Type || '') === 'Purchase' && String(r.Name || r.breed || '').toLowerCase().includes('cow')).length;
+            liveStats.buffaloes = cattleDealData.filter(r => (r.txType || r.Type || '') === 'Purchase' && !String(r.Name || r.breed || '').toLowerCase().includes('cow')).length;
+            
+            liveStats.cattlePurchaseInvestment = cattleDealData.filter(r => (r.txType || r.Type || '') === 'Purchase').reduce((sum, r) => sum + (parseFloat(r.Amount || r.amount || 0)), 0);
+            
+            let bulkL = bulkDairyData.reduce((sum, r) => sum + (parseFloat(r.Quantity || r.qty || 0)), 0);
+            let retailL = retailMilkData.reduce((sum, r) => sum + (parseFloat(r.Quantity || r.qty || 0)), 0);
+            liveStats.totalMilkLitres = bulkL + retailL;
+
+            let bulkRev = bulkDairyData.filter(r => String(r.Status || r.status || '').toLowerCase() === 'paid').reduce((sum, r) => sum + (parseFloat(r.Amount || r.totalAmt || r.amount || 0)), 0);
+            let retailRev = retailMilkData.filter(r => String(r.Status || r.status || '').toLowerCase() === 'paid').reduce((sum, r) => sum + (parseFloat(r.Amount || r.totalAmt || r.amount || 0)), 0);
+            liveStats.monthlyRevenue = bulkRev + retailRev;
         }
 
         function toggleSidebar() {
@@ -529,10 +544,9 @@
                 status: document.getElementById('paymentStatus').value,
                 module: 'Bulk Dairy'
             };
-            masterLedgerHistory.push(record);
             postEntryToGoogleSheet(record);
             alert("Bulk Milk Entry saved successfully!");
-            syncDataFromGoogleSheet();
+            setTimeout(syncDataFromGoogleSheet, 1500);
         }
 
         function saveCattleEntry() {
@@ -547,10 +561,9 @@
                 status: document.getElementById('cattleStatus').value,
                 module: 'Cattle Deal'
             };
-            cattlePurchaseRecords.push(record);
             postEntryToGoogleSheet(record);
             alert("Cattle record saved successfully!");
-            syncDataFromGoogleSheet();
+            setTimeout(syncDataFromGoogleSheet, 1500);
         }
 
         function saveInfrastructureEntry() {
@@ -563,10 +576,9 @@
                 amount: parseFloat(document.getElementById('infraAmount').value) || 0,
                 module: 'Infrastructure'
             };
-            infrastructureRecords.push(record);
             postEntryToGoogleSheet(record);
             alert("Infrastructure asset saved successfully!");
-            syncDataFromGoogleSheet();
+            setTimeout(syncDataFromGoogleSheet, 1500);
         }
 
         function saveExpenseEntry() {
@@ -577,10 +589,9 @@
                 desc: document.getElementById('expDesc').value.trim(),
                 module: 'Expense'
             };
-            masterLedgerHistory.push(record);
             postEntryToGoogleSheet(record);
             alert("Expense saved successfully!");
-            syncDataFromGoogleSheet();
+            setTimeout(syncDataFromGoogleSheet, 1500);
         }
 
         function restoreSavedTables() {
@@ -589,16 +600,20 @@
             cattleBody.innerHTML = '';
             infraBody.innerHTML = '';
 
-            if(cattlePurchaseRecords.length > 0) {
-                cattlePurchaseRecords.forEach(r => {
-                    cattleBody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||r.date||''}</td><td class="p-3 font-bold text-amber-600">${r.txType||r.Module||''}</td><td class="p-3">${r.breed||r.Name||''}</td><td class="p-3">${r.tag||'-'}</td><td class="p-3">${r.party||r.Name||''}</td><td class="p-3">${r.mobile||'-'}</td><td class="p-3 font-bold">₹${r.amount||r.Amount||0}</td><td class="p-3">${r.status||r.Status||'Paid'}</td></tr>`;
+            if(cattleDealData.length > 0) {
+                cattleDealData.forEach(r => {
+                    cattleBody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||''}</td><td class="p-3 font-bold text-amber-600">${r.Module||''}</td><td class="p-3">${r.Name||''}</td><td class="p-3">${r.Details||'-'}</td><td class="p-3">${r.Name||''}</td><td class="p-3">${r.Mobile||'-'}</td><td class="p-3 font-bold">₹${r.Amount||0}</td><td class="p-3">${r.Status||'Paid'}</td></tr>`;
                 });
+            } else {
+                cattleBody.innerHTML = `<tr><td colspan="8" class="p-4 text-center">No cattle records found.</td></tr>`;
             }
 
-            if(infrastructureRecords.length > 0) {
-                infrastructureRecords.forEach(r => {
-                    infraBody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||r.date||''}</td><td class="p-3 font-semibold text-teal-700">${r.category||r.Category||''}</td><td class="p-3">${r.vendor||r.Vendor||''}</td><td class="p-3">${r.mobile||r.Mobile||'-'}</td><td class="p-3">${r.desc||r.Description||''}</td><td class="p-3 font-bold text-teal-800">₹${r.amount||r.Amount||0}</td></tr>`;
+            if(infrastructureData.length > 0) {
+                infrastructureData.forEach(r => {
+                    infraBody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||''}</td><td class="p-3 font-semibold text-teal-700">${r.Category||''}</td><td class="p-3">${r.Vendor||''}</td><td class="p-3">${r.Mobile||'-'}</td><td class="p-3">${r.Description||''}</td><td class="p-3 font-bold text-teal-800">₹${r.Amount||0}</td></tr>`;
                 });
+            } else {
+                infraBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center">No infrastructure assets found.</td></tr>`;
             }
         }
 
@@ -606,25 +621,37 @@
             let query = document.getElementById('ledgerSearchInput').value.toLowerCase().trim();
             let tbody = document.getElementById('ledgerTableBody');
             tbody.innerHTML = '';
-            let matches = masterLedgerHistory.filter(r => String(r.party||r.Name||'').toLowerCase().includes(query) || String(r.mobile||r.Mobile||'').includes(query));
+            
+            let allLedger = ledgerData.concat(bulkDairyData, retailMilkData, cattleDealData);
+            let matches = allLedger.filter(r => String(r.Name || r.Party || r.Vendor || '').toLowerCase().includes(query) || String(r.Mobile || '').includes(query));
+            
             if(matches.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center">No ledger history found.</td></tr>`;
                 return;
             }
             matches.forEach(r => {
-                tbody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||r.date||''}</td><td class="p-3">${r.module||''}</td><td class="p-3">${r.desc||r.Details||'-'}</td><td class="p-3 font-bold">₹${r.amount||r.Amount||0}</td><td class="p-3">${r.Status||r.status||'Completed'}</td></tr>`;
+                tbody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||''}</td><td class="p-3">${r.module||'Ledger'}</td><td class="p-3">${r.Details||r.Description||'-'}</td><td class="p-3 font-bold">₹${r.Amount||0}</td><td class="p-3">${r.Status||'Completed'}</td></tr>`;
             });
         }
 
         function applyGlobalDateFilter() {
             document.getElementById('total-cattle-count').innerText = `${liveStats.cows + liveStats.buffaloes} (Cows: ${liveStats.cows}, Buff: ${liveStats.buffaloes})`;
             document.getElementById('cattle-purchase-investment').innerText = `₹ ${liveStats.cattlePurchaseInvestment}`;
+            
+            let totalInfraAmt = infrastructureData.reduce((sum, r) => sum + (parseFloat(r.Amount || 0)), 0);
+            document.getElementById('filtered-infra-display').innerText = `₹ ${totalInfraAmt}`;
+            
             document.getElementById('total-milk').innerText = `${liveStats.totalMilkLitres} Liters`;
             document.getElementById('monthly-revenue').innerText = `+ ₹ ${liveStats.monthlyRevenue}`;
+
+            let totalExpAmt = expensesData.reduce((sum, r) => sum + (parseFloat(r.Amount || 0)), 0);
+            document.getElementById('filtered-expense-display').innerText = `₹ ${totalExpAmt}`;
+
+            let netProfit = liveStats.monthlyRevenue - totalExpAmt;
+            document.getElementById('net-profit-display').innerText = `₹ ${netProfit}`;
         }
 
         function resetGlobalDateFilter() { applyGlobalDateFilter(); }
-        function changeLanguage(lang) {}
     </script>
 </body>
 </html>
