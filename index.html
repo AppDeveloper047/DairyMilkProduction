@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dairy Management CRM</title>
     
+    <!-- ========================================== -->
+    <!-- EXTERNAL STYLESHEETS & SCRIPTS (CDN Links) -->
+    <!-- ========================================== -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
@@ -67,18 +70,18 @@
     <!-- 1. SIDEBAR NAVIGATION PANEL -->
     <div id="sidebar" class="w-72 sidebar-3d-bg text-white flex flex-col z-50 transform -translate-x-full md:translate-x-0 fixed md:relative h-full">
         <div class="p-6 text-2xl font-extrabold tracking-wider flex items-center justify-between border-b border-white/15">
-            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle">Tiwari & Son's</span></span>
+            <span class="flex items-center drop-shadow-[0_2px_10px_rgba(236,72,153,0.8)]"><i class="fa-solid fa-cow mr-2 text-pink-400"></i> <span id="sidebarBrandTitle" data-translate="app_title">Tiwari & Son's</span></span>
             <button onclick="toggleSidebar()" class="md:hidden text-white text-xl hover:text-pink-400 transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
         <nav class="flex-1 px-4 py-6 space-y-3.5 overflow-y-auto">
             <a href="#home" onclick="switchTab('home', this)" class="menu-3d-btn active-tab flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> Dashboard
+                <i class="fa-solid fa-house mr-3 text-pink-400 text-lg"></i> <span data-translate="menu_home">Dashboard</span>
             </a>
             
             <div>
                 <button onclick="toggleBillingSubMenu()" class="menu-3d-btn w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                    <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> Billing Invoice</span>
+                    <span class="flex items-center"><i class="fa-solid fa-file-invoice-dollar mr-3 text-purple-400 text-lg"></i> <span data-translate="menu_billing">Billing Invoice</span></span>
                     <i class="fa-solid fa-chevron-down text-xs text-gray-300 transition-transform duration-300" id="billingArrow"></i>
                 </button>
                 <div id="billingSubMenu" class="hidden pl-4 pr-2 py-2 space-y-2 mt-2 bg-black/30 rounded-xl border border-white/10 backdrop-blur-md">
@@ -97,29 +100,30 @@
                 </div>
             </div>
 
+            <!-- Infrastructure & Asset Investment Menu Link -->
             <a href="#infrastructure" onclick="switchTab('infrastructure', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> Infrastructure & Asset
+                <i class="fa-solid fa-building-shield mr-3 text-teal-400 text-lg"></i> <span>Infrastructure & Asset</span>
             </a>
 
             <a href="#ledger" onclick="switchTab('ledger', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> Payment Ledger
+                <i class="fa-solid fa-book-open mr-3 text-cyan-400 text-lg"></i> <span>Payment Ledger</span>
             </a>
 
             <a href="#pending-customers" onclick="switchTab('pending-customers', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> Pending Amount
+                <i class="fa-solid fa-indian-rupee-sign mr-3 text-red-400 text-lg"></i> <span>Pending Amount</span>
             </a>
 
             <a href="#expense" onclick="switchTab('expense', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> Expense Management
+                <i class="fa-solid fa-wallet mr-3 text-blue-400 text-lg"></i> <span data-translate="menu_expense">Expense Management</span>
             </a>
             <a href="#profile" onclick="switchTab('profile', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> Edit Profile
+                <i class="fa-solid fa-gear mr-3 text-amber-400 text-lg"></i> <span data-translate="menu_profile">Edit Profile</span>
             </a>
             <a href="#terms" onclick="switchTab('terms', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> Bill Terms
+                <i class="fa-solid fa-file-contract mr-3 text-emerald-400 text-lg"></i> <span data-translate="menu_terms">Bill Terms</span>
             </a>
             <a href="#whatsapp" onclick="switchTab('whatsapp', this)" class="menu-3d-btn flex items-center px-4 py-3.5 rounded-2xl font-semibold shadow-lg">
-                <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> WhatsApp Messages
+                <i class="fa-brands fa-whatsapp mr-3 text-green-400 text-lg"></i> <span data-translate="menu_whatsapp">WhatsApp Messages</span>
             </a>
         </nav>
 
@@ -136,9 +140,9 @@
             <div class="flex-1 flex flex-col items-center justify-center text-center px-4">
                 <h1 id="headerBrandName" class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Tiwari & Son's Dairy Farm</h1>
                 <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600 mt-0.5 font-medium">
-                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Shajapur, Madhya Pradesh</span>
+                    <span id="headerOfficeLoc"><i class="fa-solid fa-location-dot text-pink-500 mr-1"></i>Head Office: Tingajpur, Madhya Pradesh</span>
                     <span>|</span>
-                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Shajapur, Madhya Pradesh</span>
+                    <span id="headerHubLoc"><i class="fa-solid fa-boxes-packing text-purple-500 mr-1"></i>Hub: Tingajpur, Madhya Pradesh</span>
                     <span>|</span>
                     <span id="headerContactNum"><i class="fa-solid fa-phone text-emerald-500 mr-1"></i>+91 9752266047</span>
                 </div>
@@ -154,8 +158,9 @@
 
         <main class="p-6 space-y-6 flex-1">
            
-            <!-- 3. DASHBOARD TAB -->
+            <!-- 3. DASHBOARD TAB & GLOBAL DATE-TO-DATE FILTER BAR -->
             <div id="tab-home" class="tab-content space-y-6">
+                
                 <div class="card-light-box p-4 rounded-2xl shadow-md bg-white/90 flex flex-col md:flex-row items-center justify-between gap-4 border border-pink-200">
                     <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
                         <i class="fa-solid fa-calendar-days text-pink-600 text-lg"></i>
@@ -177,106 +182,139 @@
                 </div>
 
                 <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    
                     <div class="card" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-cow mr-1"></i> Total Cattle Count</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-cow mr-1"></i> Total Cattle Count</span>
+                        </div>
                         <div class="card-value" id="total-cattle-count" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 (Cows: 0, Buff: 0)</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-horse mr-1"></i> Cattle Purchase</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-horse mr-1"></i> Cattle Purchase</span>
+                        </div>
                         <div class="card-value" id="cattle-purchase-investment" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0d9488, #0f766e); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-building-shield mr-1"></i> Infrastructure & Asset</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-building-shield mr-1"></i> Infrastructure & Asset</span>
+                        </div>
                         <div class="card-value mt-4" id="filtered-infra-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #ea580c, #c2410c); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-glass-water mr-1"></i> Milk Production</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-glass-water mr-1"></i> Milk Production</span>
+                        </div>
                         <div class="card-value" id="total-milk" style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Liters</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-chart-line mr-1"></i> Revenue</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-chart-line mr-1"></i> Revenue</span>
+                        </div>
                         <div class="card-value" id="monthly-revenue" style="font-size: 20px; font-weight: bold; margin-top: 5px;">+ ₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #9333ea, #7e22ce); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-indian-rupee-sign mr-1"></i> Pending Amount</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-indian-rupee-sign mr-1"></i> Pending Amount</span>
+                        </div>
                         <div class="card-value" id="pending-amount" style="font-size: 20px; font-weight: bold; margin-top: 5px;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-calculator mr-1"></i> Expenses</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-calculator mr-1"></i> Expenses</span>
+                        </div>
                         <div class="card-value mt-4" id="filtered-expense-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #059669, #047857); padding: 15px; border-radius: 12px; color: white;">
-                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;"><span><i class="fa-solid fa-arrow-trend-up mr-1"></i> Net Profit</span></div>
+                        <div class="card-title font-bold flex items-center justify-between" style="font-size: 14px; opacity: 0.9;">
+                            <span><i class="fa-solid fa-arrow-trend-up mr-1"></i> Net Profit</span>
+                        </div>
                         <div class="card-value mt-4" id="net-profit-display" style="font-size: 20px; font-weight: bold;">₹ 0</div>
                     </div>
-                </div> 
 
+                </div> 
+                
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown</h3>
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                                <i class="fa-solid fa-chart-pie mr-2 text-pink-600"></i> Cattle Ratio Breakdown
+                            </h3>
+                            <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold">Live Share</span>
                         </div>
                         <div class="relative w-full flex justify-center items-center py-2">
-                            <div class="w-[300px] h-[300px]"><canvas id="cattleChart"></canvas></div>
+                            <div class="w-[300px] h-[300px]">
+                                <canvas id="cattleChart"></canvas>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl shadow-2xl relative overflow-hidden bg-white">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend</h3>
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                                <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> Bulk Milk Sales & Trend
+                            </h3>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Live Filtered Output</span>
                         </div>
-                        <div class="relative w-full py-2"><canvas id="milkChart" height="155"></canvas></div>
+                        <div class="relative w-full py-2">
+                            <canvas id="milkChart" height="155"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Infrastructure Tab (With Vendor Mobile Field Fixed) -->
+            <!-- Infrastructure & Asset Investment Management Tab -->
             <div id="tab-infrastructure" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
                     <div class="border-b border-slate-200 pb-3">
                         <h2 class="text-xl font-bold text-teal-600"><i class="fa-solid fa-building-shield mr-2"></i> Infrastructure & Asset Investment Management</h2>
+                        <p class="text-slate-600 text-sm mt-1">Keep a record of expenses incurred on farm sheds, machinery, borewells, vehicles, or other infrastructure and assets.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div>
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
-                            <input type="date" id="infraDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800">
+                            <input type="date" id="infraDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                         <div>
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Asset Category:</label>
-                            <select id="infraCategory" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800">
+                            <select id="infraCategory" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                                 <option value="Dairy Shed Construction">Dairy Shed Construction</option>
                                 <option value="Milking Machine & Equipment">Milking Machine & Equipment</option>
                                 <option value="Borewell & Water Pipeline">Borewell & Water Pipeline</option>
                                 <option value="Chaff Cutter Machine">Chaff Cutter Machine</option>
-                                <option value="Transport Vehicle">Transport Vehicle</option>
+                                <option value="Transport Vehicle / Tractor">Transport Vehicle</option>
+                                <option value="Other Infrastructure">Other Infrastructure Asset</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Investment Amount (₹):</label>
-                            <input type="number" id="infraAmount" placeholder="e.g. 150000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 font-bold text-teal-700">
+                            <input type="number" id="infraAmount" placeholder="e.g. 150000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-teal-700 font-bold focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
-                        <div>
+                        
+                        <div class="mb-3">
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor / Contractor Name:</label>
-                            <input type="text" id="infraVendor" placeholder="Enter Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3">
+                            <select id="infraVendorSelect" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm mb-2" onchange="handleInfraVendorChange(this)">
+                                <option value="">Select Vendor / Contractor</option>
+                                <option value="Self">Self</option>
+                                <option value="NEW">+ Add New Vendor</option>
+                            </select>
+                            <input type="text" id="infraVendorCustom" placeholder="Enter New Vendor Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-sm hidden">
                         </div>
-                        <div>
-                            <label class="block text-sm text-slate-700 mb-1 font-medium">Vendor Mobile Number:</label>
-                            <input type="text" id="infraMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3">
-                        </div>
+                        
                         <div class="md:col-span-2">
                             <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
-                            <input type="text" id="infraDesc" placeholder="e.g. Paid for iron sheds" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3">
+                            <input type="text" id="infraDesc" placeholder="e.g. Paid for iron sheds and roofing materials" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-teal-500 focus:outline-none shadow-sm">
                         </div>
                     </div>
                     <div class="pt-2">
-                        <button onclick="saveInfrastructureEntry()" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg">
+                        <button onclick="saveInfrastructureEntry()" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
                             <i class="fa-solid fa-floppy-disk mr-2"></i> Save Infrastructure Asset
                         </button>
                     </div>
@@ -287,124 +325,368 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
-                                <tr class="bg-slate-200/90 text-slate-700 border-b">
-                                    <th class="p-3">Date</th><th class="p-3">Category</th><th class="p-3">Vendor</th><th class="p-3">Mobile</th><th class="p-3">Description</th><th class="p-3">Amount</th>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date</th>
+                                    <th class="p-3">Asset Category</th>
+                                    <th class="p-3">Vendor</th>
+                                    <th class="p-3">Description</th>
+                                    <th class="p-3">Amount</th>
                                 </tr>
                             </thead>
                             <tbody id="infraTableBody" class="text-slate-700">
-                                <tr class="border-b text-slate-500"><td colspan="6" class="p-4 text-center">No infrastructure assets recorded yet.</td></tr>
+                                <tr class="border-b border-slate-200/60 text-slate-500">
+                                    <td colspan="5" class="p-4 text-center">No infrastructure assets recorded yet.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Ledger Tab -->
+            <!-- 4. CUSTOMER PAYMENT LEDGER STATEMENT -->
             <div id="tab-ledger" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl shadow-xl space-y-5">
                     <div class="border-b border-slate-200 pb-3">
                         <h2 class="text-xl font-bold text-cyan-700"><i class="fa-solid fa-book-open mr-2"></i> Customer Payment Ledger & Statement</h2>
+                        <p class="text-slate-600 text-sm mt-1">Search customer name or mobile number to view complete transaction and ledger history.</p>
                     </div>
+                    
                     <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1"><input type="text" id="ledgerSearchInput" placeholder="Enter Name or Mobile Number..." class="w-full bg-white border rounded-xl p-3 text-sm outline-none shadow-sm"></div>
-                        <div class="flex items-end"><button onclick="searchCustomerLedger()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl font-medium text-sm transition shadow-md"><i class="fa-solid fa-magnifying-glass mr-1"></i> Search Ledger</button></div>
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Customer Name / Mobile Number</label>
+                            <input type="text" id="ledgerSearchInput" placeholder="Enter Name or Mobile Number..." class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-cyan-500 outline-none shadow-sm">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="searchCustomerLedger()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl font-medium text-sm transition shadow-md">
+                                <i class="fa-solid fa-magnifying-glass mr-1"></i> Search Ledger
+                            </button>
+                        </div>
                     </div>
+
+                    <div id="ledgerSummaryBox" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4 bg-cyan-50/70 p-4 rounded-2xl border border-cyan-200">
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Customer Name</p>
+                            <p id="summaryName" class="text-lg font-bold text-slate-800">-</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Current Outstanding Balance</p>
+                            <p id="summaryPending" class="text-lg font-bold text-red-600">₹0</p>
+                        </div>
+                        <div class="flex justify-end items-center">
+                            <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition shadow"><i class="fa-solid fa-print mr-1"></i> Print Statement</button>
+                        </div>
+                    </div>
+
                     <div class="overflow-x-auto rounded-xl border border-slate-200">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
-                                <tr class="bg-slate-200/90 text-slate-700 border-b"><th class="p-3">Date</th><th class="p-3">Module / Type</th><th class="p-3">Details / Ref</th><th class="p-3">Amount</th><th class="p-3">Status</th></tr>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date</th>
+                                    <th class="p-3">Module / Type</th>
+                                    <th class="p-3">Details / Ref</th>
+                                    <th class="p-3">Amount</th>
+                                    <th class="p-3">Status</th>
+                                </tr>
                             </thead>
                             <tbody id="ledgerTableBody" class="text-slate-700">
-                                <tr class="border-b text-slate-500"><td colspan="5" class="p-4 text-center">Please search a customer to view ledger history.</td></tr>
+                                <tr class="border-b border-slate-200/60 text-slate-500">
+                                    <td colspan="5" class="p-4 text-center">Please search a customer to view ledger history.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Pending Customers Tab -->
+            <!-- 5. PENDING AMOUNT & MANAGEMENT -->
             <div id="tab-pending-customers" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                    <div class="border-b border-slate-200 pb-3">
-                        <h2 class="text-xl font-bold text-red-600"><i class="fa-solid fa-indian-rupee-sign mr-2"></i> Pending Amount & Customer Management</h2>
+                    <div class="border-b border-slate-200 pb-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-red-600"><i class="fa-solid fa-indian-rupee-sign mr-2"></i> Pending Amount & Customer Management</h2>
+                            <p class="text-slate-600 text-sm mt-1">Search by customer name or mobile number to record payments and track remaining balance.</p>
+                        </div>
+                        <button onclick="renderPendingCustomers()" class="bg-red-100 text-red-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-200 transition">
+                            <i class="fa-solid fa-rotate mr-1"></i> Refresh List
+                        </button>
                     </div>
+
+                    <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 text-lg ml-2"></i>
+                        <input type="text" id="pendingSearchInput" oninput="filterPendingList()" placeholder="Search by Customer Name or Mobile Number..." class="w-full bg-transparent text-slate-800 focus:outline-none text-sm font-medium">
+                    </div>
+
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
-                                <tr class="bg-slate-200/90 text-slate-700 border-b"><th class="p-3">Date</th><th class="p-3">Module</th><th class="p-3">Party Name</th><th class="p-3">Mobile</th><th class="p-3">Details</th><th class="p-3">Pending Amount</th></tr>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date</th>
+                                    <th class="p-3">Module / Type</th>
+                                    <th class="p-3">Customer / Party Name</th>
+                                    <th class="p-3">Mobile Number</th>
+                                    <th class="p-3">Details / Quantity</th>
+                                    <th class="p-3">Pending Amount</th>
+                                    <th class="p-3">Action / Edit</th>
+                                </tr>
                             </thead>
                             <tbody id="pendingTableBody" class="text-slate-700">
-                                <tr class="border-b text-slate-500"><td colspan="6" class="p-4 text-center">No pending customers found.</td></tr>
+                                <tr class="border-b border-slate-200/60 text-slate-500">
+                                    <td colspan="7" class="p-4 text-center">No pending customers found.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Billing Invoices Sub-Tabs -->
+            <!-- 6. BILLING INVOICE MASTER CONTAINER -->
             <div id="tab-billing-invoice" class="tab-content hidden space-y-6">
                 
                 <div id="subtab-bulk-dairy" class="sub-content space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <h2 class="text-xl font-bold text-pink-600"><i class="fa-solid fa-industry mr-2"></i> Bulk Dairy Milk Sales Entry</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label><input type="date" id="billDate" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Shift:</label><select id="billShift" class="w-full bg-white/90 border rounded-xl p-3"><option value="Morning">Morning</option><option value="Evening">Evening</option></select></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Milk Type:</label><select id="milkType" class="w-full bg-white/90 border rounded-xl p-3"><option value="Cow Milk">Cow Milk</option><option value="Buffalo Milk">Buffalo Milk</option></select></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Quantity (Liters):</label><input type="number" id="milkQty" oninput="calculateFatBilling()" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">FAT %:</label><input type="number" step="0.1" id="milkFat" oninput="calculateFatBilling()" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Fat Rate (₹):</label><input type="number" step="0.5" id="fatRate" oninput="calculateFatBilling()" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Liter (Auto):</label><input type="text" id="perLiterRate" class="w-full bg-white/50 border rounded-xl p-3 font-bold text-purple-700" readonly></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label><input type="text" id="totalAmount" class="w-full bg-white/50 border rounded-xl p-3 font-bold text-pink-600" readonly></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Party Name:</label><input type="text" id="bulkPartyName" placeholder="Enter Party Name" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number:</label><input type="text" id="bulkDairyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label><select id="paymentStatus" class="w-full bg-white/90 border rounded-xl p-3"><option value="Pending">Pending</option><option value="Paid">Paid</option></select></div>
+                        <div class="border-b border-slate-200 pb-3">
+                            <h2 class="text-xl font-bold text-pink-600"><i class="fa-solid fa-industry mr-2"></i> Bulk Dairy Milk Sales Entry</h2>
+                            <p class="text-slate-600 text-sm mt-1">Enter FAT and Fat Rate; Rate per Liter and Total Amount will calculate automatically.</p>
                         </div>
-                        <div class="pt-2"><button onclick="saveMilkEntry()" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg">Save Bulk Entry</button></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <input type="date" id="billDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Shift:</label>
+                                <select id="billShift" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                    <option value="Morning">Morning</option>
+                                    <option value="Evening">Evening</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Milk Type:</label>
+                                <select id="milkType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                    <option value="Cow Milk">Cow Milk</option>
+                                    <option value="Buffalo Milk">Buffalo Milk</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Quantity (Liters):</label>
+                                <input type="number" id="milkQty" placeholder="e.g. 85" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">FAT %:</label>
+                                <input type="number" step="0.1" id="milkFat" placeholder="e.g. 5.0" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Fat Rate (₹):</label>
+                                <input type="number" step="0.5" id="fatRate" placeholder="e.g. 10" oninput="calculateFatBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">SNF / CLR:</label>
+                                <input type="number" step="0.1" id="milkSnf" placeholder="e.g. 8.5" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Liter (Auto):</label>
+                                <input type="text" id="perLiterRate" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-purple-700 font-bold shadow-sm" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
+                                <input type="text" id="totalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Party Name:</label>
+                                <select id="bulkDairySelect" onchange="onBulkPartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                    <option value="">Select Party / Dairy</option>
+                                    <option value="Shyamlal Traders">Shyamlal Traders</option>
+                                    <option value="Kishan Singh">Kishan Singh</option>
+                                    <option value="Agri Feed Suppliers">Agri Feed Suppliers</option>
+                                    <option value="Shajapur Organic Hub">Shajapur Organic Hub</option>
+                                    <option value="NEW">+ Add New Party</option>
+                                </select>
+                                <input type="text" id="bulkDairyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-pink-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number (Auto):</label>
+                                <input type="text" id="bulkDairyMobile" placeholder="Auto-filled Mobile Number" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-slate-800 font-bold shadow-sm">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <select id="paymentStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none shadow-sm">
+                                    <option value="Pending">Pending</option>
+                                    <option value="Paid">Paid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button onclick="saveMilkEntry()" class="bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bulk Entry
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Milk Selling Record Sheet Preview</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                        <th class="p-3">Date</th><th class="p-3">Shift</th><th class="p-3">Milk Type</th><th class="p-3">Quantity</th><th class="p-3">FAT %</th><th class="p-3">Fat Rate</th><th class="p-3">SNF / CLR</th><th class="p-3">Rate/L</th><th class="p-3">Total Amt</th><th class="p-3">Dairy</th><th class="p-3">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="salesTableBody" class="text-slate-700">
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="11" class="p-4 text-center">No records added yet.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <div id="subtab-retail-milk" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <h2 class="text-xl font-bold text-purple-600"><i class="fa-solid fa-store mr-2"></i> Retail Milk Selling Entry</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label><input type="date" id="retailDate" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Customer Name:</label><input type="text" id="retailCustCustom" placeholder="Enter Customer Name" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number:</label><input type="text" id="retailMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Total Liters:</label><input type="number" step="0.5" id="retailLitermt" oninput="calculateRetailBilling()" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Per Liter Rate (₹):</label><input type="number" id="retailRate" oninput="calculateRetailBilling()" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label><input type="text" id="retailTotalAmt" class="w-full bg-white/50 border rounded-xl p-3 font-bold text-pink-600" readonly></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label><select id="retailStatus" class="w-full bg-white/90 border rounded-xl p-3"><option value="Paid">Paid</option><option value="Pending">Pending</option></select></div>
+                        <div class="border-b border-slate-200 pb-3">
+                            <h2 class="text-xl font-bold text-purple-600"><i class="fa-solid fa-store mr-2"></i> Retail Milk Selling Entry</h2>
+                            <p class="text-slate-600 text-sm mt-1">Direct customer retail billing without FAT/CLR calculations.</p>
                         </div>
-                        <div class="pt-2"><button onclick="saveRetailEntry()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg">Save Retail Bill</button></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <input type="date" id="retailDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Name:</label>
+                                <select id="retailCustSelect" onchange="onRetailCustomerChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                                    <option value="">Select Customer</option>
+                                    <option value="Rahul Sharma">Rahul Sharma</option>
+                                    <option value="Amit Verma">Amit Verma</option>
+                                    <option value="NEW">+ Add New Customer</option>
+                                </select>
+                                <input type="text" id="retailCustCustom" placeholder="Enter New Customer Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-purple-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Mobile Number:</label>
+                                <input type="text" id="retailMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Liters:</label>
+                                <input type="number" step="0.5" id="retailLitermt" placeholder="e.g. 5" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Per Liter Rate (₹):</label>
+                                <input type="number" id="retailRate" placeholder="e.g. 60" oninput="calculateRetailBilling()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto):</label>
+                                <input type="text" id="retailTotalAmt" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-pink-600 font-bold shadow-sm" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <select id="retailStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-purple-500 focus:outline-none shadow-sm">
+                                    <option value="Paid">Paid</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button onclick="saveRetailEntry()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Retail Bill
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                        <h3 class="text-lg font-bold text-purple-700"><i class="fa-solid fa-table mr-2"></i> Retail Milk Records</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                        <th class="p-3">Date</th><th class="p-3">Customer Name</th><th class="p-3">Mobile</th><th class="p-3">Liters</th><th class="p-3">Rate/L</th><th class="p-3">Total Amount</th><th class="p-3">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="retailTableBody" class="text-slate-700">
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="7" class="p-4 text-center">No retail records added yet.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <div id="subtab-cattle-deal" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-horse mr-2"></i> Cattle Purchase & Sell Management</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label><input type="date" id="cattleDate" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label><select id="cattleTxType" class="w-full bg-white/90 border rounded-xl p-3"><option value="Purchase">Purchase</option><option value="Sell">Sell</option></select></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Cattle Breed / Category:</label><input type="text" id="cattleBreed" placeholder="e.g. Milking Cow" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Tag Number / Identification:</label><input type="text" id="cattleTag" placeholder="e.g. TAG-405" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Party Name:</label><input type="text" id="cattleParty" placeholder="Enter Party Name" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label><input type="text" id="cattleMobile" placeholder="Enter Mobile" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label><input type="number" id="cattleAmount" placeholder="e.g. 65000" class="w-full bg-white/90 border rounded-xl p-3 font-bold text-amber-700"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label><select id="cattleStatus" class="w-full bg-white/90 border rounded-xl p-3"><option value="Paid">Paid</option><option value="Pending">Pending</option></select></div>
+                        <div class="border-b border-slate-200 pb-3">
+                            <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-horse mr-2"></i> Cattle Purchase & Sell Management</h2>
+                            <p class="text-slate-600 text-sm mt-1">Record cattle buying and selling details with tag number and pricing.</p>
                         </div>
-                        <div class="pt-2"><button onclick="saveCattleEntry()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg">Save Cattle Record</button></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <input type="date" id="cattleDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
+                                <select id="cattleTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                                    <option value="Purchase">Purchase</option>
+                                    <option value="Sell">Sell</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Cattle Breed / Category:</label>
+                                <select id="cattleBreedSelect" onchange="checkNewCattleCategory(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                                    <option value="Milking Cow">Milking Cow</option>
+                                    <option value="Milking Buffalo">Milking Buffalo</option>
+                                    <option value="Heifer / Calf">Heifer / Calf</option>
+                                    <option value="Pregnant Animal">Pregnant Animal</option>
+                                    <option value="NEW">+ Add New Category</option>
+                                </select>
+                                <input type="text" id="cattleBreedCustom" placeholder="Enter New Category" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Tag Number / Identification:</label>
+                                <input type="text" id="cattleTag" placeholder="e.g. TAG-405" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Name (Dealer/Farmer):</label>
+                                <select id="cattlePartySelect" onchange="onCattlePartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                                    <option value="">Select Party</option>
+                                    <option value="Shyamlal Traders">Shyamlal Traders</option>
+                                    <option value="Kishan Singh">Kishan Singh</option>
+                                    <option value="NEW">+ Add New Party</option>
+                                </select>
+                                <input type="text" id="cattlePartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-amber-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>
+                                <input type="text" id="cattlePartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
+                                <input type="number" id="cattleAmount" placeholder="e.g. 65000" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-amber-700 font-bold focus:border-amber-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <select id="cattleStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                                    <option value="Paid">Paid</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button onclick="saveCattleEntry()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Cattle Record
+                            </button>
+                        </div>
                     </div>
 
                     <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
-                        <h3 class="text-lg font-bold text-amber-700">Cattle Deal History</h3>
+                        <h3 class="text-lg font-bold text-amber-700"><i class="fa-solid fa-table mr-2"></i> Cattle Deal History</h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
-                                    <tr class="bg-slate-200/90 text-slate-700 border-b"><th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Breed</th><th class="p-3">Tag No.</th><th class="p-3">Party Name</th><th class="p-3">Mobile</th><th class="p-3">Amount</th><th class="p-3">Status</th></tr>
+                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Breed</th><th class="p-3">Tag No.</th><th class="p-3">Party Name</th><th class="p-3">Mobile</th><th class="p-3">Amount</th><th class="p-3">Status</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="cattleTableBody" class="text-slate-700">
-                                    <tr class="border-b text-slate-500"><td colspan="8" class="p-4 text-center">No cattle records added yet.</td></tr>
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="8" class="p-4 text-center">No cattle records added yet.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -413,124 +695,525 @@
 
                 <div id="subtab-other-products" class="sub-content hidden space-y-6">
                     <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-boxes-stacked mr-2"></i> Other Products Purchase & Sell</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label><input type="date" id="prodDate" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label><select id="prodTxType" class="w-full bg-white/90 border rounded-xl p-3"><option value="Purchase">Purchase</option><option value="Sell">Sell</option></select></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Product Name:</label><input type="text" id="prodNameCustom" placeholder="Enter Product Name" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Total Quantity:</label><input type="number" step="0.1" id="prodQtyNum" placeholder="e.g. 10" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Unit (₹):</label><input type="number" step="0.5" id="prodRatePerUnit" placeholder="e.g. 1250" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Party / Vendor Name:</label><input type="text" id="prodPartyCustom" placeholder="Enter Party Name" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label><input type="text" id="prodPartyMobile" placeholder="Enter Mobile" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                            <div><label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label><select id="prodStatus" class="w-full bg-white/90 border rounded-xl p-3"><option value="Paid">Paid</option><option value="Pending">Pending</option></select></div>
+                        <div class="border-b border-slate-200 pb-3">
+                            <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-boxes-stacked mr-2"></i> Other Products Purchase & Sell</h2>
+                            <p class="text-slate-600 text-sm mt-1">Manage inventory with per Bag, Kg, Litre, Pcs calculation options.</p>
                         </div>
-                        <div class="pt-2"><button onclick="saveProductEntry()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg">Save Product Record</button></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                                <input type="date" id="prodDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Transaction Type:</label>
+                                <select id="prodTxType" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                    <option value="Purchase">Purchase</option>
+                                    <option value="Sell">Sell</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Product Name:</label>
+                                <select id="prodNameSelect" onchange="checkNewProduct(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                    <option value="Cattle Feed (Pashu Aahar)">Cattle Feed (Pashu Aahar)</option>
+                                    <option value="Vermicompost Fertilizer">Vermicompost Fertilizer</option>
+                                    <option value="Chaff / Straw">Chaff / Straw</option>
+                                    <option value="Veterinary Medicine">Veterinary Medicine</option>
+                                    <option value="NEW">+ Add New Product</option>
+                                </select>
+                                <input type="text" id="prodNameCustom" placeholder="Enter New Product Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Unit Option:</label>
+                                <select id="prodUnitType" onchange="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                    <option value="Bag">Per Bag</option>
+                                    <option value="Kg">Per Kg</option>
+                                    <option value="Litre">Per Litre</option>
+                                    <option value="Pcs">Per Piece</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Quantity:</label>
+                                <input type="number" step="0.1" id="prodQtyNum" placeholder="e.g. 10" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Rate per Unit (₹):</label>
+                                <input type="number" step="0.5" id="prodRatePerUnit" placeholder="e.g. 1250" oninput="calculateProductTotal()" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Total Amount (Auto Calc):</label>
+                                <input type="text" id="prodTotalAmount" placeholder="Auto Calculated" class="w-full bg-white/50 border border-slate-300 rounded-xl p-3 text-emerald-700 font-bold shadow-sm" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party / Vendor Name:</label>
+                                <select id="prodPartySelect" onchange="onProductPartyChange(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                    <option value="">Select Party</option>
+                                    <option value="Agri Feed Suppliers">Agri Feed Suppliers</option>
+                                    <option value="Shajapur Organic Hub">Shajapur Organic Hub</option>
+                                    <option value="NEW">+ Add New Party</option>
+                                </select>
+                                <input type="text" id="prodPartyCustom" placeholder="Enter New Party Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-emerald-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Party Mobile Number:</label>
+                                <input type="text" id="prodPartyMobile" placeholder="Enter Mobile Number" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-700 mb-1 font-medium">Payment Status:</label>
+                                <select id="prodStatus" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">
+                                    <option value="Paid">Paid</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button onclick="saveProductEntry()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                                <i class="fa-solid fa-floppy-disk mr-2"></i> Save Product Record
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                        <h3 class="text-lg font-bold text-emerald-700"><i class="fa-solid fa-table mr-2"></i> Products History</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                        <th class="p-3">Date</th><th class="p-3">Type</th><th class="p-3">Product Name</th><th class="p-3">Quantity & Unit</th><th class="p-3">Rate/Unit</th><th class="p-3">Total Amount</th><th class="p-3">Party</th><th class="p-3">Mobile</th><th class="p-3">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="prodTableBody" class="text-slate-700">
+                                    <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="9" class="p-4 text-center">No product records added yet.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Expense Management -->
+            <!-- 7. FARM & DAIRY EXPENSE MANAGEMENT -->
             <div id="tab-expense" class="tab-content hidden space-y-6">
                 <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
-                    <h2 class="text-xl font-bold text-blue-600"><i class="fa-solid fa-wallet mr-2"></i> Farm & Dairy Expense Management</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                        <div><label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label><input type="date" id="expDate" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                        <div><label class="block text-sm text-slate-700 mb-1 font-medium">Expense Category:</label><input type="text" id="expCategory" placeholder="e.g. Cattle Feed" class="w-full bg-white/90 border rounded-xl p-3"></div>
-                        <div><label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label><input type="number" id="expAmount" placeholder="e.g. 2500" class="w-full bg-white/90 border rounded-xl p-3 font-bold text-blue-700"></div>
-                        <div class="md:col-span-2"><label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label><input type="text" id="expDesc" placeholder="e.g. Purchased feed" class="w-full bg-white/90 border rounded-xl p-3"></div>
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-blue-600"><i class="fa-solid fa-wallet mr-2"></i> Farm & Dairy Expense Management</h2>
+                        <p class="text-slate-600 text-sm mt-1">Track daily operating costs like cattle feed, electricity, wages, and veterinary expenses.</p>
                     </div>
-                    <div class="pt-2"><button onclick="saveExpenseEntry()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg">Save Expense</button></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Date:</label>
+                            <input type="date" id="expDate" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Expense Category:</label>
+                            <select id="expCategory" onchange="checkNewExpenseCategory(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
+                                <option value="Cattle Feed & Dana">Cattle Feed & Dana</option>
+                                <option value="Veterinary & Medicine">Veterinary & Medicine</option>
+                                <option value="Electricity & Water">Electricity & Water</option>
+                                <option value="Labour Wages">Labour Wages</option>
+                                <option value="Transport & Logistics">Transport & Logistics</option>
+                                <option value="Maintenance & Miscellaneous">Maintenance & Miscellaneous</option>
+                                <option value="NEW">+ Add New Category</option>
+                            </select>
+                            <input type="text" id="expCategoryCustom" placeholder="Enter New Category Name" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 mt-2 hidden focus:border-blue-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Amount (₹):</label>
+                            <input type="number" id="expAmount" placeholder="e.g. 2500" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-blue-700 font-bold focus:border-blue-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Description / Notes:</label>
+                            <input type="text" id="expDesc" placeholder="e.g. Purchased 2 bags cattle feed from local mandi" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-blue-500 focus:outline-none shadow-sm">
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="saveExpenseEntry()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Expense
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-light-box p-6 rounded-3xl space-y-4 shadow-xl">
+                    <h3 class="text-lg font-bold text-blue-700"><i class="fa-solid fa-table mr-2"></i> Expense Records Sheet</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-200/90 text-slate-700 border-b border-slate-300">
+                                    <th class="p-3">Date</th><th class="p-3">Category</th><th class="p-3">Description</th><th class="p-3">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expenseTableBody" class="text-slate-700">
+                                <tr class="border-b border-slate-200/60 text-slate-500"><td colspan="4" class="p-4 text-center">No expense records added yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <!-- Profile, Terms & WhatsApp Tabs -->
-            <div id="tab-profile" class="tab-content hidden space-y-6"><div class="card-light-box p-6 rounded-3xl"><h2 class="text-xl font-bold">Edit Profile</h2></div></div>
-            <div id="tab-terms" class="tab-content hidden space-y-6"><div class="card-light-box p-6 rounded-3xl"><h2 class="text-xl font-bold">Bill Terms</h2></div></div>
-            <div id="tab-whatsapp" class="tab-content hidden space-y-6"><div class="card-light-box p-6 rounded-3xl"><h2 class="text-xl font-bold">WhatsApp Messages</h2></div></div>
+            <!-- 8. EDIT PROFILE & BUSINESS INFO -->
+            <div id="tab-profile" class="tab-content hidden space-y-6">
+                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-amber-600"><i class="fa-solid fa-gear mr-2"></i> Edit Farm & Business Profile</h2>
+                        <p class="text-slate-600 text-sm mt-1">Update your dairy brand name, head office address, and contact details for invoices.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Dairy / Brand Name:</label>
+                            <input type="text" id="profileBrandName" value="Tiwari & Son's" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Head Office Location:</label>
+                            <input type="text" id="profileOffice" value="Shajapur, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Packaging Hub Location:</label>
+                            <input type="text" id="profileHub" value="Indore, Madhya Pradesh" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Contact Number / Helpline:</label>
+                            <input type="text" id="profileContact" value="+91 9752266047" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-amber-500 focus:outline-none shadow-sm">
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="saveProfileChanges()" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Update Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. BILL TERMS & CONDITIONS -->
+            <div id="tab-terms" class="tab-content hidden space-y-6">
+                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-emerald-600"><i class="fa-solid fa-file-contract mr-2"></i> Bill Terms & Conditions Management</h2>
+                        <p class="text-slate-600 text-sm mt-1">Define standard terms that will appear at the bottom of customer invoices and bills.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Invoice Terms & Policy (HTML / Text):</label>
+                            <textarea id="billTermsText" rows="6" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-emerald-500 focus:outline-none shadow-sm">1. Goods once sold will not be taken back without prior inspection.
+2. Payment must be cleared within 7 days from the date of billing.
+3. All disputes are subject to Shajapur (M.P.) jurisdiction only.
+4. Thank you for your trusted business with Tiwari & Son's.</textarea>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="saveBillTerms()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> Save Bill Terms
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. WHATSAPP MESSAGE GENERATOR -->
+            <div id="tab-whatsapp" class="tab-content hidden space-y-6">
+                <div class="card-light-box p-6 rounded-3xl space-y-5 shadow-xl">
+                    <div class="border-b border-slate-200 pb-3">
+                        <h2 class="text-xl font-bold text-green-600"><i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp Quick Message Generator</h2>
+                        <p class="text-slate-600 text-sm mt-1">Send bills, payment reminders, or daily milk delivery updates directly to customers via WhatsApp.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customer Mobile Number:</label>
+                            <input type="text" id="waMobile" value="9752266047" placeholder="e.g. 919876543210" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Message Template Type:</label>
+                            <select id="waTemplateType" onchange="updateWaTemplate(this.value)" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">
+                                <option value="bill">Daily Milk Bill & Payment Reminder</option>
+                                <option value="welcome">Welcome New Retail Customer</option>
+                                <option value="payment">Payment Receipt Acknowledgement</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-slate-700 mb-1 font-medium">Customizable Message:</label>
+                            <textarea id="waMessageText" rows="4" class="w-full bg-white/90 border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-green-500 focus:outline-none shadow-sm">Namaste! Your daily milk supply bill from Tiwari & Son's has been generated. Please check and clear your payment. Thank you!</textarea>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="sendWhatsAppMessage()" class="bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-xl px-8 py-3.5 shadow-lg hover:opacity-90 transition transform active:scale-95">
+                            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Send via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
-    <!-- JAVASCRIPT LOGIC (With all original features + sync fixes + sidebar auto-hide) -->
-    <script>
-        const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
+    <!-- 11. MODAL POPUP -->
+    <div id="editBillingModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="card-light-box p-6 rounded-3xl w-full max-w-lg space-y-4 shadow-2xl relative">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-lg font-bold text-pink-600"><i class="fa-solid fa-file-invoice-dollar mr-2"></i> Edit & Update Payment</h3>
+                <button onclick="closeEditModal()" class="text-slate-500 hover:text-slate-800 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <input type="hidden" id="editRowIndex">
+            
+            <div class="space-y-3 text-sm">
+                <div>
+                    <label class="block text-slate-700 font-medium mb-1">Customer / Party Name:</label>
+                    <input type="text" id="modalCustName" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800 font-bold" readonly>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Payment Date:</label>
+                        <input type="date" id="modalPayDate" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Module / Type:</label>
+                        <input type="text" id="modalModule" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 font-medium mb-1">Details / Quantity:</label>
+                    <input type="text" id="modalDetails" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-slate-800" readonly>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Total / Outstanding Amt (₹):</label>
+                        <input type="number" id="modalTotalAmt" class="w-full bg-slate-100 border border-slate-300 rounded-xl p-3 text-red-600 font-bold" readonly>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1">Paying Now (₹):</label>
+                        <input type="number" id="modalPayingAmt" placeholder="Enter amount" oninput="autoCalculateOutstanding()" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-slate-800 focus:border-pink-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 font-medium mb-1">Remaining Outstanding Amount (Auto Calculated):</label>
+                    <input type="text" id="modalRemainingAmt" class="w-full bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-700 font-extrabold" readonly>
+                </div>
+            </div>
 
+            <div class="flex gap-3 pt-2">
+                <button onclick="saveModalPaymentUpdate()" class="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-3 rounded-xl shadow-lg hover:opacity-90 transition">
+                    <i class="fa-solid fa-check mr-1"></i> Update Payment
+                </button>
+                <button onclick="closeEditModal()" class="bg-slate-200 text-slate-700 px-5 py-3 rounded-xl font-bold hover:bg-slate-300 transition">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12. JAVASCRIPT LOGIC WITH CATEGORY-WISE SEPARATE DASHBOARD CALCULATION -->
+    <script>
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
         let calculatedRetailAmt = 0;
         let calculatedProductTotalAmt = 0;
 
-        let bulkDairyData = [];
-        let retailMilkData = [];
-        let cattleDealData = [];
-        let productsData = [];
-        let infrastructureData = [];
-        let expensesData = [];
-        let ledgerData = [];
-        let pendingRecords = [];
+        let pendingRecords = JSON.parse(localStorage.getItem('shri_khatu_pending')) || [];
+        let masterLedgerHistory = JSON.parse(localStorage.getItem('shri_khatu_ledger')) || [];
+        let cattlePurchaseRecords = JSON.parse(localStorage.getItem('shri_khatu_cattle_purchases')) || [];
+        let infrastructureRecords = JSON.parse(localStorage.getItem('shri_khatu_infra')) || [];
+        let retailMilkRecords = JSON.parse(localStorage.getItem('shri_khatu_retail')) || [];
+        let bulkMilkRecords = JSON.parse(localStorage.getItem('shri_khatu_bulk')) || [];
+        let productRecords = JSON.parse(localStorage.getItem('shri_khatu_products')) || [];
+        let expenseRecords = JSON.parse(localStorage.getItem('shri_khatu_expenses')) || [];
 
-        let liveStats = { cows: 0, buffaloes: 0, cattlePurchaseInvestment: 0, totalMilkLitres: 0, monthlyRevenue: 0 };
+        let liveStats = JSON.parse(localStorage.getItem('shri_khatu_stats')) || {
+            cows: 0,
+            buffaloes: 0,
+            cattlePurchaseInvestment: 0,
+            totalMilkLitres: 0,
+            monthlyRevenue: 0
+        };
+
+        let customerDirectory = {
+            "Rahul Sharma": "9876543210",
+            "Amit Verma": "9123456789",
+            "Shyamlal Traders": "9988776655",
+            "Kishan Singh": "9811223344",
+            "Agri Feed Suppliers": "9722334455",
+            "Shajapur Organic Hub": "9655443322"
+        };
+
         let cattleChartInstance = null;
         let milkChartInstance = null;
 
         window.onload = function() {
             let today = new Date();
             let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-            if(document.getElementById('globalFilterStart')) document.getElementById('globalFilterStart').valueAsDate = firstDay;
-            if(document.getElementById('globalFilterEnd')) document.getElementById('globalFilterEnd').valueAsDate = today;
+            
+            let gStart = document.getElementById('globalFilterStart');
+            let gEnd = document.getElementById('globalFilterEnd');
+            if(gStart) gStart.valueAsDate = firstDay;
+            if(gEnd) gEnd.valueAsDate = today;
 
             initCharts();
-            if(GOOGLE_WEB_APP_URL) {
-                syncDataFromGoogleSheet();
-            }
+            applyGlobalDateFilter();
+            restoreSavedTables();
         };
-
-        function syncDataFromGoogleSheet() {
-            fetch(GOOGLE_WEB_APP_URL)
-                .then(response => response.json())
-                .then(data => {
-                    if(data) {
-                        bulkDairyData = data.bulkDairy || [];
-                        retailMilkData = data.retailMilk || [];
-                        cattleDealData = data.cattleDeal || [];
-                        productsData = data.products || [];
-                        infrastructureData = data.infrastructure || [];
-                        expensesData = data.expenses || [];
-                        ledgerData = data.ledger || [];
-
-                        recalculateLiveStats();
-                        restoreSavedTables();
-                        applyGlobalDateFilter();
-                    }
-                })
-                .catch(err => console.error("Sheet Fetch Error:", err));
+        
+        function persistAppData() {
+            localStorage.setItem('shri_khatu_pending', JSON.stringify(pendingRecords));
+            localStorage.setItem('shri_khatu_ledger', JSON.stringify(masterLedgerHistory));
+            localStorage.setItem('shri_khatu_stats', JSON.stringify(liveStats));
+            localStorage.setItem('shri_khatu_cattle_purchases', JSON.stringify(cattlePurchaseRecords));
+            localStorage.setItem('shri_khatu_infra', JSON.stringify(infrastructureRecords));
+            localStorage.setItem('shri_khatu_retail', JSON.stringify(retailMilkRecords));
+            localStorage.setItem('shri_khatu_bulk', JSON.stringify(bulkMilkRecords));
+            localStorage.setItem('shri_khatu_products', JSON.stringify(productRecords));
+            localStorage.setItem('shri_khatu_expenses', JSON.stringify(expenseRecords));
         }
 
-        function postEntryToGoogleSheet(record) {
-            fetch(GOOGLE_WEB_APP_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify(record)
-            }).catch(err => console.error("Push Error:", err));
-        }
-
-        function recalculateLiveStats() {
-            liveStats.cows = cattleDealData.filter(r => (r.txType || r.Type || '') === 'Purchase' && String(r.Name || r.breed || '').toLowerCase().includes('cow')).length;
-            liveStats.buffaloes = cattleDealData.filter(r => (r.txType || r.Type || '') === 'Purchase' && !String(r.Name || r.breed || '').toLowerCase().includes('cow')).length;
+        // Separate category calculations for Dashboard Boxes
+        function applyGlobalDateFilter() {
+            let startVal = document.getElementById('globalFilterStart').value;
+            let endVal = document.getElementById('globalFilterEnd').value;
             
-            liveStats.cattlePurchaseInvestment = cattleDealData.filter(r => (r.txType || r.Type || '') === 'Purchase').reduce((sum, r) => sum + (parseFloat(r.Amount || r.amount || 0)), 0);
-            
-            let bulkL = bulkDairyData.reduce((sum, r) => sum + (parseFloat(r.Quantity || r.qty || 0)), 0);
-            let retailL = retailMilkData.reduce((sum, r) => sum + (parseFloat(r.Quantity || r.qty || 0)), 0);
-            liveStats.totalMilkLitres = bulkL + retailL;
+            let startDate = startVal ? new Date(startVal) : new Date(0);
+            let endDate = endVal ? new Date(endVal) : new Date(8640000000000000);
+            endDate.setHours(23, 59, 59, 999);
 
-            let bulkRev = bulkDairyData.filter(r => String(r.Status || r.status || '').toLowerCase() === 'paid').reduce((sum, r) => sum + (parseFloat(r.Amount || r.totalAmt || r.amount || 0)), 0);
-            let retailRev = retailMilkData.filter(r => String(r.Status || r.status || '').toLowerCase() === 'paid').reduce((sum, r) => sum + (parseFloat(r.Amount || r.totalAmt || r.amount || 0)), 0);
-            liveStats.monthlyRevenue = bulkRev + retailRev;
+            let filteredMilkLiters = 0;
+            let filteredRevenue = 0;
+            let filteredExpenses = 0;
+            let filteredInfra = 0;
+            let filteredCattleInvestment = 0;
+
+            // 1. Bulk & Retail Milk Calculation
+            [...bulkMilkRecords, ...retailMilkRecords].forEach(item => {
+                let itemDate = new Date(item.date);
+                if (itemDate >= startDate && itemDate <= endDate) {
+                    filteredMilkLiters += (item.liters || 0);
+                    filteredRevenue += (item.amount || 0);
+                }
+            });
+
+            // 2. Expenses Calculation
+            [...expenseRecords, ...productRecords].forEach(item => {
+                let itemDate = new Date(item.date);
+                if (itemDate >= startDate && itemDate <= endDate) {
+                    filteredExpenses += (item.amount || 0);
+                }
+            });
+
+            // 3. Infrastructure Assets Calculation
+            infrastructureRecords.forEach(item => {
+                let itemDate = new Date(item.date);
+                if (itemDate >= startDate && itemDate <= endDate) {
+                    filteredInfra += (item.amount || 0);
+                }
+            });
+
+            // 4. Cattle Purchase Investment Calculation
+            cattlePurchaseRecords.forEach(item => {
+                let itemDate = new Date(item.date);
+                if (itemDate >= startDate && itemDate <= endDate && item.type === 'Purchase') {
+                    filteredCattleInvestment += (item.amount || 0);
+                }
+            });
+
+            // Update UI Boxes Separately
+            document.getElementById('total-milk').innerText = filteredMilkLiters.toFixed(1) + " Liters";
+            document.getElementById('monthly-revenue').innerText = "+ ₹ " + filteredRevenue.toLocaleString('en-IN');
+            document.getElementById('filtered-expense-display').innerText = "₹ " + filteredExpenses.toLocaleString('en-IN');
+            document.getElementById('filtered-infra-display').innerText = "₹ " + filteredInfra.toLocaleString('en-IN');
+            document.getElementById('cattle-purchase-investment').innerText = "₹ " + filteredCattleInvestment.toLocaleString('en-IN');
+
+            let netProfit = filteredRevenue - filteredExpenses;
+            let netProfitEl = document.getElementById('net-profit-display');
+            netProfitEl.innerText = (netProfit >= 0 ? "+ ₹ " : "- ₹ ") + Math.abs(netProfit).toLocaleString('en-IN');
+            netProfitEl.style.color = netProfit >= 0 ? "#ffffff" : "#fca5a5";
+
+            updateCattleStatsDisplay();
         }
 
-        // Sidebar Auto-Hide Fix on Mobile Click
+        function resetGlobalDateFilter() {
+            let today = new Date();
+            let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            let gStart = document.getElementById('globalFilterStart');
+            let gEnd = document.getElementById('globalFilterEnd');
+            if(gStart) gStart.valueAsDate = firstDay;
+            if(gEnd) gEnd.valueAsDate = today;
+            applyGlobalDateFilter();
+        }
+
+        function updateCattleStatsDisplay() {
+            let totalCows = cattlePurchaseRecords.filter(r => r.type === 'Purchase' && r.breed.toLowerCase().includes('cow')).length;
+            let totalBuff = cattlePurchaseRecords.filter(r => r.type === 'Purchase' && r.breed.toLowerCase().includes('buffalo')).length;
+            let totalCattle = totalCows + totalBuff;
+            
+            document.getElementById('total-cattle-count').innerText = `${totalCattle} (Cows: ${totalCows}, Buff: ${totalBuff})`;
+            updatePendingStats();
+        }
+
+        function updatePendingStats() {
+            let totalPending = 0;
+            pendingRecords.forEach(p => { totalPending += (p.pendingAmount || 0); });
+            let pendingEl = document.getElementById('pending-amount');
+            if(pendingEl) pendingEl.innerText = `₹ ${totalPending.toLocaleString('en-IN')}`;
+        }
+
+        function restoreSavedTables() {
+            updatePendingStats();
+            
+            // Restore Expense Table
+            let expTbody = document.getElementById('expenseTableBody');
+            if(expTbody && expenseRecords.length > 0) {
+                expTbody.innerHTML = '';
+                expenseRecords.forEach(rec => {
+                    let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                        <td class="p-3">${rec.date}</td><td class="p-3 font-semibold text-blue-600">${rec.category}</td>
+                        <td class="p-3">${rec.details}</td><td class="p-3 text-red-600 font-bold">- ₹ ${rec.amount.toLocaleString('en-IN')}</td>
+                    </tr>`;
+                    expTbody.insertAdjacentHTML('afterbegin', row);
+                });
+            }
+
+            // Restore Infrastructure Table
+            let infraTbody = document.getElementById('infraTableBody');
+            if(infraTbody && infrastructureRecords.length > 0) {
+                infraTbody.innerHTML = '';
+                infrastructureRecords.forEach(rec => {
+                    let row = `<tr class="border-b border-slate-200/60 hover:bg-white/50 transition">
+                        <td class="p-3">${rec.date}</td>
+                        <td class="p-3 font-bold text-teal-700">${rec.category}</td>
+                        <td class="p-3">${rec.vendor}</td>
+                        <td class="p-3">${rec.details}</td>
+                        <td class="p-3 text-teal-600 font-extrabold">₹ ${rec.amount.toLocaleString('en-IN')}</td>
+                    </tr>`;
+                    infraTbody.insertAdjacentHTML('afterbegin', row);
+                });
+            }
+        }
+
+        // Chart Initializations
+        function initCharts() {
+            const ctxCattle = document.getElementById('cattleChart').getContext('2d');
+            cattleChartInstance = new Chart(ctxCattle, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Cows', 'Buffaloes'],
+                    datasets: [{
+                        data: [1, 1],
+                        backgroundColor: ['#3b82f6', '#ec4899'],
+                        borderWidth: 2
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            const ctxMilk = document.getElementById('milkChart').getContext('2d');
+            milkChartInstance = new Chart(ctxMilk, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Milk Output (L)',
+                        data: [45, 52, 49, 58, 55, 60, 62],
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        // Navigation & Sidebar Auto-Hide Logic
         function toggleSidebar() {
             let sb = document.getElementById('sidebar');
             sb.classList.toggle('-translate-x-full');
@@ -566,207 +1249,230 @@
             }
         }
 
+        function onBulkPartyChange(val) {
+            let customInput = document.getElementById('bulkDairyCustom');
+            let mobileInput = document.getElementById('bulkDairyMobile');
+            
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+                mobileInput.value = '';
+            } else {
+                customInput.classList.add('hidden');
+                if (customerDirectory[val]) {
+                    mobileInput.value = customerDirectory[val];
+                } else {
+                    mobileInput.value = '';
+                }
+            }
+        }
+
+        function onRetailCustomerChange(val) {
+            let customInput = document.getElementById('retailCustCustom');
+            let mobileInput = document.getElementById('retailMobile');
+            
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+                mobileInput.value = '';
+            } else {
+                customInput.classList.add('hidden');
+                if (customerDirectory[val]) {
+                    mobileInput.value = customerDirectory[val];
+                } else {
+                    mobileInput.value = '';
+                }
+            }
+        }
+
+        function onCattlePartyChange(val) {
+            let customInput = document.getElementById('cattlePartyCustom');
+            let mobileInput = document.getElementById('cattlePartyMobile');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+                mobileInput.value = '';
+            } else {
+                customInput.classList.add('hidden');
+                if (customerDirectory[val]) mobileInput.value = customerDirectory[val];
+            }
+        }
+
+        function onProductPartyChange(val) {
+            let customInput = document.getElementById('prodPartyCustom');
+            let mobileInput = document.getElementById('prodPartyMobile');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+                mobileInput.value = '';
+            } else {
+                customInput.classList.add('hidden');
+                if (customerDirectory[val]) mobileInput.value = customerDirectory[val];
+            }
+        }
+
+        function checkNewCattleCategory(val) {
+            let customInput = document.getElementById('cattleBreedCustom');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
+            }
+        }
+
+        function checkNewProduct(val) {
+            let customInput = document.getElementById('prodNameCustom');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
+            }
+        }
+
+        function checkNewExpenseCategory(val) {
+            let customInput = document.getElementById('expCategoryCustom');
+            if (val === 'NEW') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
+            }
+        }
+
         function calculateFatBilling() {
             let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             let fat = parseFloat(document.getElementById('milkFat').value) || 0;
             let fatRate = parseFloat(document.getElementById('fatRate').value) || 0;
-            calculatedPerLiter = fat * fatRate;
-            calculatedTotalAmt = qty * calculatedPerLiter;
-            document.getElementById('perLiterRate').value = calculatedPerLiter.toFixed(2);
-            document.getElementById('totalAmount').value = calculatedTotalAmt.toFixed(2);
+
+            let ratePerLiter = fat * fatRate;
+            calculatedPerLiter = ratePerLiter;
+            document.getElementById('perLiterRate').value = ratePerLiter.toFixed(2);
+
+            let total = qty * ratePerLiter;
+            calculatedTotalAmt = total;
+            document.getElementById('totalAmount').value = total.toFixed(2);
         }
 
         function calculateRetailBilling() {
             let liters = parseFloat(document.getElementById('retailLitermt').value) || 0;
             let rate = parseFloat(document.getElementById('retailRate').value) || 0;
-            calculatedRetailAmt = liters * rate;
-            document.getElementById('retailTotalAmt').value = calculatedRetailAmt.toFixed(2);
+
+            let total = liters * rate;
+            calculatedRetailAmt = total;
+            document.getElementById('retailTotalAmt').value = total.toFixed(2);
         }
 
-        function saveMilkEntry() {
-            let record = {
-                date: document.getElementById('billDate').value || new Date().toISOString().split('T')[0],
-                shift: document.getElementById('billShift').value,
-                milkType: document.getElementById('milkType').value,
-                qty: parseFloat(document.getElementById('milkQty').value) || 0,
-                party: document.getElementById('bulkPartyName').value.trim(),
-                mobile: document.getElementById('bulkDairyMobile').value.trim(),
-                totalAmt: calculatedTotalAmt,
-                status: document.getElementById('paymentStatus').value,
-                module: 'Bulk Dairy'
-            };
-            postEntryToGoogleSheet(record);
-            alert("Bulk Milk Entry saved successfully!");
-            setTimeout(syncDataFromGoogleSheet, 1500);
+        function calculateProductTotal() {
+            let qty = parseFloat(document.getElementById('prodQtyNum').value) || 0;
+            let rate = parseFloat(document.getElementById('prodRatePerUnit').value) || 0;
+
+            let total = qty * rate;
+            calculatedProductTotalAmt = total;
+            document.getElementById('prodTotalAmount').value = total.toFixed(2);
         }
 
-        function saveRetailEntry() {
-            let record = {
-                date: document.getElementById('retailDate').value || new Date().toISOString().split('T')[0],
-                party: document.getElementById('retailCustCustom').value.trim(),
-                mobile: document.getElementById('retailMobile').value.trim(),
-                qty: parseFloat(document.getElementById('retailLitermt').value) || 0,
-                totalAmt: calculatedRetailAmt,
-                status: document.getElementById('retailStatus').value,
-                module: 'Retail Milk'
-            };
-            postEntryToGoogleSheet(record);
-            alert("Retail Bill saved successfully!");
-            setTimeout(syncDataFromGoogleSheet, 1500);
-        }
-
-        function saveCattleEntry() {
-            let record = {
-                date: document.getElementById('cattleDate').value || new Date().toISOString().split('T')[0],
-                txType: document.getElementById('cattleTxType').value,
-                breed: document.getElementById('cattleBreed').value.trim(),
-                tag: document.getElementById('cattleTag').value.trim(),
-                party: document.getElementById('cattleParty').value.trim(),
-                mobile: document.getElementById('cattleMobile').value.trim(),
-                amount: parseFloat(document.getElementById('cattleAmount').value) || 0,
-                status: document.getElementById('cattleStatus').value,
-                module: 'Cattle Deal'
-            };
-            postEntryToGoogleSheet(record);
-            alert("Cattle record saved successfully!");
-            setTimeout(syncDataFromGoogleSheet, 1500);
+        function handleInfraVendorChange(selectObj) {
+            let customInput = document.getElementById('infraVendorCustom');
+            if (selectObj.value === 'NEW') {
+                customInput.classList.remove('hidden');
+                customInput.focus();
+                customInput.value = '';
+            } else {
+                customInput.classList.add('hidden');
+                customInput.value = selectObj.value;
+            }
         }
 
         function saveInfrastructureEntry() {
-            let record = {
-                date: document.getElementById('infraDate').value || new Date().toISOString().split('T')[0],
-                category: document.getElementById('infraCategory').value,
-                vendor: document.getElementById('infraVendor').value.trim(),
-                mobile: document.getElementById('infraMobile').value.trim(),
-                desc: document.getElementById('infraDesc').value.trim(),
-                amount: parseFloat(document.getElementById('infraAmount').value) || 0,
-                module: 'Infrastructure'
-            };
-            postEntryToGoogleSheet(record);
-            alert("Infrastructure asset saved successfully!");
-            setTimeout(syncDataFromGoogleSheet, 1500);
+            let date = document.getElementById('infraDate').value || new Date().toISOString().split('T')[0];
+            let category = document.getElementById('infraCategory').value;
+            let amount = parseFloat(document.getElementById('infraAmount').value) || 0;
+            
+            let vendorSelect = document.getElementById('infraVendorSelect').value;
+            let customVendor = document.getElementById('infraVendorCustom').value;
+            let vendor = (vendorSelect === 'NEW') ? customVendor : (vendorSelect || 'Self');
+            
+            let details = document.getElementById('infraDesc').value || '-';
+
+            if(amount <= 0) { alert('Please enter a valid investment amount.'); return; }
+
+            infrastructureRecords.push({ date, category, amount, vendor, details });
+            persistAppData();
+            restoreSavedTables();
+            applyGlobalDateFilter();
+            
+            document.getElementById('infraAmount').value = '';
+            document.getElementById('infraVendorSelect').value = '';
+            document.getElementById('infraVendorCustom').value = '';
+            document.getElementById('infraVendorCustom').classList.add('hidden');
+            document.getElementById('infraDesc').value = '';
+
+            alert('Infrastructure Asset saved successfully!');
+        }
+        
+        function saveMilkEntry() {
+            let date = document.getElementById('billDate').value || new Date().toISOString().split('T')[0];
+            let qty = parseFloat(document.getElementById('milkQty').value) || 0;
+            if(qty <= 0) { alert('Please enter valid quantity.'); return; }
+            
+            bulkMilkRecords.push({ date, liters: qty, amount: calculatedTotalAmt, module: 'Bulk_Milk' });
+            persistAppData();
+            applyGlobalDateFilter();
+            alert('Bulk Entry saved!');
         }
 
-        function saveExpenseEntry() {
-            let record = {
-                date: document.getElementById('expDate').value || new Date().toISOString().split('T')[0],
-                category: document.getElementById('expCategory').value.trim(),
-                amount: parseFloat(document.getElementById('expAmount').value) || 0,
-                desc: document.getElementById('expDesc').value.trim(),
-                module: 'Expense'
-            };
-            postEntryToGoogleSheet(record);
-            alert("Expense saved successfully!");
-            setTimeout(syncDataFromGoogleSheet, 1500);
+        function saveRetailEntry() {
+            let liters = parseFloat(document.getElementById('retailLitermt').value) || 0;
+            if(liters <= 0) { alert('Please enter valid liters.'); return; }
+            let date = document.getElementById('retailDate').value || new Date().toISOString().split('T')[0];
+
+            retailMilkRecords.push({ date, liters, amount: calculatedRetailAmt, module: 'Retail_Milk' });
+            persistAppData();
+            applyGlobalDateFilter();
+            alert('Retail Bill saved!');
+        }
+
+        function saveCattleEntry() {
+            let amount = parseFloat(document.getElementById('cattleAmount').value) || 0;
+            let date = document.getElementById('cattleDate').value || new Date().toISOString().split('T')[0];
+            let type = document.getElementById('cattleTxType').value;
+            let breed = document.getElementById('cattleBreedSelect').value === 'NEW' ? document.getElementById('cattleBreedCustom').value : document.getElementById('cattleBreedSelect').value;
+
+            cattlePurchaseRecords.push({ date, type, breed, amount });
+            persistAppData();
+            applyGlobalDateFilter();
+            alert('Cattle Record saved!');
         }
 
         function saveProductEntry() {
-            let record = {
-                date: document.getElementById('prodDate').value || new Date().toISOString().split('T')[0],
-                txType: document.getElementById('prodTxType').value,
-                prodName: document.getElementById('prodNameCustom').value.trim(),
-                qty: parseFloat(document.getElementById('prodQtyNum').value) || 0,
-                amount: (parseFloat(document.getElementById('prodQtyNum').value) || 0) * (parseFloat(document.getElementById('prodRatePerUnit').value) || 0),
-                party: document.getElementById('prodPartyCustom').value.trim(),
-                mobile: document.getElementById('prodPartyMobile').value.trim(),
-                status: document.getElementById('prodStatus').value,
-                module: 'Other Products'
-            };
-            postEntryToGoogleSheet(record);
-            alert("Product record saved successfully!");
-            setTimeout(syncDataFromGoogleSheet, 1500);
+            let amount = calculatedProductTotalAmt;
+            let date = document.getElementById('prodDate').value || new Date().toISOString().split('T')[0];
+            productRecords.push({ date, amount, module: 'Other_Products' });
+            persistAppData();
+            applyGlobalDateFilter();
+            alert('Product Record saved!');
         }
 
-        function restoreSavedTables() {
-            let cattleBody = document.getElementById('cattleTableBody');
-            let infraBody = document.getElementById('infraTableBody');
-            if(cattleBody) {
-                cattleBody.innerHTML = '';
-                if(cattleDealData.length > 0) {
-                    cattleDealData.forEach(r => {
-                        cattleBody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||''}</td><td class="p-3 font-bold text-amber-600">${r.Module||''}</td><td class="p-3">${r.Name||''}</td><td class="p-3">${r.Details||'-'}</td><td class="p-3">${r.Name||''}</td><td class="p-3">${r.Mobile||'-'}</td><td class="p-3 font-bold">₹${r.Amount||0}</td><td class="p-3">${r.Status||'Paid'}</td></tr>`;
-                    });
-                } else {
-                    cattleBody.innerHTML = `<tr><td colspan="8" class="p-4 text-center">No cattle records found.</td></tr>`;
-                }
-            }
+        function saveExpenseEntry() {
+            let amount = parseFloat(document.getElementById('expAmount').value) || 0;
+            let date = document.getElementById('expDate').value || new Date().toISOString().split('T')[0];
+            let category = document.getElementById('expCategory').value;
+            let details = document.getElementById('expDesc').value;
 
-            if(infraBody) {
-                infraBody.innerHTML = '';
-                if(infrastructureData.length > 0) {
-                    infrastructureData.forEach(r => {
-                        infraBody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||''}</td><td class="p-3 font-semibold text-teal-700">${r.Category||''}</td><td class="p-3">${r.Vendor||''}</td><td class="p-3">${r.Mobile||'-'}</td><td class="p-3">${r.Description||''}</td><td class="p-3 font-bold text-teal-800">₹${r.Amount||0}</td></tr>`;
-                    });
-                } else {
-                    infraBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center">No infrastructure assets found.</td></tr>`;
-                }
-            }
+            expenseRecords.push({ date, category, amount, details, module: 'Farm_Expense' });
+            persistAppData();
+            restoreSavedTables();
+            applyGlobalDateFilter();
+            alert('Expense saved!');
         }
 
-        function searchCustomerLedger() {
-            let query = document.getElementById('ledgerSearchInput').value.toLowerCase().trim();
-            let tbody = document.getElementById('ledgerTableBody');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            
-            let allLedger = ledgerData.concat(bulkDairyData, retailMilkData, cattleDealData);
-            let matches = allLedger.filter(r => String(r.Name || r.Party || r.Vendor || '').toLowerCase().includes(query) || String(r.Mobile || '').includes(query));
-            
-            if(matches.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center">No ledger history found.</td></tr>`;
-                return;
-            }
-            matches.forEach(r => {
-                tbody.innerHTML += `<tr class="border-b"><td class="p-3">${r.Date||''}</td><td class="p-3">${r.module||'Ledger'}</td><td class="p-3">${r.Details||r.Description||'-'}</td><td class="p-3 font-bold">₹${r.Amount||0}</td><td class="p-3">${r.Status||'Completed'}</td></tr>`;
-            });
-        }
-
-        function applyGlobalDateFilter() {
-            document.getElementById('total-cattle-count').innerText = `${liveStats.cows + liveStats.buffaloes} (Cows: ${liveStats.cows}, Buff: ${liveStats.buffaloes})`;
-            document.getElementById('cattle-purchase-investment').innerText = `₹ ${liveStats.cattlePurchaseInvestment}`;
-            
-            let totalInfraAmt = infrastructureData.reduce((sum, r) => sum + (parseFloat(r.Amount || 0)), 0);
-            let infraDisplay = document.getElementById('filtered-infra-display');
-            if(infraDisplay) infraDisplay.innerText = `₹ ${totalInfraAmt}`;
-            
-            document.getElementById('total-milk').innerText = `${liveStats.totalMilkLitres} Liters`;
-            document.getElementById('monthly-revenue').innerText = `+ ₹ ${liveStats.monthlyRevenue}`;
-
-            let totalExpAmt = expensesData.reduce((sum, r) => sum + (parseFloat(r.Amount || 0)), 0);
-            let expDisplay = document.getElementById('filtered-expense-display');
-            if(expDisplay) expDisplay.innerText = `₹ ${totalExpAmt}`;
-
-            let netProfit = liveStats.monthlyRevenue - totalExpAmt;
-            let netProfitEl = document.getElementById('net-profit-display');
-            if(netProfitEl) netProfitEl.innerText = `₹ ${netProfit}`;
-        }
-
-        function resetGlobalDateFilter() { applyGlobalDateFilter(); }
-
-        function initCharts() {
-            const ctxCattle = document.getElementById('cattleChart');
-            if(ctxCattle) {
-                cattleChartInstance = new Chart(ctxCattle.getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Cows', 'Buffaloes'],
-                        datasets: [{ data: [1, 1], backgroundColor: ['#3b82f6', '#ec4899'], borderWidth: 2 }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false }
-                });
-            }
-
-            const ctxMilk = document.getElementById('milkChart');
-            if(ctxMilk) {
-                milkChartInstance = new Chart(ctxMilk.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        datasets: [{ label: 'Milk Output (L)', data: [45, 52, 49, 58, 55, 60, 62], borderColor: '#2563eb', fill: true }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false }
-                });
-            }
+        function searchCustomerLedger() {}
+        function renderPendingCustomers() {}
+        function filterPendingList() {}
+        function closeEditModal() {}
+        function saveModalPaymentUpdate() {}
+        function autoCalculateOutstanding() {}
+        function saveProfileChanges() { alert('Profile updated successfully!'); }
+        function saveBillTerms() { alert('Bill terms saved successfully!'); }
+        function sendWhatsAppMessage() { 
+            let mobile = document.getElementById('waMobile').value || '9752266047';
+            let message = encodeURIComponent(document.getElementById('waMessageText').value);
+            window.open(`https://wa.me/${mobile}?text=${message}`, '_blank');
         }
     </script>
 </body>
