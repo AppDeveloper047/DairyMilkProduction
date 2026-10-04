@@ -995,8 +995,10 @@
         </div>
     </div>
 
-    <!-- 12. JAVASCRIPT LOGIC WITH CATEGORY-WISE SEPARATE DASHBOARD CALCULATION -->
+    <!-- 12. JAVASCRIPT LOGIC WITH GOOGLE SHEET SYNC -->
     <script>
+        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbw1MVVFqiDez_lZz0cz5Hmfojt7KJeHlbKnMU2QQfOJgFRlntejP9Prf1X4pMfWwD9r/exec";
+
         let calculatedPerLiter = 0;
         let calculatedTotalAmt = 0;
         let calculatedRetailAmt = 0;
@@ -1057,7 +1059,20 @@
             localStorage.setItem('shri_khatu_expenses', JSON.stringify(expenseRecords));
         }
 
-        // Separate category calculations for Dashboard Boxes
+        function sendDataToGoogleSheet(payload) {
+            if (!GOOGLE_SHEET_URL) return;
+            fetch(GOOGLE_SHEET_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                console.log('Data synced to Google Sheet successfully.');
+            }).catch(err => {
+                console.error('Error syncing with Google Sheet:', err);
+            });
+        }
+
         function applyGlobalDateFilter() {
             let startVal = document.getElementById('globalFilterStart').value;
             let endVal = document.getElementById('globalFilterEnd').value;
@@ -1072,7 +1087,6 @@
             let filteredInfra = 0;
             let filteredCattleInvestment = 0;
 
-            // 1. Bulk & Retail Milk Calculation
             [...bulkMilkRecords, ...retailMilkRecords].forEach(item => {
                 let itemDate = new Date(item.date);
                 if (itemDate >= startDate && itemDate <= endDate) {
@@ -1081,7 +1095,6 @@
                 }
             });
 
-            // 2. Expenses Calculation
             [...expenseRecords, ...productRecords].forEach(item => {
                 let itemDate = new Date(item.date);
                 if (itemDate >= startDate && itemDate <= endDate) {
@@ -1089,7 +1102,6 @@
                 }
             });
 
-            // 3. Infrastructure Assets Calculation
             infrastructureRecords.forEach(item => {
                 let itemDate = new Date(item.date);
                 if (itemDate >= startDate && itemDate <= endDate) {
@@ -1097,7 +1109,6 @@
                 }
             });
 
-            // 4. Cattle Purchase Investment Calculation
             cattlePurchaseRecords.forEach(item => {
                 let itemDate = new Date(item.date);
                 if (itemDate >= startDate && itemDate <= endDate && item.type === 'Purchase') {
@@ -1105,7 +1116,6 @@
                 }
             });
 
-            // Update UI Boxes Separately
             document.getElementById('total-milk').innerText = filteredMilkLiters.toFixed(1) + " Liters";
             document.getElementById('monthly-revenue').innerText = "+ ₹ " + filteredRevenue.toLocaleString('en-IN');
             document.getElementById('filtered-expense-display').innerText = "₹ " + filteredExpenses.toLocaleString('en-IN');
@@ -1149,7 +1159,6 @@
         function restoreSavedTables() {
             updatePendingStats();
             
-            // Restore Expense Table
             let expTbody = document.getElementById('expenseTableBody');
             if(expTbody && expenseRecords.length > 0) {
                 expTbody.innerHTML = '';
@@ -1162,7 +1171,6 @@
                 });
             }
 
-            // Restore Infrastructure Table
             let infraTbody = document.getElementById('infraTableBody');
             if(infraTbody && infrastructureRecords.length > 0) {
                 infraTbody.innerHTML = '';
@@ -1179,7 +1187,6 @@
             }
         }
 
-        // Chart Initializations
         function initCharts() {
             const ctxCattle = document.getElementById('cattleChart').getContext('2d');
             cattleChartInstance = new Chart(ctxCattle, {
@@ -1213,7 +1220,6 @@
             });
         }
 
-        // Navigation & Sidebar Auto-Hide Logic
         function toggleSidebar() {
             let sb = document.getElementById('sidebar');
             sb.classList.toggle('-translate-x-full');
@@ -1391,8 +1397,10 @@
 
             if(amount <= 0) { alert('Please enter a valid investment amount.'); return; }
 
-            infrastructureRecords.push({ date, category, amount, vendor, details });
+            let record = { type: 'Infrastructure', date, category, amount, vendor, details };
+            infrastructureRecords.push(record);
             persistAppData();
+            sendDataToGoogleSheet(record);
             restoreSavedTables();
             applyGlobalDateFilter();
             
@@ -1402,7 +1410,7 @@
             document.getElementById('infraVendorCustom').classList.add('hidden');
             document.getElementById('infraDesc').value = '';
 
-            alert('Infrastructure Asset saved successfully!');
+            alert('Infrastructure Asset saved & synced to Google Sheet!');
         }
         
         function saveMilkEntry() {
@@ -1410,10 +1418,12 @@
             let qty = parseFloat(document.getElementById('milkQty').value) || 0;
             if(qty <= 0) { alert('Please enter valid quantity.'); return; }
             
-            bulkMilkRecords.push({ date, liters: qty, amount: calculatedTotalAmt, module: 'Bulk_Milk' });
+            let record = { type: 'Bulk_Milk', date, liters: qty, amount: calculatedTotalAmt };
+            bulkMilkRecords.push(record);
             persistAppData();
+            sendDataToGoogleSheet(record);
             applyGlobalDateFilter();
-            alert('Bulk Entry saved!');
+            alert('Bulk Entry saved & synced to Google Sheet!');
         }
 
         function saveRetailEntry() {
@@ -1421,10 +1431,12 @@
             if(liters <= 0) { alert('Please enter valid liters.'); return; }
             let date = document.getElementById('retailDate').value || new Date().toISOString().split('T')[0];
 
-            retailMilkRecords.push({ date, liters, amount: calculatedRetailAmt, module: 'Retail_Milk' });
+            let record = { type: 'Retail_Milk', date, liters, amount: calculatedRetailAmt };
+            retailMilkRecords.push(record);
             persistAppData();
+            sendDataToGoogleSheet(record);
             applyGlobalDateFilter();
-            alert('Retail Bill saved!');
+            alert('Retail Bill saved & synced to Google Sheet!');
         }
 
         function saveCattleEntry() {
@@ -1433,19 +1445,23 @@
             let type = document.getElementById('cattleTxType').value;
             let breed = document.getElementById('cattleBreedSelect').value === 'NEW' ? document.getElementById('cattleBreedCustom').value : document.getElementById('cattleBreedSelect').value;
 
-            cattlePurchaseRecords.push({ date, type, breed, amount });
+            let record = { type: 'Cattle_' + type, date, breed, amount };
+            cattlePurchaseRecords.push(record);
             persistAppData();
+            sendDataToGoogleSheet(record);
             applyGlobalDateFilter();
-            alert('Cattle Record saved!');
+            alert('Cattle Record saved & synced to Google Sheet!');
         }
 
         function saveProductEntry() {
             let amount = calculatedProductTotalAmt;
             let date = document.getElementById('prodDate').value || new Date().toISOString().split('T')[0];
-            productRecords.push({ date, amount, module: 'Other_Products' });
+            let record = { type: 'Other_Products', date, amount };
+            productRecords.push(record);
             persistAppData();
+            sendDataToGoogleSheet(record);
             applyGlobalDateFilter();
-            alert('Product Record saved!');
+            alert('Product Record saved & synced to Google Sheet!');
         }
 
         function saveExpenseEntry() {
@@ -1454,11 +1470,13 @@
             let category = document.getElementById('expCategory').value;
             let details = document.getElementById('expDesc').value;
 
-            expenseRecords.push({ date, category, amount, details, module: 'Farm_Expense' });
+            let record = { type: 'Farm_Expense', date, category, amount, details };
+            expenseRecords.push(record);
             persistAppData();
+            sendDataToGoogleSheet(record);
             restoreSavedTables();
             applyGlobalDateFilter();
-            alert('Expense saved!');
+            alert('Expense saved & synced to Google Sheet!');
         }
 
         function searchCustomerLedger() {}
